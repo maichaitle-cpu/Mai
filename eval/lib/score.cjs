@@ -82,6 +82,8 @@ function locate(q, a, run) {
   let best = 0, bestArea = areas[0];
   areas.forEach(ar => { const f = inter(a.bbox, grow(ar, pad)) / Math.max(1, areaOf(a.bbox)); if (f > best) { best = f; bestArea = ar; } });
   if (best < 0.85) return { ok: false, why: 'outside its answer area (' + Math.round(best * 100) + '% inside)' };
+  const pic = (q.avoid || []).find(r => inter(a.bbox, r) > Math.min(areaOf(a.bbox), areaOf(r)) * 0.1);
+  if (pic) return { ok: false, why: 'written over a picture' };
   const cover = coversText(a.bbox, page, grow(bestArea, pad));
   if (cover) return { ok: false, why: 'covers printed text: "' + cover.slice(0, 40) + '"' };
   return { ok: true, why: '' };

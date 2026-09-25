@@ -1,0 +1,1058 @@
+{
+ "doc": "real/exam_revision.pdf",
+ "settings": {},
+ "questions": [
+  {
+   "label": "1.",
+   "page": 1,
+   "kind": "write",
+   "cat": "LONG_TEXT",
+   "prompt": "Rewrite the following informal sentence using a formal academic tone and precise vocabulary: \"Pythons are crazy huge and totally ruin the environment!\"",
+   "qrect": [
+    105,
+    626,
+    813,
+    65
+   ],
+   "areas": [
+    [
+     105,
+     702,
+     981,
+     105
+    ]
+   ],
+   "answer": "Burmese pythons are extremely large and cause serious damage to the local ecosystem."
+  },
+  {
+   "label": "A.",
+   "page": 1,
+   "kind": "write",
+   "cat": "LONG_TEXT",
+   "prompt": "A. Topic Sentence: What is its purpose in a paragraph?",
+   "qrect": [
+    105,
+    967,
+    475,
+    20
+   ],
+   "areas": [
+    [
+     105,
+     998,
+     981,
+     105
+    ]
+   ],
+   "answer": "A clear research question keeps the search focused, so you only collect sources that actually help answer it and you do not waste time on unrelated data."
+  },
+  {
+   "label": "B.",
+   "page": 1,
+   "kind": "write",
+   "cat": "LONG_TEXT",
+   "prompt": "B. Supporting Details: What type of information should go here?",
+   "qrect": [
+    105,
+    1120,
+    561,
+    20
+   ],
+   "areas": [
+    [
+     105,
+     1151,
+     981,
+     105
+    ]
+   ],
+   "answer": "A clear research question keeps the search focused, so you only collect sources that actually help answer it and you do not waste time on unrelated data."
+  },
+  {
+   "label": "C.",
+   "page": 1,
+   "kind": "write",
+   "cat": "LONG_TEXT",
+   "prompt": "C. Essay Conclusion: How should an effective conclusion structure wrap up an essay?",
+   "qrect": [
+    105,
+    1273,
+    738,
+    20
+   ],
+   "areas": [
+    [
+     105,
+     1304,
+     981,
+     105
+    ]
+   ],
+   "answer": "A clear research question keeps the search focused, so you only collect sources that actually help answer it and you do not waste time on unrelated data."
+  },
+  {
+   "label": "3.",
+   "page": 2,
+   "kind": "write",
+   "cat": "LONG_TEXT",
+   "prompt": "Why do informative writers use visual aids or graphics when presenting complex data?",
+   "qrect": [
+    105,
+    204,
+    749,
+    20
+   ],
+   "areas": [
+    [
+     105,
+     235,
+     981,
+     105
+    ]
+   ],
+   "answer": "A clear research question keeps the search focused, so you only collect sources that actually help answer it and you do not waste time on unrelated data."
+  },
+  {
+   "label": "A.",
+   "page": 2,
+   "kind": "write",
+   "cat": "LONG_TEXT",
+   "prompt": "A. Research Questions: Why is a clear research question important before you start looking for data?",
+   "qrect": [
+    105,
+    574,
+    875,
+    20
+   ],
+   "areas": [
+    [
+     105,
+     605,
+     981,
+     105
+    ]
+   ],
+   "answer": "A clear research question keeps the search focused, so you only collect sources that actually help answer it and you do not waste time on unrelated data."
+  },
+  {
+   "label": "B.",
+   "page": 2,
+   "kind": "write",
+   "cat": "LONG_TEXT",
+   "prompt": "B. Refining Queries: If your initial online search yields irrelevant results, what specific steps should you take to refine your search strategy?",
+   "qrect": [
+    105,
+    727,
+    958,
+    47
+   ],
+   "areas": [
+    [
+     105,
+     785,
+     981,
+     105
+    ]
+   ],
+   "answer": "A clear research question keeps the search focused, so you only collect sources that actually help answer it and you do not waste time on unrelated data."
+  },
+  {
+   "label": "Primary Source",
+   "page": 2,
+   "kind": "cell",
+   "cat": "TABLE_TEXT",
+   "prompt": "Primary Source — Definition (In your own words)",
+   "qrect": [
+    121,
+    1104,
+    143,
+    20
+   ],
+   "areas": [
+    [
+     431,
+     1084,
+     477,
+     97
+    ]
+   ],
+   "cell": {
+    "row": [
+     429,
+     1086,
+     481,
+     93
+    ],
+    "header": [
+     121,
+     1052,
+     879,
+     19
+    ],
+    "col": "Definition (In your own words)"
+   },
+   "answer": "A first-hand record made at the time of the event."
+  },
+  {
+   "label": "Primary Source",
+   "page": 2,
+   "kind": "cell",
+   "cat": "TABLE_TEXT",
+   "prompt": "Primary Source — Example",
+   "qrect": [
+    121,
+    1104,
+    143,
+    20
+   ],
+   "areas": [
+    [
+     912,
+     1084,
+     172,
+     97
+    ]
+   ],
+   "cell": {
+    "row": [
+     910,
+     1086,
+     176,
+     93
+    ],
+    "header": [
+     121,
+     1052,
+     879,
+     19
+    ],
+    "col": "Example"
+   },
+   "answer": "A diary"
+  },
+  {
+   "label": "Secondary Source",
+   "page": 2,
+   "kind": "cell",
+   "cat": "TABLE_TEXT",
+   "prompt": "Secondary Source — Definition (In your own words)",
+   "qrect": [
+    121,
+    1197,
+    163,
+    20
+   ],
+   "areas": [
+    [
+     431,
+     1177,
+     477,
+     97
+    ]
+   ],
+   "cell": {
+    "row": [
+     429,
+     1179,
+     481,
+     93
+    ],
+    "header": [
+     121,
+     1052,
+     879,
+     19
+    ],
+    "col": "Definition (In your own words)"
+   },
+   "answer": "A first-hand record made at the time of the event."
+  },
+  {
+   "label": "Secondary Source",
+   "page": 2,
+   "kind": "cell",
+   "cat": "TABLE_TEXT",
+   "prompt": "Secondary Source — Example",
+   "qrect": [
+    121,
+    1197,
+    163,
+    20
+   ],
+   "areas": [
+    [
+     912,
+     1177,
+     172,
+     97
+    ]
+   ],
+   "cell": {
+    "row": [
+     910,
+     1179,
+     176,
+     93
+    ],
+    "header": [
+     121,
+     1052,
+     879,
+     19
+    ],
+    "col": "Example"
+   },
+   "answer": "A diary"
+  },
+  {
+   "label": "A.",
+   "page": 3,
+   "kind": "write",
+   "cat": "LONG_TEXT",
+   "prompt": "A. Paraphrasing vs. Direct Quoting: What is the main structural and formatting difference between paraphrasing an author and directly quoting them?",
+   "qrect": [
+    105,
+    204,
+    866,
+    47
+   ],
+   "areas": [
+    [
+     105,
+     262,
+     981,
+     105
+    ]
+   ],
+   "answer": "A clear research question keeps the search focused, so you only collect sources that actually help answer it and you do not waste time on unrelated data."
+  },
+  {
+   "label": "B.",
+   "page": 3,
+   "kind": "write",
+   "cat": "LONG_TEXT",
+   "prompt": "B. Synthesizing Information: Explain what it means to synthesize information from multiple texts.",
+   "qrect": [
+    105,
+    384,
+    852,
+    20
+   ],
+   "areas": [
+    [
+     105,
+     415,
+     981,
+     105
+    ]
+   ],
+   "answer": "A clear research question keeps the search focused, so you only collect sources that actually help answer it and you do not waste time on unrelated data."
+  },
+  {
+   "label": "A.",
+   "page": 3,
+   "kind": "write",
+   "cat": "LONG_TEXT",
+   "prompt": "A. Authority & Publisher Reputation: What should you check about an author or publisher to evaluate credibility?",
+   "qrect": [
+    105,
+    754,
+    894,
+    47
+   ],
+   "areas": [
+    [
+     105,
+     812,
+     981,
+     105
+    ]
+   ],
+   "answer": "A clear research question keeps the search focused, so you only collect sources that actually help answer it and you do not waste time on unrelated data."
+  },
+  {
+   "label": "B.",
+   "page": 3,
+   "kind": "write",
+   "cat": "LONG_TEXT",
+   "prompt": "B. Domain Extensions: Why are .gov and .edu domains usually considered more reliable than .com or .net?",
+   "qrect": [
+    105,
+    934,
+    952,
+    20
+   ],
+   "areas": [
+    [
+     105,
+     965,
+     981,
+     105
+    ]
+   ],
+   "answer": "A clear research question keeps the search focused, so you only collect sources that actually help answer it and you do not waste time on unrelated data."
+  },
+  {
+   "label": "C.",
+   "page": 3,
+   "kind": "write",
+   "cat": "LONG_TEXT",
+   "prompt": "C. Publication Dates: Why is the date of publication critical when researching rapidly changing fields?",
+   "qrect": [
+    105,
+    1087,
+    883,
+    20
+   ],
+   "areas": [
+    [
+     105,
+     1118,
+     981,
+     105
+    ]
+   ],
+   "answer": "A clear research question keeps the search focused, so you only collect sources that actually help answer it and you do not waste time on unrelated data."
+  },
+  {
+   "label": "A.",
+   "page": 4,
+   "kind": "write",
+   "cat": "LONG_TEXT",
+   "prompt": "A. Preventing Plagiarism: What note-taking techniques can you use while researching to prevent accidental plagiarism?",
+   "qrect": [
+    105,
+    204,
+    935,
+    47
+   ],
+   "areas": [
+    [
+     105,
+     262,
+     981,
+     105
+    ]
+   ],
+   "answer": "A clear research question keeps the search focused, so you only collect sources that actually help answer it and you do not waste time on unrelated data."
+  },
+  {
+   "label": "B.",
+   "page": 4,
+   "kind": "write",
+   "cat": "LONG_TEXT",
+   "prompt": "B. Explicit Verbal Attributions: What is the purpose of using verbal attributions (e.g., \"According to researcher...\") when delivering evidence in a speech or presentation?",
+   "qrect": [
+    105,
+    384,
+    976,
+    47
+   ],
+   "areas": [
+    [
+     105,
+     442,
+     981,
+     105
+    ]
+   ],
+   "answer": "A clear research question keeps the search focused, so you only collect sources that actually help answer it and you do not waste time on unrelated data."
+  },
+  {
+   "label": "C.",
+   "page": 4,
+   "kind": "write",
+   "cat": "LONG_TEXT",
+   "prompt": "C. Structured Outlines: How do structured outlines help organize evidence before speaking or writing?",
+   "qrect": [
+    105,
+    564,
+    893,
+    20
+   ],
+   "areas": [
+    [
+     105,
+     595,
+     981,
+     105
+    ]
+   ],
+   "answer": "A clear research question keeps the search focused, so you only collect sources that actually help answer it and you do not waste time on unrelated data."
+  },
+  {
+   "label": "1.",
+   "page": 4,
+   "kind": "write",
+   "cat": "LONG_TEXT",
+   "prompt": "What does this story show about cultural differences, communication barriers, and loneliness?",
+   "qrect": [
+    105,
+    1060,
+    812,
+    20
+   ],
+   "areas": [
+    [
+     105,
+     1091,
+     981,
+     105
+    ]
+   ],
+   "answer": "A clear research question keeps the search focused, so you only collect sources that actually help answer it and you do not waste time on unrelated data."
+  },
+  {
+   "label": "2.",
+   "page": 4,
+   "kind": "write",
+   "cat": "LONG_TEXT",
+   "prompt": "How does the summer camp setting help bridge cultural and political divides between the young women?",
+   "qrect": [
+    105,
+    1356,
+    905,
+    20
+   ],
+   "areas": [
+    [
+     105,
+     1387,
+     981,
+     105
+    ]
+   ],
+   "answer": "A clear research question keeps the search focused, so you only collect sources that actually help answer it and you do not waste time on unrelated data."
+  },
+  {
+   "label": "3.",
+   "page": 5,
+   "kind": "write",
+   "cat": "LONG_TEXT",
+   "prompt": "What is the fundamental global purpose of shared human rights outlined in this text?",
+   "qrect": [
+    105,
+    204,
+    732,
+    20
+   ],
+   "areas": [
+    [
+     105,
+     235,
+     981,
+     105
+    ]
+   ],
+   "answer": "A clear research question keeps the search focused, so you only collect sources that actually help answer it and you do not waste time on unrelated data."
+  },
+  {
+   "label": "4.",
+   "page": 5,
+   "kind": "write",
+   "cat": "LONG_TEXT",
+   "prompt": "Why does the author argue that true peace requires more than just the absence of physical warfare?",
+   "qrect": [
+    105,
+    499,
+    859,
+    20
+   ],
+   "areas": [
+    [
+     105,
+     530,
+     981,
+     105
+    ]
+   ],
+   "answer": "A clear research question keeps the search focused, so you only collect sources that actually help answer it and you do not waste time on unrelated data."
+  },
+  {
+   "label": "5.",
+   "page": 5,
+   "kind": "write",
+   "cat": "LONG_TEXT",
+   "prompt": "How does the father preserve his Native American heritage while living in an urban environment?",
+   "qrect": [
+    105,
+    795,
+    846,
+    20
+   ],
+   "areas": [
+    [
+     105,
+     826,
+     981,
+     105
+    ]
+   ],
+   "answer": "A clear research question keeps the search focused, so you only collect sources that actually help answer it and you do not waste time on unrelated data."
+  },
+  {
+   "label": "1.",
+   "page": 5,
+   "kind": "write",
+   "cat": "LONG_TEXT",
+   "prompt": "What role do dedicated individuals play in preventing animal species from going extinct?",
+   "qrect": [
+    105,
+    1291,
+    765,
+    20
+   ],
+   "areas": [
+    [
+     105,
+     1322,
+     981,
+     105
+    ]
+   ],
+   "answer": "A clear research question keeps the search focused, so you only collect sources that actually help answer it and you do not waste time on unrelated data."
+  },
+  {
+   "label": "2.",
+   "page": 6,
+   "kind": "write",
+   "cat": "LONG_TEXT",
+   "prompt": "What does this text explain about natural adaptations and human fascination with natural beauty?",
+   "qrect": [
+    105,
+    204,
+    848,
+    20
+   ],
+   "areas": [
+    [
+     105,
+     235,
+     981,
+     105
+    ]
+   ],
+   "answer": "A clear research question keeps the search focused, so you only collect sources that actually help answer it and you do not waste time on unrelated data."
+  },
+  {
+   "label": "3.",
+   "page": 6,
+   "kind": "write",
+   "cat": "LONG_TEXT",
+   "prompt": "Why does the author encourage readers to look past sensationalized \"monster\" stories about pythons?",
+   "qrect": [
+    105,
+    499,
+    873,
+    20
+   ],
+   "areas": [
+    [
+     105,
+     530,
+     981,
+     105
+    ]
+   ],
+   "answer": "A clear research question keeps the search focused, so you only collect sources that actually help answer it and you do not waste time on unrelated data."
+  },
+  {
+   "label": "4.",
+   "page": 6,
+   "kind": "write",
+   "cat": "LONG_TEXT",
+   "prompt": "How does using a non-human (bat) perspective challenge human assumptions of superiority?",
+   "qrect": [
+    105,
+    795,
+    800,
+    20
+   ],
+   "areas": [
+    [
+     105,
+     826,
+     981,
+     105
+    ]
+   ],
+   "answer": "A clear research question keeps the search focused, so you only collect sources that actually help answer it and you do not waste time on unrelated data."
+  },
+  {
+   "label": "5.",
+   "page": 6,
+   "kind": "write",
+   "cat": "LONG_TEXT",
+   "prompt": "How does the story explore natural disasters, tragedy, trauma, and internal conflict?",
+   "qrect": [
+    105,
+    1090,
+    720,
+    20
+   ],
+   "areas": [
+    [
+     105,
+     1121,
+     981,
+     105
+    ]
+   ],
+   "answer": "A clear research question keeps the search focused, so you only collect sources that actually help answer it and you do not waste time on unrelated data."
+  },
+  {
+   "label": "Metaphor",
+   "page": 7,
+   "kind": "cell",
+   "cat": "TABLE_TEXT",
+   "prompt": "Metaphor — Definition (In your own words)",
+   "qrect": [
+    121,
+    324,
+    90,
+    20
+   ],
+   "areas": [
+    [
+     369,
+     304,
+     441,
+     89
+    ]
+   ],
+   "cell": {
+    "row": [
+     367,
+     306,
+     445,
+     85
+    ],
+    "header": [
+     121,
+     272,
+     853,
+     19
+    ],
+    "col": "Definition (In your own words)"
+   },
+   "answer": "A comparison that says one thing is another thing."
+  },
+  {
+   "label": "Metaphor",
+   "page": 7,
+   "kind": "cell",
+   "cat": "TABLE_TEXT",
+   "prompt": "Metaphor — Original Example",
+   "qrect": [
+    121,
+    324,
+    90,
+    20
+   ],
+   "areas": [
+    [
+     814,
+     304,
+     270,
+     89
+    ]
+   ],
+   "cell": {
+    "row": [
+     812,
+     306,
+     274,
+     85
+    ],
+    "header": [
+     121,
+     272,
+     853,
+     19
+    ],
+    "col": "Original Example"
+   },
+   "answer": "Her voice was music."
+  },
+  {
+   "label": "Simile",
+   "page": 7,
+   "kind": "cell",
+   "cat": "TABLE_TEXT",
+   "prompt": "Simile — Definition (In your own words)",
+   "qrect": [
+    121,
+    409,
+    58,
+    20
+   ],
+   "areas": [
+    [
+     369,
+     389,
+     441,
+     90
+    ]
+   ],
+   "cell": {
+    "row": [
+     367,
+     391,
+     445,
+     86
+    ],
+    "header": [
+     121,
+     272,
+     853,
+     19
+    ],
+    "col": "Definition (In your own words)"
+   },
+   "answer": "A comparison that says one thing is another thing."
+  },
+  {
+   "label": "Simile",
+   "page": 7,
+   "kind": "cell",
+   "cat": "TABLE_TEXT",
+   "prompt": "Simile — Original Example",
+   "qrect": [
+    121,
+    409,
+    58,
+    20
+   ],
+   "areas": [
+    [
+     814,
+     389,
+     270,
+     90
+    ]
+   ],
+   "cell": {
+    "row": [
+     812,
+     391,
+     274,
+     86
+    ],
+    "header": [
+     121,
+     272,
+     853,
+     19
+    ],
+    "col": "Original Example"
+   },
+   "answer": "Her voice was music."
+  },
+  {
+   "label": "Personification",
+   "page": 7,
+   "kind": "cell",
+   "cat": "TABLE_TEXT",
+   "prompt": "Personification — Definition (In your own words)",
+   "qrect": [
+    121,
+    495,
+    140,
+    20
+   ],
+   "areas": [
+    [
+     369,
+     475,
+     441,
+     89
+    ]
+   ],
+   "cell": {
+    "row": [
+     367,
+     477,
+     445,
+     85
+    ],
+    "header": [
+     121,
+     272,
+     853,
+     19
+    ],
+    "col": "Definition (In your own words)"
+   },
+   "answer": "A comparison that says one thing is another thing."
+  },
+  {
+   "label": "Personification",
+   "page": 7,
+   "kind": "cell",
+   "cat": "TABLE_TEXT",
+   "prompt": "Personification — Original Example",
+   "qrect": [
+    121,
+    495,
+    140,
+    20
+   ],
+   "areas": [
+    [
+     814,
+     475,
+     270,
+     89
+    ]
+   ],
+   "cell": {
+    "row": [
+     812,
+     477,
+     274,
+     85
+    ],
+    "header": [
+     121,
+     272,
+     853,
+     19
+    ],
+    "col": "Original Example"
+   },
+   "answer": "Her voice was music."
+  },
+  {
+   "label": "A.",
+   "page": 7,
+   "kind": "write",
+   "cat": "LONG_TEXT",
+   "prompt": "A. Character's Internal Conflict: What is an internal conflict, and how does it differ from an external conflict?",
+   "qrect": [
+    105,
+    723,
+    952,
+    20
+   ],
+   "areas": [
+    [
+     105,
+     754,
+     981,
+     105
+    ]
+   ],
+   "answer": "A clear research question keeps the search focused, so you only collect sources that actually help answer it and you do not waste time on unrelated data."
+  },
+  {
+   "label": "B.",
+   "page": 7,
+   "kind": "write",
+   "cat": "LONG_TEXT",
+   "prompt": "B. Symbolism: How do authors use symbols to add deeper meaning to a story?",
+   "qrect": [
+    105,
+    876,
+    674,
+    20
+   ],
+   "areas": [
+    [
+     105,
+     907,
+     981,
+     105
+    ]
+   ],
+   "answer": "A clear research question keeps the search focused, so you only collect sources that actually help answer it and you do not waste time on unrelated data."
+  },
+  {
+   "label": "C.",
+   "page": 7,
+   "kind": "write",
+   "cat": "LONG_TEXT",
+   "prompt": "C. Narrative Point of View (POV): Explain how point of view affects what the audience thinks and feels about characters.",
+   "qrect": [
+    105,
+    1029,
+    946,
+    47
+   ],
+   "areas": [
+    [
+     105,
+     1087,
+     981,
+     105
+    ]
+   ],
+   "answer": "A clear research question keeps the search focused, so you only collect sources that actually help answer it and you do not waste time on unrelated data."
+  },
+  {
+   "label": "D.",
+   "page": 7,
+   "kind": "write",
+   "cat": "LONG_TEXT",
+   "prompt": "D. Underlying Theme: How do you determine the underlying theme of a literary text?",
+   "qrect": [
+    105,
+    1209,
+    741,
+    20
+   ],
+   "areas": [
+    [
+     105,
+     1240,
+     981,
+     105
+    ]
+   ],
+   "answer": "A clear research question keeps the search focused, so you only collect sources that actually help answer it and you do not waste time on unrelated data."
+  },
+  {
+   "label": "Task 1",
+   "page": 8,
+   "kind": "write",
+   "cat": "LONG_TEXT",
+   "prompt": "Prompt: Think about the overarching theme of human relationships. Why is it often difficult for individuals from different cultures, political backgrounds, or generations to connect? Based on what you read in these texts, what does it take for human beings to truly understand one another, overcome conflict, and build meaningful relationships?",
+   "qrect": [
+    105,
+    318,
+    977,
+    107
+   ],
+   "areas": [
+    [
+     105,
+     442,
+     981,
+     187
+    ]
+   ],
+   "answer": "A clear research question keeps the search focused, so you only collect sources that actually help answer it and you do not waste time on unrelated data."
+  },
+  {
+   "label": "Task 2",
+   "page": 8,
+   "kind": "write",
+   "cat": "LONG_TEXT",
+   "prompt": "Prompt: Think about the overall relationship between humans and the natural world. How do these texts challenge the idea that humans control nature? What responsibilities do humans have toward wildlife and the planet, and how should we cope when nature presents dangerous power or natural disasters?",
+   "qrect": [
+    105,
+    846,
+    965,
+    78
+   ],
+   "areas": [
+    [
+     105,
+     941,
+     981,
+     188
+    ]
+   ],
+   "answer": "A clear research question keeps the search focused, so you only collect sources that actually help answer it and you do not waste time on unrelated data."
+  }
+ ]
+}

@@ -165,7 +165,111 @@ def polygraph():
     d.save('real/polygraph.pdf')
 
 
-BUILDERS = {'physics': physics, 'polygraph': polygraph}
+def exam_revision():
+    d = Doc('exam_revision')
+
+    def box_after(p, y):
+        v = d.P(p)['vec']['vl']
+        cands = sorted([r for r in v if 103 <= r[2] <= 107 and r[1] - r[0] > 60 and r[0] > y - 5], key=lambda r: r[0])
+        r = cands[0]
+        return [105, r[0], 1086 - 105, r[1] - r[0]]
+
+    LONG = 'A clear research question keeps the search focused, so you only collect sources that actually help answer it and you do not waste time on unrelated data.'
+    def q(p, label, lines, prompt=None, cat='LONG_TEXT', ans=LONG):
+        last = lines[-1]
+        text = prompt or ' '.join(d.L(p, i)['text'] for i in lines)
+        d.add(label=label, page=p, kind='write', cat=cat, prompt=text, qrect=d.rect(p, *lines), areas=[box_after(p, d.L(p, last)['bottom'])], answer=ans)
+
+    def cell(p, rowline, header, col, colx, rowy, ans):
+        L = d.L(p, rowline)
+        d.add(label=L['text'], page=p, kind='cell', cat='TABLE_TEXT', prompt=L['text'] + ' — ' + col, qrect=d.rect(p, rowline),
+              areas=[[colx[0] + 2, rowy[0] - 2, colx[1] - colx[0] - 4, rowy[1] - rowy[0] + 4]],
+              cell={'row': [colx[0], rowy[0], colx[1] - colx[0], rowy[1] - rowy[0]], 'header': d.rect(p, header), 'col': col}, answer=ans)
+
+    q(1, '1.', [9, 10], ans='Burmese pythons are extremely large and cause serious damage to the local ecosystem.')
+    q(1, 'A.', [13]); q(1, 'B.', [14]); q(1, 'C.', [15])
+    q(2, '3.', [2]); q(2, 'A.', [6]); q(2, 'B.', [7, 8])
+    for rl, ry in [(12, (1086, 1179)), (13, (1179, 1272))]:
+        cell(2, rl, 11, 'Definition (In your own words)', (429, 910), ry, 'A first-hand record made at the time of the event.')
+        cell(2, rl, 11, 'Example', (910, 1086), ry, 'A diary')
+    q(3, 'A.', [2, 3]); q(3, 'B.', [4]); q(3, 'A.', [8, 9]); q(3, 'B.', [10]); q(3, 'C.', [11])
+    q(4, 'A.', [2, 3]); q(4, 'B.', [4, 5]); q(4, 'C.', [6]); q(4, '1.', [12]); q(4, '2.', [15])
+    q(5, '3.', [2]); q(5, '4.', [5]); q(5, '5.', [8]); q(5, '1.', [14])
+    q(6, '2.', [2]); q(6, '3.', [5]); q(6, '4.', [8]); q(6, '5.', [11])
+    for rl, ry in [(4, (306, 391)), (5, (391, 477)), (6, (477, 562))]:
+        cell(7, rl, 3, 'Definition (In your own words)', (367, 812), ry, 'A comparison that says one thing is another thing.')
+        cell(7, rl, 3, 'Original Example', (812, 1086), ry, 'Her voice was music.')
+    q(7, 'A.', [9]); q(7, 'B.', [10]); q(7, 'C.', [11, 12]); q(7, 'D.', [13])
+    q(8, 'Task 1', [4, 5, 6, 7]); q(8, 'Task 2', [11, 12, 13])
+    d.save('real/exam_revision.pdf')
+
+
+def ink_boxes(name, page, region, skip):
+    """Bounding boxes of non-text ink (pictures, graphs) inside region, ignoring text line bands."""
+    from PIL import Image
+    im = Image.open(os.path.join(DUMP, name, 'p%d.png' % page)).convert('L')
+    x0, y0, w, h = region
+    rows = []
+    for y in range(y0, y0 + h, 2):
+        if any(a <= y <= b for a, b in skip):
+            continue
+        dark = [x for x in range(x0, x0 + w, 2) if im.getpixel((x, y)) < 160]
+        if len(dark) > 2:
+            rows.append((y, min(dark), max(dark)))
+    boxes = []
+    for y, a, b in rows:
+        if boxes and y - boxes[-1][3] <= 24:
+            bx = boxes[-1]; boxes[-1] = [min(bx[0], a), bx[1], max(bx[2], b), y]
+        else:
+            boxes.append([a, y, b, y])
+    return [[a, t, b - a, bb - t] for a, t, b, bb in boxes if bb - t > 20 and b - a > 20]
+
+
+def phe():
+    d = Doc('phe')
+    spec = [(2, [0, 1], 2), (2, [3, 4, 5, 6], 7), (3, [0, 1], 2), (3, [3, 4, 5], 6), (4, [0, 1, 2], 3), (4, [4, 5, 6, 7], 8), (5, [0, 1, 2], 3), (5, [4, 5, 6], 7)]
+    answers = ['0.25 N·s', '4.0 N·s, 8000 N', '4 N, 0 N, 2 N', '1200 J', '0.2 kg·m/s ทิศตะวันออก', '2.0 m/s', '0.5 m', '17.5 m']
+    for n, (p, ql, al) in enumerate(spec, 1):
+        Q = [d.L(p, i) for i in ql]
+        A = d.L(p, al)
+        area = [175, Q[-1]['bottom'] + 6, 1085 - 175, A['bottom'] + 6 - Q[-1]['bottom'] - 6]
+        skip = [(l['top'] - 4, l['bottom'] + 4) for l in d.P(p)['lines']]
+        avoid = ink_boxes('phe', p, [180, area[1], 900, A['top'] - area[1] - 4], skip)
+        d.add(label=f'{n}.', page=p, kind='write', cat='FORMULA_WORKING', prompt=' '.join(l['text'] for l in Q), qrect=d.rect(p, *ql),
+              areas=[area], avoid=avoid, answer='I = FΔt\n= ...\n∴ ' + answers[n - 1])
+    d.save('real/phe.pdf', settings={'math': 'Show working'})
+
+
+def icecream():
+    d = Doc('icecream')
+    X0, X1 = 100, 1275
+    def lines_area(p, first, last):
+        a, b = d.L(p, first), d.L(p, last)
+        return [X0, a['top'] - 16, X1 - X0, b['bottom'] + 6 - a['top'] + 16]
+    hdr = d.L(1, 21)
+    cols = [(c[0], c[1]) for c in hdr['cells']]
+    right = 1528
+    edges = [c[1] for c in hdr['cells']] + [right]
+    rows = {22: (1000, 1070), 23: (1074, 1144), 24: (1148, 1216)}
+    colnames = [c[0] for c in hdr['cells']]
+    for rl, (t, b) in rows.items():
+        L = d.L(1, rl)
+        for k in (1, 2, 3):
+            x0 = edges[k] - 10; x1 = edges[k + 1] - 10
+            d.add(label=L['text'], page=1, kind='cell', cat='TABLE_SHORT', prompt=L['text'] + ' — ' + colnames[k], qrect=d.rect(1, rl),
+                  areas=[[x0, t, x1 - x0, b - t]], cell={'row': [x0, t, x1 - x0, b - t], 'header': d.rect(1, 21), 'col': colnames[k]}, answer='Liquid, smooth' if k == 1 else ('Cold, about 4 °C' if k == 2 else '0 min'))
+    eq = d.rect(1, 4)
+    d.add(label='1.', page=1, kind='write', cat='SHORT_TEXT', prompt=d.L(1, 26)['text'][3:], qrect=d.rect(1, 26), areas=[lines_area(1, 27, 28), [eq[0] - 40, eq[1] - 8, eq[2] + 80, eq[3] + 16]], answer='1 C₁₂H₂₂O₁₁ + 12 O₂ → 12 CO₂ + 11 H₂O')
+    d.add(label='2.', page=1, kind='write', cat='FORMULA_WORKING', prompt=d.L(1, 29)['text'][3:], qrect=d.rect(1, 29), areas=[lines_area(1, 30, 32)], answer='n = m / M\n= 25.0 g / 342.30 g/mol\n∴ n = 0.0730 mol')
+    d.add(label='3.', page=1, kind='write', cat='FORMULA_WORKING', prompt=d.L(1, 33)['text'][3:] + ' ' + d.L(1, 34)['text'], qrect=d.rect(1, 33, 34), areas=[lines_area(1, 35, 37)], answer='0.0730 mol × 12 = 0.876 mol CO₂')
+    spec = [(4, [4], (5, 6)), (5, [7, 8], (9, 10)), (6, [11, 12], (13, 15)), (7, [16, 17], (18, 20)), (8, [21, 22], (23, 24)), (9, [25, 26], (27, 29)), (10, [30, 31], (32, 33))]
+    for n, ql, (a, b) in spec:
+        d.add(label=f'{n}.', page=2, kind='write', cat='LONG_TEXT', prompt=' '.join(d.L(2, i)['text'] for i in ql)[3:].strip(), qrect=d.rect(2, *ql), areas=[lines_area(2, a, b)],
+              answer='Salt dissolves into ions that get in the way of water molecules forming ice, so the freezing point drops below 0 °C and the bath gets cold enough to freeze the milk.')
+    d.save('real/icecream.docx')
+
+
+BUILDERS = {'physics': physics, 'polygraph': polygraph, 'exam_revision': exam_revision, 'phe': phe, 'icecream': icecream}
 
 if __name__ == '__main__':
     for n in (sys.argv[1:] or BUILDERS.keys()):

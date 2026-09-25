@@ -2578,14 +2578,14 @@ class Component extends DCLogic {
       if (gap >= r.lh * 1.1) slots.push({ top: rules[i], gap });
     }
     if (!slots.length) {
-      const n = Math.max(1, Math.floor(r.h / (r.lh * 2)));
+      const n = Math.max(1, Math.floor(r.h / (r.lh * 1.7)));
       const g = r.h / n;
       for (let k = 0; k < n; k++) slots.push({ top: r.y + k * g, gap: g });
     }
     return slots.map(s => ({
       top: s.top, gap: s.gap, base: s.top + s.gap * 0.76,
       x: r.x + r.lh * 0.8, w: Math.max(r.lh * 3, r.w - r.lh * 1.6),
-      size: Math.max(r.lh * 1.05, Math.min(r.lh * 1.7, s.gap * 0.62)),
+      size: Math.max(r.lh * 1.0, Math.min(r.lh * 1.35, s.gap * 0.62)),
     }));
   }
 
@@ -2623,7 +2623,15 @@ class Component extends DCLogic {
         chunks.forEach((p, k) => words.push(k ? '\u0003' + p : p));
       });
     });
-    return this.layoutWords(this.decorate(words, Number(seed) || 1), slots, seed);
+    const deco = this.decorate(words, Number(seed) || 1);
+    const cut = deco.lastIndexOf('\u0002');
+    if (slots.length > 1 && slots[slots.length - 1].answer && cut > 0) {
+      const head = this.layoutWords(deco.slice(0, cut), slots.slice(0, -1), seed);
+      const segs = head.reduce((m, st) => Math.max(m, st.seg || 0), 0);
+      const tail = this.layoutWords(deco.slice(cut + 1), slots.slice(-1), seed).map(st => ({ ...st, seg: segs + 1 }));
+      return head.concat(tail);
+    }
+    return this.layoutWords(deco, slots, seed);
   }
 
   layoutWords(words, slots, seed) {
@@ -2792,7 +2800,21 @@ class Component extends DCLogic {
         if (inkIn(x0, y0, x1, y1) < 0.02) cands.push({ type: 'box', x0, y0, x1, y1 });
       }
     });
+    const vrun = (x, ya, yb) => {
+      let best = 0;
+      for (let xx = Math.max(0, Math.round(x - lh * 0.7)); xx <= Math.min(w - 1, Math.round(x + lh * 0.7)); xx++) {
+        let n = 0, t = 0;
+        for (let y = Math.max(0, Math.round(ya)); y <= Math.min(h - 1, Math.round(yb)); y++) { t++; n += ink[y * w + xx]; }
+        if (t) best = Math.max(best, n / t);
+      }
+      return best;
+    };
+    const endTouch = (x, y) => vrun(x, y - lh * 0.9, y - 2) > 0.8 || vrun(x, y + 2, y + lh * 0.9) > 0.8;
+    const bx0 = cl.map(b => b.x * k).sort((a, b) => a - b), bx1 = cl.map(b => (b.x + b.w) * k).sort((a, b) => a - b);
+    const textL = bx0.length ? bx0[Math.floor(bx0.length * 0.05)] : left, textR = bx1.length ? bx1[Math.floor(bx1.length * 0.95)] : right;
+    const decor = r => (endTouch(r.x0, r.y0) && endTouch(r.x1, r.y0)) || r.x1 > textR + lh * 1.5 || r.x0 < textL - lh * 1.5;
     rules.forEach(r => {
+      if (decor(r)) return;
       const x0 = Math.round(r.x0), x1 = Math.round(r.x1), span = Math.max(1, (x1 - x0) / 2);
       let top = Math.max(0, Math.round(r.y0 - lh * 2.2));
       for (let y = r.y0 - 2; y >= Math.max(0, r.y0 - lh * 2.2); y--) {
@@ -2867,7 +2889,7 @@ class Component extends DCLogic {
 
   slotsForSpace(page, sp) {
     if (sp.type === 'line') {
-      return [{ top: sp.y, gap: sp.h, base: sp.base != null ? sp.base : sp.y + sp.h * 0.88, x: sp.x + sp.lh * 0.3, w: Math.max(sp.lh * 3, sp.w - sp.lh * 0.6), size: Math.min(sp.lh * 1.45, sp.h * 0.8) }];
+      return [{ top: sp.y, gap: sp.h, base: sp.base != null ? sp.base : sp.y + sp.h * 0.88, x: sp.x + sp.lh * 0.3, w: Math.max(sp.lh * 3, sp.w - sp.lh * 0.6), size: Math.min(sp.lh * 1.35, sp.h * 0.8), answer: !!sp.answerLine }];
     }
     return this.slotsFor(page, { x: sp.x, y: sp.y, w: sp.w, h: sp.h, lh: sp.lh, cell: true });
   }
@@ -3057,7 +3079,20 @@ class Component extends DCLogic {
         const rightHere = beside ? Math.min(rightQ, beside.x0 - lh) : rightQ;
         const y0 = L.bottom, y1 = N ? N.top : Math.min(H - lh * 2, L.bottom + lh * 16);
         let zone = spaces.map((sp, n) => ({ sp, n: n + 1 })).filter(z => !used.has(z.n) && z.sp.y >= y0 - lh * 0.3 && z.sp.y + z.sp.h <= y1 + lh * 0.3 && (!cols || this.colIdx(page, z.sp.x + Math.min(z.sp.w, lh * 4) / 2) === lc));
-        if (zone.some(z => z.sp.type === 'line')) zone = zone.filter(z => z.sp.type !== 'space');
+        const boxZ = zone.filter(z => z.sp.type === 'box');
+        const lineZ = zone.filter(z => z.sp.type === 'line');
+        let answerLine = false;
+        if (boxZ.length) {
+          zone = boxZ.concat(lineZ.filter(z => boxZ.some(bz => z.sp.y >= bz.sp.y - lh * 0.3 && z.sp.y + z.sp.h <= bz.sp.y + bz.sp.h + lh * 0.3))).sort((p, r) => p.sp.y - r.sp.y);
+        } else if (lineZ.length) {
+          const cat = String(q.cat || '').toUpperCase();
+          const roomy = ['FORMULA_WORKING', 'LONG_TEXT', 'OTHER'].indexOf(cat) >= 0 && lineZ.length <= 1;
+          const firstLine = Math.min.apply(null, lineZ.map(z => z.sp.y + z.sp.h));
+          const gaps = roomy ? zone.filter(z => z.sp.type === 'space' && z.sp.y + z.sp.h <= firstLine && z.sp.y < firstLine - lh * 3 && z.sp.h >= lh * 2.5) : [];
+          zone = gaps.map(z => (z.sp.y + z.sp.h > Math.min.apply(null, lineZ.map(l => l.sp.y)) ? { ...z, sp: { ...z.sp, h: Math.min.apply(null, lineZ.map(l => l.sp.y)) - z.sp.y - lh * 0.2 } } : z)).concat(lineZ).sort((p, r) => p.sp.y - r.sp.y);
+          answerLine = gaps.length > 0;
+          if (answerLine) { const lz = zone[zone.length - 1]; zone[zone.length - 1] = { ...lz, sp: { ...lz.sp, answerLine: true } }; }
+        }
         let how = 'spaces';
         if (!zone.length && y1 - y0 >= lh * 2.2) {
           const gh = Math.min(y1 - y0 - lh * 0.4, lh * 8);
@@ -3072,6 +3107,12 @@ class Component extends DCLogic {
           how = 'inline';
         }
         zone.forEach(z => used.add(z.n));
+        zone = zone.map(z => {
+          if (z.sp.type !== 'space') return z;
+          const x0 = Math.max(z.sp.x, Math.min(L.x0 - lh, W * 0.5)), x1 = Math.min(z.sp.x + z.sp.w, rightQ);
+          return x1 - x0 > lh * 4 ? { ...z, sp: { ...z.sp, x: x0, w: x1 - x0 } } : z;
+        });
+        zone.forEach(z => { spaces[z.n - 1] = z.sp; });
         let rows = 0;
         zone.forEach(z => { rows += z.sp.type === 'line' ? 1 : Math.max(1, Math.floor(z.sp.h / (lh * 2))); });
         let atype = how === 'inline' ? 'short' : rows === 0 ? null : rows === 1 ? 'sentence' : rows <= 3 ? 'sentences' : 'paragraph';
