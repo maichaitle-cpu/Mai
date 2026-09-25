@@ -7,6 +7,8 @@
   },
   "devDependencies": {
     "@anthropic-ai/sdk": "^0.128.0",
+    "@tesseract.js-data/eng": "^1.0.0",
+    "@tesseract.js-data/tha": "^1.0.0",
     "docx-preview": "0.3.2",
     "html2canvas": "1.4.1",
     "jspdf": "2.5.1",

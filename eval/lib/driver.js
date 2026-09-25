@@ -43,9 +43,13 @@ window.__runDoc = async function (opts) {
     },
   };
   Object.assign(comp.state, { email: 'eval@local', ocr: 'Built-in', gkey: '' }, settings || {});
-  const blob = await (await fetch('/' + doc)).blob();
-  const file = new File([blob], doc.split('/').pop(), { type: blob.type });
-  comp.state.files = [{ id: '1', name: file.name, size: file.size, type: file.type, raw: file, pct: 100, state: 'done' }];
+  const docs = Array.isArray(doc) ? doc : [doc];
+  comp.state.files = [];
+  for (const [i, d] of docs.entries()) {
+    const blob = await (await fetch('/' + d)).blob();
+    const file = new File([blob], d.split('/').pop(), { type: blob.type });
+    comp.state.files.push({ id: String(i + 1), name: file.name, size: file.size, type: file.type, raw: file, pct: 100, state: 'done' });
+  }
   const t0 = performance.now();
   await comp.runPipeline();
   const st = comp.state;
@@ -60,7 +64,7 @@ window.__runDoc = async function (opts) {
     layout: comp._traceRaw && comp._traceRaw.layout ? comp._traceRaw.layout.map(q => ({ id: q.id, label: q.label, page: q.page, lineId: q.lineId, kind: q.kind, cat: q.cat, recovered: !!q.recovered, fromTable: !!q.fromTable, col: q.col || '', prompt: String(q.prompt || '').slice(0, 60) })) : null,
     calls,
     pages: (st.pages || []).map((p, i) => ({
-      page: i + 1, w: p.canvas.width, h: p.canvas.height, ocr: !!p.ocr,
+      page: i + 1, w: p.canvas.width, h: p.canvas.height, ocr: !!p.ocr, ocrConf: p.ocrConf || null, ocrFailed: !!p.ocrFailed, prep: p.prep || null,
       lines: (p.lines || []).map(l => ({ id: l.id, top: r(l.top), bottom: r(l.bottom), x0: r(l.x0), x1: r(l.x1), text: l.text, cells: (l.cells || []).map(c => [c.text, r(c.x0), r(c.x1)]) })),
       spaces: (p.spaces || []).map((s, k) => ({ n: k + 1, type: s.type, rect: [r(s.x), r(s.y), r(s.w), r(s.h)] })),
     })),

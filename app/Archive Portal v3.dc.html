@@ -1523,7 +1523,46 @@ class Component extends DCLogic {
         }
       }
     }
+    const lm = label.match(/^\(?([A-Fa-f\u0E01-\u0E2E])\s*[).:]/);
+    if (lm) {
+      const lre = new RegExp('(^|[\\s(])\\(?' + esc(lm[1]) + '\\s*[).:]', 'g');
+      const nextQ = page.lines.filter(l => l.top > qL.bottom && Component.Q_RE.test(l.text)).reduce((m, l) => Math.min(m, l.top), Infinity);
+      for (const L of cand.filter(l => l.top < nextQ)) {
+        const m = this.charMap(L);
+        lre.lastIndex = 0;
+        let hit;
+        while ((hit = lre.exec(m.str))) {
+          const i = hit.index + hit[1].length;
+          const cell = (L.cells || []).find(c => c.x0 <= m.xs[i] + 1 && c.x1 >= m.xs[i]) || { x1: L.x1 };
+          const nextOpt = /[(\s]\(?[A-Fa-f\u0E01-\u0E2E]\s*[).:]/g;
+          nextOpt.lastIndex = i + 2;
+          const nx = nextOpt.exec(m.str);
+          const x0 = m.xs[i], x1 = Math.min(cell.x1, nx ? m.xs[nx.index] - h * 0.3 : Infinity);
+          if (x1 - x0 > h * 0.8 && x0 >= col.x0 - h * 2 && x0 <= col.x1 + h * 2) return { x: x0, y: L.top, w: x1 - x0, h: L.bottom - L.top };
+          if (lre.lastIndex === hit.index) lre.lastIndex++;
+        }
+      }
+    }
     return null;
+  }
+
+  // One option per line directly under the question: when text matching fails (OCR), take them in order.
+  optionLines(page, q) {
+    const qL = this.locateLine(page, q);
+    if (!qL) return null;
+    const n = q.options.length, h = qL.h;
+    const after = page.lines.filter(l => l.top > qL.bottom - h * 0.2 && (l.col == null || l.col === qL.col)).sort((a, b) => a.top - b.top);
+    const out = [];
+    for (const l of after) {
+      if (Component.Q_RE.test(l.text) || out.length >= n) break;
+      if (l.x0 < qL.x0 - h * 0.5 || l.x1 - l.x0 > (page.canvas ? page.canvas.width * 0.6 : 1e9)) break;
+      if (out.length && l.top - out[out.length - 1].bottom > h * 2.5) break;
+      out.push(l);
+    }
+    if (out.length !== n) return null;
+    const next = page.lines.filter(l => l.top > out[n - 1].bottom && (l.col == null || l.col === qL.col)).sort((a, b) => a.top - b.top)[0];
+    if (next && !Component.Q_RE.test(next.text) && next.top - out[n - 1].bottom < h * 1.2 && next.x0 >= qL.x0 - h * 0.5 && next.x1 - next.x0 < (page.canvas ? page.canvas.width * 0.6 : 1e9)) return null;
+    return out.map(l => ({ x: l.x0, y: l.top, w: Math.min(l.x1 - l.x0, h * 14), h: l.bottom - l.top }));
   }
 
   isInfo(s) {
@@ -2034,8 +2073,11 @@ class Component extends DCLogic {
       l.frags.sort((a, b) => a.x0 - b.x0);
       let text = '';
       const blanks = [];
+      const mainBase = l.frags.reduce((m, f) => (f.h >= l.h * 0.85 ? Math.max(m, f.base) : m), -Infinity);
       l.frags.forEach((fr, k) => {
-        if (k && fr.x0 - l.frags[k - 1].x1 > l.h * 0.15) text += ' ';
+        const sup = isFinite(mainBase) && fr.h < l.h * 0.85 && mainBase - fr.base > fr.h * 0.25 && /^[0-9a-zA-Z+\-−()]{1,4}$/.test(fr.str.trim()) && k && /[0-9A-Za-z)]$/.test(text);
+        if (k && !sup && fr.x0 - l.frags[k - 1].x1 > l.h * 0.15) text += ' ';
+        if (sup) text += '^';
         text += fr.str;
         const re = /_{3,}/g;
         let m;
@@ -2084,7 +2126,7 @@ class Component extends DCLogic {
         }
       }
     }
-    return segs.filter(s => {
+    return segs.filter(s => s.x1 >= L.x0 - h * 3 && s.x0 <= L.x1 + h * 3).filter(s => {
       let d = 0, n = 0;
       const yA = Math.round(L.base - h * 0.8), yB = Math.max(yA + 1, s.y - 3);
       for (let x = s.x0 + 2; x < s.x1 - 2; x += 3) {
@@ -2289,7 +2331,8 @@ class Component extends DCLogic {
         this.setState({ stageNote: 'Reading text with Google Vision, page ' + (n + 1) + ' of ' + need.length });
         try {
           const data = await this.googleOcr(p, gkey);
-          const lines = data ? this.ocrToLines(data) : [];
+          const lines = data ? this.ocrToLines(data, p.canvas.width) : [];
+          lines.forEach(l => { if (!l.blanks.length) l.blanks = this.findLineBlanks(p.canvas, l); });
           if (lines.length >= 3) { p.lines = lines; p.ocr = true; p.ocrConf = 95; p.ocrBy = 'google'; }
         } catch (err) {
           this.toast('info', 'Google Vision failed', ((err && err.message) || '') + ' Using the built-in OCR instead.');
@@ -2300,27 +2343,40 @@ class Component extends DCLogic {
       if (!need.length) return;
     }
     if (!window.Tesseract) { this.toast('info', 'OCR unavailable', 'Scanned pages will be read by Claude instead.'); return; }
-    let worker;
-    try { worker = await window.Tesseract.createWorker('eng+tha'); }
+    // English first: an eng+tha model turns Latin text into Thai look-alikes. Pages that read poorly in
+    // English (Thai worksheets) are read again with Thai + English and the better pass is kept.
+    const workers = {};
+    const getWorker = async lang => (workers[lang] = workers[lang] || window.Tesseract.createWorker(lang));
+    const read = async (p, lang) => {
+      const res = await (await getWorker(lang)).recognize(p.ocrCanvas || p.canvas);
+      const data = res.data || {};
+      const words = (data.words || []).filter(w => w.text && w.text.trim());
+      const conf = words.length ? words.reduce((s, w) => s + (w.confidence || 0), 0) / words.length : 0;
+      const weak = words.length ? words.filter(w => (w.confidence || 0) < 60).length / words.length : 1;
+      return { data, conf, weak, lang };
+    };
+    try { await getWorker('eng'); }
     catch (e) { this.toast('info', 'OCR unavailable', 'Scanned pages will be read by Claude instead.'); return; }
     try {
       for (let n = 0; n < need.length; n++) {
         const p = pages[need[n]];
         this.setState({ stageNote: 'Reading text with OCR, page ' + (n + 1) + ' of ' + need.length });
         try {
-          const res = await worker.recognize(p.ocrCanvas || p.canvas);
-          const data = res.data || {};
-          const words = (data.words || []).filter(w => w.text && w.text.trim());
-          const conf = words.length ? words.reduce((s, w) => s + (w.confidence || 0), 0) / words.length : 0;
-          const lines = this.ocrToLines(data);
-          if (lines.length >= 3 && conf >= 55) { p.lines = lines; p.ocr = true; p.ocrConf = Math.round(conf); }
+          let best = await read(p, 'eng');
+          if (best.weak > 0.2 || best.conf < 80) {
+            this.setState({ stageNote: 'Reading Thai text with OCR, page ' + (n + 1) + ' of ' + need.length });
+            try { const th = await read(p, 'tha+eng'); if (th.conf > best.conf) best = th; } catch (e) {}
+          }
+          const lines = this.ocrToLines(best.data, p.canvas.width);
+          lines.forEach(l => { if (!l.blanks.length) l.blanks = this.findLineBlanks(p.canvas, l); });
+          if (lines.length >= 3 && best.conf >= 55) { p.lines = lines; p.ocr = true; p.ocrConf = Math.round(best.conf); p.ocrLang = best.lang; }
           else p.ocrFailed = true;
         } catch (err) { p.ocrFailed = true; }
       }
-    } finally { try { await worker.terminate(); } catch (e) {} }
+    } finally { for (const k of Object.keys(workers)) { try { await (await workers[k]).terminate(); } catch (e) {} } }
   }
 
-  ocrToLines(data) {
+  ocrToLines(data, W) {
     const out = [];
     const filler = t => /^[._\-–—…·•:=~ ]{2,}$/.test(t) || /^[.·…]+$/.test(t);
     (data.lines || []).forEach(ln => {
@@ -2336,9 +2392,12 @@ class Component extends DCLogic {
       const blanksAll = all.filter(w => filler(w.text.trim()) && w.bbox.x1 - w.bbox.x0 > hh * 1.5).map(w => ({ x0: w.bbox.x0, x1: w.bbox.x1 }));
       const groups = [[words[0]]];
       for (let i = 1; i < words.length; i++) {
-        if (words[i].bbox.x0 - words[i - 1].bbox.x1 > hh * 4) groups.push([]);
+        if (words[i].bbox.x0 - words[i - 1].bbox.x1 > hh * (W ? 10 : 4)) groups.push([]);
         groups[groups.length - 1].push(words[i]);
       }
+      // Thai OCR returns characters as separate words; Thai has no spaces inside a phrase.
+      const glue = (a, b) => (/[\u0E00-\u0E7F]$/.test(a) && /^[\u0E00-\u0E7F]/.test(b) ? '' : ' ');
+      const joinW = ws => ws.reduce((t, w) => (t ? t + glue(t, w.text) + w.text : w.text), '');
       groups.forEach(g => {
         const x0 = g[0].bbox.x0, x1 = g[g.length - 1].bbox.x1;
         const ys = g.map(w => w.bbox.y1 - w.bbox.y0).sort((a, b) => a - b);
@@ -2348,12 +2407,13 @@ class Component extends DCLogic {
         const cells = [];
         g.forEach(w => {
           const c = cells[cells.length - 1];
-          if (c && w.bbox.x0 - c.x1 <= gh * 1.2) { c.text += ' ' + w.text; c.x1 = w.bbox.x1; }
+          const thai = c && /[\u0E00-\u0E7F]$/.test(c.text) && /^[\u0E00-\u0E7F]/.test(w.text);
+          if (c && w.bbox.x0 - c.x1 <= gh * (thai ? 2.5 : 1.2)) { c.text += glue(c.text, w.text) + w.text; c.x1 = w.bbox.x1; }
           else cells.push({ text: w.text, x0: w.bbox.x0, x1: w.bbox.x1 });
         });
         const nextX = groups[groups.indexOf(g) + 1] ? groups[groups.indexOf(g) + 1][0].bbox.x0 : Infinity;
         out.push({
-          id: 0, text: g.map(w => w.text).join(' ').replace(/\s+/g, ' ').trim(), base, h: gh,
+          id: 0, text: joinW(g).replace(/\s+/g, ' ').trim(), base, h: gh,
           x0, x1, top: base - gh * 0.85, bottom: base + gh * 0.25,
           blanks: blanksAll.filter(bk => bk.x0 >= x0 - gh && bk.x0 < nextX), blankUsed: 0, cells,
         });
@@ -2361,7 +2421,7 @@ class Component extends DCLogic {
     });
     out.sort((a, b) => a.base - b.base || a.x0 - b.x0);
     out.forEach((l, i) => { l.id = i; });
-    return out;
+    return W ? this.splitColumns(out, W) : out;
   }
 
 
@@ -2805,6 +2865,12 @@ class Component extends DCLogic {
       const sat = Math.max(r, g, b) - Math.min(r, g, b);
       ink[p] = (r * 299 + g * 587 + b * 114) / 1000 < 170 && (sat < 60 || (r * 299 + g * 587 + b * 114) / 1000 < 70) ? 1 : 0;
     }
+    // Pictures: saturated colour that is not text ink still must not be written over.
+    const pic = new Uint8Array(w * h);
+    for (let i = 0, p = 0; i < d.length; i += 4, p++) {
+      const r = d[i], g = d[i + 1], b = d[i + 2], lum = (r * 299 + g * 587 + b * 114) / 1000, sat = Math.max(r, g, b) - Math.min(r, g, b);
+      pic[p] = !ink[p] && sat > 70 && lum < 225 ? 1 : 0;
+    }
     const tl = (page.lines || []).filter(l => l.h > 3 && !/^[_.\-–—…\s]+$/.test(l.text || ''));
     const cl = tl.length >= 3 ? tl.map(l => ({ x: l.x0, y: l.top, w: l.x1 - l.x0, h: l.h })) : this.lineClusters(src, 0, 0, W, H);
     const hs = cl.map(b => b.h).sort((a, b) => a - b);
@@ -2957,7 +3023,7 @@ class Component extends DCLogic {
       const rowEmpty = [];
       for (let y = 0; y < h; y++) {
         let n = 0;
-        for (let x = Math.round(L0); x <= Math.round(R0); x += 2) n += ink[y * w + x];
+        for (let x = Math.round(L0); x <= Math.round(R0); x += 2) n += ink[y * w + x] || pic[y * w + x];
         rowEmpty.push(n <= 1);
       }
       let bs = -1;
@@ -3661,6 +3727,10 @@ class Component extends DCLogic {
           else if (o.box) r = { x: n(o.box.x, 0) / 100 * oW, y: n(o.box.y, 0) / 100 * oH, w: Math.max(8, n(o.box.w, 4) / 100 * oW), h: Math.max(8, n(o.box.h, 2) / 100 * oH) };
           return r ? { o, r: { ...this.snapOption(op, r), page: opn } } : null;
         }).filter((z, i, arr) => z && arr.findIndex(y => y && y.r.page === z.r.page && Math.abs(y.r.x - z.r.x) < 4 && Math.abs(y.r.y - z.r.y) < 4) === i);
+        if (keep.length < q.options.length && q.options.every(o => !o.page || o.page === (q.page || 1))) {
+          const ord = this.optionLines(page, q);
+          if (ord) keep.splice(0, keep.length, ...ord.map((r, k) => ({ o: q.options[k], r: { ...r, page: q.page || 1 } })));
+        }
         if (keep.length >= 2) {
           const pgs = [...new Set(keep.map(z => z.r.page))];
           if (pgs.length === 1 && pgs[0] !== (q.page || 1)) q = { ...q, qpage: q.qpage || q.page || 1, page: pgs[0] };
@@ -4293,7 +4363,7 @@ class Component extends DCLogic {
     if (kind === 'blank' && !L.blanks.length) {
       const i0 = pg.lines.indexOf(L);
       const stop = untilLineId != null ? pg.lines.findIndex(l => l.id === untilLineId) : -1;
-      const B = pg.lines.slice(i0 + 1, stop > i0 ? stop : i0 + 4).find(l => labelled(l) && !this.isInfo(l.text));
+      const B = pg.lines.slice(i0 + 1, stop > i0 ? Math.min(stop, i0 + 5) : i0 + 4).find(l => labelled(l) && !this.isInfo(l.text) && l.col === L.col && l.top - L.bottom < L.h * 5);
       if (B) { L = B; lineId = B.id; } else kind = 'box';
     } else if (kind === 'box' && labelled(L) && !ruleOnly(L) && !this.isInfo(L.text) && !/(คำตอบ|answer)\s*[:：]?\s*[_.…]/i.test(L.text)) {
       kind = 'blank';
@@ -4309,22 +4379,28 @@ class Component extends DCLogic {
   }
 
   async readTextLayout(pages) {
+    // Scanned pages: OCR text can be garbled, so their page images go along (max 4 per request).
     const chunks = [];
-    let cur = '';
+    let cur = { text: '', imgs: [] };
     pages.forEach((p, pi) => {
       const block = this.textBlock(p, pi);
-      if (cur && cur.length + block.length > 40000) { chunks.push(cur); cur = ''; }
-      cur += block;
+      if (cur.text && (cur.text.length + block.length > 40000 || (p.ocr && cur.imgs.length >= 4))) { chunks.push(cur); cur = { text: '', imgs: [] }; }
+      cur.text += block;
+      if (p.ocr && p.apiUrl) cur.imgs.push({ n: pi + 1, url: p.apiUrl });
     });
-    if (cur) chunks.push(cur);
+    if (cur.text) chunks.push(cur);
     const found = [];
     for (let c = 0; c < chunks.length; c++) {
       this.setState({ stageNote: 'Reading text layer ' + (c + 1) + ' of ' + chunks.length });
-      const hasQ = /\[Q\]/.test(chunks[c]);
+      const hasQ = /\[Q\]/.test(chunks[c].text);
+      const tail = '\nLines tagged [Q] start with a question number; [options: ...] lists option letters found by code. JSON only.';
+      const content = chunks[c].imgs.length
+        ? chunks[c].imgs.map(im => ({ type: 'image', source: { type: 'base64', media_type: 'image/jpeg', data: im.url.split(',')[1] } })).concat([{ type: 'text', text: 'The attached image(s) are pages ' + chunks[c].imgs.map(im => im.n).join(', ') + ' in order. Their text lines below came from OCR and may contain misread characters: take question wording and options from the image, but always answer with the line ids below.\n' + chunks[c].text + tail }])
+        : chunks[c].text + tail;
       const out = await this.askFast({
         max_tokens: 8000,
         system: Component.TEXT_LAYOUT_PROMPT,
-        messages: [{ role: 'user', content: chunks[c] + '\nLines tagged [Q] start with a question number; [options: ...] lists option letters found by code. JSON only.' }],
+        messages: [{ role: 'user', content }],
       }, 'Reading text layer', raw => { try { const q = this.parseJson(raw).questions; return Array.isArray(q) && (q.length > 0 || !hasQ); } catch (e) { return false; } });
       (this.parseJson(out).questions || []).forEach(q => { const t = this.textQ(q, pages); if (t) found.push(t); });
     }
@@ -4464,7 +4540,8 @@ class Component extends DCLogic {
       for (let hi = 0; hi < lines.length; hi++) {
         const Hd = lines[hi];
         const hc = this.headerCells(page, Hd);
-        if (hc.length < 2 || hc.some(c => String(c.text).length > 60)) continue;
+        if (hc.length < 2 || hc.length > 8 || hc.some(c => String(c.text).length > 60 || String(c.text).replace(/[^\p{L}\p{N}]/gu, '').length < 2)) continue;
+        if (page.canvas && Hd.bottom < page.canvas.height * 0.08) continue;
         if ((Hd.blanks && Hd.blanks.length) || this.isInfo(Hd.text) || Component.INFO_TH.test(String(Hd.text)) || Component.INSTRUCTION.test(String(Hd.text))) continue;
         if (edge(page, Hd) && running(Hd)) continue;
         const h = Hd.h || 16;

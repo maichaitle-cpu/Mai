@@ -31,18 +31,32 @@ const CDN = {
   'https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js': NM('tesseract.js/dist/tesseract.min.js'),
 };
 
+// Tesseract loads its worker, wasm core and language data from CDNs; serve them from node_modules.
+function tesseractFile(url) {
+  let m;
+  if ((m = url.match(/npm\/tesseract\.js@[^/]+\/dist\/([^?]+)/))) return NM('tesseract.js/dist/' + m[1]);
+  if ((m = url.match(/npm\/tesseract\.js-core@[^/]+\/([^?]+)/))) return NM('tesseract.js-core/' + m[1]);
+  if ((m = url.match(/@tesseract\.js-data\/([^?]+)/))) return NM('@tesseract.js-data/' + m[1]);
+  if ((m = url.match(/tessdata[^/]*\/(?:[^/]+\/)*([a-z_]+)\.traineddata(\.gz)?/))) return NM('@tesseract.js-data/' + m[1] + '/4.0.0_best_int/' + m[1] + '.traineddata.gz');
+  return null;
+}
+
 const TYPES = { '.js': 'application/javascript', '.html': 'text/html', '.pdf': 'application/pdf', '.json': 'application/json', '.png': 'image/png', '.jpg': 'image/jpeg', '.docx': 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' };
 
 async function openApp({ onClaude, log = () => {} } = {}) {
   const { chromium } = loadPlaywright();
   const browser = await chromium.launch();
-  const page = await browser.newPage({ viewport: { width: 1280, height: 900 } });
+  const context = await browser.newContext({ viewport: { width: 1280, height: 900 } });
+  const page = await context.newPage();
   page.on('pageerror', e => log('[pageerror] ' + e.message));
   page.on('console', m => { if (m.type() === 'error') log('[console] ' + m.text()); });
   const script = appScript();
-  await page.route('**/*', route => {
+  await context.route('**/*', route => {
     const url = route.request().url();
     if (CDN[url]) return route.fulfill({ body: fs.readFileSync(CDN[url]), contentType: 'application/javascript' });
+    const tf = tesseractFile(url);
+    if (tf && fs.existsSync(tf)) return route.fulfill({ body: fs.readFileSync(tf), contentType: tf.endsWith('.wasm') ? 'application/wasm' : tf.endsWith('.js') ? 'application/javascript' : 'application/octet-stream', headers: { 'access-control-allow-origin': '*' } });
+    if (tf) console.error('[tesseract] missing', url);
     if (url.startsWith('http://eval.local/')) {
       const rel = decodeURIComponent(url.slice('http://eval.local/'.length).split('?')[0]);
       if (rel === 'app.js') return route.fulfill({ body: script, contentType: 'application/javascript' });

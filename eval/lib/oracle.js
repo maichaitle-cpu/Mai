@@ -30,19 +30,36 @@
     return JSON.parse(text.slice(a, b + 1));
   }
 
+  window.__scaleGT = function (gt, widths) {
+    if (!gt.basePage) return gt;
+    const sc = p => (widths[(p || 1) - 1] || gt.basePage[0]) / gt.basePage[0];
+    const R = (r, p) => (r ? r.map((v, i) => (i < 4 ? Math.round(v * sc(p)) : v)) : r);
+    return { ...gt, questions: gt.questions.map(q => ({
+      ...q,
+      qrect: R(q.qrect, q.page), area: R(q.area, q.page), areas: q.areas && q.areas.map(a => R(a, q.page)), avoid: q.avoid && q.avoid.map(a => R(a, q.page)),
+      options: q.options && q.options.map(o => ({ ...o, rect: R(o.rect, o.page || q.page) })),
+      cell: q.cell && { ...q.cell, row: R(q.cell.row, q.page), header: R(q.cell.header, q.page) },
+    })) };
+  };
+
   window.__makeOracle = function (gt, cfg, comp) {
     cfg = cfg || {};
-    const Q = gt.questions.map(q => (q.area || !q.areas ? q : { ...q, area: q.areas[0] }));
+    let Q0 = gt.questions.map(q => (q.area || !q.areas ? q : { ...q, area: q.areas[0] }));
+    let scaled = !gt.basePage;
+    const Qs = () => {
+      if (!scaled && comp.state.pages && comp.state.pages.length) { Q0 = __scaleGT({ ...gt, questions: Q0 }, comp.state.pages.map(p => p.canvas.width)).questions; scaled = true; }
+      return Q0;
+    };
     const pages = () => comp.state.pages || [];
 
     function matchQ(label, prompt, page) {
       const cm = /Row: (.+?) — Column: (.+)$/.exec(String(prompt || ''));
       if (cm) {
-        const cells = Q.filter(q => q.kind === 'cell' && norm(q.label) === norm(cm[1]));
+        const cells = Qs().filter(q => q.kind === 'cell' && norm(q.label) === norm(cm[1]));
         if (cells.length) return cells.reduce((b, q) => (sim(q.cell.col, cm[2]) + sim(cm[2], q.cell.col) > sim(b.cell.col, cm[2]) + sim(cm[2], b.cell.col) ? q : b));
       }
       let best = null, bs = -1;
-      Q.forEach(q => {
+      Qs().forEach(q => {
         if (page && q.page !== page && !(q.optionsPage && q.optionsPage === page)) return;
         const lab = labelKey(label) && labelKey(label) === labelKey(q.label) ? 1 : 0;
         const s = lab * 2 + sim(q.prompt, prompt) * 3;
@@ -109,12 +126,14 @@
       const fm = /FOCUS: ([^\n]*?) look like/.exec(txt);
       const focus = fm ? fm[1].split(',').map(x => x.trim()) : null;
       const out = focus ? [] : fakes();
-      Q.forEach(q => {
+      const shown = new Set((txt.match(/=== PAGE (\d+) ===/g) || []).map(m => Number(m.match(/\d+/)[0])));
+      Qs().forEach(q => {
         const P = pages()[q.page - 1];
         if (!P) return;
+        if (shown.size && !shown.has(q.page)) return;
         if (focus) {
           // a question "owns" the lines from the end of the previous question on its page down to its own answer area
-          const prev = Q.filter(o => o.page === q.page && o !== q && o.qrect && q.qrect && o.qrect[1] < q.qrect[1]).map(o => { const r = o.area || o.qrect; return r[1] + r[3]; });
+          const prev = Qs().filter(o => o.page === q.page && o !== q && o.qrect && q.qrect && o.qrect[1] < q.qrect[1]).map(o => { const r = o.area || o.qrect; return r[1] + r[3]; });
           const from = prev.length ? Math.max.apply(null, prev) : 0;
           const r = q.area || q.qrect;
           const to = r ? r[1] + r[3] : (q.qrect ? q.qrect[1] + q.qrect[3] : 0);
@@ -125,7 +144,7 @@
         let L = qls[qls.length - 1];
         if (q.kind === 'blank' || q.kind === 'cell') {
           const r = q.cell ? q.cell.row : q.area;
-          const on = P.lines.filter(l => cy(l) >= r[1] - 4 && cy(l) <= r[1] + r[3] + 4).sort((a, b) => Math.abs(cy(a) - (r[1] + r[3] / 2)) - Math.abs(cy(b) - (r[1] + r[3] / 2)));
+          const on = P.lines.filter(l => cy(l) >= r[1] - 4 && cy(l) <= r[1] + r[3] + 4 && l.x1 > r[0] - 40 && l.x0 < r[0] + r[2] + 40).sort((a, b) => Math.abs(cy(a) - (r[1] + r[3] / 2)) - Math.abs(cy(b) - (r[1] + r[3] / 2)));
           if (on.length) L = on[0];
         }
         if (!L) return;
@@ -160,7 +179,7 @@
       const focus = /FOCUS: questions numbered ([\d, ]+)/.exec(textOf(body.messages[0].content));
       const want = focus ? focus[1].split(',').map(s => Number(s.trim())) : null;
       const out = [];
-      Q.forEach(q => {
+      Qs().forEach(q => {
         const k = set.indexOf(q.page);
         if (k < 0) return;
         if (want && want.indexOf(parseInt(q.label, 10)) < 0) return;

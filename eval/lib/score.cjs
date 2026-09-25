@@ -90,7 +90,21 @@ function locate(q, a, run) {
   return { ok: true, why: '' };
 }
 
-function score(gt, run) {
+function scaleGT(gt, widths) {
+  if (!gt.basePage) return gt;
+  const sc = p => (widths[(p || 1) - 1] || gt.basePage[0]) / gt.basePage[0];
+  const R = (r, p) => (r ? r.map((v, i) => (i < 4 ? Math.round(v * sc(p)) : v)) : r);
+  return { ...gt, questions: gt.questions.map(q => ({
+    ...q,
+    qrect: R(q.qrect, q.page), area: R(q.area, q.page), areas: q.areas && q.areas.map(a => R(a, q.page)), avoid: q.avoid && q.avoid.map(a => R(a, q.page)),
+    options: q.options && q.options.map(o => ({ ...o, rect: R(o.rect, o.page || q.page) })),
+    cell: q.cell && { ...q.cell, row: R(q.cell.row, q.page), header: R(q.cell.header, q.page) },
+    pad: gt.scan ? 22 : q.pad,
+  })) };
+}
+
+function score(gt0, run) {
+  const gt = scaleGT(gt0, (run.pages || []).map(p => p.w));
   const { pairs, extra } = matchAnswers(gt, run.answers);
   const rows = gt.questions.map(q => {
     const a = pairs.get(q);
