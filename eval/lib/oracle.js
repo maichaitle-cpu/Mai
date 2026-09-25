@@ -184,7 +184,8 @@
       const req = jsonIn(textOf(body.messages[0].content));
       const answers = (req.questions || []).map(x => {
         const q = matchQ(x.label, x.prompt);
-        const a = { id: x.id, label: x.label, confidence: 'high', keywords: [] };
+        const a = { id: x.id, label: x.label, confidence: 'high', keywords: ['key idea', 'term'] };
+        if (/FORMULA|NUMERIC/.test(String(x.cat || ''))) { a.work = 'v = d / t = 120 / 2 = 60, check units km/h, then multiply by time'; a.calc = '120/2'; }
         if (Array.isArray(x.options)) {
           let k = 0;
           if (q && q.options) {

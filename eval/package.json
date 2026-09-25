@@ -6,11 +6,12 @@
     "eval": "node lib/eval.cjs"
   },
   "devDependencies": {
-    "pdfjs-dist": "3.11.174",
-    "jspdf": "2.5.1",
-    "jszip": "3.10.1",
+    "@anthropic-ai/sdk": "^0.128.0",
     "docx-preview": "0.3.2",
     "html2canvas": "1.4.1",
+    "jspdf": "2.5.1",
+    "jszip": "3.10.1",
+    "pdfjs-dist": "3.11.174",
     "tesseract.js": "5.1.1",
     "tesseract.js-core": "5.1.1"
   }

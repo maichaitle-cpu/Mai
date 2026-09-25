@@ -5,6 +5,18 @@ window.__runDoc = async function (opts) {
   const comp = new __C();
   comp.toast = () => {};
   const oracle = gt ? __makeOracle(gt, oracleCfg || {}, comp) : null;
+  const PRICE = { 'claude-sonnet-4-5': [3, 15], 'claude-sonnet-4-6': [3, 15], 'claude-sonnet-5': [2, 10], 'claude-haiku-4-5': [1, 5], 'claude-opus-5': [5, 25] };
+  const imgTokens = b64 => new Promise(res => { const im = new Image(); im.onload = () => res(Math.min(1600, Math.ceil(im.naturalWidth * im.naturalHeight / 750))); im.onerror = () => res(1500); im.src = 'data:image/jpeg;base64,' + b64; });
+  const estimate = async (body, out) => {
+    let txt = String(body.system || '').length, img = 0;
+    for (const m of body.messages || []) {
+      if (typeof m.content === 'string') { txt += m.content.length; continue; }
+      for (const b of m.content || []) { if (b.type === 'text') txt += b.text.length; else if (b.type === 'image') img += await imgTokens(b.source.data); }
+    }
+    const inTok = Math.round(txt / 3.6) + img, outTok = Math.round(String(out || '').length / 3.4);
+    const pr = PRICE[body.model] || PRICE['claude-sonnet-4-5'];
+    return { inTok, outTok, imgTok: img, est: (inTok * pr[0] + outTok * pr[1]) / 1e6 };
+  };
   window.claude = {
     complete: async body => {
       const stage = __stageOf(body.system);
@@ -12,6 +24,7 @@ window.__runDoc = async function (opts) {
       const rec = { stage, model: body.model || null, images: 0 };
       (body.messages || []).forEach(m => (Array.isArray(m.content) ? m.content : []).forEach(b => { if (b.type === 'image') rec.images++; }));
       calls.push(rec);
+      const wrapOut = async out => { Object.assign(rec, await estimate(body, out)); return out; };
       try {
         if (claude === 'live') {
           const r = JSON.parse(await window.__claudeNode(JSON.stringify(body)));
@@ -20,7 +33,7 @@ window.__runDoc = async function (opts) {
           return r.text;
         }
         if (!oracle) throw new Error('No ground truth for oracle mode');
-        return await oracle.complete(body, stage);
+        return await wrapOut(await oracle.complete(body, stage));
       } catch (e) {
         rec.error = String((e && e.message) || e);
         throw e;

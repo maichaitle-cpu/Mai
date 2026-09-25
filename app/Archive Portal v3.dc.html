@@ -885,6 +885,14 @@ class Component extends DCLogic {
     return Array.from(new Uint8Array(d)).map(b => b.toString(16).padStart(2, '0')).join('');
   }
 
+  static MODEL = 'claude-sonnet-5';
+  static MODEL_FAST = 'claude-haiku-4-5';
+  static MODEL_FALLBACK = 'claude-sonnet-4-5';
+  // Website build: set to your backend route that forwards the request body to the Messages API
+  // with the server-side API key and returns { text, usage, model }. Empty = Claude Design runtime.
+  static API_URL = '';
+  static PRICES = { 'claude-sonnet-5': [2, 10], 'claude-sonnet-4-5': [3, 15], 'claude-sonnet-4-6': [3, 15], 'claude-haiku-4-5': [1, 5] };
+
   static PAGE_CAP = 50;
   static SOLVE_BATCH = 30;
   static GVISION_KEY = '';
@@ -1676,7 +1684,7 @@ class Component extends DCLogic {
     };
     try {
       const res = await this.ask({
-        model: 'claude-sonnet-4-5',
+        model: Component.MODEL,
         max_tokens: 400,
         system: Component.PIN_PROMPT,
         messages: [{ role: 'user', content: [
@@ -2205,6 +2213,7 @@ class Component extends DCLogic {
       const page = pages[i];
       const mine = out.filter(a => (a.page || 1) === i + 1 && a.slots && !a.choiceRects && a.kind !== 'draw' && a.bbox && a.text && a.text !== '—');
       if (!mine.length) continue;
+      if (this.realPick('accuracy').key !== 'Full check' && !mine.some(a => a.flag || a.overflow || a.boxOnly || a.placedBy === 'check')) continue;
       const spaces = page.spaces || [];
       this.setState({ stageNote: 'Final visual check, page ' + (i + 1) + ' of ' + pages.length });
       const c = this.composite(page, mine);
@@ -2230,7 +2239,7 @@ class Component extends DCLogic {
       if (url.length > 190000) url = this.shrinkCanvas(c, 1100);
       try {
         const res = await this.ask({
-          model: 'claude-sonnet-4-5',
+          model: Component.MODEL,
           max_tokens: 1500,
           system: Component.FINAL_PROMPT,
           messages: [{ role: 'user', content: [
@@ -2391,16 +2400,33 @@ class Component extends DCLogic {
     return out.map(o => ({ label: o.label, lineId: o.lineId }));
   }
 
+  trackUsage(model, usage, label, body, out) {
+    const u = this._usage = this._usage || { calls: 0, inTok: 0, outTok: 0, cost: 0, estimated: false, byStage: {} };
+    let inTok, outTok;
+    if (usage) { inTok = (usage.input_tokens || 0) + (usage.cache_creation_input_tokens || 0) + (usage.cache_read_input_tokens || 0); outTok = usage.output_tokens || 0; }
+    else {
+      let chars = String((body && body.system) || '').length, img = 0;
+      ((body && body.messages) || []).forEach(m => (typeof m.content === 'string' ? [{ type: 'text', text: m.content }] : m.content || []).forEach(b => { if (b.type === 'text') chars += b.text.length; else if (b.type === 'image') img += 1500; }));
+      inTok = Math.round(chars / 3.6) + img; outTok = Math.round(String(out || '').length / 3.4); u.estimated = true;
+    }
+    const pr = Component.PRICES[model] || Component.PRICES[Component.MODEL_FALLBACK];
+    const cost = (inTok * pr[0] + outTok * pr[1]) / 1e6;
+    u.calls++; u.inTok += inTok; u.outTok += outTok; u.cost += cost;
+    const k = String(label || 'other').replace(/\s*\d+.*$/, '');
+    u.byStage[k] = u.byStage[k] || { calls: 0, cost: 0 };
+    u.byStage[k].calls++; u.byStage[k].cost += cost;
+  }
+
   async askFast(body, label, validate) {
     if (!this._noHaiku) {
       try {
-        const out = await this.ask({ ...body, model: 'claude-haiku-4-5' }, label);
+        const out = await this.ask({ ...body, model: Component.MODEL_FAST }, label);
         if (!validate || validate(out)) return out;
       } catch (e) {
         if (/model|not.?found|invalid|unsupported|permission/i.test(String((e && e.message) || e))) this._noHaiku = true;
       }
     }
-    return this.ask({ ...body, model: 'claude-sonnet-4-5' }, label);
+    return this.ask({ ...body, model: Component.MODEL }, label);
   }
 
   safeCalc(expr) {
@@ -3306,7 +3332,7 @@ class Component extends DCLogic {
       let assign = [];
       try {
         const res = await this.ask({
-          model: 'claude-sonnet-4-5',
+          model: Component.MODEL,
           max_tokens: 2000,
           system: Component.ASSIGN_PROMPT,
           messages: [{ role: 'user', content: [
@@ -3405,10 +3431,11 @@ class Component extends DCLogic {
       const spaces = page.spaces, W = page.canvas.width, H = page.canvas.height;
       const idxs = byPage[p];
       let map = [];
-      try {
+      const needMap = this.realPick('accuracy').key === 'Full check' || idxs.some(i => !(out[i].zone && out[i].zone.length) || out[i].mapWhy || !out[i].slots);
+      if (needMap) try {
         const img = this.markSpaces(page, spaces);
         const res = await this.ask({
-          model: 'claude-sonnet-4-5',
+          model: Component.MODEL,
           max_tokens: 3000,
           system: Component.MAP_PROMPT,
           messages: [{ role: 'user', content: [
@@ -3680,7 +3707,7 @@ class Component extends DCLogic {
       try {
         const shot = this.shrinkCanvas(this.composite(pages[i], mine));
         const out = await this.ask({
-          model: 'claude-sonnet-4-5',
+          model: Component.MODEL,
           max_tokens: 2000,
           system: Component.VERIFY_PROMPT,
           messages: [{ role: 'user', content: [
@@ -4127,12 +4154,46 @@ class Component extends DCLogic {
     return [{ type: 'text', text: 'Worksheet contents, line by line:\n\n' + src.text }];
   }
 
+  // Reasoning only where it changes answers (solving, double-checking); every other step runs without thinking.
+  withControls(body) {
+    if (this._noControls || !/sonnet-5|sonnet-4-6|opus-[45]/.test(String(body.model))) return body;
+    const reason = body.system === Component.SOLVE_PROMPT || body.system === Component.CHECK_PROMPT;
+    return reason
+      ? { ...body, max_tokens: Math.max(body.max_tokens || 0, 16000), thinking: { type: 'adaptive' }, output_config: { effort: 'medium' } }
+      : { ...body, thinking: { type: 'disabled' } };
+  }
+
   async ask(body, label) {
+    body = { ...body, model: body.model === Component.MODEL && this._modelDown ? Component.MODEL_FALLBACK : body.model || Component.MODEL };
+    body = this.withControls(body);
     for (let attempt = 0; attempt < 4; attempt++) {
       try {
-        return await window.claude.complete(body);
+        if (Component.API_URL) {
+          const r = await fetch(Component.API_URL, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(body) });
+          if (!r.ok) throw new Error(((await r.text()) || '').slice(0, 300) || 'HTTP ' + r.status);
+          const j = await r.json();
+          this.trackUsage(j.model || body.model, j.usage, label);
+          return j.text;
+        }
+        const out = await window.claude.complete(body);
+        this.trackUsage(body.model, null, label, body, out);
+        return out;
       } catch (e) {
         const msg = String((e && e.message) || e);
+        if (body.model === Component.MODEL && /model/i.test(msg) && /not.?found|invalid|unsupported|unknown|does not exist|not available/i.test(msg)) {
+          this._modelDown = true;
+          const { thinking, output_config, ...rest } = body;
+          body = this.withControls({ ...rest, model: Component.MODEL_FALLBACK });
+          attempt--;
+          continue;
+        }
+        if ((body.thinking || body.output_config) && /thinking|output_config|effort|extra inputs|not permitted|unexpected/i.test(msg)) {
+          this._noControls = true;
+          const { thinking, output_config, ...rest } = body;
+          body = rest;
+          attempt--;
+          continue;
+        }
         const limited = /rate|429|too many|overload|529|503|busy/i.test(msg);
         if (!limited || attempt === 3) throw e;
         for (let s = 20; s > 0; s--) {
@@ -4146,7 +4207,7 @@ class Component extends DCLogic {
 
   async readChunk(blocks, pageOffset, totalPages, hint) {
     const out = await this.ask({
-      model: 'claude-sonnet-4-5',
+      model: Component.MODEL,
       max_tokens: 6000,
       system: Component.LAYOUT_PROMPT,
       messages: [{ role: 'user', content: blocks.concat([{ type: 'text', text: (hint ? hint + ' ' : '') + 'Read these ' + blocks.length + ' page image(s) now. "page" is the 1-based index within THIS set. JSON only.' }]) }],
@@ -4315,7 +4376,7 @@ class Component extends DCLogic {
       this.setState({ stageNote: 'Checking ' + refs.length + ' possibly missed question(s) on page ' + pn });
       try {
         const out = await this.ask({
-          model: 'claude-sonnet-4-5',
+          model: Component.MODEL,
           max_tokens: 3000,
           system: Component.TEXT_LAYOUT_PROMPT,
           messages: [{ role: 'user', content: this.textBlock(pg, pn - 1) + 'FOCUS: ' + refs.join(', ') + ' look like questions or answer blanks that were missed. Return ONLY the questions (one entry per blank) that start on or include those lines, or {"questions":[]} if they are not questions. JSON only.' }],
@@ -4549,7 +4610,7 @@ class Component extends DCLogic {
          { type: 'text', text: 'The worksheet page is attached. Read each question in full from the image, including any printed options, then answer.\n' + json }]
       : json;
     const out = await this.ask({
-      model: 'claude-sonnet-4-5',
+      model: Component.MODEL,
       max_tokens: 8000,
       system: Component.SOLVE_PROMPT,
       messages: [{ role: 'user', content: wrap(JSON.stringify({
@@ -6179,7 +6240,7 @@ class Component extends DCLogic {
         if (!list.length) continue;
         try {
           const out = await this.ask({
-            model: 'claude-sonnet-4-5',
+            model: Component.MODEL,
             max_tokens: 4000,
             system: Component.CHECK_PROMPT,
             messages: [{ role: 'user', content: [
@@ -6255,6 +6316,7 @@ class Component extends DCLogic {
       await this.wait(500);
       this.setState({ stageIdx: 4, stageNote: '' });
       this._solveRaw = {};
+      this._usage = null;
       const T = { times: [], t: performance.now() };
       const tick = name => { const n = performance.now(); T.times.push({ name, ms: Math.round(n - T.t) }); T.t = n; };
       const layout = await this.readLayout(src);
@@ -6674,6 +6736,8 @@ class Component extends DCLogic {
         const r = v => Math.round(v);
         const rep = {
           version: 'v3', at: new Date().toISOString(), files: st.files.map(x => x.name),
+          mode: this._traceRaw ? this._traceRaw.mode : null, model: this._modelDown ? Component.MODEL_FALLBACK : Component.MODEL,
+          usage: this._usage ? { ...this._usage, perPage: this._usage.cost / Math.max(1, st.pages.length) } : null,
           settings: { accuracy: st.accuracy, level: st.level, math: st.math },
           pages: st.pages.map((p, i) => ({
             page: i + 1, w: p.canvas.width, h: p.canvas.height, ocr: !!p.ocr, ocrConf: p.ocrConf || null, ocrFailed: !!p.ocrFailed, prep: p.prep || null,
