@@ -1,0 +1,17 @@
+{
+  "name": "archive-portal-eval",
+  "private": true,
+  "description": "Headless evaluation harness for the Archive Portal worksheet pipeline",
+  "scripts": {
+    "eval": "node lib/eval.cjs"
+  },
+  "devDependencies": {
+    "pdfjs-dist": "3.11.174",
+    "jspdf": "2.5.1",
+    "jszip": "3.10.1",
+    "docx-preview": "0.3.2",
+    "html2canvas": "1.4.1",
+    "tesseract.js": "5.1.1",
+    "tesseract.js-core": "5.1.1"
+  }
+}
