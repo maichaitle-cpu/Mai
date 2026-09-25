@@ -36,6 +36,11 @@
     const pages = () => comp.state.pages || [];
 
     function matchQ(label, prompt, page) {
+      const cm = /Row: (.+?) — Column: (.+)$/.exec(String(prompt || ''));
+      if (cm) {
+        const cells = Q.filter(q => q.kind === 'cell' && norm(q.label) === norm(cm[1]));
+        if (cells.length) return cells.reduce((b, q) => (sim(q.cell.col, cm[2]) + sim(cm[2], q.cell.col) > sim(b.cell.col, cm[2]) + sim(cm[2], b.cell.col) ? q : b));
+      }
       let best = null, bs = -1;
       Q.forEach(q => {
         if (page && q.page !== page && !(q.optionsPage && q.optionsPage === page)) return;

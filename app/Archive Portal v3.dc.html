@@ -1472,13 +1472,14 @@ class Component extends DCLogic {
     const norm = s => String(s || '').toLowerCase().replace(/[^a-z0-9\u0E00-\u0E7F]+/g, ' ').trim();
     const pw = norm(String(q.prompt || '').replace(/ Options:.*$/, '')).split(' ').filter(w => w.length > 2).slice(0, 8);
     if (!pw.length) return given;
-    let best = null, bs = 0;
+    let best = null, bs = 0, hits = 0;
     page.lines.forEach(l => {
       const t = norm(l.text);
-      const sc = pw.reduce((n, w) => n + (t.indexOf(w) >= 0 ? 1 : 0), 0) - (given ? Math.abs(l.id - given.id) * 0.04 : 0);
-      if (sc > bs) { bs = sc; best = l; }
+      const n = pw.reduce((k, w) => k + (t.indexOf(w) >= 0 ? 1 : 0), 0);
+      const sc = n - (given ? Math.abs(l.id - given.id) * 0.04 : 0);
+      if (sc > bs) { bs = sc; best = l; hits = n; }
     });
-    return bs >= Math.min(2, pw.length) ? best : given;
+    return hits >= Math.min(2, pw.length) ? best : given;
   }
 
   findOption(page, q, o) {
@@ -1502,10 +1503,14 @@ class Component extends DCLogic {
         const m = this.charMap(L);
         re.lastIndex = 0;
         let hit;
+        const cols = this.pageCols(page);
+        const sameLine = L === qL;
+        const lim = sameLine ? (cols ? cols[this.colIdx(page, qL.x0)] : { x0: qL.x0, x1: Infinity }) : col;
         while ((hit = re.exec(m.str))) {
           const i = hit.index + hit[1].length, n = hit[2].length;
           const x0 = m.xs[i], x1 = m.xs[i + n - 1] + m.ws[i + n - 1];
-          if (x0 >= col.x0 - h && x1 <= col.x1 + h * 2) return { x: x0, y: L.top, w: Math.max(L.h * 0.6, x1 - x0), h: L.bottom - L.top };
+          if (sameLine && x0 < col.textEnd - h * 0.5 && !/^\(?[A-Za-z\u0E01-\u0E2E][).]/.test(hit[2])) { if (re.lastIndex === hit.index) re.lastIndex++; continue; }
+          if (x0 >= lim.x0 - h && x1 <= lim.x1 + h * 2) return { x: x0, y: L.top, w: Math.max(L.h * 0.6, x1 - x0), h: L.bottom - L.top };
           if (re.lastIndex === hit.index) re.lastIndex++;
         }
       }
@@ -1969,6 +1974,45 @@ class Component extends DCLogic {
     return this.groupFrags(frags, vec && vec.vl);
   }
 
+  // Two-column pages: text on the same baseline in both columns arrives as one line. Find the gutter from
+  // narrow text runs, split those lines at it, and order lines left column first, then right column.
+  splitColumns(lines, W) {
+    const cells = [].concat(...lines.map(l => (l.cells || []).map(c => ({ ...c, l }))));
+    const narrow = cells.filter(c => c.x1 - c.x0 < W * 0.55 && String(c.text).replace(/[\s._\-–—…·]/g, '').length >= 2);
+    if (narrow.length < 12) return lines;
+    const bins = 100, cov = new Array(bins).fill(0);
+    narrow.forEach(c => { for (let b = Math.max(0, Math.floor(c.x0 / W * bins)); b <= Math.min(bins - 1, Math.floor(c.x1 / W * bins)); b++) cov[b]++; });
+    let best = null;
+    for (let b = 35; b <= 65; b++) {
+      if (cov[b] > narrow.length * 0.01) continue;
+      let e = b;
+      while (e + 1 <= 65 && cov[e + 1] <= narrow.length * 0.01) e++;
+      if (!best || e - b > best.e - best.b) best = { b, e };
+      b = e;
+    }
+    if (!best || best.e - best.b < 1) return lines;
+    const gx = (best.b + best.e + 1) / 2 / bins * W;
+    const side = c => (c.x1 < gx ? 0 : c.x0 > gx ? 1 : -1);
+    const L0 = narrow.filter(c => side(c) === 0).length, R0 = narrow.filter(c => side(c) === 1).length;
+    const both = lines.filter(l => (l.cells || []).some(c => side(c) === 0) && (l.cells || []).some(c => side(c) === 1) && !(l.cells || []).some(c => side(c) < 0)).length;
+    if (L0 < narrow.length * 0.2 || R0 < narrow.length * 0.2 || both < 4) return lines;
+    const part = (l, k) => {
+      const cs = l.cells.filter(c => side(c) === k);
+      return { ...l, cells: cs, text: cs.map(c => c.text).join(' ').replace(/\s+/g, ' ').trim(), x0: Math.min.apply(null, cs.map(c => c.x0)), x1: Math.max.apply(null, cs.map(c => c.x1)), blanks: (l.blanks || []).filter(b => (k === 0 ? b.x1 < gx : b.x0 > gx)), col: k };
+    };
+    const out = [];
+    lines.forEach(l => {
+      const cs = l.cells || [];
+      if (cs.length && cs.every(c => side(c) >= 0) && cs.some(c => side(c) === 0) && cs.some(c => side(c) === 1)) { out.push(part(l, 0), part(l, 1)); return; }
+      const k = cs.length && cs.every(c => side(c) === 0) ? 0 : cs.length && cs.every(c => side(c) === 1) ? 1 : -1;
+      out.push({ ...l, col: k });
+    });
+    const colTop = Math.min.apply(null, out.filter(l => l.col >= 0).map(l => l.top));
+    const rank = l => (l.col < 0 ? (l.top < colTop ? 0 : 3) : 1 + l.col);
+    out.sort((a, b) => rank(a) - rank(b) || a.base - b.base || a.x0 - b.x0);
+    return out.map((l, i) => ({ ...l, id: i }));
+  }
+
   groupFrags(frags, rules) {
     frags.sort((a, b) => a.base - b.base || a.x0 - b.x0);
     const lines = [];
@@ -2312,7 +2356,7 @@ class Component extends DCLogic {
   }
 
 
-  static Q_RE = /^\s*(ข้อ\s*)?\(?\d{1,3}\s*[.)]/;
+  static Q_RE = /^\s*(ข้อ\s*|Q\s*)?\(?\d{1,3}\s*[.)]/i;
   static OPT_RE = /(^|\s)\(?([กขคงจฉ]|[A-Fa-f])\s*[.)](?=\s|$)/g;
 
   optionSegs(text) {
@@ -2333,12 +2377,15 @@ class Component extends DCLogic {
     const idx = page.lines.findIndex(l => l.id === lineId);
     if (idx < 0) return null;
     const out = [];
+    let first = -1;
     for (let j = idx + 1; j < Math.min(page.lines.length, idx + 9); j++) {
       const L = page.lines[j];
       if (Component.Q_RE.test(L.text)) break;
-      this.optionSegs(L.text).forEach(s => out.push({ ...s, lineId: L.id }));
+      const segs = this.optionSegs(L.text);
+      if (segs.length && first < 0) first = j;
+      segs.forEach(s => out.push({ ...s, lineId: L.id }));
     }
-    if (out.length < 2) return null;
+    if (out.length < 2 || first - idx > 2) return null;
     const order = k => { const t = 'กขคงจฉ'.indexOf(k); return t >= 0 ? t : 'abcdef'.indexOf(k); };
     if (order(out[0].key) !== 0) return null;
     return out.map(o => ({ label: o.label, lineId: o.lineId }));
@@ -2427,7 +2474,7 @@ class Component extends DCLogic {
     while (end + 1 < cells.length && cells[end + 1].x0 - cells[end].x1 <= L.h * 2) end++;
     const c = cells[start];
     const nxt = cells[end + 1];
-    return { x0: c.x0, x1: nxt ? nxt.x0 - L.h * 1.2 : pageRight, text: c.text, textRight: cells[end].x1 };
+    return { x0: c.x0, x1: nxt ? nxt.x0 - L.h * 1.2 : pageRight, text: c.text, textRight: cells[end].x1, textEnd: cells[best].x1 };
   }
 
   inCol(l, col) {
@@ -2517,12 +2564,36 @@ class Component extends DCLogic {
     return (data[i] * 299 + data[i + 1] * 587 + data[i + 2] * 114) / 1000 < bg - 10;
   }
 
+  headerBand(page, header) {
+    const h = header.h || 16, cy = (header.top + header.bottom) / 2;
+    let T = cy - h * 0.8, B = cy + h * 0.8;
+    if (page.vec && page.vec.hl) {
+      const hs = page.vec.hl.filter(r => r.x0 < header.x1 && r.x1 > header.x0);
+      const up = hs.filter(r => r.y < cy - h * 0.3).reduce((m, r) => Math.max(m, r.y), -Infinity);
+      const dn = hs.filter(r => r.y > cy + h * 0.3).reduce((m, r) => Math.min(m, r.y), Infinity);
+      if (isFinite(up) && isFinite(dn) && dn - up < h * 5) { T = up; B = dn; }
+    }
+    return (page.lines || []).filter(l => l === header || (l.col === header.col && (l.top + l.bottom) / 2 > T && (l.top + l.bottom) / 2 < B && l.x1 > header.x0 - h * 20 && l.x0 < header.x1 + h * 20));
+  }
+
+  headerCells(page, header) {
+    if (!header) return [];
+    const band = this.headerBand(page, header);
+    const cs = [];
+    band.sort((a, b) => a.top - b.top).forEach(l => (l.cells || []).forEach(c => {
+      const same = cs.find(o => Math.min(o.x1, c.x1) - Math.max(o.x0, c.x0) > 0);
+      if (same) { same.text += ' ' + c.text; same.x0 = Math.min(same.x0, c.x0); same.x1 = Math.max(same.x1, c.x1); }
+      else cs.push({ text: c.text, x0: c.x0, x1: c.x1 });
+    }));
+    return cs.sort((a, b) => a.x0 - b.x0);
+  }
+
   regionFromCell(page, row, header, col) {
     const canvas = page.canvas;
     const W = canvas.width, H = canvas.height;
     const h = row.h;
     const norm = t => String(t || '').toLowerCase().replace(/[^a-z0-9\u0E00-\u0E7F]+/g, '');
-    const cells = (header && header.cells) || [];
+    const cells = this.headerCells(page, header);
     const want = norm(col);
     let ci = cells.findIndex(c => { const n = norm(c.text); return n && want && (n.indexOf(want) >= 0 || want.indexOf(n) >= 0); });
     if (ci < 0) ci = Math.min(1, cells.length - 1);
@@ -2796,6 +2867,11 @@ class Component extends DCLogic {
       });
       rules.forEach(r => { if (r.vec) for (let x = Math.max(0, Math.round(r.x0)); x <= Math.min(w - 1, Math.round(r.x1)); x++) ink[r.y0 * w + x] = 1; });
     }
+    const ruleText = (page.lines || []).filter(l => /^[\s_.\-–—…·]+$/.test(String(l.text || '')) && l.x1 - l.x0 > lh * 2);
+    rules.forEach(r => {
+      const t = ruleText.find(l => Math.abs(l.bottom * k - r.y0) < lh * 0.9 && Math.min(r.x1, l.x1 * k) - Math.max(r.x0, l.x0 * k) > 0);
+      if (t) { r.x0 = Math.max(r.x0, t.x0 * k - 2); r.x1 = Math.min(r.x1, t.x1 * k + 2); }
+    });
     rules.sort((a, b) => a.y0 - b.y0 || a.x0 - b.x0);
     const cands = [];
     const ov = (a0, a1, b0, b1) => Math.max(0, Math.min(a1, b1) - Math.max(a0, b0));
@@ -2832,7 +2908,10 @@ class Component extends DCLogic {
     const endTouch = (x, y) => vrun(x, y - lh * 0.9, y - 2) > 0.8 || vrun(x, y + 2, y + lh * 0.9) > 0.8;
     const bx0 = cl.map(b => b.x * k).sort((a, b) => a - b), bx1 = cl.map(b => (b.x + b.w) * k).sort((a, b) => a - b);
     const textL = bx0.length ? bx0[Math.floor(bx0.length * 0.05)] : left, textR = bx1.length ? bx1[Math.floor(bx1.length * 0.95)] : right;
-    const decor = r => (endTouch(r.x0, r.y0) && endTouch(r.x1, r.y0)) || r.x1 > textR + lh * 1.5 || r.x0 < textL - lh * 1.5;
+    const edgeBand = r => r.y0 > h * 0.9 || r.y0 < h * 0.08;
+    const minX0 = bx0.length ? bx0[0] : 0, maxX1 = bx1.length ? bx1[bx1.length - 1] : w;
+    const outside = r => (Math.max(0, r.x1 - Math.max(r.x0, maxX1)) + Math.max(0, Math.min(r.x1, minX0) - r.x0)) > (r.x1 - r.x0) * 0.5;
+    const decor = r => (endTouch(r.x0, r.y0) && endTouch(r.x1, r.y0)) || outside(r) || (edgeBand(r) && (r.x1 > textR + lh * 1.5 || r.x0 < textL - lh * 1.5));
     rules.forEach(r => {
       if (decor(r)) return;
       const x0 = Math.round(r.x0), x1 = Math.round(r.x1), span = Math.max(1, (x1 - x0) / 2);
@@ -2954,7 +3033,7 @@ class Component extends DCLogic {
     if (page._cols !== undefined) return page._cols;
     page._cols = null;
     const W = page.canvas.width;
-    const ls = (page.lines || []).filter(l => l.x1 - l.x0 > 4 && String(l.text || '').replace(/[\s._\-–—…·:=]/g, '').length >= 2);
+    const ls = (page.lines || []).filter(l => l.x1 - l.x0 > 4 && l.x1 - l.x0 < W * 0.55 && String(l.text || '').replace(/[\s._\-–—…·:=]/g, '').length >= 2);
     if (ls.length < 10) return null;
     const bins = 100, cov = new Array(bins).fill(0);
     ls.forEach(l => { for (let b = Math.max(0, Math.floor(l.x0 / W * bins)); b <= Math.min(bins - 1, Math.floor(l.x1 / W * bins)); b++) cov[b]++; });
@@ -3678,7 +3757,7 @@ class Component extends DCLogic {
       let lines = [];
       try {
         const tc = await page.getTextContent();
-        lines = this.groupLines(tc.items, viewport, lib, vec);
+        lines = this.splitColumns(this.groupLines(tc.items, viewport, lib, vec), canvas.width);
         lines.forEach(l => { if (!l.blanks.length) l.blanks = this.findLineBlanks(canvas, l); });
       } catch (err) {}
       pages.push({
@@ -4323,15 +4402,17 @@ class Component extends DCLogic {
       const pn = pi + 1;
       for (let hi = 0; hi < lines.length; hi++) {
         const Hd = lines[hi];
-        const hc = Hd.cells || [];
+        const hc = this.headerCells(page, Hd);
         if (hc.length < 2 || hc.some(c => String(c.text).length > 60)) continue;
         if ((Hd.blanks && Hd.blanks.length) || this.isInfo(Hd.text) || Component.INFO_TH.test(String(Hd.text)) || Component.INSTRUCTION.test(String(Hd.text))) continue;
         if (edge(page, Hd) && running(Hd)) continue;
         const h = Hd.h || 16;
         const rows = [];
-        let prevB = Hd.bottom, gap0 = null;
+        const bandBottom = Math.max.apply(null, this.headerBand(page, Hd).map(l => l.bottom).concat([Hd.bottom]));
+        let prevB = bandBottom, gap0 = null;
         for (let j = hi + 1; j < lines.length && rows.length < 30; j++) {
           const L = lines[j];
+          if (L.bottom <= bandBottom + 1) continue;
           const gap = L.top - prevB;
           if (gap > h * 6) break;
           if (gap0 != null && (gap > gap0 * 1.6 + h * 0.5 || gap < gap0 * 0.4 - h * 0.5)) break;
@@ -4340,6 +4421,7 @@ class Component extends DCLogic {
           if (c0.x1 > hc[1].x0 + h * 0.5 || c0.x0 < hc[0].x0 - Math.max(h * 2.5, hc[1].x0 - hc[0].x0)) break;
           const tx = String(L.text || '').trim();
           if (/^[•●▪\-–*]\s/.test(tx) || Component.Q_RE.test(tx) || (tx.length > 6 && tx === tx.toUpperCase() && /[A-Z]{4}/.test(tx)) || String(tx).replace(/[\s._\-–—…·:=]/g, '').length < 2) break;
+          if ((L.blanks && L.blanks.length) || this.isInfo(L.text) || Component.INFO_TH.test(tx) || Component.INSTRUCTION.test(tx)) break;
           const cs = L.cells && L.cells.length ? L.cells : [{ text: L.text, x0: L.x0, x1: L.x1 }];
           if (cs.some(z => hc.slice(1).some(c => z.x0 < c.x0 - h * 1.5 && z.x1 > c.x0 + h))) break;
           const filled = hc.map((c, k) => { const x0 = c.x0 - h * 0.8, x1 = hc[k + 1] ? hc[k + 1].x0 - h * 0.4 : Infinity; return cs.some(z => z.x0 < x1 && z.x1 > x0 && (k === 0 || z.x0 > c.x0 - h * 1.5)); });
@@ -4352,7 +4434,12 @@ class Component extends DCLogic {
         if (rows.length < 2) continue;
         const emptyCols = hc.map((c, k) => k).filter(k => k > 0 && rows.every(r => !r.filled[k]));
         if (!emptyCols.length) continue;
-        const intro = lines.slice(Math.max(0, hi - 2), hi).filter(l => Hd.top - l.bottom < h * 4).map(l => l.text).join(' ').slice(0, 220);
+        const bandL = this.headerBand(page, Hd);
+        const bandTop = Math.min.apply(null, bandL.map(l => l.top));
+        const above = lines.filter(l => bandL.indexOf(l) < 0 && l.col === Hd.col && l.bottom <= bandTop + 1 && bandTop - l.bottom < h * 4).sort((p, r) => r.top - p.top);
+        const introL = [];
+        for (const l of above) { introL.unshift(l); if (Component.Q_RE.test(l.text) || introL.length >= 2 || this.optionSegs(l.text).length) break; }
+        const intro = introL.filter(l => !this.optionSegs(l.text).length || Component.Q_RE.test(l.text)).map(l => l.text).join(' ').slice(0, 220);
         const rowIds = new Set(rows.map(r => r.L.id));
         const existing = out.filter(q => (q.page || 1) === pn && (rowIds.has(q.lineId) || (q.kind === 'cell' && (q.lineId === Hd.id || q.headerId === Hd.id))));
         if (existing.some(q => q.kind === 'choice')) continue;
@@ -4419,7 +4506,7 @@ class Component extends DCLogic {
   }
 
   labelNum(label) {
-    const m = String(label || '').trim().match(/^\(?(\d{1,3})(?![\d/:])/);
+    const m = String(label || '').trim().match(/^(?:ข้อ\s*|Q\s*)?\(?(\d{1,3})(?![\d/:])/i);
     return m ? Number(m[1]) : null;
   }
 

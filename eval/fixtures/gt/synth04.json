@@ -1,0 +1,506 @@
+{
+ "doc": "synth/synth04.pdf",
+ "synthetic": true,
+ "thai": false,
+ "twoCol": true,
+ "questions": [
+  {
+   "label": "1.",
+   "page": 1,
+   "kind": "choice",
+   "cat": "MULTIPLE_CHOICE",
+   "prompt": "What is 12 × 8?",
+   "qrect": [
+    90,
+    191,
+    479,
+    23
+   ],
+   "options": [
+    {
+     "text": "(A) 96",
+     "page": 1,
+     "rect": [
+      129,
+      222,
+      220,
+      23
+     ]
+    },
+    {
+     "text": "(B) 86",
+     "page": 1,
+     "rect": [
+      349,
+      222,
+      220,
+      23
+     ]
+    },
+    {
+     "text": "(C) 108",
+     "page": 1,
+     "rect": [
+      129,
+      252,
+      220,
+      23
+     ]
+    },
+    {
+     "text": "(D) 92",
+     "page": 1,
+     "rect": [
+      349,
+      252,
+      220,
+      23
+     ]
+    }
+   ],
+   "correct": 0
+  },
+  {
+   "label": "2.",
+   "page": 1,
+   "kind": "choice",
+   "cat": "MULTIPLE_CHOICE",
+   "prompt": "What is 12 × 8?",
+   "qrect": [
+    90,
+    302,
+    479,
+    23
+   ],
+   "options": [
+    {
+     "text": "a) 96",
+     "page": 1,
+     "rect": [
+      129,
+      333,
+      220,
+      23
+     ]
+    },
+    {
+     "text": "b) 86",
+     "page": 1,
+     "rect": [
+      349,
+      333,
+      220,
+      23
+     ]
+    },
+    {
+     "text": "c) 108",
+     "page": 1,
+     "rect": [
+      129,
+      363,
+      220,
+      23
+     ]
+    },
+    {
+     "text": "d) 92",
+     "page": 1,
+     "rect": [
+      349,
+      363,
+      220,
+      23
+     ]
+    }
+   ],
+   "correct": 0
+  },
+  {
+   "label": "3.",
+   "page": 1,
+   "kind": "choice",
+   "cat": "MULTIPLE_CHOICE",
+   "prompt": "Solve for x: 2x + 6 = 14",
+   "qrect": [
+    90,
+    413,
+    479,
+    23
+   ],
+   "options": [
+    {
+     "text": "(A) x = 3",
+     "page": 1,
+     "rect": [
+      129,
+      444,
+      220,
+      23
+     ]
+    },
+    {
+     "text": "(B) x = 4",
+     "page": 1,
+     "rect": [
+      349,
+      444,
+      220,
+      23
+     ]
+    },
+    {
+     "text": "(C) x = 5",
+     "page": 1,
+     "rect": [
+      129,
+      474,
+      220,
+      23
+     ]
+    },
+    {
+     "text": "(D) x = 10",
+     "page": 1,
+     "rect": [
+      349,
+      474,
+      220,
+      23
+     ]
+    }
+   ],
+   "correct": 1
+  },
+  {
+   "label": "4.",
+   "page": 1,
+   "kind": "choice",
+   "cat": "MULTIPLE_CHOICE",
+   "prompt": "A triangle has angles 50° and 60°. The third angle is:",
+   "qrect": [
+    90,
+    524,
+    479,
+    23
+   ],
+   "options": [
+    {
+     "text": "A. 60°",
+     "page": 1,
+     "rect": [
+      129,
+      554,
+      440,
+      23
+     ]
+    },
+    {
+     "text": "B. 70°",
+     "page": 1,
+     "rect": [
+      129,
+      584,
+      440,
+      23
+     ]
+    },
+    {
+     "text": "C. 80°",
+     "page": 1,
+     "rect": [
+      129,
+      614,
+      440,
+      23
+     ]
+    },
+    {
+     "text": "D. 90°",
+     "page": 1,
+     "rect": [
+      129,
+      644,
+      440,
+      23
+     ]
+    }
+   ],
+   "correct": 1
+  },
+  {
+   "label": "5.",
+   "page": 1,
+   "kind": "choice",
+   "cat": "MULTIPLE_CHOICE",
+   "prompt": "Which organ pumps blood around the body?",
+   "qrect": [
+    90,
+    693,
+    479,
+    23
+   ],
+   "options": [
+    {
+     "text": "A. lungs",
+     "page": 1,
+     "rect": [
+      129,
+      723,
+      440,
+      23
+     ]
+    },
+    {
+     "text": "B. liver",
+     "page": 1,
+     "rect": [
+      129,
+      753,
+      440,
+      23
+     ]
+    },
+    {
+     "text": "C. kidney",
+     "page": 1,
+     "rect": [
+      129,
+      783,
+      440,
+      23
+     ]
+    },
+    {
+     "text": "D. heart",
+     "page": 1,
+     "rect": [
+      129,
+      813,
+      440,
+      23
+     ]
+    }
+   ],
+   "correct": 3
+  },
+  {
+   "label": "(a)",
+   "page": 1,
+   "kind": "choice",
+   "cat": "TRUE_FALSE",
+   "prompt": "A square is a type of rectangle.",
+   "qrect": [
+    120,
+    897,
+    296,
+    23
+   ],
+   "options": [
+    {
+     "text": "True",
+     "page": 1,
+     "rect": [
+      465,
+      897,
+      39,
+      23
+     ]
+    },
+    {
+     "text": "False",
+     "page": 1,
+     "rect": [
+      521,
+      897,
+      48,
+      23
+     ]
+    }
+   ],
+   "correct": 0
+  },
+  {
+   "label": "(b)",
+   "page": 1,
+   "kind": "choice",
+   "cat": "TRUE_FALSE",
+   "prompt": "Sound travels faster than light.",
+   "qrect": [
+    120,
+    932,
+    293,
+    23
+   ],
+   "options": [
+    {
+     "text": "True",
+     "page": 1,
+     "rect": [
+      465,
+      932,
+      39,
+      23
+     ]
+    },
+    {
+     "text": "False",
+     "page": 1,
+     "rect": [
+      521,
+      932,
+      48,
+      23
+     ]
+    }
+   ],
+   "correct": 1
+  },
+  {
+   "label": "(c)",
+   "page": 1,
+   "kind": "choice",
+   "cat": "TRUE_FALSE",
+   "prompt": "All metals are magnetic.",
+   "qrect": [
+    120,
+    966,
+    235,
+    23
+   ],
+   "options": [
+    {
+     "text": "True",
+     "page": 1,
+     "rect": [
+      465,
+      966,
+      39,
+      23
+     ]
+    },
+    {
+     "text": "False",
+     "page": 1,
+     "rect": [
+      521,
+      966,
+      48,
+      23
+     ]
+    }
+   ],
+   "correct": 1
+  },
+  {
+   "label": "7.",
+   "page": 1,
+   "kind": "write",
+   "cat": "SHORT_TEXT",
+   "prompt": "What is the capital city of Japan?",
+   "answer": "Tokyo",
+   "qrect": [
+    90,
+    1016,
+    479,
+    23
+   ],
+   "areas": [
+    [
+     120,
+     1038,
+     449,
+     45
+    ]
+   ]
+  },
+  {
+   "label": "(a)",
+   "page": 1,
+   "kind": "write",
+   "cat": "FORMULA_WORKING",
+   "prompt": "A car travels 120 km in 2 hours. Calculate its average speed.",
+   "answer": "60 km/h",
+   "qrect": [
+    120,
+    1145,
+    449,
+    23
+   ],
+   "areas": [
+    [
+     90,
+     1167,
+     479,
+     135
+    ]
+   ]
+  },
+  {
+   "label": "(b)",
+   "page": 1,
+   "kind": "write",
+   "cat": "FORMULA_WORKING",
+   "prompt": "A car travels 120 km in 2 hours. How far would it travel in 5 hours at the same speed?",
+   "answer": "300 km",
+   "qrect": [
+    120,
+    1314,
+    449,
+    45
+   ],
+   "areas": [
+    [
+     90,
+     1359,
+     479,
+     135
+    ]
+   ]
+  },
+  {
+   "label": "9.",
+   "page": 1,
+   "kind": "write",
+   "cat": "LONG_TEXT",
+   "prompt": "Why is it important to control variables in an experiment?",
+   "answer": "Keeping other variables the same makes sure that only the variable being tested causes the change, so the result is fair.",
+   "qrect": [
+    623,
+    191,
+    479,
+    45
+   ],
+   "areas": [
+    [
+     653,
+     248,
+     449,
+     165
+    ]
+   ]
+  },
+  {
+   "label": "10.",
+   "page": 1,
+   "kind": "write",
+   "cat": "LONG_TEXT",
+   "prompt": "Explain why metals are good conductors of electricity.",
+   "answer": "Metals have free electrons that can move through the structure and carry charge from one end to the other.",
+   "qrect": [
+    623,
+    440,
+    479,
+    45
+   ],
+   "areas": [
+    [
+     623,
+     473,
+     479,
+     99
+    ]
+   ]
+  }
+ ]
+}

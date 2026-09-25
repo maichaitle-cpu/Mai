@@ -1,0 +1,648 @@
+{
+ "doc": "synth/synth12.pdf",
+ "synthetic": true,
+ "thai": false,
+ "twoCol": true,
+ "questions": [
+  {
+   "label": "(a)",
+   "page": 1,
+   "kind": "write",
+   "cat": "FORMULA_WORKING",
+   "prompt": "A car travels 120 km in 2 hours. Calculate its average speed.",
+   "answer": "60 km/h",
+   "qrect": [
+    120,
+    225,
+    449,
+    23
+   ],
+   "areas": [
+    [
+     90,
+     248,
+     479,
+     135
+    ]
+   ]
+  },
+  {
+   "label": "(b)",
+   "page": 1,
+   "kind": "write",
+   "cat": "FORMULA_WORKING",
+   "prompt": "A car travels 120 km in 2 hours. How far would it travel in 5 hours at the same speed?",
+   "answer": "300 km",
+   "qrect": [
+    120,
+    395,
+    449,
+    45
+   ],
+   "areas": [
+    [
+     90,
+     440,
+     479,
+     135
+    ]
+   ]
+  },
+  {
+   "label": "(a)",
+   "page": 1,
+   "kind": "choice",
+   "cat": "TRUE_FALSE",
+   "prompt": "Sound travels faster than light.",
+   "qrect": [
+    120,
+    636,
+    293,
+    23
+   ],
+   "options": [
+    {
+     "text": "True",
+     "page": 1,
+     "rect": [
+      465,
+      636,
+      39,
+      23
+     ]
+    },
+    {
+     "text": "False",
+     "page": 1,
+     "rect": [
+      521,
+      636,
+      48,
+      23
+     ]
+    }
+   ],
+   "correct": 1
+  },
+  {
+   "label": "(b)",
+   "page": 1,
+   "kind": "choice",
+   "cat": "TRUE_FALSE",
+   "prompt": "A square is a type of rectangle.",
+   "qrect": [
+    120,
+    671,
+    296,
+    23
+   ],
+   "options": [
+    {
+     "text": "True",
+     "page": 1,
+     "rect": [
+      465,
+      671,
+      39,
+      23
+     ]
+    },
+    {
+     "text": "False",
+     "page": 1,
+     "rect": [
+      521,
+      671,
+      48,
+      23
+     ]
+    }
+   ],
+   "correct": 0
+  },
+  {
+   "label": "(c)",
+   "page": 1,
+   "kind": "choice",
+   "cat": "TRUE_FALSE",
+   "prompt": "Ice is less dense than liquid water.",
+   "qrect": [
+    120,
+    705,
+    315,
+    45
+   ],
+   "options": [
+    {
+     "text": "True",
+     "page": 1,
+     "rect": [
+      465,
+      705,
+      39,
+      23
+     ]
+    },
+    {
+     "text": "False",
+     "page": 1,
+     "rect": [
+      521,
+      705,
+      48,
+      23
+     ]
+    }
+   ],
+   "correct": 0
+  },
+  {
+   "label": "Iron",
+   "page": 1,
+   "kind": "cell",
+   "cat": "TABLE_SHORT",
+   "prompt": "Iron — Symbol",
+   "answer": "Fe",
+   "qrect": [
+    121,
+    869,
+    109,
+    57
+   ],
+   "areas": [
+    [
+     230,
+     869,
+     103,
+     57
+    ]
+   ],
+   "cell": {
+    "row": [
+     230,
+     869,
+     103,
+     57
+    ],
+    "header": [
+     121,
+     812,
+     420,
+     57
+    ],
+    "col": "Symbol"
+   }
+  },
+  {
+   "label": "Iron",
+   "page": 1,
+   "kind": "cell",
+   "cat": "TABLE_SHORT",
+   "prompt": "Iron — Metal or non-metal",
+   "answer": "Metal",
+   "qrect": [
+    121,
+    869,
+    109,
+    57
+   ],
+   "areas": [
+    [
+     333,
+     869,
+     208,
+     57
+    ]
+   ],
+   "cell": {
+    "row": [
+     333,
+     869,
+     208,
+     57
+    ],
+    "header": [
+     121,
+     812,
+     420,
+     57
+    ],
+    "col": "Metal or non-metal"
+   }
+  },
+  {
+   "label": "Oxygen",
+   "page": 1,
+   "kind": "cell",
+   "cat": "TABLE_SHORT",
+   "prompt": "Oxygen — Symbol",
+   "answer": "O",
+   "qrect": [
+    121,
+    926,
+    109,
+    57
+   ],
+   "areas": [
+    [
+     230,
+     926,
+     103,
+     57
+    ]
+   ],
+   "cell": {
+    "row": [
+     230,
+     926,
+     103,
+     57
+    ],
+    "header": [
+     121,
+     812,
+     420,
+     57
+    ],
+    "col": "Symbol"
+   }
+  },
+  {
+   "label": "Oxygen",
+   "page": 1,
+   "kind": "cell",
+   "cat": "TABLE_SHORT",
+   "prompt": "Oxygen — Metal or non-metal",
+   "answer": "Non-metal",
+   "qrect": [
+    121,
+    926,
+    109,
+    57
+   ],
+   "areas": [
+    [
+     333,
+     926,
+     208,
+     57
+    ]
+   ],
+   "cell": {
+    "row": [
+     333,
+     926,
+     208,
+     57
+    ],
+    "header": [
+     121,
+     812,
+     420,
+     57
+    ],
+    "col": "Metal or non-metal"
+   }
+  },
+  {
+   "label": "Sulfur",
+   "page": 1,
+   "kind": "cell",
+   "cat": "TABLE_SHORT",
+   "prompt": "Sulfur — Symbol",
+   "answer": "S",
+   "qrect": [
+    121,
+    983,
+    109,
+    57
+   ],
+   "areas": [
+    [
+     230,
+     983,
+     103,
+     57
+    ]
+   ],
+   "cell": {
+    "row": [
+     230,
+     983,
+     103,
+     57
+    ],
+    "header": [
+     121,
+     812,
+     420,
+     57
+    ],
+    "col": "Symbol"
+   }
+  },
+  {
+   "label": "Sulfur",
+   "page": 1,
+   "kind": "cell",
+   "cat": "TABLE_SHORT",
+   "prompt": "Sulfur — Metal or non-metal",
+   "answer": "Non-metal",
+   "qrect": [
+    121,
+    983,
+    109,
+    57
+   ],
+   "areas": [
+    [
+     333,
+     983,
+     208,
+     57
+    ]
+   ],
+   "cell": {
+    "row": [
+     333,
+     983,
+     208,
+     57
+    ],
+    "header": [
+     121,
+     812,
+     420,
+     57
+    ],
+    "col": "Metal or non-metal"
+   }
+  },
+  {
+   "label": "4)",
+   "page": 1,
+   "kind": "blank",
+   "cat": "FILL_BLANK",
+   "prompt": "Light travels faster than ___ .",
+   "answer": "sound",
+   "qrect": [
+    120,
+    1104,
+    449,
+    23
+   ],
+   "areas": [
+    [
+     354,
+     1092,
+     158,
+     41
+    ]
+   ]
+  },
+  {
+   "label": "4)",
+   "page": 1,
+   "kind": "blank",
+   "cat": "FILL_BLANK",
+   "prompt": "The powerhouse of the cell is the ___ .",
+   "answer": "mitochondria",
+   "qrect": [
+    120,
+    1140,
+    449,
+    45
+   ],
+   "areas": [
+    [
+     117,
+     1151,
+     158,
+     41
+    ]
+   ]
+  },
+  {
+   "label": "4)",
+   "page": 1,
+   "kind": "blank",
+   "cat": "FILL_BLANK",
+   "prompt": "The opposite of \"ancient\" is ___ .",
+   "answer": "modern",
+   "qrect": [
+    120,
+    1199,
+    449,
+    23
+   ],
+   "areas": [
+    [
+     386,
+     1187,
+     158,
+     41
+    ]
+   ]
+  },
+  {
+   "label": "5)",
+   "page": 1,
+   "kind": "blank",
+   "cat": "FILL_BLANK",
+   "prompt": "The capital of France is ___ .",
+   "answer": "Paris",
+   "qrect": [
+    120,
+    1284,
+    449,
+    47
+   ],
+   "areas": [
+    [
+     117,
+     1295,
+     231,
+     38
+    ]
+   ]
+  },
+  {
+   "label": "5)",
+   "page": 1,
+   "kind": "blank",
+   "cat": "FILL_BLANK",
+   "prompt": "The opposite of \"ancient\" is ___ .",
+   "answer": "modern",
+   "qrect": [
+    120,
+    1344,
+    449,
+    47
+   ],
+   "areas": [
+    [
+     117,
+     1355,
+     231,
+     38
+    ]
+   ]
+  },
+  {
+   "label": "5)",
+   "page": 1,
+   "kind": "blank",
+   "cat": "FILL_BLANK",
+   "prompt": "The powerhouse of the cell is the ___ .",
+   "answer": "mitochondria",
+   "qrect": [
+    120,
+    1404,
+    449,
+    47
+   ],
+   "areas": [
+    [
+     117,
+     1415,
+     231,
+     38
+    ]
+   ]
+  },
+  {
+   "label": "6)",
+   "page": 1,
+   "kind": "write",
+   "cat": "LONG_TEXT",
+   "prompt": "Why is it important to control variables in an experiment?",
+   "answer": "Keeping other variables the same makes sure that only the variable being tested causes the change, so the result is fair.",
+   "qrect": [
+    623,
+    191,
+    479,
+    45
+   ],
+   "areas": [
+    [
+     623,
+     224,
+     479,
+     99
+    ]
+   ]
+  },
+  {
+   "label": "7)",
+   "page": 1,
+   "kind": "choice",
+   "cat": "MULTIPLE_CHOICE",
+   "prompt": "What is the boiling point of water at sea level?",
+   "qrect": [
+    623,
+    350,
+    479,
+    23
+   ],
+   "options": [
+    {
+     "text": "A. 90 °C",
+     "page": 1,
+     "rect": [
+      662,
+      381,
+      73,
+      23
+     ]
+    },
+    {
+     "text": "B. 100 °C",
+     "page": 1,
+     "rect": [
+      794,
+      381,
+      84,
+      23
+     ]
+    },
+    {
+     "text": "C. 110 °C",
+     "page": 1,
+     "rect": [
+      938,
+      381,
+      83,
+      23
+     ]
+    },
+    {
+     "text": "D. 120 °C",
+     "page": 1,
+     "rect": [
+      662,
+      381,
+      439,
+      45
+     ]
+    }
+   ],
+   "correct": 1
+  },
+  {
+   "label": "8)",
+   "page": 1,
+   "kind": "choice",
+   "cat": "MULTIPLE_CHOICE",
+   "prompt": "A triangle has angles 50° and 60°. The third angle is:",
+   "qrect": [
+    623,
+    453,
+    479,
+    23
+   ],
+   "options": [
+    {
+     "text": "a) 60°",
+     "page": 1,
+     "rect": [
+      662,
+      485,
+      52,
+      23
+     ]
+    },
+    {
+     "text": "b) 70°",
+     "page": 1,
+     "rect": [
+      774,
+      485,
+      52,
+      23
+     ]
+    },
+    {
+     "text": "c) 80°",
+     "page": 1,
+     "rect": [
+      886,
+      485,
+      51,
+      23
+     ]
+    },
+    {
+     "text": "d) 90°",
+     "page": 1,
+     "rect": [
+      662,
+      485,
+      353,
+      45
+     ]
+    }
+   ],
+   "correct": 1
+  }
+ ]
+}

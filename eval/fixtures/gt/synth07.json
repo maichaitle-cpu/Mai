@@ -1,0 +1,538 @@
+{
+ "doc": "synth/synth07.pdf",
+ "synthetic": true,
+ "thai": false,
+ "twoCol": false,
+ "questions": [
+  {
+   "label": "1)",
+   "page": 1,
+   "kind": "write",
+   "cat": "SHORT_TEXT",
+   "prompt": "Write the chemical formula of water.",
+   "answer": "H₂O",
+   "qrect": [
+    90,
+    195,
+    1011,
+    24
+   ],
+   "areas": [
+    [
+     120,
+     219,
+     981,
+     45
+    ]
+   ]
+  },
+  {
+   "label": "2)",
+   "page": 1,
+   "kind": "write",
+   "cat": "LONG_TEXT",
+   "prompt": "Describe two ways to reduce plastic waste at school.",
+   "answer": "Bring reusable bottles and containers, and set up recycling bins in every classroom.",
+   "qrect": [
+    90,
+    291,
+    1011,
+    24
+   ],
+   "areas": [
+    [
+     90,
+     303,
+     1011,
+     102
+    ]
+   ]
+  },
+  {
+   "label": "3)",
+   "page": 1,
+   "kind": "choice",
+   "cat": "MULTIPLE_CHOICE",
+   "prompt": "Which planet is closest to the Sun?",
+   "qrect": [
+    90,
+    432,
+    1011,
+    24
+   ],
+   "options": [
+    {
+     "text": "(A) Venus",
+     "page": 1,
+     "rect": [
+      129,
+      465,
+      486,
+      24
+     ]
+    },
+    {
+     "text": "(B) Earth",
+     "page": 1,
+     "rect": [
+      615,
+      465,
+      486,
+      24
+     ]
+    },
+    {
+     "text": "(C) Mercury",
+     "page": 1,
+     "rect": [
+      129,
+      497,
+      486,
+      24
+     ]
+    },
+    {
+     "text": "(D) Mars",
+     "page": 1,
+     "rect": [
+      615,
+      497,
+      486,
+      24
+     ]
+    }
+   ],
+   "correct": 2
+  },
+  {
+   "label": "4)",
+   "page": 1,
+   "kind": "choice",
+   "cat": "MULTIPLE_CHOICE",
+   "prompt": "What is 12 × 8?",
+   "qrect": [
+    90,
+    548,
+    1011,
+    24
+   ],
+   "options": [
+    {
+     "text": "a) 96",
+     "page": 1,
+     "rect": [
+      129,
+      581,
+      486,
+      24
+     ]
+    },
+    {
+     "text": "b) 86",
+     "page": 1,
+     "rect": [
+      615,
+      581,
+      486,
+      24
+     ]
+    },
+    {
+     "text": "c) 108",
+     "page": 1,
+     "rect": [
+      129,
+      612,
+      486,
+      24
+     ]
+    },
+    {
+     "text": "d) 92",
+     "page": 1,
+     "rect": [
+      615,
+      612,
+      486,
+      24
+     ]
+    }
+   ],
+   "correct": 0
+  },
+  {
+   "label": "5)",
+   "page": 1,
+   "kind": "blank",
+   "cat": "FILL_BLANK",
+   "prompt": "The opposite of \"ancient\" is ___ .",
+   "answer": "modern",
+   "qrect": [
+    120,
+    701,
+    981,
+    24
+   ],
+   "areas": [
+    [
+     408,
+     689,
+     170,
+     42
+    ]
+   ]
+  },
+  {
+   "label": "5)",
+   "page": 1,
+   "kind": "blank",
+   "cat": "FILL_BLANK",
+   "prompt": "The capital of France is ___ .",
+   "answer": "Paris",
+   "qrect": [
+    120,
+    738,
+    981,
+    24
+   ],
+   "areas": [
+    [
+     372,
+     726,
+     170,
+     42
+    ]
+   ]
+  },
+  {
+   "label": "5)",
+   "page": 1,
+   "kind": "blank",
+   "cat": "FILL_BLANK",
+   "prompt": "Light travels faster than ___ .",
+   "answer": "sound",
+   "qrect": [
+    120,
+    776,
+    981,
+    24
+   ],
+   "areas": [
+    [
+     371,
+     764,
+     170,
+     42
+    ]
+   ]
+  },
+  {
+   "label": "(a)",
+   "page": 1,
+   "kind": "choice",
+   "cat": "TRUE_FALSE",
+   "prompt": "Sound travels faster than light.",
+   "qrect": [
+    120,
+    863,
+    315,
+    24
+   ],
+   "options": [
+    {
+     "text": "True",
+     "page": 1,
+     "rect": [
+      990,
+      863,
+      42,
+      24
+     ]
+    },
+    {
+     "text": "False",
+     "page": 1,
+     "rect": [
+      1050,
+      863,
+      51,
+      24
+     ]
+    }
+   ],
+   "correct": 1
+  },
+  {
+   "label": "(b)",
+   "page": 1,
+   "kind": "choice",
+   "cat": "TRUE_FALSE",
+   "prompt": "A square is a type of rectangle.",
+   "qrect": [
+    120,
+    899,
+    319,
+    24
+   ],
+   "options": [
+    {
+     "text": "True",
+     "page": 1,
+     "rect": [
+      990,
+      899,
+      42,
+      24
+     ]
+    },
+    {
+     "text": "False",
+     "page": 1,
+     "rect": [
+      1050,
+      899,
+      51,
+      24
+     ]
+    }
+   ],
+   "correct": 0
+  },
+  {
+   "label": "(c)",
+   "page": 1,
+   "kind": "choice",
+   "cat": "TRUE_FALSE",
+   "prompt": "All metals are magnetic.",
+   "qrect": [
+    120,
+    935,
+    253,
+    24
+   ],
+   "options": [
+    {
+     "text": "True",
+     "page": 1,
+     "rect": [
+      990,
+      935,
+      42,
+      24
+     ]
+    },
+    {
+     "text": "False",
+     "page": 1,
+     "rect": [
+      1050,
+      935,
+      51,
+      24
+     ]
+    }
+   ],
+   "correct": 1
+  },
+  {
+   "label": "7)",
+   "page": 1,
+   "kind": "choice",
+   "cat": "MULTIPLE_CHOICE",
+   "prompt": "Which word is a synonym of \"rapid\"?",
+   "qrect": [
+    90,
+    986,
+    1011,
+    24
+   ],
+   "options": [
+    {
+     "text": "(A) slow",
+     "page": 1,
+     "rect": [
+      129,
+      1017,
+      972,
+      24
+     ]
+    },
+    {
+     "text": "(B) quick",
+     "page": 1,
+     "rect": [
+      129,
+      1049,
+      972,
+      24
+     ]
+    },
+    {
+     "text": "(C) late",
+     "page": 1,
+     "rect": [
+      129,
+      1080,
+      972,
+      24
+     ]
+    },
+    {
+     "text": "(D) heavy",
+     "page": 1,
+     "rect": [
+      129,
+      1112,
+      972,
+      24
+     ]
+    }
+   ],
+   "correct": 1
+  },
+  {
+   "label": "8)",
+   "page": 1,
+   "kind": "choice",
+   "cat": "MULTIPLE_CHOICE",
+   "prompt": "What is the SI unit of force?",
+   "qrect": [
+    90,
+    1163,
+    1011,
+    24
+   ],
+   "options": [
+    {
+     "text": "(A) newton",
+     "page": 1,
+     "rect": [
+      129,
+      1194,
+      972,
+      24
+     ]
+    },
+    {
+     "text": "(B) joule",
+     "page": 1,
+     "rect": [
+      129,
+      1226,
+      972,
+      24
+     ]
+    },
+    {
+     "text": "(C) watt",
+     "page": 1,
+     "rect": [
+      129,
+      1257,
+      972,
+      24
+     ]
+    },
+    {
+     "text": "(D) pascal",
+     "page": 1,
+     "rect": [
+      129,
+      1289,
+      972,
+      24
+     ]
+    }
+   ],
+   "correct": 0
+  },
+  {
+   "label": "9)",
+   "page": 2,
+   "kind": "write",
+   "cat": "LONG_TEXT",
+   "prompt": "Explain how the seasons are caused on Earth.",
+   "answer": "The Earth is tilted, so each hemisphere gets more direct sunlight during part of the year, which makes it summer there.",
+   "qrect": [
+    90,
+    84,
+    1011,
+    24
+   ],
+   "areas": [
+    [
+     120,
+     120,
+     981,
+     165
+    ]
+   ]
+  },
+  {
+   "label": "10)",
+   "page": 2,
+   "kind": "blank",
+   "cat": "FILL_BLANK",
+   "prompt": "A triangle with three equal sides is called an ___ triangle.",
+   "answer": "equilateral",
+   "qrect": [
+    120,
+    350,
+    981,
+    26
+   ],
+   "areas": [
+    [
+     561,
+     338,
+     231,
+     39
+    ]
+   ]
+  },
+  {
+   "label": "10)",
+   "page": 2,
+   "kind": "blank",
+   "cat": "FILL_BLANK",
+   "prompt": "Water boils at ___ °C at sea level.",
+   "answer": "100",
+   "qrect": [
+    120,
+    389,
+    981,
+    26
+   ],
+   "areas": [
+    [
+     282,
+     377,
+     231,
+     39
+    ]
+   ]
+  },
+  {
+   "label": "10)",
+   "page": 2,
+   "kind": "blank",
+   "cat": "FILL_BLANK",
+   "prompt": "Light travels faster than ___ .",
+   "answer": "sound",
+   "qrect": [
+    120,
+    428,
+    981,
+    26
+   ],
+   "areas": [
+    [
+     371,
+     416,
+     231,
+     39
+    ]
+   ]
+  }
+ ]
+}

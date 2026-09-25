@@ -1,0 +1,448 @@
+{
+ "doc": "synth/synth09.pdf",
+ "synthetic": true,
+ "thai": false,
+ "twoCol": false,
+ "questions": [
+  {
+   "label": "(a)",
+   "page": 1,
+   "kind": "choice",
+   "cat": "TRUE_FALSE",
+   "prompt": "Ice is less dense than liquid water.",
+   "qrect": [
+    120,
+    231,
+    350,
+    24
+   ],
+   "options": [
+    {
+     "text": "True",
+     "page": 1,
+     "rect": [
+      990,
+      231,
+      42,
+      24
+     ]
+    },
+    {
+     "text": "False",
+     "page": 1,
+     "rect": [
+      1050,
+      231,
+      51,
+      24
+     ]
+    }
+   ],
+   "correct": 0
+  },
+  {
+   "label": "(b)",
+   "page": 1,
+   "kind": "choice",
+   "cat": "TRUE_FALSE",
+   "prompt": "All metals are magnetic.",
+   "qrect": [
+    120,
+    267,
+    254,
+    24
+   ],
+   "options": [
+    {
+     "text": "True",
+     "page": 1,
+     "rect": [
+      990,
+      267,
+      42,
+      24
+     ]
+    },
+    {
+     "text": "False",
+     "page": 1,
+     "rect": [
+      1050,
+      267,
+      51,
+      24
+     ]
+    }
+   ],
+   "correct": 1
+  },
+  {
+   "label": "(c)",
+   "page": 1,
+   "kind": "choice",
+   "cat": "TRUE_FALSE",
+   "prompt": "A square is a type of rectangle.",
+   "qrect": [
+    120,
+    303,
+    318,
+    24
+   ],
+   "options": [
+    {
+     "text": "True",
+     "page": 1,
+     "rect": [
+      990,
+      303,
+      42,
+      24
+     ]
+    },
+    {
+     "text": "False",
+     "page": 1,
+     "rect": [
+      1050,
+      303,
+      51,
+      24
+     ]
+    }
+   ],
+   "correct": 0
+  },
+  {
+   "label": "2.",
+   "page": 1,
+   "kind": "write",
+   "cat": "LONG_TEXT",
+   "prompt": "Describe two ways to reduce plastic waste at school.",
+   "answer": "Bring reusable bottles and containers, and set up recycling bins in every classroom.",
+   "qrect": [
+    90,
+    354,
+    1011,
+    24
+   ],
+   "areas": [
+    [
+     120,
+     390,
+     981,
+     165
+    ]
+   ]
+  },
+  {
+   "label": "3.",
+   "page": 1,
+   "kind": "blank",
+   "cat": "FILL_BLANK",
+   "prompt": "The opposite of \"ancient\" is ___ .",
+   "answer": "modern",
+   "qrect": [
+    120,
+    620,
+    981,
+    26
+   ],
+   "areas": [
+    [
+     408,
+     608,
+     231,
+     39
+    ]
+   ]
+  },
+  {
+   "label": "3.",
+   "page": 1,
+   "kind": "blank",
+   "cat": "FILL_BLANK",
+   "prompt": "A triangle with three equal sides is called an ___ triangle.",
+   "answer": "equilateral",
+   "qrect": [
+    120,
+    659,
+    981,
+    26
+   ],
+   "areas": [
+    [
+     561,
+     647,
+     231,
+     39
+    ]
+   ]
+  },
+  {
+   "label": "3.",
+   "page": 1,
+   "kind": "blank",
+   "cat": "FILL_BLANK",
+   "prompt": "Water boils at ___ °C at sea level.",
+   "answer": "100",
+   "qrect": [
+    120,
+    698,
+    981,
+    26
+   ],
+   "areas": [
+    [
+     281,
+     686,
+     231,
+     39
+    ]
+   ]
+  },
+  {
+   "label": "4.",
+   "page": 1,
+   "kind": "write",
+   "cat": "SHORT_TEXT",
+   "prompt": "Give one example of a renewable energy source.",
+   "answer": "Solar power",
+   "qrect": [
+    90,
+    750,
+    1011,
+    24
+   ],
+   "areas": [
+    [
+     120,
+     774,
+     981,
+     45
+    ]
+   ]
+  },
+  {
+   "label": "5.",
+   "page": 1,
+   "kind": "blank",
+   "cat": "FILL_BLANK",
+   "prompt": "A triangle with three equal sides is called an ___ triangle.",
+   "answer": "equilateral",
+   "qrect": [
+    120,
+    884,
+    981,
+    24
+   ],
+   "areas": [
+    [
+     561,
+     872,
+     170,
+     42
+    ]
+   ]
+  },
+  {
+   "label": "5.",
+   "page": 1,
+   "kind": "blank",
+   "cat": "FILL_BLANK",
+   "prompt": "The capital of France is ___ .",
+   "answer": "Paris",
+   "qrect": [
+    120,
+    921,
+    981,
+    24
+   ],
+   "areas": [
+    [
+     372,
+     909,
+     170,
+     42
+    ]
+   ]
+  },
+  {
+   "label": "5.",
+   "page": 1,
+   "kind": "blank",
+   "cat": "FILL_BLANK",
+   "prompt": "The opposite of \"ancient\" is ___ .",
+   "answer": "modern",
+   "qrect": [
+    120,
+    959,
+    981,
+    24
+   ],
+   "areas": [
+    [
+     407,
+     947,
+     170,
+     42
+    ]
+   ]
+  },
+  {
+   "label": "6.",
+   "page": 1,
+   "kind": "choice",
+   "cat": "MULTIPLE_CHOICE",
+   "prompt": "What is 12 × 8?",
+   "qrect": [
+    90,
+    1010,
+    1011,
+    24
+   ],
+   "options": [
+    {
+     "text": "A. 96",
+     "page": 1,
+     "rect": [
+      129,
+      1043,
+      49,
+      24
+     ]
+    },
+    {
+     "text": "B. 86",
+     "page": 1,
+     "rect": [
+      238,
+      1043,
+      49,
+      24
+     ]
+    },
+    {
+     "text": "C. 108",
+     "page": 1,
+     "rect": [
+      347,
+      1043,
+      62,
+      24
+     ]
+    },
+    {
+     "text": "D. 92",
+     "page": 1,
+     "rect": [
+      469,
+      1043,
+      50,
+      24
+     ]
+    }
+   ],
+   "correct": 0
+  },
+  {
+   "label": "7.",
+   "page": 1,
+   "kind": "choice",
+   "cat": "MULTIPLE_CHOICE",
+   "prompt": "Solve for x: 2x + 6 = 14",
+   "qrect": [
+    90,
+    1094,
+    1011,
+    24
+   ],
+   "options": [
+    {
+     "text": "(A) x = 3",
+     "page": 1,
+     "rect": [
+      129,
+      1127,
+      80,
+      24
+     ]
+    },
+    {
+     "text": "(B) x = 4",
+     "page": 1,
+     "rect": [
+      269,
+      1127,
+      80,
+      24
+     ]
+    },
+    {
+     "text": "(C) x = 5",
+     "page": 1,
+     "rect": [
+      409,
+      1127,
+      81,
+      24
+     ]
+    },
+    {
+     "text": "(D) x = 10",
+     "page": 1,
+     "rect": [
+      550,
+      1127,
+      93,
+      24
+     ]
+    }
+   ],
+   "correct": 1
+  },
+  {
+   "label": "(a)",
+   "page": 2,
+   "kind": "write",
+   "cat": "FORMULA_WORKING",
+   "prompt": "A car travels 120 km in 2 hours. Calculate its average speed.",
+   "answer": "60 km/h",
+   "qrect": [
+    120,
+    120,
+    981,
+    24
+   ],
+   "areas": [
+    [
+     90,
+     144,
+     1011,
+     135
+    ]
+   ]
+  },
+  {
+   "label": "(b)",
+   "page": 2,
+   "kind": "write",
+   "cat": "FORMULA_WORKING",
+   "prompt": "A car travels 120 km in 2 hours. How far would it travel in 5 hours at the same speed?",
+   "answer": "300 km",
+   "qrect": [
+    120,
+    291,
+    981,
+    24
+   ],
+   "areas": [
+    [
+     90,
+     315,
+     1011,
+     135
+    ]
+   ]
+  }
+ ]
+}

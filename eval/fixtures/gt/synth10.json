@@ -1,0 +1,500 @@
+{
+ "doc": "synth/synth10.pdf",
+ "synthetic": true,
+ "thai": true,
+ "twoCol": false,
+ "questions": [
+  {
+   "label": "1.",
+   "page": 1,
+   "kind": "choice",
+   "cat": "MULTIPLE_CHOICE",
+   "prompt": "12 × 8 มีค่าเท่าใด",
+   "qrect": [
+    90,
+    236,
+    1011,
+    38
+   ],
+   "options": [
+    {
+     "text": "ก. 96",
+     "page": 1,
+     "rect": [
+      129,
+      281,
+      972,
+      38
+     ]
+    },
+    {
+     "text": "ข. 86",
+     "page": 1,
+     "rect": [
+      129,
+      326,
+      972,
+      38
+     ]
+    },
+    {
+     "text": "ค. 108",
+     "page": 1,
+     "rect": [
+      129,
+      371,
+      972,
+      38
+     ]
+    },
+    {
+     "text": "ง. 92",
+     "page": 1,
+     "rect": [
+      129,
+      416,
+      972,
+      38
+     ]
+    }
+   ],
+   "correct": 0
+  },
+  {
+   "label": "2.",
+   "page": 1,
+   "kind": "choice",
+   "cat": "MULTIPLE_CHOICE",
+   "prompt": "หน่วย SI ของแรงคืออะไร",
+   "qrect": [
+    90,
+    480,
+    1011,
+    38
+   ],
+   "options": [
+    {
+     "text": "ก. นิวตัน",
+     "page": 1,
+     "rect": [
+      129,
+      525,
+      972,
+      38
+     ]
+    },
+    {
+     "text": "ข. จูล",
+     "page": 1,
+     "rect": [
+      129,
+      570,
+      972,
+      38
+     ]
+    },
+    {
+     "text": "ค. วัตต์",
+     "page": 1,
+     "rect": [
+      129,
+      615,
+      972,
+      38
+     ]
+    },
+    {
+     "text": "ง. ปาสคาล",
+     "page": 1,
+     "rect": [
+      129,
+      660,
+      972,
+      38
+     ]
+    }
+   ],
+   "correct": 0
+  },
+  {
+   "label": "3.",
+   "page": 1,
+   "kind": "choice",
+   "cat": "MULTIPLE_CHOICE",
+   "prompt": "หน่วย SI ของแรงคืออะไร",
+   "qrect": [
+    90,
+    725,
+    1011,
+    38
+   ],
+   "options": [
+    {
+     "text": "ก. นิวตัน",
+     "page": 1,
+     "rect": [
+      129,
+      770,
+      972,
+      38
+     ]
+    },
+    {
+     "text": "ข. จูล",
+     "page": 1,
+     "rect": [
+      129,
+      815,
+      972,
+      38
+     ]
+    },
+    {
+     "text": "ค. วัตต์",
+     "page": 1,
+     "rect": [
+      129,
+      860,
+      972,
+      38
+     ]
+    },
+    {
+     "text": "ง. ปาสคาล",
+     "page": 1,
+     "rect": [
+      129,
+      905,
+      972,
+      38
+     ]
+    }
+   ],
+   "correct": 0
+  },
+  {
+   "label": "4.",
+   "page": 1,
+   "kind": "choice",
+   "cat": "MULTIPLE_CHOICE",
+   "prompt": "12 × 8 มีค่าเท่าใด",
+   "qrect": [
+    90,
+    969,
+    1011,
+    38
+   ],
+   "options": [
+    {
+     "text": "ก. 96",
+     "page": 1,
+     "rect": [
+      129,
+      1014,
+      972,
+      38
+     ]
+    },
+    {
+     "text": "ข. 86",
+     "page": 1,
+     "rect": [
+      129,
+      1059,
+      972,
+      38
+     ]
+    },
+    {
+     "text": "ค. 108",
+     "page": 1,
+     "rect": [
+      129,
+      1104,
+      972,
+      38
+     ]
+    },
+    {
+     "text": "ง. 92",
+     "page": 1,
+     "rect": [
+      129,
+      1149,
+      972,
+      38
+     ]
+    }
+   ],
+   "correct": 0
+  },
+  {
+   "label": "5.",
+   "page": 1,
+   "kind": "choice",
+   "cat": "MULTIPLE_CHOICE",
+   "prompt": "หน่วย SI ของแรงคืออะไร",
+   "qrect": [
+    90,
+    1214,
+    1011,
+    38
+   ],
+   "options": [
+    {
+     "text": "ก. นิวตัน",
+     "page": 1,
+     "rect": [
+      129,
+      1259,
+      972,
+      38
+     ]
+    },
+    {
+     "text": "ข. จูล",
+     "page": 1,
+     "rect": [
+      129,
+      1304,
+      972,
+      38
+     ]
+    },
+    {
+     "text": "ค. วัตต์",
+     "page": 1,
+     "rect": [
+      129,
+      1349,
+      972,
+      38
+     ]
+    },
+    {
+     "text": "ง. ปาสคาล",
+     "page": 1,
+     "rect": [
+      129,
+      1394,
+      972,
+      38
+     ]
+    }
+   ],
+   "correct": 0
+  },
+  {
+   "label": "6.",
+   "page": 2,
+   "kind": "write",
+   "cat": "SHORT_TEXT",
+   "prompt": "Give one example of a renewable energy source.",
+   "answer": "Solar power",
+   "qrect": [
+    90,
+    84,
+    1011,
+    27
+   ],
+   "areas": [
+    [
+     120,
+     111,
+     981,
+     45
+    ]
+   ]
+  },
+  {
+   "label": "7.",
+   "page": 2,
+   "kind": "write",
+   "cat": "LONG_TEXT",
+   "prompt": "Explain how the seasons are caused on Earth.",
+   "answer": "The Earth is tilted, so each hemisphere gets more direct sunlight during part of the year, which makes it summer there.",
+   "qrect": [
+    90,
+    183,
+    1011,
+    27
+   ],
+   "areas": [
+    [
+     120,
+     222,
+     981,
+     165
+    ]
+   ]
+  },
+  {
+   "label": "8.",
+   "page": 2,
+   "kind": "choice",
+   "cat": "MULTIPLE_CHOICE",
+   "prompt": "ดาวเคราะห์ดวงใดอยู่ใกล้ดวงอาทิตย์ที่สุด",
+   "qrect": [
+    90,
+    414,
+    1011,
+    38
+   ],
+   "options": [
+    {
+     "text": "ก. ดาวศุกร์",
+     "page": 2,
+     "rect": [
+      129,
+      459,
+      972,
+      38
+     ]
+    },
+    {
+     "text": "ข. โลก",
+     "page": 2,
+     "rect": [
+      129,
+      504,
+      972,
+      38
+     ]
+    },
+    {
+     "text": "ค. ดาวพุธ",
+     "page": 2,
+     "rect": [
+      129,
+      549,
+      972,
+      38
+     ]
+    },
+    {
+     "text": "ง. ดาวอังคาร",
+     "page": 2,
+     "rect": [
+      129,
+      594,
+      972,
+      38
+     ]
+    }
+   ],
+   "correct": 2
+  },
+  {
+   "label": "9.",
+   "page": 2,
+   "kind": "choice",
+   "cat": "MULTIPLE_CHOICE",
+   "prompt": "12 × 8 มีค่าเท่าใด",
+   "qrect": [
+    90,
+    659,
+    1011,
+    38
+   ],
+   "options": [
+    {
+     "text": "ก. 96",
+     "page": 2,
+     "rect": [
+      129,
+      704,
+      972,
+      38
+     ]
+    },
+    {
+     "text": "ข. 86",
+     "page": 2,
+     "rect": [
+      129,
+      749,
+      972,
+      38
+     ]
+    },
+    {
+     "text": "ค. 108",
+     "page": 2,
+     "rect": [
+      129,
+      794,
+      972,
+      38
+     ]
+    },
+    {
+     "text": "ง. 92",
+     "page": 2,
+     "rect": [
+      129,
+      839,
+      972,
+      38
+     ]
+    }
+   ],
+   "correct": 0
+  },
+  {
+   "label": "10.",
+   "page": 2,
+   "kind": "choice",
+   "cat": "MULTIPLE_CHOICE",
+   "prompt": "ข้อใดเป็นจำนวนเฉพาะ",
+   "qrect": [
+    90,
+    903,
+    1011,
+    38
+   ],
+   "options": [
+    {
+     "text": "ก. 21",
+     "page": 2,
+     "rect": [
+      129,
+      948,
+      972,
+      38
+     ]
+    },
+    {
+     "text": "ข. 27",
+     "page": 2,
+     "rect": [
+      129,
+      993,
+      972,
+      38
+     ]
+    },
+    {
+     "text": "ค. 29",
+     "page": 2,
+     "rect": [
+      129,
+      1038,
+      972,
+      38
+     ]
+    },
+    {
+     "text": "ง. 33",
+     "page": 2,
+     "rect": [
+      129,
+      1083,
+      972,
+      38
+     ]
+    }
+   ],
+   "correct": 2
+  }
+ ]
+}

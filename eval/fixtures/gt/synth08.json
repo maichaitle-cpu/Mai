@@ -1,0 +1,760 @@
+{
+ "doc": "synth/synth08.pdf",
+ "synthetic": true,
+ "thai": false,
+ "twoCol": false,
+ "questions": [
+  {
+   "label": "1)",
+   "page": 1,
+   "kind": "blank",
+   "cat": "FILL_BLANK",
+   "prompt": "Light travels faster than ___ .",
+   "answer": "sound",
+   "qrect": [
+    120,
+    233,
+    981,
+    26
+   ],
+   "areas": [
+    [
+     334,
+     221,
+     231,
+     38
+    ]
+   ]
+  },
+  {
+   "label": "1)",
+   "page": 1,
+   "kind": "blank",
+   "cat": "FILL_BLANK",
+   "prompt": "The powerhouse of the cell is the ___ .",
+   "answer": "mitochondria",
+   "qrect": [
+    120,
+    272,
+    981,
+    26
+   ],
+   "areas": [
+    [
+     408,
+     260,
+     231,
+     38
+    ]
+   ]
+  },
+  {
+   "label": "1)",
+   "page": 1,
+   "kind": "blank",
+   "cat": "FILL_BLANK",
+   "prompt": "Water boils at ___ °C at sea level.",
+   "answer": "100",
+   "qrect": [
+    120,
+    311,
+    981,
+    26
+   ],
+   "areas": [
+    [
+     256,
+     299,
+     231,
+     38
+    ]
+   ]
+  },
+  {
+   "label": "2)",
+   "page": 1,
+   "kind": "write",
+   "cat": "SHORT_TEXT",
+   "prompt": "Write the chemical formula of water.",
+   "answer": "H₂O",
+   "qrect": [
+    90,
+    363,
+    1011,
+    24
+   ],
+   "areas": [
+    [
+     120,
+     387,
+     981,
+     45
+    ]
+   ]
+  },
+  {
+   "label": "3)",
+   "page": 1,
+   "kind": "write",
+   "cat": "LONG_TEXT",
+   "prompt": "Describe two ways to reduce plastic waste at school.",
+   "answer": "Bring reusable bottles and containers, and set up recycling bins in every classroom.",
+   "qrect": [
+    90,
+    459,
+    1011,
+    24
+   ],
+   "areas": [
+    [
+     120,
+     495,
+     981,
+     165
+    ]
+   ]
+  },
+  {
+   "label": "4)",
+   "page": 1,
+   "kind": "choice",
+   "cat": "MULTIPLE_CHOICE",
+   "prompt": "Which planet is closest to the Sun?",
+   "qrect": [
+    90,
+    687,
+    1011,
+    24
+   ],
+   "options": [
+    {
+     "text": "A. Venus",
+     "page": 1,
+     "rect": [
+      129,
+      720,
+      71,
+      23
+     ]
+    },
+    {
+     "text": "B. Earth",
+     "page": 1,
+     "rect": [
+      260,
+      720,
+      65,
+      23
+     ]
+    },
+    {
+     "text": "C. Mercury",
+     "page": 1,
+     "rect": [
+      385,
+      720,
+      90,
+      23
+     ]
+    },
+    {
+     "text": "D. Mars",
+     "page": 1,
+     "rect": [
+      535,
+      720,
+      64,
+      23
+     ]
+    }
+   ],
+   "correct": 2
+  },
+  {
+   "label": "5)",
+   "page": 1,
+   "kind": "choice",
+   "cat": "MULTIPLE_CHOICE",
+   "prompt": "Which layer of the atmosphere contains the ozone layer?",
+   "qrect": [
+    90,
+    771,
+    1011,
+    24
+   ],
+   "options": [
+    {
+     "text": "A. troposphere",
+     "page": 1,
+     "rect": [
+      129,
+      804,
+      116,
+      23
+     ]
+    },
+    {
+     "text": "B. stratosphere",
+     "page": 1,
+     "rect": [
+      305,
+      804,
+      117,
+      23
+     ]
+    },
+    {
+     "text": "C. mesosphere",
+     "page": 1,
+     "rect": [
+      482,
+      804,
+      115,
+      23
+     ]
+    },
+    {
+     "text": "D. thermosphere",
+     "page": 1,
+     "rect": [
+      657,
+      804,
+      130,
+      23
+     ]
+    }
+   ],
+   "correct": 1
+  },
+  {
+   "label": "6)",
+   "page": 1,
+   "kind": "choice",
+   "cat": "MULTIPLE_CHOICE",
+   "prompt": "Which word is a synonym of \"rapid\"?",
+   "qrect": [
+    90,
+    855,
+    1011,
+    24
+   ],
+   "options": [
+    {
+     "text": "(A) slow",
+     "page": 1,
+     "rect": [
+      129,
+      888,
+      486,
+      24
+     ]
+    },
+    {
+     "text": "(B) quick",
+     "page": 1,
+     "rect": [
+      615,
+      888,
+      486,
+      24
+     ]
+    },
+    {
+     "text": "(C) late",
+     "page": 1,
+     "rect": [
+      129,
+      920,
+      486,
+      24
+     ]
+    },
+    {
+     "text": "(D) heavy",
+     "page": 1,
+     "rect": [
+      615,
+      920,
+      486,
+      24
+     ]
+    }
+   ],
+   "correct": 1
+  },
+  {
+   "label": "7)",
+   "page": 1,
+   "kind": "choice",
+   "cat": "MULTIPLE_CHOICE",
+   "prompt": "The chemical symbol for sodium is:",
+   "qrect": [
+    90,
+    971,
+    1011,
+    24
+   ],
+   "options": [
+    {
+     "text": "(A) S",
+     "page": 1,
+     "rect": [
+      129,
+      1004,
+      486,
+      24
+     ]
+    },
+    {
+     "text": "(B) Na",
+     "page": 1,
+     "rect": [
+      615,
+      1004,
+      486,
+      24
+     ]
+    },
+    {
+     "text": "(C) So",
+     "page": 1,
+     "rect": [
+      129,
+      1035,
+      486,
+      24
+     ]
+    },
+    {
+     "text": "(D) Sd",
+     "page": 1,
+     "rect": [
+      615,
+      1035,
+      486,
+      24
+     ]
+    }
+   ],
+   "correct": 1
+  },
+  {
+   "label": "8)",
+   "page": 1,
+   "kind": "blank",
+   "cat": "FILL_BLANK",
+   "prompt": "Light travels faster than ___ .",
+   "answer": "sound",
+   "qrect": [
+    120,
+    1124,
+    981,
+    24
+   ],
+   "areas": [
+    [
+     334,
+     1112,
+     143,
+     41
+    ]
+   ]
+  },
+  {
+   "label": "8)",
+   "page": 1,
+   "kind": "blank",
+   "cat": "FILL_BLANK",
+   "prompt": "Water boils at ___ °C at sea level.",
+   "answer": "100",
+   "qrect": [
+    120,
+    1161,
+    981,
+    24
+   ],
+   "areas": [
+    [
+     257,
+     1149,
+     143,
+     41
+    ]
+   ]
+  },
+  {
+   "label": "8)",
+   "page": 1,
+   "kind": "blank",
+   "cat": "FILL_BLANK",
+   "prompt": "The opposite of \"ancient\" is ___ .",
+   "answer": "modern",
+   "qrect": [
+    120,
+    1199,
+    981,
+    24
+   ],
+   "areas": [
+    [
+     365,
+     1187,
+     143,
+     41
+    ]
+   ]
+  },
+  {
+   "label": "9)",
+   "page": 1,
+   "kind": "write",
+   "cat": "LONG_TEXT",
+   "prompt": "Explain why metals are good conductors of electricity.",
+   "answer": "Metals have free electrons that can move through the structure and carry charge from one end to the other.",
+   "qrect": [
+    90,
+    1250,
+    1011,
+    24
+   ],
+   "areas": [
+    [
+     90,
+     1262,
+     1011,
+     102
+    ]
+   ]
+  },
+  {
+   "label": "(a)",
+   "page": 1,
+   "kind": "choice",
+   "cat": "TRUE_FALSE",
+   "prompt": "Ice is less dense than liquid water.",
+   "qrect": [
+    120,
+    1427,
+    292,
+    24
+   ],
+   "options": [
+    {
+     "text": "True",
+     "page": 1,
+     "rect": [
+      1008,
+      1427,
+      36,
+      23
+     ]
+    },
+    {
+     "text": "False",
+     "page": 1,
+     "rect": [
+      1060,
+      1427,
+      41,
+      23
+     ]
+    }
+   ],
+   "correct": 0
+  },
+  {
+   "label": "(b)",
+   "page": 1,
+   "kind": "choice",
+   "cat": "TRUE_FALSE",
+   "prompt": "A square is a type of rectangle.",
+   "qrect": [
+    120,
+    1463,
+    267,
+    24
+   ],
+   "options": [
+    {
+     "text": "True",
+     "page": 1,
+     "rect": [
+      1008,
+      1463,
+      36,
+      23
+     ]
+    },
+    {
+     "text": "False",
+     "page": 1,
+     "rect": [
+      1060,
+      1463,
+      41,
+      23
+     ]
+    }
+   ],
+   "correct": 0
+  },
+  {
+   "label": "(c)",
+   "page": 1,
+   "kind": "choice",
+   "cat": "TRUE_FALSE",
+   "prompt": "All metals are magnetic.",
+   "qrect": [
+    120,
+    1499,
+    216,
+    24
+   ],
+   "options": [
+    {
+     "text": "True",
+     "page": 1,
+     "rect": [
+      1008,
+      1499,
+      36,
+      23
+     ]
+    },
+    {
+     "text": "False",
+     "page": 1,
+     "rect": [
+      1060,
+      1499,
+      41,
+      23
+     ]
+    }
+   ],
+   "correct": 1
+  },
+  {
+   "label": "Copper",
+   "page": 2,
+   "kind": "cell",
+   "cat": "TABLE_SHORT",
+   "prompt": "Copper — Symbol",
+   "answer": "Cu",
+   "qrect": [
+    120,
+    177,
+    231,
+    57
+   ],
+   "areas": [
+    [
+     351,
+     177,
+     216,
+     57
+    ]
+   ],
+   "cell": {
+    "row": [
+     351,
+     177,
+     216,
+     57
+    ],
+    "header": [
+     120,
+     120,
+     890,
+     57
+    ],
+    "col": "Symbol"
+   }
+  },
+  {
+   "label": "Copper",
+   "page": 2,
+   "kind": "cell",
+   "cat": "TABLE_SHORT",
+   "prompt": "Copper — Metal or non-metal",
+   "answer": "Metal",
+   "qrect": [
+    120,
+    177,
+    231,
+    57
+   ],
+   "areas": [
+    [
+     566,
+     177,
+     444,
+     57
+    ]
+   ],
+   "cell": {
+    "row": [
+     566,
+     177,
+     444,
+     57
+    ],
+    "header": [
+     120,
+     120,
+     890,
+     57
+    ],
+    "col": "Metal or non-metal"
+   }
+  },
+  {
+   "label": "Helium",
+   "page": 2,
+   "kind": "cell",
+   "cat": "TABLE_SHORT",
+   "prompt": "Helium — Symbol",
+   "answer": "He",
+   "qrect": [
+    120,
+    234,
+    231,
+    57
+   ],
+   "areas": [
+    [
+     351,
+     234,
+     216,
+     57
+    ]
+   ],
+   "cell": {
+    "row": [
+     351,
+     234,
+     216,
+     57
+    ],
+    "header": [
+     120,
+     120,
+     890,
+     57
+    ],
+    "col": "Symbol"
+   }
+  },
+  {
+   "label": "Helium",
+   "page": 2,
+   "kind": "cell",
+   "cat": "TABLE_SHORT",
+   "prompt": "Helium — Metal or non-metal",
+   "answer": "Non-metal",
+   "qrect": [
+    120,
+    234,
+    231,
+    57
+   ],
+   "areas": [
+    [
+     566,
+     234,
+     444,
+     57
+    ]
+   ],
+   "cell": {
+    "row": [
+     566,
+     234,
+     444,
+     57
+    ],
+    "header": [
+     120,
+     120,
+     890,
+     57
+    ],
+    "col": "Metal or non-metal"
+   }
+  },
+  {
+   "label": "Sulfur",
+   "page": 2,
+   "kind": "cell",
+   "cat": "TABLE_SHORT",
+   "prompt": "Sulfur — Symbol",
+   "answer": "S",
+   "qrect": [
+    120,
+    291,
+    231,
+    57
+   ],
+   "areas": [
+    [
+     351,
+     291,
+     216,
+     57
+    ]
+   ],
+   "cell": {
+    "row": [
+     351,
+     291,
+     216,
+     57
+    ],
+    "header": [
+     120,
+     120,
+     890,
+     57
+    ],
+    "col": "Symbol"
+   }
+  },
+  {
+   "label": "Sulfur",
+   "page": 2,
+   "kind": "cell",
+   "cat": "TABLE_SHORT",
+   "prompt": "Sulfur — Metal or non-metal",
+   "answer": "Non-metal",
+   "qrect": [
+    120,
+    291,
+    231,
+    57
+   ],
+   "areas": [
+    [
+     566,
+     291,
+     444,
+     57
+    ]
+   ],
+   "cell": {
+    "row": [
+     566,
+     291,
+     444,
+     57
+    ],
+    "header": [
+     120,
+     120,
+     890,
+     57
+    ],
+    "col": "Metal or non-metal"
+   }
+  }
+ ]
+}

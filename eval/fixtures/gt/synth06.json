@@ -1,0 +1,444 @@
+{
+ "doc": "synth/synth06.pdf",
+ "synthetic": true,
+ "thai": true,
+ "twoCol": false,
+ "questions": [
+  {
+   "label": "1)",
+   "page": 1,
+   "kind": "write",
+   "cat": "SHORT_TEXT",
+   "prompt": "What is the value of 3² + 4²?",
+   "answer": "25",
+   "qrect": [
+    90,
+    231,
+    1011,
+    26
+   ],
+   "areas": [
+    [
+     120,
+     257,
+     981,
+     45
+    ]
+   ]
+  },
+  {
+   "label": "2)",
+   "page": 1,
+   "kind": "write",
+   "cat": "LONG_TEXT",
+   "prompt": "Describe what happens to particles when a solid melts.",
+   "answer": "The particles gain energy, vibrate more and break out of their fixed positions so they can slide past each other.",
+   "qrect": [
+    90,
+    329,
+    1011,
+    26
+   ],
+   "areas": [
+    [
+     90,
+     354,
+     1011,
+     135
+    ]
+   ]
+  },
+  {
+   "label": "3)",
+   "page": 1,
+   "kind": "choice",
+   "cat": "MULTIPLE_CHOICE",
+   "prompt": "อวัยวะใดทำหน้าที่สูบฉีดเลือด",
+   "qrect": [
+    90,
+    516,
+    1011,
+    36
+   ],
+   "options": [
+    {
+     "text": "ก. ปอด",
+     "page": 1,
+     "rect": [
+      129,
+      560,
+      972,
+      36
+     ]
+    },
+    {
+     "text": "ข. ตับ",
+     "page": 1,
+     "rect": [
+      129,
+      603,
+      972,
+      36
+     ]
+    },
+    {
+     "text": "ค. ไต",
+     "page": 1,
+     "rect": [
+      129,
+      647,
+      972,
+      36
+     ]
+    },
+    {
+     "text": "ง. หัวใจ",
+     "page": 1,
+     "rect": [
+      129,
+      690,
+      972,
+      36
+     ]
+    }
+   ],
+   "correct": 3
+  },
+  {
+   "label": "4)",
+   "page": 1,
+   "kind": "choice",
+   "cat": "MULTIPLE_CHOICE",
+   "prompt": "หน่วย SI ของแรงคืออะไร",
+   "qrect": [
+    90,
+    753,
+    1011,
+    36
+   ],
+   "options": [
+    {
+     "text": "ก. นิวตัน",
+     "page": 1,
+     "rect": [
+      129,
+      797,
+      972,
+      36
+     ]
+    },
+    {
+     "text": "ข. จูล",
+     "page": 1,
+     "rect": [
+      129,
+      840,
+      972,
+      36
+     ]
+    },
+    {
+     "text": "ค. วัตต์",
+     "page": 1,
+     "rect": [
+      129,
+      884,
+      972,
+      36
+     ]
+    },
+    {
+     "text": "ง. ปาสคาล",
+     "page": 1,
+     "rect": [
+      129,
+      927,
+      972,
+      36
+     ]
+    }
+   ],
+   "correct": 0
+  },
+  {
+   "label": "5)",
+   "page": 1,
+   "kind": "choice",
+   "cat": "MULTIPLE_CHOICE",
+   "prompt": "ข้อใดเป็นจำนวนเฉพาะ",
+   "qrect": [
+    90,
+    990,
+    1011,
+    36
+   ],
+   "options": [
+    {
+     "text": "ก. 21",
+     "page": 1,
+     "rect": [
+      129,
+      1034,
+      972,
+      36
+     ]
+    },
+    {
+     "text": "ข. 27",
+     "page": 1,
+     "rect": [
+      129,
+      1077,
+      972,
+      36
+     ]
+    },
+    {
+     "text": "ค. 29",
+     "page": 1,
+     "rect": [
+      129,
+      1121,
+      972,
+      36
+     ]
+    },
+    {
+     "text": "ง. 33",
+     "page": 1,
+     "rect": [
+      129,
+      1164,
+      972,
+      36
+     ]
+    }
+   ],
+   "correct": 2
+  },
+  {
+   "label": "6)",
+   "page": 1,
+   "kind": "choice",
+   "cat": "MULTIPLE_CHOICE",
+   "prompt": "ดาวเคราะห์ดวงใดอยู่ใกล้ดวงอาทิตย์ที่สุด",
+   "qrect": [
+    90,
+    1227,
+    1011,
+    36
+   ],
+   "options": [
+    {
+     "text": "ก. ดาวศุกร์",
+     "page": 1,
+     "rect": [
+      129,
+      1271,
+      972,
+      36
+     ]
+    },
+    {
+     "text": "ข. โลก",
+     "page": 1,
+     "rect": [
+      129,
+      1314,
+      972,
+      36
+     ]
+    },
+    {
+     "text": "ค. ดาวพุธ",
+     "page": 1,
+     "rect": [
+      129,
+      1358,
+      972,
+      36
+     ]
+    },
+    {
+     "text": "ง. ดาวอังคาร",
+     "page": 1,
+     "rect": [
+      129,
+      1401,
+      972,
+      36
+     ]
+    }
+   ],
+   "correct": 2
+  },
+  {
+   "label": "7)",
+   "page": 2,
+   "kind": "choice",
+   "cat": "MULTIPLE_CHOICE",
+   "prompt": "อวัยวะใดทำหน้าที่สูบฉีดเลือด",
+   "qrect": [
+    90,
+    84,
+    1011,
+    36
+   ],
+   "options": [
+    {
+     "text": "ก. ปอด",
+     "page": 2,
+     "rect": [
+      129,
+      128,
+      972,
+      36
+     ]
+    },
+    {
+     "text": "ข. ตับ",
+     "page": 2,
+     "rect": [
+      129,
+      171,
+      972,
+      36
+     ]
+    },
+    {
+     "text": "ค. ไต",
+     "page": 2,
+     "rect": [
+      129,
+      215,
+      972,
+      36
+     ]
+    },
+    {
+     "text": "ง. หัวใจ",
+     "page": 2,
+     "rect": [
+      129,
+      258,
+      972,
+      36
+     ]
+    }
+   ],
+   "correct": 3
+  },
+  {
+   "label": "8)",
+   "page": 2,
+   "kind": "choice",
+   "cat": "MULTIPLE_CHOICE",
+   "prompt": "12 × 8 มีค่าเท่าใด",
+   "qrect": [
+    90,
+    321,
+    1011,
+    36
+   ],
+   "options": [
+    {
+     "text": "ก. 96",
+     "page": 2,
+     "rect": [
+      129,
+      365,
+      972,
+      36
+     ]
+    },
+    {
+     "text": "ข. 86",
+     "page": 2,
+     "rect": [
+      129,
+      408,
+      972,
+      36
+     ]
+    },
+    {
+     "text": "ค. 108",
+     "page": 2,
+     "rect": [
+      129,
+      452,
+      972,
+      36
+     ]
+    },
+    {
+     "text": "ง. 92",
+     "page": 2,
+     "rect": [
+      129,
+      495,
+      972,
+      36
+     ]
+    }
+   ],
+   "correct": 0
+  },
+  {
+   "label": "9)",
+   "page": 2,
+   "kind": "choice",
+   "cat": "MULTIPLE_CHOICE",
+   "prompt": "12 × 8 มีค่าเท่าใด",
+   "qrect": [
+    90,
+    558,
+    1011,
+    36
+   ],
+   "options": [
+    {
+     "text": "ก. 96",
+     "page": 2,
+     "rect": [
+      129,
+      602,
+      972,
+      36
+     ]
+    },
+    {
+     "text": "ข. 86",
+     "page": 2,
+     "rect": [
+      129,
+      645,
+      972,
+      36
+     ]
+    },
+    {
+     "text": "ค. 108",
+     "page": 2,
+     "rect": [
+      129,
+      689,
+      972,
+      36
+     ]
+    },
+    {
+     "text": "ง. 92",
+     "page": 2,
+     "rect": [
+      129,
+      732,
+      972,
+      36
+     ]
+    }
+   ],
+   "correct": 0
+  }
+ ]
+}

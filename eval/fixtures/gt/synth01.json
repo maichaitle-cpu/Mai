@@ -1,0 +1,884 @@
+{
+ "doc": "synth/synth01.pdf",
+ "synthetic": true,
+ "thai": false,
+ "twoCol": true,
+ "questions": [
+  {
+   "label": "1.",
+   "page": 1,
+   "kind": "choice",
+   "cat": "MULTIPLE_CHOICE",
+   "prompt": "Which of these is a prime number?",
+   "qrect": [
+    90,
+    200,
+    479,
+    26
+   ],
+   "options": [
+    {
+     "text": "a) 21",
+     "page": 1,
+     "rect": [
+      129,
+      234,
+      220,
+      26
+     ]
+    },
+    {
+     "text": "b) 27",
+     "page": 1,
+     "rect": [
+      349,
+      234,
+      220,
+      26
+     ]
+    },
+    {
+     "text": "c) 29",
+     "page": 1,
+     "rect": [
+      129,
+      267,
+      220,
+      26
+     ]
+    },
+    {
+     "text": "d) 33",
+     "page": 1,
+     "rect": [
+      349,
+      267,
+      220,
+      26
+     ]
+    }
+   ],
+   "correct": 2
+  },
+  {
+   "label": "2.",
+   "page": 1,
+   "kind": "choice",
+   "cat": "MULTIPLE_CHOICE",
+   "prompt": "The chemical symbol for sodium is:",
+   "qrect": [
+    90,
+    320,
+    479,
+    26
+   ],
+   "options": [
+    {
+     "text": "(A) S",
+     "page": 1,
+     "rect": [
+      129,
+      354,
+      220,
+      26
+     ]
+    },
+    {
+     "text": "(B) Na",
+     "page": 1,
+     "rect": [
+      349,
+      354,
+      220,
+      26
+     ]
+    },
+    {
+     "text": "(C) So",
+     "page": 1,
+     "rect": [
+      129,
+      387,
+      220,
+      26
+     ]
+    },
+    {
+     "text": "(D) Sd",
+     "page": 1,
+     "rect": [
+      349,
+      387,
+      220,
+      26
+     ]
+    }
+   ],
+   "correct": 1
+  },
+  {
+   "label": "3.",
+   "page": 1,
+   "kind": "write",
+   "cat": "SHORT_TEXT",
+   "prompt": "Name the process by which water vapour turns into liquid water.",
+   "answer": "Condensation",
+   "qrect": [
+    90,
+    440,
+    479,
+    51
+   ],
+   "areas": [
+    [
+     120,
+     491,
+     449,
+     45
+    ]
+   ]
+  },
+  {
+   "label": "4.",
+   "page": 1,
+   "kind": "choice",
+   "cat": "MULTIPLE_CHOICE",
+   "prompt": "A triangle has angles 50° and 60°. The third angle is:",
+   "qrect": [
+    90,
+    563,
+    479,
+    51
+   ],
+   "options": [
+    {
+     "text": "(A) 60°",
+     "page": 1,
+     "rect": [
+      129,
+      623,
+      70,
+      26
+     ]
+    },
+    {
+     "text": "(B) 70°",
+     "page": 1,
+     "rect": [
+      259,
+      623,
+      70,
+      26
+     ]
+    },
+    {
+     "text": "(C) 80°",
+     "page": 1,
+     "rect": [
+      390,
+      623,
+      72,
+      26
+     ]
+    },
+    {
+     "text": "(D) 90°",
+     "page": 1,
+     "rect": [
+      129,
+      623,
+      423,
+      51
+     ]
+    }
+   ],
+   "correct": 1
+  },
+  {
+   "label": "5.",
+   "page": 1,
+   "kind": "choice",
+   "cat": "MULTIPLE_CHOICE",
+   "prompt": "What is 12 × 8?",
+   "qrect": [
+    90,
+    701,
+    479,
+    26
+   ],
+   "options": [
+    {
+     "text": "a) 96",
+     "page": 1,
+     "rect": [
+      129,
+      735,
+      51,
+      26
+     ]
+    },
+    {
+     "text": "b) 86",
+     "page": 1,
+     "rect": [
+      240,
+      735,
+      51,
+      26
+     ]
+    },
+    {
+     "text": "c) 108",
+     "page": 1,
+     "rect": [
+      352,
+      735,
+      63,
+      26
+     ]
+    },
+    {
+     "text": "d) 92",
+     "page": 1,
+     "rect": [
+      129,
+      735,
+      365,
+      51
+     ]
+    }
+   ],
+   "correct": 0
+  },
+  {
+   "label": "6.",
+   "page": 1,
+   "kind": "choice",
+   "cat": "MULTIPLE_CHOICE",
+   "prompt": "Which gas do plants absorb during photosynthesis?",
+   "qrect": [
+    90,
+    813,
+    479,
+    51
+   ],
+   "options": [
+    {
+     "text": "(A) oxygen",
+     "page": 1,
+     "rect": [
+      129,
+      873,
+      109,
+      26
+     ]
+    },
+    {
+     "text": "(B) nitrogen",
+     "page": 1,
+     "rect": [
+      298,
+      873,
+      118,
+      26
+     ]
+    },
+    {
+     "text": "(C) carbon dioxide",
+     "page": 1,
+     "rect": [
+      129,
+      873,
+      378,
+      51
+     ]
+    },
+    {
+     "text": "(D) hydrogen",
+     "page": 1,
+     "rect": [
+      335,
+      899,
+      131,
+      26
+     ]
+    }
+   ],
+   "correct": 2
+  },
+  {
+   "label": "Oxygen",
+   "page": 1,
+   "kind": "cell",
+   "cat": "TABLE_SHORT",
+   "prompt": "Oxygen — Symbol",
+   "answer": "O",
+   "qrect": [
+    121,
+    1060,
+    119,
+    57
+   ],
+   "areas": [
+    [
+     240,
+     1060,
+     113,
+     57
+    ]
+   ],
+   "cell": {
+    "row": [
+     240,
+     1060,
+     113,
+     57
+    ],
+    "header": [
+     121,
+     989,
+     420,
+     71
+    ],
+    "col": "Symbol"
+   }
+  },
+  {
+   "label": "Oxygen",
+   "page": 1,
+   "kind": "cell",
+   "cat": "TABLE_SHORT",
+   "prompt": "Oxygen — Metal or non-metal",
+   "answer": "Non-metal",
+   "qrect": [
+    121,
+    1060,
+    119,
+    57
+   ],
+   "areas": [
+    [
+     353,
+     1060,
+     188,
+     57
+    ]
+   ],
+   "cell": {
+    "row": [
+     353,
+     1060,
+     188,
+     57
+    ],
+    "header": [
+     121,
+     989,
+     420,
+     71
+    ],
+    "col": "Metal or non-metal"
+   }
+  },
+  {
+   "label": "Copper",
+   "page": 1,
+   "kind": "cell",
+   "cat": "TABLE_SHORT",
+   "prompt": "Copper — Symbol",
+   "answer": "Cu",
+   "qrect": [
+    121,
+    1117,
+    119,
+    57
+   ],
+   "areas": [
+    [
+     240,
+     1117,
+     113,
+     57
+    ]
+   ],
+   "cell": {
+    "row": [
+     240,
+     1117,
+     113,
+     57
+    ],
+    "header": [
+     121,
+     989,
+     420,
+     71
+    ],
+    "col": "Symbol"
+   }
+  },
+  {
+   "label": "Copper",
+   "page": 1,
+   "kind": "cell",
+   "cat": "TABLE_SHORT",
+   "prompt": "Copper — Metal or non-metal",
+   "answer": "Metal",
+   "qrect": [
+    121,
+    1117,
+    119,
+    57
+   ],
+   "areas": [
+    [
+     353,
+     1117,
+     188,
+     57
+    ]
+   ],
+   "cell": {
+    "row": [
+     353,
+     1117,
+     188,
+     57
+    ],
+    "header": [
+     121,
+     989,
+     420,
+     71
+    ],
+    "col": "Metal or non-metal"
+   }
+  },
+  {
+   "label": "Iron",
+   "page": 1,
+   "kind": "cell",
+   "cat": "TABLE_SHORT",
+   "prompt": "Iron — Symbol",
+   "answer": "Fe",
+   "qrect": [
+    121,
+    1174,
+    119,
+    57
+   ],
+   "areas": [
+    [
+     240,
+     1174,
+     113,
+     57
+    ]
+   ],
+   "cell": {
+    "row": [
+     240,
+     1174,
+     113,
+     57
+    ],
+    "header": [
+     121,
+     989,
+     420,
+     71
+    ],
+    "col": "Symbol"
+   }
+  },
+  {
+   "label": "Iron",
+   "page": 1,
+   "kind": "cell",
+   "cat": "TABLE_SHORT",
+   "prompt": "Iron — Metal or non-metal",
+   "answer": "Metal",
+   "qrect": [
+    121,
+    1174,
+    119,
+    57
+   ],
+   "areas": [
+    [
+     353,
+     1174,
+     188,
+     57
+    ]
+   ],
+   "cell": {
+    "row": [
+     353,
+     1174,
+     188,
+     57
+    ],
+    "header": [
+     121,
+     989,
+     420,
+     71
+    ],
+    "col": "Metal or non-metal"
+   }
+  },
+  {
+   "label": "(a)",
+   "page": 1,
+   "kind": "choice",
+   "cat": "TRUE_FALSE",
+   "prompt": "Ice is less dense than liquid water.",
+   "qrect": [
+    120,
+    1296,
+    299,
+    51
+   ],
+   "options": [
+    {
+     "text": "True",
+     "page": 1,
+     "rect": [
+      449,
+      1296,
+      45,
+      26
+     ]
+    },
+    {
+     "text": "False",
+     "page": 1,
+     "rect": [
+      513,
+      1296,
+      55,
+      26
+     ]
+    }
+   ],
+   "correct": 0
+  },
+  {
+   "label": "(b)",
+   "page": 1,
+   "kind": "choice",
+   "cat": "TRUE_FALSE",
+   "prompt": "A square is a type of rectangle.",
+   "qrect": [
+    120,
+    1359,
+    299,
+    51
+   ],
+   "options": [
+    {
+     "text": "True",
+     "page": 1,
+     "rect": [
+      449,
+      1359,
+      45,
+      26
+     ]
+    },
+    {
+     "text": "False",
+     "page": 1,
+     "rect": [
+      513,
+      1359,
+      55,
+      26
+     ]
+    }
+   ],
+   "correct": 0
+  },
+  {
+   "label": "(c)",
+   "page": 1,
+   "kind": "choice",
+   "cat": "TRUE_FALSE",
+   "prompt": "All metals are magnetic.",
+   "qrect": [
+    120,
+    1422,
+    271,
+    26
+   ],
+   "options": [
+    {
+     "text": "True",
+     "page": 1,
+     "rect": [
+      449,
+      1422,
+      45,
+      26
+     ]
+    },
+    {
+     "text": "False",
+     "page": 1,
+     "rect": [
+      513,
+      1422,
+      55,
+      26
+     ]
+    }
+   ],
+   "correct": 1
+  },
+  {
+   "label": "9.",
+   "page": 1,
+   "kind": "write",
+   "cat": "LONG_TEXT",
+   "prompt": "Describe two ways to reduce plastic waste at school.",
+   "answer": "Bring reusable bottles and containers, and set up recycling bins in every classroom.",
+   "qrect": [
+    623,
+    200,
+    479,
+    51
+   ],
+   "areas": [
+    [
+     623,
+     239,
+     479,
+     105
+    ]
+   ]
+  },
+  {
+   "label": "(a)",
+   "page": 1,
+   "kind": "write",
+   "cat": "FORMULA_WORKING",
+   "prompt": "A car travels 120 km in 2 hours. Calculate its average speed.",
+   "answer": "60 km/h",
+   "qrect": [
+    653,
+    408,
+    449,
+    26
+   ],
+   "areas": [
+    [
+     623,
+     434,
+     479,
+     135
+    ]
+   ]
+  },
+  {
+   "label": "(b)",
+   "page": 1,
+   "kind": "write",
+   "cat": "FORMULA_WORKING",
+   "prompt": "A car travels 120 km in 2 hours. How far would it travel in 5 hours at the same speed?",
+   "answer": "300 km",
+   "qrect": [
+    653,
+    581,
+    449,
+    51
+   ],
+   "areas": [
+    [
+     623,
+     632,
+     479,
+     135
+    ]
+   ]
+  },
+  {
+   "label": "11.",
+   "page": 1,
+   "kind": "blank",
+   "cat": "FILL_BLANK",
+   "prompt": "A triangle with three equal sides is called an ___ triangle.",
+   "answer": "equilateral",
+   "qrect": [
+    653,
+    833,
+    449,
+    53
+   ],
+   "areas": [
+    [
+     681,
+     846,
+     231,
+     41
+    ]
+   ]
+  },
+  {
+   "label": "11.",
+   "page": 1,
+   "kind": "blank",
+   "cat": "FILL_BLANK",
+   "prompt": "The powerhouse of the cell is the ___ .",
+   "answer": "mitochondria",
+   "qrect": [
+    653,
+    899,
+    449,
+    53
+   ],
+   "areas": [
+    [
+     650,
+     912,
+     231,
+     41
+    ]
+   ]
+  },
+  {
+   "label": "11.",
+   "page": 1,
+   "kind": "blank",
+   "cat": "FILL_BLANK",
+   "prompt": "The capital of France is ___ .",
+   "answer": "Paris",
+   "qrect": [
+    653,
+    965,
+    449,
+    53
+   ],
+   "areas": [
+    [
+     650,
+     978,
+     231,
+     41
+    ]
+   ]
+  },
+  {
+   "label": "12.",
+   "page": 1,
+   "kind": "choice",
+   "cat": "MULTIPLE_CHOICE",
+   "prompt": "Which layer of the atmosphere contains the ozone layer?",
+   "qrect": [
+    623,
+    1044,
+    479,
+    51
+   ],
+   "options": [
+    {
+     "text": "(A) troposphere",
+     "page": 1,
+     "rect": [
+      662,
+      1103,
+      440,
+      26
+     ]
+    },
+    {
+     "text": "(B) stratosphere",
+     "page": 1,
+     "rect": [
+      662,
+      1136,
+      440,
+      26
+     ]
+    },
+    {
+     "text": "(C) mesosphere",
+     "page": 1,
+     "rect": [
+      662,
+      1169,
+      440,
+      26
+     ]
+    },
+    {
+     "text": "(D) thermosphere",
+     "page": 1,
+     "rect": [
+      662,
+      1202,
+      440,
+      26
+     ]
+    }
+   ],
+   "correct": 1
+  },
+  {
+   "label": "13.",
+   "page": 1,
+   "kind": "choice",
+   "cat": "MULTIPLE_CHOICE",
+   "prompt": "What is 12 × 8?",
+   "qrect": [
+    623,
+    1254,
+    479,
+    26
+   ],
+   "options": [
+    {
+     "text": "A. 96",
+     "page": 1,
+     "rect": [
+      662,
+      1287,
+      440,
+      26
+     ]
+    },
+    {
+     "text": "B. 86",
+     "page": 1,
+     "rect": [
+      662,
+      1320,
+      440,
+      26
+     ]
+    },
+    {
+     "text": "C. 108",
+     "page": 1,
+     "rect": [
+      662,
+      1353,
+      440,
+      26
+     ]
+    },
+    {
+     "text": "D. 92",
+     "page": 1,
+     "rect": [
+      662,
+      1386,
+      440,
+      26
+     ]
+    }
+   ],
+   "correct": 0
+  }
+ ]
+}

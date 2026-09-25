@@ -79,10 +79,10 @@ function sheet(no) {
   let n = 0;
   const gt = [];
   const Q = (spec) => { const id = 'q' + gt.length; gt.push({ id, ...spec }); return id; };
-  const add = h => blocks.push(h);
-  add(`<div class="hdr"><b>${th ? 'แบบฝึกหัด' : 'Worksheet'} ${no}</b><span>${th ? 'วิทยาศาสตร์ ม.4' : 'Grade 9 Science'}</span></div>`);
-  add(`<div class="info">${th ? 'ชื่อ' : 'Name'}: ______________________ ${th ? 'ชั้น' : 'Class'}: ________ ${th ? 'เลขที่' : 'Date'}: ________</div>`);
-  add(`<p class="ins">${th ? 'คำชี้แจง: ตอบคำถามทุกข้อ' : 'Instructions: Answer all questions. Write your answers in the spaces provided.'}</p>`);
+  const add = (h, extra) => blocks.push({ html: h, ...(extra || {}) });
+  add(`<div class="hdr full"><b>${th ? 'แบบฝึกหัด' : 'Worksheet'} ${no}</b><span>${th ? 'วิทยาศาสตร์ ม.4' : 'Grade 9 Science'}</span></div>`);
+  add(`<div class="info full">${th ? 'ชื่อ' : 'Name'}: ______________________ ${th ? 'ชั้น' : 'Class'}: ________ ${th ? 'เลขที่' : 'Date'}: ________</div>`);
+  add(`<p class="ins full">${th ? 'คำชี้แจง: ตอบคำถามทุกข้อ' : 'Instructions: Answer all questions. Write your answers in the spaces provided.'}</p>`);
   const kinds = shuffle(th ? ['mc_th', 'mc_th', 'mc_th', 'short', 'long'] : ['mc_lines', 'mc_inline', 'mc_grid', 'short', 'long', 'blank', 'tf', 'table', 'dotted', 'subparts', 'blank_css']).slice(0, th ? 5 : 7 + Math.floor(rnd() * 3));
   const lead = [];
   kinds.forEach(kind => {
@@ -96,7 +96,7 @@ function sheet(no) {
         const id = Q({ label: lab, kind: 'choice', cat: 'MULTIPLE_CHOICE', prompt: qt, options: opts.map((o, k) => letters[k] + ' ' + o), correct: c });
         const o = opts.map((t, k) => `<span class="opt" data-opt="${id}:${k}">${letters[k]} ${esc(t)}</span>`);
         const body = kind === 'mc_inline' ? `<div class="optrow">${o.join('')}</div>` : kind === 'mc_grid' ? `<div class="optgrid">${o.join('')}</div>` : `<div class="optcol">${o.join('')}</div>`;
-        add(`<div class="q"><div data-q="${id}">${esc(lab)} ${esc(qt)}</div>${body}</div>`);
+        add(`<div class="q"><div data-q="${id}">${esc(lab)} ${esc(qt)}</div>${body}</div>`, { head: `<div class="q"><div data-q="${id}">${esc(lab)} ${esc(qt)}</div></div>`, tail: `<div class="q">${body}</div>` });
       }
     } else if (kind === 'short') {
       const [qt, a] = pick(SHORT);
@@ -112,7 +112,7 @@ function sheet(no) {
     } else if (kind === 'dotted') {
       const [qt, a] = pick(LONG);
       const lab = numFmt(++n);
-      const id = Q({ label: lab, kind: 'write', cat: 'LONG_TEXT', prompt: qt, answer: a });
+      const id = Q({ label: lab, kind: 'write', cat: 'LONG_TEXT', prompt: qt, answer: a, dotted: true });
       add(`<div class="q"><div data-q="${id}">${esc(lab)} ${esc(qt)}</div><div data-area="${id}"><div class="dots">${'.'.repeat(120)}</div><div class="dots">${'.'.repeat(120)}</div></div></div>`);
     } else if (kind === 'blank' || kind === 'blank_css') {
       const lab = numFmt(++n);
@@ -146,15 +146,15 @@ function sheet(no) {
     }
   });
   const css = `
-    @page { size: A4; margin: 0 }
+    @page { size: 794px 1123px; margin: 0 }
     * { box-sizing: border-box }
     body { margin: 0; font-family: ${font}; font-size: ${fs0}px; color: #111 }
-    .page { width: 794px; height: 1123px; padding: 56px 60px 70px; position: relative; page-break-after: always; overflow: hidden }
-    .page .foot { position: absolute; bottom: 30px; left: 60px; right: 60px; font-size: 11px; color: #555; display: flex; justify-content: space-between }
-    .cols { column-count: ${twoCol ? 2 : 1}; column-gap: 36px; column-fill: auto; height: 900px }
-    .hdr { display: flex; justify-content: space-between; border-bottom: 2px solid #333; padding-bottom: 6px; margin-bottom: 10px; column-span: all }
-    .info { margin: 8px 0; column-span: all } .ins { font-style: italic; margin: 6px 0 14px; column-span: all }
-    .q { margin: 0 0 18px; break-inside: avoid }
+    .page { width: 794px; height: 1123px; position: relative; page-break-after: always; overflow: hidden }
+    .blk { position: absolute }
+    .foot { position: absolute; bottom: 30px; left: 60px; right: 60px; font-size: 11px; color: #555; display: flex; justify-content: space-between }
+    .hdr { display: flex; justify-content: space-between; border-bottom: 2px solid #333; padding-bottom: 6px }
+    .info { margin: 4px 0 } .ins { font-style: italic; margin: 0 }
+    .q { padding-bottom: 18px }
     .optcol span { display: block; margin: 5px 0 0 26px } .optrow { margin: 6px 0 0 26px } .optrow span { margin-right: 40px }
     .optgrid { display: grid; grid-template-columns: 1fr 1fr; margin: 6px 0 0 26px; row-gap: 5px }
     .rule { border-bottom: 1px solid #333; height: 30px; margin: 0 0 0 20px }
@@ -165,8 +165,8 @@ function sheet(no) {
     table { border-collapse: collapse; margin: 8px 0 0 20px; width: 88% } th, td { padding: 6px 10px; height: 38px; text-align: left }
     .tb th, .tb td { border: 1px solid #333 } .tn th { border-bottom: 1px solid #333 }
     .sub { margin: 8px 0 0 20px } .gap { height: 90px }`;
-  const html = `<!DOCTYPE html><html><head><meta charset="utf-8"><style>${css}</style></head><body><div class="page"><div class="cols">${blocks.join('')}</div><div class="foot"><span>${th ? 'แบบฝึกหัด' : 'Worksheet'} ${no}</span><span>Page 1</span></div></div></body></html>`;
-  return { html, gt, th, twoCol };
+  const footer = pn => `<div class="foot"><span>${th ? 'แบบฝึกหัด' : 'Worksheet'} ${no}</span><span>Page ${pn}</span></div>`;
+  return { blocks, css, footer, gt, th, twoCol };
 }
 
 (async () => {
@@ -175,26 +175,50 @@ function sheet(no) {
   const browser = await chromium.launch();
   const page = await browser.newPage({ viewport: { width: 794, height: 1123 } });
   for (let i = 1; i <= count; i++) {
-    const { html, gt, th, twoCol } = sheet(i);
+    const { blocks, css, footer, gt, th, twoCol } = sheet(i);
+    const L = 60, R = 734, TOP = 56, BOT = 1123 - 90, GAP = 36;
+    const colW = twoCol ? (R - L - GAP) / 2 : R - L;
+    await page.setContent(`<!DOCTYPE html><html><head><meta charset="utf-8"><style>${css}</style></head><body>` + blocks.map((b, k) => `<div id="m${k}" style="width:${/class="(hdr|info|ins) full/.test(b.html) ? R - L : colW}px">${b.html}</div>` + (b.head ? `<div id="h${k}" style="width:${colW}px">${b.head}</div><div id="t${k}" style="width:${colW}px">${b.tail}</div>` : '')).join('') + `</body></html>`);
+    const hts = await page.evaluate(n => { const h = id => { const e = document.getElementById(id); return e ? e.getBoundingClientRect().height : 0; }; return Array.from({ length: n }, (_, k) => ({ all: h('m' + k), head: h('h' + k), tail: h('t' + k) })); }, blocks.length);
+    const pages = [[]];
+    let pg = 0, col = 0, y = TOP, colTop = TOP;
+    const place = (html, hgt, full) => {
+      if (full) { pages[pg].push({ html, x: L, y, w: R - L }); y += hgt + 6; colTop = y; return; }
+      pages[pg].push({ html, x: L + col * (colW + GAP), y, w: colW }); y += hgt;
+    };
+    const next = () => { if (twoCol && col === 0) { col = 1; y = colTop; } else { pages.push([]); pg++; col = 0; y = TOP; colTop = TOP; } };
+    blocks.forEach((b, k) => {
+      const full = /class="(hdr|info|ins) full/.test(b.html);
+      const h = hts[k];
+      if (y + h.all <= BOT) return place(b.html, h.all, full);
+      if (b.head && y + h.head <= BOT && rnd() < 0.7) { place(b.head, h.head); next(); return place(b.tail, h.tail); }
+      next();
+      place(b.html, h.all, full);
+    });
+    const html = `<!DOCTYPE html><html><head><meta charset="utf-8"><style>${css}</style></head><body>` + pages.map((items, pi) => `<div class="page">` + items.map(it => `<div class="blk" style="left:${it.x}px;top:${it.y}px;width:${it.w}px">${it.html}</div>`).join('') + footer(pi + 1) + `</div>`).join('') + `</body></html>`;
     await page.setContent(html, { waitUntil: 'load' });
     const K = 1.5; // CSS px -> app canvas px (PDF scale 2 at 72pt/in)
     const geo = await page.evaluate(() => {
-      const r = el => { const b = el.getBoundingClientRect(); return [b.left, b.top, b.width, b.height]; };
-      const o = { q: {}, area: {}, opt: {}, row: {}, hdr: [] };
+      const pgs = Array.from(document.querySelectorAll('.page'));
+      const r = el => { const p = el.closest('.page'), b = el.getBoundingClientRect(), o = p.getBoundingClientRect(); return [b.left - o.left, b.top - o.top, b.width, b.height, pgs.indexOf(p) + 1]; };
+      const o = { q: {}, area: {}, opt: {}, row: {} };
       document.querySelectorAll('[data-q]').forEach(el => { o.q[el.dataset.q] = r(el); });
       document.querySelectorAll('[data-area]').forEach(el => { o.area[el.dataset.area] = r(el); });
       document.querySelectorAll('[data-opt]').forEach(el => { o.opt[el.dataset.opt] = r(el); });
-      document.querySelectorAll('[data-cellrow]').forEach(el => { const tr = el.parentElement; o.row[el.dataset.cellrow] = { row: r(tr.children[0]), cell: r(el), text: tr.children[0].textContent, hdr: r(tr.parentElement.children[0]) }; });
+      document.querySelectorAll('[data-cellrow]').forEach(el => { const tr = el.parentElement; o.row[el.dataset.cellrow] = { row: r(tr.children[0]), cell: r(el), hdr: r(tr.parentElement.children[0]) }; });
       return o;
     });
-    const k = v => v.map(x => Math.round(x * K));
+    const k = v => v.slice(0, 4).map(x => Math.round(x * K));
+    const pgOf = v => v[4];
     const questions = [];
     gt.forEach(g => {
-      const q = { label: g.label, page: 1, kind: g.kind, cat: g.cat, prompt: g.prompt, answer: g.answer };
+      const anchor = geo.q[g.id] || geo.area[g.id] || (geo.row[g.id] && geo.row[g.id].row);
+      const q = { label: g.label, page: pgOf(anchor), kind: g.kind, cat: g.cat, prompt: g.prompt, answer: g.answer };
       if (geo.q[g.id]) q.qrect = k(geo.q[g.id]);
       if (g.kind === 'choice') {
-        q.options = g.options.map((t, j) => ({ text: t, page: 1, rect: k(geo.opt[g.id + ':' + j]) }));
+        q.options = g.options.map((t, j) => ({ text: t, page: pgOf(geo.opt[g.id + ':' + j]), rect: k(geo.opt[g.id + ':' + j]) }));
         q.correct = g.correct;
+        if (q.options[0].page !== q.page) q.optionsPage = q.options[0].page;
       } else if (g.kind === 'cell') {
         const R = geo.row[g.id];
         q.qrect = k(R.row);
@@ -203,15 +227,16 @@ function sheet(no) {
       } else {
         const a = geo.area[g.id];
         if (g.kind === 'blank') q.areas = [k([a[0] - 2, a[1] - 8, a[2] + 4, a[3] + 12])];
+        else if (g.dotted) q.areas = [k([a[0], a[1] - 22, a[2], a[3] + 22])];
         else q.areas = [k(a)];
         if (!q.qrect) q.qrect = k(a);
       }
       questions.push(q);
     });
     const name = 'synth' + String(i).padStart(2, '0');
-    await page.pdf({ path: path.join(OUT_PDF, name + '.pdf'), preferCSSPageSize: true, printBackground: true });
+    await page.pdf({ path: path.join(OUT_PDF, name + '.pdf'), width: '794px', height: '1123px', printBackground: true });
     fs.writeFileSync(path.join(OUT_GT, name + '.json'), JSON.stringify({ doc: 'synth/' + name + '.pdf', synthetic: true, thai: th, twoCol, questions }, null, 1));
-    console.log(name, questions.length, 'questions', th ? 'thai' : '', twoCol ? 'two-column' : '');
+    console.log(name, questions.length, 'questions,', pages.length, 'pages', th ? 'thai' : '', twoCol ? 'two-column' : '', questions.some(q => q.optionsPage) ? 'split' : '');
   }
   await browser.close();
 })().catch(e => { console.error(e); process.exit(1); });

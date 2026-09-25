@@ -1,0 +1,728 @@
+{
+ "doc": "synth/synth11.pdf",
+ "synthetic": true,
+ "thai": false,
+ "twoCol": false,
+ "questions": [
+  {
+   "label": "(a)",
+   "page": 1,
+   "kind": "choice",
+   "cat": "TRUE_FALSE",
+   "prompt": "All metals are magnetic.",
+   "qrect": [
+    120,
+    231,
+    254,
+    24
+   ],
+   "options": [
+    {
+     "text": "True",
+     "page": 1,
+     "rect": [
+      990,
+      231,
+      42,
+      24
+     ]
+    },
+    {
+     "text": "False",
+     "page": 1,
+     "rect": [
+      1050,
+      231,
+      51,
+      24
+     ]
+    }
+   ],
+   "correct": 1
+  },
+  {
+   "label": "(b)",
+   "page": 1,
+   "kind": "choice",
+   "cat": "TRUE_FALSE",
+   "prompt": "Ice is less dense than liquid water.",
+   "qrect": [
+    120,
+    267,
+    350,
+    24
+   ],
+   "options": [
+    {
+     "text": "True",
+     "page": 1,
+     "rect": [
+      990,
+      267,
+      42,
+      24
+     ]
+    },
+    {
+     "text": "False",
+     "page": 1,
+     "rect": [
+      1050,
+      267,
+      51,
+      24
+     ]
+    }
+   ],
+   "correct": 0
+  },
+  {
+   "label": "(c)",
+   "page": 1,
+   "kind": "choice",
+   "cat": "TRUE_FALSE",
+   "prompt": "The Sun is a star.",
+   "qrect": [
+    120,
+    303,
+    193,
+    24
+   ],
+   "options": [
+    {
+     "text": "True",
+     "page": 1,
+     "rect": [
+      990,
+      303,
+      42,
+      24
+     ]
+    },
+    {
+     "text": "False",
+     "page": 1,
+     "rect": [
+      1050,
+      303,
+      51,
+      24
+     ]
+    }
+   ],
+   "correct": 0
+  },
+  {
+   "label": "Q2.",
+   "page": 1,
+   "kind": "blank",
+   "cat": "FILL_BLANK",
+   "prompt": "The opposite of \"ancient\" is ___ .",
+   "answer": "modern",
+   "qrect": [
+    120,
+    392,
+    981,
+    24
+   ],
+   "areas": [
+    [
+     408,
+     380,
+     170,
+     42
+    ]
+   ]
+  },
+  {
+   "label": "Q2.",
+   "page": 1,
+   "kind": "blank",
+   "cat": "FILL_BLANK",
+   "prompt": "Water boils at ___ °C at sea level.",
+   "answer": "100",
+   "qrect": [
+    120,
+    429,
+    981,
+    24
+   ],
+   "areas": [
+    [
+     282,
+     417,
+     170,
+     42
+    ]
+   ]
+  },
+  {
+   "label": "Q2.",
+   "page": 1,
+   "kind": "blank",
+   "cat": "FILL_BLANK",
+   "prompt": "The capital of France is ___ .",
+   "answer": "Paris",
+   "qrect": [
+    120,
+    467,
+    981,
+    24
+   ],
+   "areas": [
+    [
+     371,
+     455,
+     170,
+     42
+    ]
+   ]
+  },
+  {
+   "label": "Q3.",
+   "page": 1,
+   "kind": "choice",
+   "cat": "MULTIPLE_CHOICE",
+   "prompt": "A triangle has angles 50° and 60°. The third angle is:",
+   "qrect": [
+    90,
+    518,
+    1011,
+    24
+   ],
+   "options": [
+    {
+     "text": "a) 60°",
+     "page": 1,
+     "rect": [
+      129,
+      551,
+      486,
+      24
+     ]
+    },
+    {
+     "text": "b) 70°",
+     "page": 1,
+     "rect": [
+      615,
+      551,
+      486,
+      24
+     ]
+    },
+    {
+     "text": "c) 80°",
+     "page": 1,
+     "rect": [
+      129,
+      582,
+      486,
+      24
+     ]
+    },
+    {
+     "text": "d) 90°",
+     "page": 1,
+     "rect": [
+      615,
+      582,
+      486,
+      24
+     ]
+    }
+   ],
+   "correct": 1
+  },
+  {
+   "label": "Q4.",
+   "page": 1,
+   "kind": "choice",
+   "cat": "MULTIPLE_CHOICE",
+   "prompt": "Which planet is closest to the Sun?",
+   "qrect": [
+    90,
+    633,
+    1011,
+    24
+   ],
+   "options": [
+    {
+     "text": "a) Venus",
+     "page": 1,
+     "rect": [
+      129,
+      666,
+      486,
+      24
+     ]
+    },
+    {
+     "text": "b) Earth",
+     "page": 1,
+     "rect": [
+      615,
+      666,
+      486,
+      24
+     ]
+    },
+    {
+     "text": "c) Mercury",
+     "page": 1,
+     "rect": [
+      129,
+      698,
+      486,
+      24
+     ]
+    },
+    {
+     "text": "d) Mars",
+     "page": 1,
+     "rect": [
+      615,
+      698,
+      486,
+      24
+     ]
+    }
+   ],
+   "correct": 2
+  },
+  {
+   "label": "Q5.",
+   "page": 1,
+   "kind": "write",
+   "cat": "LONG_TEXT",
+   "prompt": "Why is it important to control variables in an experiment?",
+   "answer": "Keeping other variables the same makes sure that only the variable being tested causes the change, so the result is fair.",
+   "qrect": [
+    90,
+    749,
+    1011,
+    24
+   ],
+   "areas": [
+    [
+     90,
+     761,
+     1011,
+     102
+    ]
+   ]
+  },
+  {
+   "label": "Q6.",
+   "page": 1,
+   "kind": "choice",
+   "cat": "MULTIPLE_CHOICE",
+   "prompt": "A triangle has angles 50° and 60°. The third angle is:",
+   "qrect": [
+    90,
+    890,
+    1011,
+    24
+   ],
+   "options": [
+    {
+     "text": "a) 60°",
+     "page": 1,
+     "rect": [
+      129,
+      921,
+      972,
+      24
+     ]
+    },
+    {
+     "text": "b) 70°",
+     "page": 1,
+     "rect": [
+      129,
+      953,
+      972,
+      24
+     ]
+    },
+    {
+     "text": "c) 80°",
+     "page": 1,
+     "rect": [
+      129,
+      984,
+      972,
+      24
+     ]
+    },
+    {
+     "text": "d) 90°",
+     "page": 1,
+     "rect": [
+      129,
+      1016,
+      972,
+      24
+     ]
+    }
+   ],
+   "correct": 1
+  },
+  {
+   "label": "Q7.",
+   "page": 1,
+   "kind": "choice",
+   "cat": "MULTIPLE_CHOICE",
+   "prompt": "Solve for x: 2x + 6 = 14",
+   "qrect": [
+    90,
+    1067,
+    1011,
+    24
+   ],
+   "options": [
+    {
+     "text": "a) x = 3",
+     "page": 1,
+     "rect": [
+      129,
+      1098,
+      972,
+      24
+     ]
+    },
+    {
+     "text": "b) x = 4",
+     "page": 1,
+     "rect": [
+      129,
+      1130,
+      972,
+      24
+     ]
+    },
+    {
+     "text": "c) x = 5",
+     "page": 1,
+     "rect": [
+      129,
+      1161,
+      972,
+      24
+     ]
+    },
+    {
+     "text": "d) x = 10",
+     "page": 1,
+     "rect": [
+      129,
+      1193,
+      972,
+      24
+     ]
+    }
+   ],
+   "correct": 1
+  },
+  {
+   "label": "Q8.",
+   "page": 1,
+   "kind": "choice",
+   "cat": "MULTIPLE_CHOICE",
+   "prompt": "The chemical symbol for sodium is:",
+   "qrect": [
+    90,
+    1244,
+    1011,
+    24
+   ],
+   "options": [
+    {
+     "text": "A. S",
+     "page": 1,
+     "rect": [
+      129,
+      1275,
+      972,
+      24
+     ]
+    },
+    {
+     "text": "B. Na",
+     "page": 1,
+     "rect": [
+      129,
+      1307,
+      972,
+      24
+     ]
+    },
+    {
+     "text": "C. So",
+     "page": 1,
+     "rect": [
+      129,
+      1338,
+      972,
+      24
+     ]
+    },
+    {
+     "text": "D. Sd",
+     "page": 1,
+     "rect": [
+      129,
+      1370,
+      972,
+      24
+     ]
+    }
+   ],
+   "correct": 1
+  },
+  {
+   "label": "Iron",
+   "page": 2,
+   "kind": "cell",
+   "cat": "TABLE_SHORT",
+   "prompt": "Iron — Symbol",
+   "answer": "Fe",
+   "qrect": [
+    121,
+    178,
+    229,
+    57
+   ],
+   "areas": [
+    [
+     350,
+     178,
+     217,
+     57
+    ]
+   ],
+   "cell": {
+    "row": [
+     350,
+     178,
+     217,
+     57
+    ],
+    "header": [
+     121,
+     121,
+     888,
+     57
+    ],
+    "col": "Symbol"
+   }
+  },
+  {
+   "label": "Iron",
+   "page": 2,
+   "kind": "cell",
+   "cat": "TABLE_SHORT",
+   "prompt": "Iron — Metal or non-metal",
+   "answer": "Metal",
+   "qrect": [
+    121,
+    178,
+    229,
+    57
+   ],
+   "areas": [
+    [
+     567,
+     178,
+     442,
+     57
+    ]
+   ],
+   "cell": {
+    "row": [
+     567,
+     178,
+     442,
+     57
+    ],
+    "header": [
+     121,
+     121,
+     888,
+     57
+    ],
+    "col": "Metal or non-metal"
+   }
+  },
+  {
+   "label": "Oxygen",
+   "page": 2,
+   "kind": "cell",
+   "cat": "TABLE_SHORT",
+   "prompt": "Oxygen — Symbol",
+   "answer": "O",
+   "qrect": [
+    121,
+    235,
+    229,
+    57
+   ],
+   "areas": [
+    [
+     350,
+     235,
+     217,
+     57
+    ]
+   ],
+   "cell": {
+    "row": [
+     350,
+     235,
+     217,
+     57
+    ],
+    "header": [
+     121,
+     121,
+     888,
+     57
+    ],
+    "col": "Symbol"
+   }
+  },
+  {
+   "label": "Oxygen",
+   "page": 2,
+   "kind": "cell",
+   "cat": "TABLE_SHORT",
+   "prompt": "Oxygen — Metal or non-metal",
+   "answer": "Non-metal",
+   "qrect": [
+    121,
+    235,
+    229,
+    57
+   ],
+   "areas": [
+    [
+     567,
+     235,
+     442,
+     57
+    ]
+   ],
+   "cell": {
+    "row": [
+     567,
+     235,
+     442,
+     57
+    ],
+    "header": [
+     121,
+     121,
+     888,
+     57
+    ],
+    "col": "Metal or non-metal"
+   }
+  },
+  {
+   "label": "Sulfur",
+   "page": 2,
+   "kind": "cell",
+   "cat": "TABLE_SHORT",
+   "prompt": "Sulfur — Symbol",
+   "answer": "S",
+   "qrect": [
+    121,
+    292,
+    229,
+    57
+   ],
+   "areas": [
+    [
+     350,
+     292,
+     217,
+     57
+    ]
+   ],
+   "cell": {
+    "row": [
+     350,
+     292,
+     217,
+     57
+    ],
+    "header": [
+     121,
+     121,
+     888,
+     57
+    ],
+    "col": "Symbol"
+   }
+  },
+  {
+   "label": "Sulfur",
+   "page": 2,
+   "kind": "cell",
+   "cat": "TABLE_SHORT",
+   "prompt": "Sulfur — Metal or non-metal",
+   "answer": "Non-metal",
+   "qrect": [
+    121,
+    292,
+    229,
+    57
+   ],
+   "areas": [
+    [
+     567,
+     292,
+     442,
+     57
+    ]
+   ],
+   "cell": {
+    "row": [
+     567,
+     292,
+     442,
+     57
+    ],
+    "header": [
+     121,
+     121,
+     888,
+     57
+    ],
+    "col": "Metal or non-metal"
+   }
+  },
+  {
+   "label": "Q10.",
+   "page": 2,
+   "kind": "write",
+   "cat": "SHORT_TEXT",
+   "prompt": "Give one example of a renewable energy source.",
+   "answer": "Solar power",
+   "qrect": [
+    90,
+    377,
+    1011,
+    24
+   ],
+   "areas": [
+    [
+     120,
+     401,
+     981,
+     45
+    ]
+   ]
+  }
+ ]
+}

@@ -1,0 +1,501 @@
+{
+ "doc": "synth/synth03.pdf",
+ "synthetic": true,
+ "thai": true,
+ "twoCol": false,
+ "questions": [
+  {
+   "label": "Q1.",
+   "page": 1,
+   "kind": "choice",
+   "cat": "MULTIPLE_CHOICE",
+   "prompt": "หน่วย SI ของแรงคืออะไร",
+   "qrect": [
+    90,
+    236,
+    1011,
+    38
+   ],
+   "options": [
+    {
+     "text": "ก. นิวตัน",
+     "page": 1,
+     "rect": [
+      129,
+      281,
+      972,
+      38
+     ]
+    },
+    {
+     "text": "ข. จูล",
+     "page": 1,
+     "rect": [
+      129,
+      326,
+      972,
+      38
+     ]
+    },
+    {
+     "text": "ค. วัตต์",
+     "page": 1,
+     "rect": [
+      129,
+      371,
+      972,
+      38
+     ]
+    },
+    {
+     "text": "ง. ปาสคาล",
+     "page": 1,
+     "rect": [
+      129,
+      416,
+      972,
+      38
+     ]
+    }
+   ],
+   "correct": 0
+  },
+  {
+   "label": "Q2.",
+   "page": 1,
+   "kind": "choice",
+   "cat": "MULTIPLE_CHOICE",
+   "prompt": "ข้อใดเป็นจำนวนเฉพาะ",
+   "qrect": [
+    90,
+    480,
+    1011,
+    38
+   ],
+   "options": [
+    {
+     "text": "ก. 21",
+     "page": 1,
+     "rect": [
+      129,
+      525,
+      972,
+      38
+     ]
+    },
+    {
+     "text": "ข. 27",
+     "page": 1,
+     "rect": [
+      129,
+      570,
+      972,
+      38
+     ]
+    },
+    {
+     "text": "ค. 29",
+     "page": 1,
+     "rect": [
+      129,
+      615,
+      972,
+      38
+     ]
+    },
+    {
+     "text": "ง. 33",
+     "page": 1,
+     "rect": [
+      129,
+      660,
+      972,
+      38
+     ]
+    }
+   ],
+   "correct": 2
+  },
+  {
+   "label": "Q3.",
+   "page": 1,
+   "kind": "choice",
+   "cat": "MULTIPLE_CHOICE",
+   "prompt": "อวัยวะใดทำหน้าที่สูบฉีดเลือด",
+   "qrect": [
+    90,
+    725,
+    1011,
+    38
+   ],
+   "options": [
+    {
+     "text": "ก. ปอด",
+     "page": 1,
+     "rect": [
+      129,
+      770,
+      972,
+      38
+     ]
+    },
+    {
+     "text": "ข. ตับ",
+     "page": 1,
+     "rect": [
+      129,
+      815,
+      972,
+      38
+     ]
+    },
+    {
+     "text": "ค. ไต",
+     "page": 1,
+     "rect": [
+      129,
+      860,
+      972,
+      38
+     ]
+    },
+    {
+     "text": "ง. หัวใจ",
+     "page": 1,
+     "rect": [
+      129,
+      905,
+      972,
+      38
+     ]
+    }
+   ],
+   "correct": 3
+  },
+  {
+   "label": "Q4.",
+   "page": 1,
+   "kind": "write",
+   "cat": "SHORT_TEXT",
+   "prompt": "What is the value of 3² + 4²?",
+   "answer": "25",
+   "qrect": [
+    90,
+    969,
+    1011,
+    27
+   ],
+   "areas": [
+    [
+     120,
+     996,
+     981,
+     45
+    ]
+   ]
+  },
+  {
+   "label": "Q5.",
+   "page": 1,
+   "kind": "choice",
+   "cat": "MULTIPLE_CHOICE",
+   "prompt": "อวัยวะใดทำหน้าที่สูบฉีดเลือด",
+   "qrect": [
+    90,
+    1068,
+    1011,
+    38
+   ],
+   "options": [
+    {
+     "text": "ก. ปอด",
+     "page": 1,
+     "rect": [
+      129,
+      1113,
+      972,
+      38
+     ]
+    },
+    {
+     "text": "ข. ตับ",
+     "page": 1,
+     "rect": [
+      129,
+      1158,
+      972,
+      38
+     ]
+    },
+    {
+     "text": "ค. ไต",
+     "page": 1,
+     "rect": [
+      129,
+      1203,
+      972,
+      38
+     ]
+    },
+    {
+     "text": "ง. หัวใจ",
+     "page": 1,
+     "rect": [
+      129,
+      1248,
+      972,
+      38
+     ]
+    }
+   ],
+   "correct": 3
+  },
+  {
+   "label": "Q6.",
+   "page": 1,
+   "kind": "choice",
+   "cat": "MULTIPLE_CHOICE",
+   "prompt": "หน่วย SI ของแรงคืออะไร",
+   "qrect": [
+    90,
+    1313,
+    1011,
+    38
+   ],
+   "options": [
+    {
+     "text": "ก. นิวตัน",
+     "page": 2,
+     "rect": [
+      129,
+      92,
+      972,
+      38
+     ]
+    },
+    {
+     "text": "ข. จูล",
+     "page": 2,
+     "rect": [
+      129,
+      137,
+      972,
+      38
+     ]
+    },
+    {
+     "text": "ค. วัตต์",
+     "page": 2,
+     "rect": [
+      129,
+      182,
+      972,
+      38
+     ]
+    },
+    {
+     "text": "ง. ปาสคาล",
+     "page": 2,
+     "rect": [
+      129,
+      227,
+      972,
+      38
+     ]
+    }
+   ],
+   "correct": 0,
+   "optionsPage": 2
+  },
+  {
+   "label": "Q7.",
+   "page": 2,
+   "kind": "choice",
+   "cat": "MULTIPLE_CHOICE",
+   "prompt": "อวัยวะใดทำหน้าที่สูบฉีดเลือด",
+   "qrect": [
+    90,
+    284,
+    1011,
+    38
+   ],
+   "options": [
+    {
+     "text": "ก. ปอด",
+     "page": 2,
+     "rect": [
+      129,
+      329,
+      972,
+      38
+     ]
+    },
+    {
+     "text": "ข. ตับ",
+     "page": 2,
+     "rect": [
+      129,
+      374,
+      972,
+      38
+     ]
+    },
+    {
+     "text": "ค. ไต",
+     "page": 2,
+     "rect": [
+      129,
+      419,
+      972,
+      38
+     ]
+    },
+    {
+     "text": "ง. หัวใจ",
+     "page": 2,
+     "rect": [
+      129,
+      464,
+      972,
+      38
+     ]
+    }
+   ],
+   "correct": 3
+  },
+  {
+   "label": "Q8.",
+   "page": 2,
+   "kind": "choice",
+   "cat": "MULTIPLE_CHOICE",
+   "prompt": "อวัยวะใดทำหน้าที่สูบฉีดเลือด",
+   "qrect": [
+    90,
+    528,
+    1011,
+    38
+   ],
+   "options": [
+    {
+     "text": "ก. ปอด",
+     "page": 2,
+     "rect": [
+      129,
+      573,
+      972,
+      38
+     ]
+    },
+    {
+     "text": "ข. ตับ",
+     "page": 2,
+     "rect": [
+      129,
+      618,
+      972,
+      38
+     ]
+    },
+    {
+     "text": "ค. ไต",
+     "page": 2,
+     "rect": [
+      129,
+      663,
+      972,
+      38
+     ]
+    },
+    {
+     "text": "ง. หัวใจ",
+     "page": 2,
+     "rect": [
+      129,
+      708,
+      972,
+      38
+     ]
+    }
+   ],
+   "correct": 3
+  },
+  {
+   "label": "Q9.",
+   "page": 2,
+   "kind": "choice",
+   "cat": "MULTIPLE_CHOICE",
+   "prompt": "ข้อใดเป็นจำนวนเฉพาะ",
+   "qrect": [
+    90,
+    773,
+    1011,
+    38
+   ],
+   "options": [
+    {
+     "text": "ก. 21",
+     "page": 2,
+     "rect": [
+      129,
+      818,
+      972,
+      38
+     ]
+    },
+    {
+     "text": "ข. 27",
+     "page": 2,
+     "rect": [
+      129,
+      863,
+      972,
+      38
+     ]
+    },
+    {
+     "text": "ค. 29",
+     "page": 2,
+     "rect": [
+      129,
+      908,
+      972,
+      38
+     ]
+    },
+    {
+     "text": "ง. 33",
+     "page": 2,
+     "rect": [
+      129,
+      953,
+      972,
+      38
+     ]
+    }
+   ],
+   "correct": 2
+  },
+  {
+   "label": "Q10.",
+   "page": 2,
+   "kind": "write",
+   "cat": "LONG_TEXT",
+   "prompt": "Describe what happens to particles when a solid melts.",
+   "answer": "The particles gain energy, vibrate more and break out of their fixed positions so they can slide past each other.",
+   "qrect": [
+    90,
+    1017,
+    1011,
+    27
+   ],
+   "areas": [
+    [
+     90,
+     1044,
+     1011,
+     135
+    ]
+   ]
+  }
+ ]
+}

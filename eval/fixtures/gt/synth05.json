@@ -1,0 +1,816 @@
+{
+ "doc": "synth/synth05.pdf",
+ "synthetic": true,
+ "thai": false,
+ "twoCol": false,
+ "questions": [
+  {
+   "label": "1.",
+   "page": 1,
+   "kind": "write",
+   "cat": "LONG_TEXT",
+   "prompt": "Explain why metals are good conductors of electricity.",
+   "answer": "Metals have free electrons that can move through the structure and carry charge from one end to the other.",
+   "qrect": [
+    90,
+    200,
+    1011,
+    26
+   ],
+   "areas": [
+    [
+     90,
+     225,
+     1011,
+     135
+    ]
+   ]
+  },
+  {
+   "label": "Sulfur",
+   "page": 1,
+   "kind": "cell",
+   "cat": "TABLE_SHORT",
+   "prompt": "Sulfur — Symbol",
+   "answer": "S",
+   "qrect": [
+    120,
+    482,
+    228,
+    57
+   ],
+   "areas": [
+    [
+     348,
+     482,
+     213,
+     57
+    ]
+   ],
+   "cell": {
+    "row": [
+     348,
+     482,
+     213,
+     57
+    ],
+    "header": [
+     120,
+     425,
+     890,
+     57
+    ],
+    "col": "Symbol"
+   }
+  },
+  {
+   "label": "Sulfur",
+   "page": 1,
+   "kind": "cell",
+   "cat": "TABLE_SHORT",
+   "prompt": "Sulfur — Metal or non-metal",
+   "answer": "Non-metal",
+   "qrect": [
+    120,
+    482,
+    228,
+    57
+   ],
+   "areas": [
+    [
+     561,
+     482,
+     448,
+     57
+    ]
+   ],
+   "cell": {
+    "row": [
+     561,
+     482,
+     448,
+     57
+    ],
+    "header": [
+     120,
+     425,
+     890,
+     57
+    ],
+    "col": "Metal or non-metal"
+   }
+  },
+  {
+   "label": "Iron",
+   "page": 1,
+   "kind": "cell",
+   "cat": "TABLE_SHORT",
+   "prompt": "Iron — Symbol",
+   "answer": "Fe",
+   "qrect": [
+    120,
+    539,
+    228,
+    57
+   ],
+   "areas": [
+    [
+     348,
+     539,
+     213,
+     57
+    ]
+   ],
+   "cell": {
+    "row": [
+     348,
+     539,
+     213,
+     57
+    ],
+    "header": [
+     120,
+     425,
+     890,
+     57
+    ],
+    "col": "Symbol"
+   }
+  },
+  {
+   "label": "Iron",
+   "page": 1,
+   "kind": "cell",
+   "cat": "TABLE_SHORT",
+   "prompt": "Iron — Metal or non-metal",
+   "answer": "Metal",
+   "qrect": [
+    120,
+    539,
+    228,
+    57
+   ],
+   "areas": [
+    [
+     561,
+     539,
+     448,
+     57
+    ]
+   ],
+   "cell": {
+    "row": [
+     561,
+     539,
+     448,
+     57
+    ],
+    "header": [
+     120,
+     425,
+     890,
+     57
+    ],
+    "col": "Metal or non-metal"
+   }
+  },
+  {
+   "label": "Helium",
+   "page": 1,
+   "kind": "cell",
+   "cat": "TABLE_SHORT",
+   "prompt": "Helium — Symbol",
+   "answer": "He",
+   "qrect": [
+    120,
+    596,
+    228,
+    57
+   ],
+   "areas": [
+    [
+     348,
+     596,
+     213,
+     57
+    ]
+   ],
+   "cell": {
+    "row": [
+     348,
+     596,
+     213,
+     57
+    ],
+    "header": [
+     120,
+     425,
+     890,
+     57
+    ],
+    "col": "Symbol"
+   }
+  },
+  {
+   "label": "Helium",
+   "page": 1,
+   "kind": "cell",
+   "cat": "TABLE_SHORT",
+   "prompt": "Helium — Metal or non-metal",
+   "answer": "Non-metal",
+   "qrect": [
+    120,
+    596,
+    228,
+    57
+   ],
+   "areas": [
+    [
+     561,
+     596,
+     448,
+     57
+    ]
+   ],
+   "cell": {
+    "row": [
+     561,
+     596,
+     448,
+     57
+    ],
+    "header": [
+     120,
+     425,
+     890,
+     57
+    ],
+    "col": "Metal or non-metal"
+   }
+  },
+  {
+   "label": "3.",
+   "page": 1,
+   "kind": "choice",
+   "cat": "MULTIPLE_CHOICE",
+   "prompt": "Which planet is closest to the Sun?",
+   "qrect": [
+    90,
+    680,
+    1011,
+    26
+   ],
+   "options": [
+    {
+     "text": "A. Venus",
+     "page": 1,
+     "rect": [
+      129,
+      714,
+      82,
+      24
+     ]
+    },
+    {
+     "text": "B. Earth",
+     "page": 1,
+     "rect": [
+      271,
+      714,
+      75,
+      24
+     ]
+    },
+    {
+     "text": "C. Mercury",
+     "page": 1,
+     "rect": [
+      406,
+      714,
+      104,
+      24
+     ]
+    },
+    {
+     "text": "D. Mars",
+     "page": 1,
+     "rect": [
+      570,
+      714,
+      74,
+      24
+     ]
+    }
+   ],
+   "correct": 2
+  },
+  {
+   "label": "4.",
+   "page": 1,
+   "kind": "choice",
+   "cat": "MULTIPLE_CHOICE",
+   "prompt": "What is the boiling point of water at sea level?",
+   "qrect": [
+    90,
+    767,
+    1011,
+    26
+   ],
+   "options": [
+    {
+     "text": "A. 90 °C",
+     "page": 1,
+     "rect": [
+      129,
+      801,
+      80,
+      24
+     ]
+    },
+    {
+     "text": "B. 100 °C",
+     "page": 1,
+     "rect": [
+      269,
+      801,
+      90,
+      24
+     ]
+    },
+    {
+     "text": "C. 110 °C",
+     "page": 1,
+     "rect": [
+      418,
+      801,
+      89,
+      24
+     ]
+    },
+    {
+     "text": "D. 120 °C",
+     "page": 1,
+     "rect": [
+      567,
+      801,
+      91,
+      24
+     ]
+    }
+   ],
+   "correct": 1
+  },
+  {
+   "label": "5.",
+   "page": 1,
+   "kind": "choice",
+   "cat": "MULTIPLE_CHOICE",
+   "prompt": "Which layer of the atmosphere contains the ozone layer?",
+   "qrect": [
+    90,
+    854,
+    1011,
+    26
+   ],
+   "options": [
+    {
+     "text": "(A) troposphere",
+     "page": 1,
+     "rect": [
+      129,
+      887,
+      972,
+      26
+     ]
+    },
+    {
+     "text": "(B) stratosphere",
+     "page": 1,
+     "rect": [
+      129,
+      920,
+      972,
+      26
+     ]
+    },
+    {
+     "text": "(C) mesosphere",
+     "page": 1,
+     "rect": [
+      129,
+      953,
+      972,
+      26
+     ]
+    },
+    {
+     "text": "(D) thermosphere",
+     "page": 1,
+     "rect": [
+      129,
+      986,
+      972,
+      26
+     ]
+    }
+   ],
+   "correct": 1
+  },
+  {
+   "label": "6.",
+   "page": 1,
+   "kind": "choice",
+   "cat": "MULTIPLE_CHOICE",
+   "prompt": "What is the SI unit of force?",
+   "qrect": [
+    90,
+    1038,
+    1011,
+    26
+   ],
+   "options": [
+    {
+     "text": "a) newton",
+     "page": 1,
+     "rect": [
+      129,
+      1071,
+      972,
+      26
+     ]
+    },
+    {
+     "text": "b) joule",
+     "page": 1,
+     "rect": [
+      129,
+      1104,
+      972,
+      26
+     ]
+    },
+    {
+     "text": "c) watt",
+     "page": 1,
+     "rect": [
+      129,
+      1137,
+      972,
+      26
+     ]
+    },
+    {
+     "text": "d) pascal",
+     "page": 1,
+     "rect": [
+      129,
+      1170,
+      972,
+      26
+     ]
+    }
+   ],
+   "correct": 0
+  },
+  {
+   "label": "7.",
+   "page": 1,
+   "kind": "choice",
+   "cat": "MULTIPLE_CHOICE",
+   "prompt": "Which of these is a prime number?",
+   "qrect": [
+    90,
+    1223,
+    1011,
+    26
+   ],
+   "options": [
+    {
+     "text": "A. 21",
+     "page": 1,
+     "rect": [
+      129,
+      1256,
+      972,
+      26
+     ]
+    },
+    {
+     "text": "B. 27",
+     "page": 1,
+     "rect": [
+      129,
+      1289,
+      972,
+      26
+     ]
+    },
+    {
+     "text": "C. 29",
+     "page": 1,
+     "rect": [
+      129,
+      1322,
+      972,
+      26
+     ]
+    },
+    {
+     "text": "D. 33",
+     "page": 1,
+     "rect": [
+      129,
+      1355,
+      972,
+      26
+     ]
+    }
+   ],
+   "correct": 2
+  },
+  {
+   "label": "8.",
+   "page": 2,
+   "kind": "blank",
+   "cat": "FILL_BLANK",
+   "prompt": "The powerhouse of the cell is the ___ .",
+   "answer": "mitochondria",
+   "qrect": [
+    120,
+    123,
+    981,
+    26
+   ],
+   "areas": [
+    [
+     451,
+     111,
+     164,
+     42
+    ]
+   ]
+  },
+  {
+   "label": "8.",
+   "page": 2,
+   "kind": "blank",
+   "cat": "FILL_BLANK",
+   "prompt": "A triangle with three equal sides is called an ___ triangle.",
+   "answer": "equilateral",
+   "qrect": [
+    120,
+    162,
+    981,
+    26
+   ],
+   "areas": [
+    [
+     551,
+     150,
+     164,
+     42
+    ]
+   ]
+  },
+  {
+   "label": "8.",
+   "page": 2,
+   "kind": "blank",
+   "cat": "FILL_BLANK",
+   "prompt": "The capital of France is ___ .",
+   "answer": "Paris",
+   "qrect": [
+    120,
+    201,
+    981,
+    26
+   ],
+   "areas": [
+    [
+     365,
+     189,
+     164,
+     42
+    ]
+   ]
+  },
+  {
+   "label": "9.",
+   "page": 2,
+   "kind": "blank",
+   "cat": "FILL_BLANK",
+   "prompt": "A triangle with three equal sides is called an ___ triangle.",
+   "answer": "equilateral",
+   "qrect": [
+    120,
+    293,
+    981,
+    29
+   ],
+   "areas": [
+    [
+     549,
+     281,
+     231,
+     41
+    ]
+   ]
+  },
+  {
+   "label": "9.",
+   "page": 2,
+   "kind": "blank",
+   "cat": "FILL_BLANK",
+   "prompt": "The powerhouse of the cell is the ___ .",
+   "answer": "mitochondria",
+   "qrect": [
+    120,
+    335,
+    981,
+    29
+   ],
+   "areas": [
+    [
+     453,
+     323,
+     231,
+     41
+    ]
+   ]
+  },
+  {
+   "label": "9.",
+   "page": 2,
+   "kind": "blank",
+   "cat": "FILL_BLANK",
+   "prompt": "The opposite of \"ancient\" is ___ .",
+   "answer": "modern",
+   "qrect": [
+    120,
+    377,
+    981,
+    29
+   ],
+   "areas": [
+    [
+     404,
+     365,
+     231,
+     41
+    ]
+   ]
+  },
+  {
+   "label": "(a)",
+   "page": 2,
+   "kind": "choice",
+   "cat": "TRUE_FALSE",
+   "prompt": "A square is a type of rectangle.",
+   "qrect": [
+    120,
+    470,
+    307,
+    26
+   ],
+   "options": [
+    {
+     "text": "True",
+     "page": 2,
+     "rect": [
+      994,
+      470,
+      42,
+      24
+     ]
+    },
+    {
+     "text": "False",
+     "page": 2,
+     "rect": [
+      1053,
+      470,
+      48,
+      24
+     ]
+    }
+   ],
+   "correct": 0
+  },
+  {
+   "label": "(b)",
+   "page": 2,
+   "kind": "choice",
+   "cat": "TRUE_FALSE",
+   "prompt": "The Sun is a star.",
+   "qrect": [
+    120,
+    507,
+    186,
+    26
+   ],
+   "options": [
+    {
+     "text": "True",
+     "page": 2,
+     "rect": [
+      994,
+      507,
+      42,
+      24
+     ]
+    },
+    {
+     "text": "False",
+     "page": 2,
+     "rect": [
+      1053,
+      507,
+      48,
+      24
+     ]
+    }
+   ],
+   "correct": 0
+  },
+  {
+   "label": "(c)",
+   "page": 2,
+   "kind": "choice",
+   "cat": "TRUE_FALSE",
+   "prompt": "Ice is less dense than liquid water.",
+   "qrect": [
+    120,
+    545,
+    337,
+    26
+   ],
+   "options": [
+    {
+     "text": "True",
+     "page": 2,
+     "rect": [
+      994,
+      545,
+      42,
+      24
+     ]
+    },
+    {
+     "text": "False",
+     "page": 2,
+     "rect": [
+      1053,
+      545,
+      48,
+      24
+     ]
+    }
+   ],
+   "correct": 0
+  },
+  {
+   "label": "11.",
+   "page": 2,
+   "kind": "write",
+   "cat": "LONG_TEXT",
+   "prompt": "Why is it important to control variables in an experiment?",
+   "answer": "Keeping other variables the same makes sure that only the variable being tested causes the change, so the result is fair.",
+   "qrect": [
+    90,
+    597,
+    1011,
+    26
+   ],
+   "areas": [
+    [
+     90,
+     611,
+     1011,
+     105
+    ]
+   ]
+  },
+  {
+   "label": "12.",
+   "page": 2,
+   "kind": "write",
+   "cat": "SHORT_TEXT",
+   "prompt": "State the formula for the area of a circle.",
+   "answer": "A = πr²",
+   "qrect": [
+    90,
+    743,
+    1011,
+    26
+   ],
+   "areas": [
+    [
+     120,
+     768,
+     981,
+     45
+    ]
+   ]
+  }
+ ]
+}
