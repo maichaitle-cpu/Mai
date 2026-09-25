@@ -44,6 +44,7 @@ window.__runDoc = async function (opts) {
     mode: comp._traceRaw ? comp._traceRaw.mode : null,
     times: comp._traceRaw ? comp._traceRaw.times : null,
     layoutCount: comp._traceRaw && comp._traceRaw.layout ? comp._traceRaw.layout.length : null,
+    layout: comp._traceRaw && comp._traceRaw.layout ? comp._traceRaw.layout.map(q => ({ id: q.id, label: q.label, page: q.page, lineId: q.lineId, kind: q.kind, cat: q.cat, recovered: !!q.recovered, fromTable: !!q.fromTable, col: q.col || '', prompt: String(q.prompt || '').slice(0, 60) })) : null,
     calls,
     pages: (st.pages || []).map((p, i) => ({
       page: i + 1, w: p.canvas.width, h: p.canvas.height, ocr: !!p.ocr,
@@ -57,6 +58,7 @@ window.__runDoc = async function (opts) {
       slots: (a.slots || []).length, strokes: (a.strokes || []).length, overflow: !!a.overflow, placedBy: a.placedBy || null, flag: a.flag || '',
     })),
     shots: null,
+    noise: window.__noiseLog ? window.__noiseLog.slice() : [],
   };
   if (snapshots) {
     out.shots = (st.pages || []).map((p, i) => {

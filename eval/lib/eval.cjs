@@ -28,7 +28,7 @@ async function main() {
     try {
       run = await page.evaluate(o => window.__runDoc(o), {
         doc: gt.doc, gt, claude: mode, snapshots: !!opt('snap'),
-        oracleCfg: { mapBoxes: !!opt('map-boxes') }, settings: gt.settings || {},
+        oracleCfg: { mapBoxes: !!opt('map-boxes'), noise: Number(opt('noise', 0)), seed: Number(opt('seed', 1)) }, settings: gt.settings || {},
       });
     } catch (e) {
       run = { apiError: 'harness: ' + e.message, answers: [], pages: [], calls: [] };
@@ -38,6 +38,7 @@ async function main() {
     s.calls = run.calls.reduce((m, c) => { m[c.stage] = (m[c.stage] || 0) + 1; return m; }, {});
     s.cost = run.calls.reduce((m, c) => m + (c.cost || 0), 0);
     s.pages = run.pages.length;
+    s.noise = run.noise || [];
     if (run.shots) run.shots.forEach((d, i) => fs.writeFileSync(path.join(outDir, name + '-p' + (i + 1) + '.jpg'), Buffer.from(d.split(',')[1], 'base64')));
     delete run.shots;
     fs.writeFileSync(path.join(outDir, name + '.run.json'), JSON.stringify(run, null, 1));

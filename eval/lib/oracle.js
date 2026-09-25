@@ -64,11 +64,58 @@
       return cands.length ? lineRef(q.page, cands[0]) : null;
     }
 
-    function layoutText() {
+    let seed = (cfg.seed || 1) * 2654435761 % 4294967296;
+    const rnd = () => { seed = (seed * 1664525 + 1013904223) % 4294967296; return seed / 4294967296; };
+    const NOISE = ['firstLine', 'noNext', 'kindSwap', 'labelFmt', 'drop', 'optText', 'noOpts', 'catWrong', 'shortPrompt'];
+    const noisy = [];
+    window.__noiseLog = noisy;
+
+    function perturb(e, q, P, focused) {
+      if (!cfg.noise || rnd() >= cfg.noise) return e;
+      const kinds = NOISE.filter(k => ((k !== 'optText' && k !== 'noOpts') || e.options) && !(focused && k === 'drop'));
+      const k = kinds[Math.floor(rnd() * kinds.length)];
+      noisy.push(q.label + '@' + q.page + ':' + k);
+      if (k === 'drop') return null;
+      if (k === 'firstLine' && q.qrect) { const f = P.lines.find(l => inRect(l, q.qrect, 2) && !isRule(l.text)); if (f) e.line = lineRef(q.page, f); }
+      if (k === 'noNext') e.next = null;
+      if (k === 'kindSwap') e.kind = e.kind === 'blank' ? 'box' : e.kind === 'box' ? 'blank' : e.kind;
+      if (k === 'labelFmt') e.label = String(e.label).replace(/[.)]$/, '').replace(/^(\d+)$/, m => (rnd() < 0.5 ? 'Q' + m : m + ')'));
+      if (k === 'optText') e.options = e.options.map(o => ({ ...o, text: o.text.replace(/^\(?[A-Da-dก-ง][).]\s*/, '') }));
+      if (k === 'noOpts') { delete e.options; e.kind = 'blank'; e.cat = 'SHORT_TEXT'; }
+      if (k === 'catWrong') e.cat = ['SHORT_TEXT', 'LONG_TEXT', 'FILL_BLANK', 'OTHER'][Math.floor(rnd() * 4)];
+      if (k === 'shortPrompt') e.prompt = String(e.prompt).split(' ').slice(0, 4).join(' ');
+      return e;
+    }
+
+    function fakes() {
+      if (!cfg.noise) return [];
       const out = [];
+      pages().forEach((P, i) => P.lines.forEach(l => {
+        if (/^(student\s*)?name|^instructions?\b|^directions?\b|^ชื่อ/i.test(l.text) && rnd() < cfg.noise * 2) {
+          out.push({ line: lineRef(i + 1, l), next: null, label: '', prompt: l.text.slice(0, 60), kind: 'blank', cat: 'SHORT_TEXT' });
+          noisy.push('fake@' + (i + 1) + ':' + l.text.slice(0, 20));
+        }
+      }));
+      return out;
+    }
+
+    function layoutText(body) {
+      const txt = textOf(body.messages[0].content);
+      const fm = /FOCUS: ([^\n]*?) look like/.exec(txt);
+      const focus = fm ? fm[1].split(',').map(x => x.trim()) : null;
+      const out = focus ? [] : fakes();
       Q.forEach(q => {
         const P = pages()[q.page - 1];
         if (!P) return;
+        if (focus) {
+          // a question "owns" the lines from the end of the previous question on its page down to its own answer area
+          const prev = Q.filter(o => o.page === q.page && o !== q && o.qrect && q.qrect && o.qrect[1] < q.qrect[1]).map(o => { const r = o.area || o.qrect; return r[1] + r[3]; });
+          const from = prev.length ? Math.max.apply(null, prev) : 0;
+          const r = q.area || q.qrect;
+          const to = r ? r[1] + r[3] : (q.qrect ? q.qrect[1] + q.qrect[3] : 0);
+          const refs = P.lines.filter(l => ((q.qrect && inRect(l, q.qrect, 2)) || (q.area && inRect(l, q.area, 2)) || (cy(l) > from && cy(l) < to && q.qrect && cy(l) < q.qrect[1] + q.qrect[3] + 2))).map(l => lineRef(q.page, l));
+          if (!refs.some(x => focus.indexOf(x) >= 0)) return;
+        }
         const qls = q.qrect ? P.lines.filter(l => inRect(l, q.qrect, 2) && !isRule(l.text)) : [];
         let L = qls[qls.length - 1];
         if (q.kind === 'blank' || q.kind === 'cell') {
@@ -89,7 +136,8 @@
             return ol ? { line: lineRef(o.page || q.page, ol), text: o.text } : null;
           }).filter(Boolean);
         }
-        out.push(e);
+        const pe = perturb(e, q, P, !!focus);
+        if (pe) out.push(pe);
       });
       return { questions: out };
     }
@@ -176,7 +224,7 @@
     return {
       complete: async (body, stage) => {
         let r;
-        if (stage === 'layout_text') r = layoutText();
+        if (stage === 'layout_text') r = layoutText(body);
         else if (stage === 'layout_vision') r = layoutVision(body);
         else if (stage === 'solve') r = solve(body);
         else if (stage === 'map') r = map(body);

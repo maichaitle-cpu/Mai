@@ -1515,7 +1515,7 @@ class Component extends DCLogic {
 
   isInfo(s) {
     s = String(s || '');
-    return (Component.INFO_FIELD.test(s) || Component.INFO_TH.test(s)) && s.length < 60;
+    return (Component.INFO_FIELD.test(s) || Component.INFO_TH.test(s)) && s.replace(/[_.…]{2,}/g, ' ').replace(/\s+/g, ' ').length < 60;
   }
 
   lineClusters(canvas, rx, ry, rw, rh) {
@@ -2434,13 +2434,33 @@ class Component extends DCLogic {
     return (l.cells && l.cells.length ? l.cells : [l]).some(c => c.x1 > col.x0 + 2 && c.x0 < col.x1 - 2);
   }
 
+  pickBlank(L, prompt) {
+    const free = L.blanks.filter(b => !b.used);
+    if (free.length === 1 || !prompt) return free[0];
+    const norm = t => String(t || '').toLowerCase().replace(/[^a-z0-9\u0E00-\u0E7F]+/g, ' ').trim();
+    const tail = norm(String(prompt).split(/\s[—–-]\s|:/).pop()).split(' ').filter(w => w.length > 1);
+    if (!tail.length) return free[0];
+    const m = this.charMap(L);
+    let best = free[0], bs = 0;
+    free.forEach(b => {
+      const prev = L.blanks.filter(o => o !== b && o.x1 <= b.x0 + 1).reduce((v, o) => Math.max(v, o.x1), -1);
+      let before = '';
+      for (let i = 0; i < m.str.length; i++) if (m.xs[i] < b.x0 - 1 && m.xs[i] >= prev) before += m.str[i];
+      const bw = norm(before).split(' ');
+      const sc = tail.filter(w => bw.indexOf(w) >= 0).length / tail.length;
+      if (sc > bs) { bs = sc; best = b; }
+    });
+    return best;
+  }
+
   regionFromLine(page, L, kind, prompt) {
     const H = page.canvas.height;
     const h = L.h;
     const col = this.colOf(page, L, prompt);
     const colW = col.x1 - col.x0;
-    if (kind === 'blank' && L.blankUsed < L.blanks.length) {
-      const b = L.blanks[L.blankUsed++];
+    if (kind === 'blank' && L.blanks.some(bk => !bk.used)) {
+      const b = this.pickBlank(L, prompt);
+      b.used = true;
       return this.clampRegion(page, { x: b.x0, y: L.top - h * 0.5, w: Math.max(b.x1 - b.x0, h * 3), h: h * 1.7, single: true, base: L.base - h * 0.12, lh: h });
     }
     const below = page.lines.filter(l => l.top > L.bottom + h * 0.3 && this.inCol(l, col)).sort((a, b) => a.top - b.top)[0];
@@ -4091,14 +4111,68 @@ class Component extends DCLogic {
     });
   }
 
+  textBlock(p, pi) {
+    const H = p.canvas.height;
+    return '=== PAGE ' + (pi + 1) + ' ===\n' + p.lines.map(l =>
+      'p' + (pi + 1) + '-l' + l.id + ' (y ' + Math.round((l.base / H) * 100) + '%)' + (l.blanks.length ? ' [blank x' + l.blanks.length + ']' : '') + (Component.Q_RE.test(l.text) ? ' [Q]' : '') + (this.optionSegs(l.text).length ? ' [options: ' + this.optionSegs(l.text).map(s => s.key).join(' ') + ']' : '') + ': ' + l.text
+    ).join('\n') + '\n\n';
+  }
+
+  textQ(q, pages) {
+    const m = String(q.line || '').match(/p(\d+)-l(\d+)/i);
+    if (!m) return null;
+    const page = Number(m[1]);
+    let lineId = Number(m[2]);
+    const pg = pages[page - 1];
+    if (!pg) return null;
+    let L = pg.lines.find(l => l.id === lineId);
+    if (!L) return null;
+    const hm = String(q.header || '').match(/p(\d+)-l(\d+)/i);
+    let options = null;
+    if (q.kind === 'choice' && Array.isArray(q.options)) {
+      options = q.options.map(o => {
+        const om = String((o && o.line) || q.line || '').match(/p(\d+)-l(\d+)/i);
+        const label = String((o && (o.text || o.label)) || '').trim();
+        return om && label ? { label, lineId: Number(om[2]), page: Number(om[1]) } : null;
+      }).filter(Boolean);
+    }
+    if ((q.kind === 'choice' && (!options || options.length < 2)) || ((q.kind === 'box' || q.kind === 'blank' || !q.kind) && !hm)) {
+      const co = this.codeOptions(pg, lineId);
+      if (co) options = co;
+    }
+    if (q.kind === 'choice' && (!options || options.length < 2) && pages[page] && pg.lines.indexOf(L) >= pg.lines.length - 3) {
+      const nx = pages[page];
+      const co2 = nx.lines && nx.lines.length ? this.codeOptions(nx, nx.lines[0].id) : null;
+      if (co2 && co2.length >= 2) options = co2.map(o => ({ ...o, page: page + 1 }));
+    }
+    const nx = String(q.next || '').match(/p(\d+)-l(\d+)/i);
+    const untilLineId = nx && Number(nx[1]) === page && Number(nx[2]) !== lineId ? Number(nx[2]) : null;
+    let kind = options && options.length ? 'choice' : q.kind === 'below' ? 'below' : q.kind === 'blank' ? 'blank' : q.kind === 'cell' && hm ? 'cell' : 'box';
+    const ruleOnly = l => /^[\s_.\-–—…·]*$/.test(String(l.text || ''));
+    const labelled = l => l.blanks.length && String(l.text || '').replace(/[_.…]{3,}/g, ' ').replace(/\s+/g, '').length > 1;
+    if (kind === 'blank' && !L.blanks.length) {
+      const i0 = pg.lines.indexOf(L);
+      const stop = untilLineId != null ? pg.lines.findIndex(l => l.id === untilLineId) : -1;
+      const B = pg.lines.slice(i0 + 1, stop > i0 ? stop : i0 + 4).find(l => labelled(l) && !this.isInfo(l.text));
+      if (B) { L = B; lineId = B.id; } else kind = 'box';
+    } else if (kind === 'box' && labelled(L) && !ruleOnly(L) && !this.isInfo(L.text) && !/(คำตอบ|answer)\s*[:：]?\s*[_.…]/i.test(L.text)) {
+      kind = 'blank';
+    } else if (kind === 'box' && ruleOnly(L)) {
+      const i0 = pg.lines.indexOf(L);
+      const P = pg.lines.slice(0, i0).reverse().find(l => !ruleOnly(l));
+      if (P) { L = P; lineId = P.id; }
+    }
+    return {
+      label: q.label || '', prompt: String(q.prompt || L.text).slice(0, 400), page, lineId, kind, untilLineId,
+      headerId: hm ? Number(hm[2]) : null, col: String(q.col || ''), options, cat: String(q.cat || '').toUpperCase(),
+    };
+  }
+
   async readTextLayout(pages) {
     const chunks = [];
     let cur = '';
     pages.forEach((p, pi) => {
-      const H = p.canvas.height;
-      const block = '=== PAGE ' + (pi + 1) + ' ===\n' + p.lines.map(l =>
-        'p' + (pi + 1) + '-l' + l.id + ' (y ' + Math.round((l.base / H) * 100) + '%)' + (l.blanks.length ? ' [blank x' + l.blanks.length + ']' : '') + (Component.Q_RE.test(l.text) ? ' [Q]' : '') + (this.optionSegs(l.text).length ? ' [options: ' + this.optionSegs(l.text).map(s => s.key).join(' ') + ']' : '') + ': ' + l.text
-      ).join('\n') + '\n\n';
+      const block = this.textBlock(p, pi);
       if (cur && cur.length + block.length > 40000) { chunks.push(cur); cur = ''; }
       cur += block;
     });
@@ -4112,44 +4186,73 @@ class Component extends DCLogic {
         system: Component.TEXT_LAYOUT_PROMPT,
         messages: [{ role: 'user', content: chunks[c] + '\nLines tagged [Q] start with a question number; [options: ...] lists option letters found by code. JSON only.' }],
       }, 'Reading text layer', raw => { try { const q = this.parseJson(raw).questions; return Array.isArray(q) && (q.length > 0 || !hasQ); } catch (e) { return false; } });
-      const qs = this.parseJson(out).questions || [];
-      qs.forEach(q => {
-        const m = String(q.line || '').match(/p(\d+)-l(\d+)/i);
-        if (!m) return;
-        const page = Number(m[1]);
-        const lineId = Number(m[2]);
-        const pg = pages[page - 1];
-        if (!pg) return;
-        const L = pg.lines.find(l => l.id === lineId);
-        if (!L) return;
-        const hm = String(q.header || '').match(/p(\d+)-l(\d+)/i);
-        let options = null;
-        if (q.kind === 'choice' && Array.isArray(q.options)) {
-          options = q.options.map(o => {
-            const om = String((o && o.line) || q.line || '').match(/p(\d+)-l(\d+)/i);
-            const label = String((o && (o.text || o.label)) || '').trim();
-            return om && label ? { label, lineId: Number(om[2]), page: Number(om[1]) } : null;
-          }).filter(Boolean);
-        }
-        if ((q.kind === 'choice' && (!options || options.length < 2)) || ((q.kind === 'box' || q.kind === 'blank' || !q.kind) && !hm)) {
-          const co = this.codeOptions(pg, lineId);
-          if (co) options = co;
-        }
-        if (q.kind === 'choice' && (!options || options.length < 2) && pages[page] && pg.lines.indexOf(L) >= pg.lines.length - 3) {
-          const nx = pages[page];
-          const co2 = nx.lines && nx.lines.length ? this.codeOptions(nx, nx.lines[0].id) : null;
-          if (co2 && co2.length >= 2) options = co2.map(o => ({ ...o, page: page + 1 }));
-        }
-        const nx = String(q.next || '').match(/p(\d+)-l(\d+)/i);
-        const untilLineId = nx && Number(nx[1]) === page && Number(nx[2]) !== lineId ? Number(nx[2]) : null;
-        const kind = options && options.length ? 'choice' : q.kind === 'below' ? 'below' : q.kind === 'blank' ? 'blank' : q.kind === 'cell' && hm ? 'cell' : 'box';
-        found.push({
-          label: q.label || '', prompt: String(q.prompt || L.text).slice(0, 400), page, lineId, kind, untilLineId,
-          headerId: hm ? Number(hm[2]) : null, col: String(q.col || ''), options, cat: String(q.cat || '').toUpperCase(),
-        });
-      });
+      (this.parseJson(out).questions || []).forEach(q => { const t = this.textQ(q, pages); if (t) found.push(t); });
     }
-    return found;
+    return this.recheckText(found, pages);
+  }
+
+  // Lines that look like questions or labelled blanks but that no found question covers.
+  uncovered(found, pages) {
+    const norm = t => String(t || '').toLowerCase().replace(/[^a-z0-9฀-๿]+/g, ' ').trim();
+    const out = [];
+    pages.forEach((pg, pi) => {
+      const pn = pi + 1;
+      const mine = found.filter(q => (q.page || 1) === pn);
+      const ids = new Set(mine.map(q => q.lineId));
+      mine.forEach(q => (q.options || []).forEach(o => { if ((o.page || pn) === pn) ids.add(o.lineId); }));
+      const prompts = ' ' + mine.map(q => norm(q.prompt)).join(' | ') + ' ';
+      const lines = pg.lines || [];
+      const qStart = l => Component.Q_RE.test(l.text) || /^\s*\(?[a-hA-H]\s*[.)]\s+\S/.test(l.text);
+      const claimed = {};
+      mine.filter(q => q.kind === 'blank').forEach(q => { claimed[q.lineId] = (claimed[q.lineId] || 0) + 1; });
+      const blanksHere = mine.some(q => q.kind === 'blank');
+      (pg.lines || []).forEach(l => {
+        const t = String(l.text || '');
+        if (ids.has(l.id) || this.isInfo(t) || Component.INFO_TH.test(t) || Component.INSTRUCTION.test(t)) return;
+        const qline = Component.Q_RE.test(t) || /^\s*\(?[a-hA-H]\s*[.)]\s+\S/.test(t);
+        const head = norm(t.replace(/^\s*(ข้อ\s*)?\(?[0-9a-hA-H]{1,3}\s*[.)]\s*/, '')).slice(0, 32);
+        const i0 = lines.indexOf(l);
+        const nextQ = lines.slice(i0 + 1).find(qStart);
+        const spanEnd = nextQ ? nextQ.top : Infinity;
+        const endsBelow = mine.some(q => { const E = lines.find(x => x.id === q.lineId); return E && E.top > l.top && E.top < spanEnd && q.kind !== 'cell'; });
+        const covered = (head.length >= 8 && prompts.indexOf(head) >= 0) || endsBelow;
+        const labelled = l.blanks.length && t.replace(/[_.…]{3,}/g, ' ').replace(/\s+/g, '').length > 1;
+        const free = labelled && blanksHere ? l.blanks.length - (claimed[l.id] || 0) : 0;
+        if ((qline && !covered) || free > 0) out.push({ page: pn, id: l.id });
+      });
+    });
+    return out;
+  }
+
+  async recheckText(found, pages) {
+    const norm = t => String(t || '').toLowerCase().replace(/[^a-z0-9\u0E00-\u0E7F]+/g, ' ').trim();
+    const miss = this.uncovered(found, pages);
+    if (!miss.length) return found;
+    const byPage = {};
+    miss.forEach(m => { (byPage[m.page] = byPage[m.page] || []).push(m.id); });
+    for (const k of Object.keys(byPage)) {
+      const pn = Number(k), pg = pages[pn - 1];
+      const refs = byPage[k].map(id => 'p' + pn + '-l' + id);
+      this.setState({ stageNote: 'Checking ' + refs.length + ' possibly missed question(s) on page ' + pn });
+      try {
+        const out = await this.ask({
+          model: 'claude-sonnet-4-5',
+          max_tokens: 3000,
+          system: Component.TEXT_LAYOUT_PROMPT,
+          messages: [{ role: 'user', content: this.textBlock(pg, pn - 1) + 'FOCUS: ' + refs.join(', ') + ' look like questions or answer blanks that were missed. Return ONLY the questions (one entry per blank) that start on or include those lines, or {"questions":[]} if they are not questions. JSON only.' }],
+        }, 'Checking for missed questions');
+        const add = (this.parseJson(out).questions || []).map(q => this.textQ(q, pages)).filter(Boolean).filter(t => t.page === pn);
+        const same = (a, b) => { const A = new Set(norm(a).split(' ')), B = norm(b).split(' ').filter(Boolean); return B.length && B.filter(w => A.has(w)).length / Math.max(A.size, B.length) >= 0.8; };
+        add.forEach(t => {
+          const onLine = found.filter(q => q.page === t.page && q.lineId === t.lineId && q.kind === t.kind);
+          const full = t.kind === 'blank' ? onLine.length >= ((pg.lines.find(l => l.id === t.lineId) || {}).blanks || []).length : onLine.length > 0;
+          if (full || onLine.some(q => same(q.prompt, t.prompt))) return;
+          found.push({ ...t, recovered: true });
+        });
+      } catch (err) {}
+    }
+    const top = q => { const pg = pages[(q.page || 1) - 1]; const L = pg && pg.lines.find(l => l.id === q.lineId); return L ? L.top : 0; };
+    return found.map((q, i) => ({ q, i })).sort((a, b) => (a.q.page || 1) - (b.q.page || 1) || (a.q.recovered || b.q.recovered ? top(a.q) - top(b.q) : a.i - b.i)).map(z => z.q);
   }
 
   batchPages(pages) {
@@ -4202,7 +4305,7 @@ class Component extends DCLogic {
       part.forEach(q => found.push(q));
     }
     if (!found.length) throw new Error('No questions were found in that file. Try a clearer scan.');
-    if (src.kind === 'pages') found = await this.fillGaps(found, src.pages);
+    if (src.kind === 'pages' && mode === 'vision') found = await this.fillGaps(found, src.pages);
     found = this.mergeContinued(found);
     found = this.completeTables(found, src.pages || this.state.pages || []);
     return { mode, questions: found.map((q, i) => ({ ...q, id: i + 1, label: q.label || (i + 1) + '.' })) };
@@ -4233,7 +4336,8 @@ class Component extends DCLogic {
           if (gap > h * 6) break;
           if (gap0 != null && (gap > gap0 * 1.6 + h * 0.5 || gap < gap0 * 0.4 - h * 0.5)) break;
           if (gap0 == null && gap > h * 2.6 && !(L.cells && L.cells.length <= 1)) break;
-          if (Math.abs(L.x0 - hc[0].x0) > h * 2.5) break;
+          const c0 = (L.cells && L.cells[0]) || L;
+          if (c0.x1 > hc[1].x0 + h * 0.5 || c0.x0 < hc[0].x0 - Math.max(h * 2.5, hc[1].x0 - hc[0].x0)) break;
           const tx = String(L.text || '').trim();
           if (/^[•●▪\-–*]\s/.test(tx) || Component.Q_RE.test(tx) || (tx.length > 6 && tx === tx.toUpperCase() && /[A-Z]{4}/.test(tx)) || String(tx).replace(/[\s._\-–—…·:=]/g, '').length < 2) break;
           const cs = L.cells && L.cells.length ? L.cells : [{ text: L.text, x0: L.x0, x1: L.x1 }];
@@ -4241,7 +4345,7 @@ class Component extends DCLogic {
           const filled = hc.map((c, k) => { const x0 = c.x0 - h * 0.8, x1 = hc[k + 1] ? hc[k + 1].x0 - h * 0.4 : Infinity; return cs.some(z => z.x0 < x1 && z.x1 > x0 && (k === 0 || z.x0 > c.x0 - h * 1.5)); });
           if (!filled[0]) break;
           if (rows.length && filled.some((v, k) => v !== rows[0].filled[k])) break;
-          if (gap0 == null) gap0 = gap;
+          if (gap0 == null && rows.length === 1) gap0 = gap;
           rows.push({ L, filled });
           prevB = L.bottom;
         }
@@ -4327,7 +4431,7 @@ class Component extends DCLogic {
     const sorted = seen.slice().sort((a, b) => a.n - b.n);
     for (let i = 1; i < sorted.length; i++) {
       const a = sorted[i - 1], b = sorted[i];
-      if (b.n - a.n <= 1 || b.n - a.n > 6) continue;
+      if (b.n - a.n <= 1 || b.n - a.n > 30) continue;
       for (let n = a.n + 1; n < b.n; n++) {
         if (nums.has(n)) continue;
         [a.page, b.page].forEach(p => { (byPage[p] = byPage[p] || new Set()).add(n); });
@@ -4932,7 +5036,7 @@ class Component extends DCLogic {
     if (this.remainingToday() < 1) { this.toast('error', 'Daily limit reached', 'Redoing a page counts as one page. Your limit resets at midnight.'); return; }
     this.setState({ redoing: i, selId: null });
     try {
-      if (page.lines) page.lines.forEach(l => { l.blankUsed = 0; });
+      if (page.lines) page.lines.forEach(l => { l.blankUsed = 0; (l.blanks || []).forEach(b => { b.used = false; }); });
       const layout = await this.readLayout({ kind: 'pages', pages: [page] });
       const maxId = this.state.answers.reduce((m, a) => Math.max(m, Number(a.id) || 0), 0);
       const qs = layout.questions.map((q, k) => ({ ...q, id: maxId + k + 1, page: 1 }));

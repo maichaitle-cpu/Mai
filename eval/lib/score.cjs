@@ -16,29 +16,30 @@ const grow = (r, p) => [r[0] - p, r[1] - p, r[2] + 2 * p, r[3] + 2 * p];
 const isRule = t => /^[\s_.\-–—…·]*$/.test(String(t || ''));
 
 function matchAnswers(gt, answers) {
+  // Global best-first pairing: repeated labels ("1." in Part A and Part B) must not steal each other's answers.
   const pool = answers.filter(a => !/-d\d+$/.test(String(a.id)));
-  const used = new Set();
-  const pairs = new Map();
-  const tryMatch = (strict) => gt.questions.forEach(q => {
-    if (pairs.has(q)) return;
-    let best = null, bs = -1;
-    pool.forEach(a => {
-      if (used.has(a)) return;
-      const pages = [q.page, q.optionsPage].concat((q.options || []).map(o => o.page)).filter(Boolean);
+  const cands = [];
+  gt.questions.forEach((q, qi) => {
+    const pages = [q.page, q.optionsPage].concat((q.options || []).map(o => o.page)).filter(Boolean);
+    const areas = q.areas || (q.area ? [q.area] : []);
+    pool.forEach((a, ai) => {
       if (pages.indexOf(a.page) < 0) return;
       const lab = labelKey(a.num) === labelKey(q.label);
-      if (strict && !lab) return;
-      const areas = q.areas || (q.area ? [q.area] : []);
+      const ps = sim(q.prompt, a.question);
       const geo = a.bbox && a.bbox.every(v => v != null) && areas.some(ar => inter(a.bbox, grow(ar, 14)) > 0) ? 0.5 : 0;
-      const s = (lab ? 2 : 0) + sim(q.prompt, a.question) * 3 + geo;
-      if (!strict && s < 1.2) return;
-      if (s > bs) { bs = s; best = a; }
+      const s = (lab ? 2 : 0) + ps * 3 + geo;
+      if (!lab && s < 1.2) return;
+      cands.push({ qi, ai, s });
     });
-    if (best) { used.add(best); pairs.set(q, best); }
   });
-  tryMatch(true);
-  tryMatch(false);
-  return { pairs, extra: pool.filter(a => !used.has(a)) };
+  cands.sort((x, y) => y.s - x.s);
+  const pairs = new Map(), usedQ = new Set(), usedA = new Set();
+  cands.forEach(c => {
+    if (usedQ.has(c.qi) || usedA.has(c.ai)) return;
+    usedQ.add(c.qi); usedA.add(c.ai);
+    pairs.set(gt.questions[c.qi], pool[c.ai]);
+  });
+  return { pairs, extra: pool.filter((a, i) => !usedA.has(i)) };
 }
 
 function coversText(bbox, page, area) {
