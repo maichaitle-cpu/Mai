@@ -1,0 +1,2286 @@
+{
+ "doc": "real/physics.pdf",
+ "settings": {},
+ "questions": [
+  {
+   "label": "1.",
+   "page": 1,
+   "kind": "choice",
+   "cat": "MULTIPLE_CHOICE",
+   "prompt": "1. A person pushes a box with a force of 50 N through a displacement of 4 m in the direction of the force. How much work is done?",
+   "qrect": [
+    125,
+    405,
+    914,
+    51
+   ],
+   "options": [
+    {
+     "text": "(A) 12.5 J",
+     "page": 1,
+     "rect": [
+      161,
+      469,
+      91,
+      23
+     ]
+    },
+    {
+     "text": "(B) 46 J",
+     "page": 1,
+     "rect": [
+      161,
+      499,
+      74,
+      23
+     ]
+    },
+    {
+     "text": "(C) 54 J",
+     "page": 1,
+     "rect": [
+      161,
+      529,
+      75,
+      23
+     ]
+    },
+    {
+     "text": "(D) 200 J",
+     "page": 1,
+     "rect": [
+      161,
+      559,
+      87,
+      23
+     ]
+    }
+   ],
+   "correct": 3,
+   "optionsPage": null
+  },
+  {
+   "label": "2.",
+   "page": 1,
+   "kind": "choice",
+   "cat": "MULTIPLE_CHOICE",
+   "prompt": "2. A force of 20 N acts at an angle of 60° to the direction of a 5 m displacement. What is the work done?",
+   "qrect": [
+    125,
+    601,
+    901,
+    51
+   ],
+   "options": [
+    {
+     "text": "(A) 100 J",
+     "page": 1,
+     "rect": [
+      161,
+      665,
+      86,
+      23
+     ]
+    },
+    {
+     "text": "(B) 86.6 J",
+     "page": 1,
+     "rect": [
+      161,
+      695,
+      91,
+      23
+     ]
+    },
+    {
+     "text": "(C) 50 J",
+     "page": 1,
+     "rect": [
+      161,
+      725,
+      75,
+      23
+     ]
+    },
+    {
+     "text": "(D) 0 J",
+     "page": 1,
+     "rect": [
+      161,
+      755,
+      63,
+      23
+     ]
+    }
+   ],
+   "correct": 2,
+   "optionsPage": null
+  },
+  {
+   "label": "3.",
+   "page": 1,
+   "kind": "choice",
+   "cat": "MULTIPLE_CHOICE",
+   "prompt": "3. A waiter carries a tray horizontally at constant velocity across a room. What is the work done by the upward force from the waiter's hand on the tray?",
+   "qrect": [
+    125,
+    797,
+    940,
+    51
+   ],
+   "options": [
+    {
+     "text": "(A) Positive",
+     "page": 1,
+     "rect": [
+      161,
+      861,
+      108,
+      23
+     ]
+    },
+    {
+     "text": "(B) Negative",
+     "page": 1,
+     "rect": [
+      161,
+      891,
+      117,
+      23
+     ]
+    },
+    {
+     "text": "(C) Zero",
+     "page": 1,
+     "rect": [
+      161,
+      921,
+      79,
+      23
+     ]
+    },
+    {
+     "text": "(D) Cannot be determined",
+     "page": 1,
+     "rect": [
+      161,
+      951,
+      243,
+      23
+     ]
+    }
+   ],
+   "correct": 2,
+   "optionsPage": null
+  },
+  {
+   "label": "4.",
+   "page": 1,
+   "kind": "choice",
+   "cat": "MULTIPLE_CHOICE",
+   "prompt": "4. A 2 kg object is lifted at constant velocity through a height of 3 m. Find the work done against gravity. (g = 10 m/s²)",
+   "qrect": [
+    125,
+    993,
+    886,
+    51
+   ],
+   "options": [
+    {
+     "text": "(A) 6 J",
+     "page": 1,
+     "rect": [
+      161,
+      1057,
+      62,
+      23
+     ]
+    },
+    {
+     "text": "(B) 20 J",
+     "page": 1,
+     "rect": [
+      161,
+      1087,
+      74,
+      23
+     ]
+    },
+    {
+     "text": "(C) 60 J",
+     "page": 1,
+     "rect": [
+      161,
+      1117,
+      75,
+      23
+     ]
+    },
+    {
+     "text": "(D) 600 J",
+     "page": 1,
+     "rect": [
+      161,
+      1147,
+      87,
+      23
+     ]
+    }
+   ],
+   "correct": 2,
+   "optionsPage": null
+  },
+  {
+   "label": "5.",
+   "page": 1,
+   "kind": "choice",
+   "cat": "MULTIPLE_CHOICE",
+   "prompt": "5. Power is best defined as:",
+   "qrect": [
+    125,
+    1189,
+    258,
+    23
+   ],
+   "options": [
+    {
+     "text": "(A) Work done × time",
+     "page": 1,
+     "rect": [
+      161,
+      1225,
+      199,
+      23
+     ]
+    },
+    {
+     "text": "(B) Work done ÷ time",
+     "page": 1,
+     "rect": [
+      161,
+      1255,
+      199,
+      23
+     ]
+    },
+    {
+     "text": "(C) Force ÷ time",
+     "page": 1,
+     "rect": [
+      161,
+      1285,
+      153,
+      23
+     ]
+    },
+    {
+     "text": "(D) Energy ÷ distance",
+     "page": 1,
+     "rect": [
+      161,
+      1315,
+      204,
+      23
+     ]
+    }
+   ],
+   "correct": 1,
+   "optionsPage": null
+  },
+  {
+   "label": "6.",
+   "page": 1,
+   "kind": "choice",
+   "cat": "MULTIPLE_CHOICE",
+   "prompt": "6. A motor lifts a 500 N load to a height of 10 m in 5 seconds. What is the power output of the motor (ignoring losses)?",
+   "qrect": [
+    125,
+    1357,
+    925,
+    51
+   ],
+   "options": [
+    {
+     "text": "(A) 100 W",
+     "page": 1,
+     "rect": [
+      161,
+      1421,
+      95,
+      23
+     ]
+    },
+    {
+     "text": "(B) 250 W",
+     "page": 1,
+     "rect": [
+      161,
+      1451,
+      95,
+      23
+     ]
+    },
+    {
+     "text": "(C) 1000 W",
+     "page": 1,
+     "rect": [
+      161,
+      1481,
+      108,
+      23
+     ]
+    },
+    {
+     "text": "(D) 5000 W",
+     "page": 1,
+     "rect": [
+      161,
+      1511,
+      108,
+      23
+     ]
+    }
+   ],
+   "correct": 2,
+   "optionsPage": null
+  },
+  {
+   "label": "7.",
+   "page": 2,
+   "kind": "choice",
+   "cat": "MULTIPLE_CHOICE",
+   "prompt": "7. Momentum is defined as the product of:",
+   "qrect": [
+    125,
+    181,
+    393,
+    23
+   ],
+   "options": [
+    {
+     "text": "(A) Mass and acceleration",
+     "page": 2,
+     "rect": [
+      161,
+      217,
+      244,
+      23
+     ]
+    },
+    {
+     "text": "(B) Mass and velocity",
+     "page": 2,
+     "rect": [
+      161,
+      247,
+      201,
+      23
+     ]
+    },
+    {
+     "text": "(C) Force and time",
+     "page": 2,
+     "rect": [
+      161,
+      277,
+      175,
+      23
+     ]
+    },
+    {
+     "text": "(D) Force and displacement",
+     "page": 2,
+     "rect": [
+      161,
+      307,
+      259,
+      23
+     ]
+    }
+   ],
+   "correct": 1,
+   "optionsPage": null
+  },
+  {
+   "label": "8.",
+   "page": 2,
+   "kind": "choice",
+   "cat": "MULTIPLE_CHOICE",
+   "prompt": "8. A 1000 kg car traveling at 20 m/s collides with an identical stationary 1000 kg car, and the two lock together. Find their common velocity after the collision.",
+   "qrect": [
+    125,
+    349,
+    938,
+    51
+   ],
+   "options": [
+    {
+     "text": "(A) 5 m/s",
+     "page": 2,
+     "rect": [
+      161,
+      413,
+      86,
+      23
+     ]
+    },
+    {
+     "text": "(B) 10 m/s",
+     "page": 2,
+     "rect": [
+      161,
+      443,
+      97,
+      23
+     ]
+    },
+    {
+     "text": "(C) 15 m/s",
+     "page": 2,
+     "rect": [
+      161,
+      473,
+      98,
+      23
+     ]
+    },
+    {
+     "text": "(D) 20 m/s",
+     "page": 2,
+     "rect": [
+      161,
+      503,
+      98,
+      23
+     ]
+    }
+   ],
+   "correct": 1,
+   "optionsPage": null
+  },
+  {
+   "label": "9.",
+   "page": 2,
+   "kind": "choice",
+   "cat": "MULTIPLE_CHOICE",
+   "prompt": "9. In a perfectly elastic collision between two objects:",
+   "qrect": [
+    125,
+    545,
+    492,
+    23
+   ],
+   "options": [
+    {
+     "text": "(A) Only momentum is conserved",
+     "page": 2,
+     "rect": [
+      161,
+      581,
+      312,
+      23
+     ]
+    },
+    {
+     "text": "(B) Only kinetic energy is conserved",
+     "page": 2,
+     "rect": [
+      161,
+      611,
+      336,
+      23
+     ]
+    },
+    {
+     "text": "(C) Both momentum and kinetic energy are conserved",
+     "page": 2,
+     "rect": [
+      161,
+      641,
+      505,
+      23
+     ]
+    },
+    {
+     "text": "(D) Neither quantity is conserved",
+     "page": 2,
+     "rect": [
+      161,
+      671,
+      306,
+      23
+     ]
+    }
+   ],
+   "correct": 2,
+   "optionsPage": null
+  },
+  {
+   "label": "10.",
+   "page": 2,
+   "kind": "choice",
+   "cat": "MULTIPLE_CHOICE",
+   "prompt": "10. A 0.5 kg ball moving at 6 m/s hits a wall and bounces straight back with the same speed. What is the magnitude of the change in momentum?",
+   "qrect": [
+    125,
+    713,
+    934,
+    51
+   ],
+   "options": [
+    {
+     "text": "(A) 0 kg·m/s",
+     "page": 2,
+     "rect": [
+      161,
+      777,
+      114,
+      23
+     ]
+    },
+    {
+     "text": "(B) 3 kg·m/s",
+     "page": 2,
+     "rect": [
+      161,
+      807,
+      114,
+      23
+     ]
+    },
+    {
+     "text": "(C) 6 kg·m/s",
+     "page": 2,
+     "rect": [
+      161,
+      837,
+      115,
+      23
+     ]
+    },
+    {
+     "text": "(D) 12 kg·m/s",
+     "page": 2,
+     "rect": [
+      161,
+      867,
+      126,
+      23
+     ]
+    }
+   ],
+   "correct": 2,
+   "optionsPage": null
+  },
+  {
+   "label": "11.",
+   "page": 2,
+   "kind": "choice",
+   "cat": "MULTIPLE_CHOICE",
+   "prompt": "11. Impulse delivered to an object is equal to its:",
+   "qrect": [
+    125,
+    909,
+    449,
+    23
+   ],
+   "options": [
+    {
+     "text": "(A) Change in kinetic energy",
+     "page": 2,
+     "rect": [
+      161,
+      945,
+      265,
+      23
+     ]
+    },
+    {
+     "text": "(B) Change in momentum",
+     "page": 2,
+     "rect": [
+      161,
+      975,
+      241,
+      23
+     ]
+    },
+    {
+     "text": "(C) Change in velocity",
+     "page": 2,
+     "rect": [
+      161,
+      1005,
+      207,
+      23
+     ]
+    },
+    {
+     "text": "(D) Force divided by time",
+     "page": 2,
+     "rect": [
+      161,
+      1035,
+      235,
+      23
+     ]
+    }
+   ],
+   "correct": 1,
+   "optionsPage": null
+  },
+  {
+   "label": "12.",
+   "page": 2,
+   "kind": "choice",
+   "cat": "MULTIPLE_CHOICE",
+   "prompt": "12. A 0.02 kg bullet is fired from a 5 kg gun initially at rest. If the bullet leaves with a velocity of 400 m/s, what is the recoil speed of the gun?",
+   "qrect": [
+    125,
+    1077,
+    914,
+    51
+   ],
+   "options": [
+    {
+     "text": "(A) 0.8 m/s",
+     "page": 2,
+     "rect": [
+      161,
+      1141,
+      103,
+      23
+     ]
+    },
+    {
+     "text": "(B) 1.6 m/s",
+     "page": 2,
+     "rect": [
+      161,
+      1171,
+      103,
+      23
+     ]
+    },
+    {
+     "text": "(C) 3.2 m/s",
+     "page": 2,
+     "rect": [
+      161,
+      1201,
+      104,
+      23
+     ]
+    },
+    {
+     "text": "(D) 8 m/s",
+     "page": 2,
+     "rect": [
+      161,
+      1231,
+      87,
+      23
+     ]
+    }
+   ],
+   "correct": 1,
+   "optionsPage": null
+  },
+  {
+   "label": "13.",
+   "page": 2,
+   "kind": "choice",
+   "cat": "MULTIPLE_CHOICE",
+   "prompt": "13. The torque produced by a force F applied at a perpendicular distance r from a pivot is given by:",
+   "qrect": [
+    125,
+    1337,
+    918,
+    23
+   ],
+   "options": [
+    {
+     "text": "(A) τ = F / r",
+     "page": 2,
+     "rect": [
+      161,
+      1373,
+      105,
+      23
+     ]
+    },
+    {
+     "text": "(B) τ = F × r",
+     "page": 2,
+     "rect": [
+      161,
+      1403,
+      111,
+      23
+     ]
+    },
+    {
+     "text": "(C) τ = F + r",
+     "page": 2,
+     "rect": [
+      161,
+      1433,
+      112,
+      23
+     ]
+    },
+    {
+     "text": "(D) τ = F² × r",
+     "page": 2,
+     "rect": [
+      161,
+      1463,
+      119,
+      23
+     ]
+    }
+   ],
+   "correct": 1,
+   "optionsPage": null
+  },
+  {
+   "label": "14.",
+   "page": 2,
+   "kind": "choice",
+   "cat": "MULTIPLE_CHOICE",
+   "prompt": "14. Which condition must be satisfied for a rigid body to be in complete mechanical equilibrium?",
+   "qrect": [
+    125,
+    1505,
+    889,
+    23
+   ],
+   "options": [
+    {
+     "text": "(A) Net force = 0 only",
+     "page": 3,
+     "rect": [
+      161,
+      129,
+      199,
+      23
+     ]
+    },
+    {
+     "text": "(B) Net torque = 0 only",
+     "page": 3,
+     "rect": [
+      161,
+      159,
+      212,
+      23
+     ]
+    },
+    {
+     "text": "(C) Both net force = 0 and net torque = 0",
+     "page": 3,
+     "rect": [
+      161,
+      189,
+      379,
+      23
+     ]
+    },
+    {
+     "text": "(D) Net force equals net torque",
+     "page": 3,
+     "rect": [
+      161,
+      219,
+      289,
+      23
+     ]
+    }
+   ],
+   "correct": 2,
+   "optionsPage": 3
+  },
+  {
+   "label": "15.",
+   "page": 3,
+   "kind": "choice",
+   "cat": "MULTIPLE_CHOICE",
+   "prompt": "15. A wrench is used to turn a bolt. Applying the same force but at a longer distance from the bolt will:",
+   "qrect": [
+    125,
+    261,
+    940,
+    23
+   ],
+   "options": [
+    {
+     "text": "(A) Decrease the torque",
+     "page": 3,
+     "rect": [
+      161,
+      297,
+      224,
+      23
+     ]
+    },
+    {
+     "text": "(B) Increase the torque",
+     "page": 3,
+     "rect": [
+      161,
+      327,
+      215,
+      23
+     ]
+    },
+    {
+     "text": "(C) Have no effect on the torque",
+     "page": 3,
+     "rect": [
+      161,
+      357,
+      300,
+      23
+     ]
+    },
+    {
+     "text": "(D) Reverse the direction of rotation",
+     "page": 3,
+     "rect": [
+      161,
+      387,
+      333,
+      23
+     ]
+    }
+   ],
+   "correct": 1,
+   "optionsPage": null
+  },
+  {
+   "label": "16.",
+   "page": 3,
+   "kind": "choice",
+   "cat": "MULTIPLE_CHOICE",
+   "prompt": "16. The moment of inertia of an object depends on:",
+   "qrect": [
+    125,
+    429,
+    475,
+    23
+   ],
+   "options": [
+    {
+     "text": "(A) Mass only",
+     "page": 3,
+     "rect": [
+      161,
+      465,
+      129,
+      23
+     ]
+    },
+    {
+     "text": "(B) Mass and how it is distributed relative to the axis of rotation",
+     "page": 3,
+     "rect": [
+      161,
+      495,
+      584,
+      23
+     ]
+    },
+    {
+     "text": "(C) Angular velocity only",
+     "page": 3,
+     "rect": [
+      161,
+      525,
+      228,
+      23
+     ]
+    },
+    {
+     "text": "(D) Torque only",
+     "page": 3,
+     "rect": [
+      161,
+      555,
+      146,
+      23
+     ]
+    }
+   ],
+   "correct": 1,
+   "optionsPage": null
+  },
+  {
+   "label": "17.",
+   "page": 3,
+   "kind": "choice",
+   "cat": "MULTIPLE_CHOICE",
+   "prompt": "17. A force of 15 N is applied perpendicular to a wrench at a distance of 0.2 m from the bolt. What torque is produced?",
+   "qrect": [
+    125,
+    597,
+    907,
+    51
+   ],
+   "options": [
+    {
+     "text": "(A) 0.75 N·m",
+     "page": 3,
+     "rect": [
+      161,
+      661,
+      119,
+      23
+     ]
+    },
+    {
+     "text": "(B) 3 N·m",
+     "page": 3,
+     "rect": [
+      161,
+      691,
+      90,
+      23
+     ]
+    },
+    {
+     "text": "(C) 7.5 N·m",
+     "page": 3,
+     "rect": [
+      161,
+      721,
+      109,
+      23
+     ]
+    },
+    {
+     "text": "(D) 30 N·m",
+     "page": 3,
+     "rect": [
+      161,
+      751,
+      103,
+      23
+     ]
+    }
+   ],
+   "correct": 1,
+   "optionsPage": null
+  },
+  {
+   "label": "18.",
+   "page": 3,
+   "kind": "choice",
+   "cat": "MULTIPLE_CHOICE",
+   "prompt": "18. Two children sit on a seesaw. A 30 kg child sits 2 m from the pivot. How far from the pivot must a 40 kg child sit on the other side for balance?",
+   "qrect": [
+    125,
+    793,
+    934,
+    51
+   ],
+   "options": [
+    {
+     "text": "(A) 1.2 m",
+     "page": 3,
+     "rect": [
+      161,
+      857,
+      87,
+      23
+     ]
+    },
+    {
+     "text": "(B) 1.5 m",
+     "page": 3,
+     "rect": [
+      161,
+      887,
+      87,
+      23
+     ]
+    },
+    {
+     "text": "(C) 2.0 m",
+     "page": 3,
+     "rect": [
+      161,
+      917,
+      88,
+      23
+     ]
+    },
+    {
+     "text": "(D) 2.67 m",
+     "page": 3,
+     "rect": [
+      161,
+      947,
+      100,
+      23
+     ]
+    }
+   ],
+   "correct": 1,
+   "optionsPage": null
+  },
+  {
+   "label": "19.",
+   "page": 3,
+   "kind": "choice",
+   "cat": "MULTIPLE_CHOICE",
+   "prompt": "19. According to Newton's law of universal gravitation, the gravitational force between two masses is:",
+   "qrect": [
+    125,
+    1053,
+    938,
+    23
+   ],
+   "options": [
+    {
+     "text": "(A) Directly proportional to the product of the masses and inversely proportional to the square of the distance between them",
+     "page": 3,
+     "rect": [
+      161,
+      1089,
+      890,
+      49
+     ]
+    },
+    {
+     "text": "(B) Directly proportional to the distance between them",
+     "page": 3,
+     "rect": [
+      161,
+      1145,
+      501,
+      23
+     ]
+    },
+    {
+     "text": "(C) Inversely proportional to the product of the masses",
+     "page": 3,
+     "rect": [
+      161,
+      1175,
+      507,
+      23
+     ]
+    },
+    {
+     "text": "(D) Independent of mass and distance",
+     "page": 3,
+     "rect": [
+      161,
+      1205,
+      356,
+      23
+     ]
+    }
+   ],
+   "correct": 0,
+   "optionsPage": null
+  },
+  {
+   "label": "20.",
+   "page": 3,
+   "kind": "choice",
+   "cat": "MULTIPLE_CHOICE",
+   "prompt": "20. If the distance between two objects is doubled, the gravitational force between them becomes:",
+   "qrect": [
+    125,
+    1247,
+    911,
+    23
+   ],
+   "options": [
+    {
+     "text": "(A) Twice as strong",
+     "page": 3,
+     "rect": [
+      161,
+      1283,
+      181,
+      23
+     ]
+    },
+    {
+     "text": "(B) Four times as strong",
+     "page": 3,
+     "rect": [
+      161,
+      1313,
+      226,
+      23
+     ]
+    },
+    {
+     "text": "(C) One-half as strong",
+     "page": 3,
+     "rect": [
+      161,
+      1343,
+      208,
+      23
+     ]
+    },
+    {
+     "text": "(D) One-quarter as strong",
+     "page": 3,
+     "rect": [
+      161,
+      1373,
+      241,
+      23
+     ]
+    }
+   ],
+   "correct": 3,
+   "optionsPage": null
+  },
+  {
+   "label": "21.",
+   "page": 3,
+   "kind": "choice",
+   "cat": "MULTIPLE_CHOICE",
+   "prompt": "21. The acceleration due to gravity on the surface of a planet depends on:",
+   "qrect": [
+    125,
+    1415,
+    687,
+    23
+   ],
+   "options": [
+    {
+     "text": "(A) The mass of the planet only",
+     "page": 3,
+     "rect": [
+      161,
+      1451,
+      292,
+      23
+     ]
+    },
+    {
+     "text": "(B) The radius of the planet only",
+     "page": 3,
+     "rect": [
+      161,
+      1481,
+      299,
+      23
+     ]
+    },
+    {
+     "text": "(C) Both the mass and radius of the planet",
+     "page": 3,
+     "rect": [
+      161,
+      1511,
+      395,
+      23
+     ]
+    },
+    {
+     "text": "(D) The mass of the object placed on it",
+     "page": 4,
+     "rect": [
+      161,
+      129,
+      361,
+      23
+     ]
+    }
+   ],
+   "correct": 2,
+   "optionsPage": null
+  },
+  {
+   "label": "22.",
+   "page": 4,
+   "kind": "choice",
+   "cat": "MULTIPLE_CHOICE",
+   "prompt": "22. A satellite orbits Earth in a circular path. The gravitational force acting on it serves as:",
+   "qrect": [
+    125,
+    171,
+    828,
+    23
+   ],
+   "options": [
+    {
+     "text": "(A) The force that slows it down",
+     "page": 4,
+     "rect": [
+      161,
+      207,
+      294,
+      23
+     ]
+    },
+    {
+     "text": "(B) The centripetal force keeping it in orbit",
+     "page": 4,
+     "rect": [
+      161,
+      237,
+      390,
+      23
+     ]
+    },
+    {
+     "text": "(C) A force with no effect on its motion",
+     "page": 4,
+     "rect": [
+      161,
+      267,
+      356,
+      23
+     ]
+    },
+    {
+     "text": "(D) The force that pushes it away from Earth",
+     "page": 4,
+     "rect": [
+      161,
+      297,
+      414,
+      23
+     ]
+    }
+   ],
+   "correct": 1,
+   "optionsPage": null
+  },
+  {
+   "label": "23.",
+   "page": 4,
+   "kind": "choice",
+   "cat": "MULTIPLE_CHOICE",
+   "prompt": "23. Weightlessness experienced by astronauts in an orbiting spacecraft occurs because:",
+   "qrect": [
+    125,
+    339,
+    822,
+    23
+   ],
+   "options": [
+    {
+     "text": "(A) There is no gravity in space",
+     "page": 4,
+     "rect": [
+      161,
+      375,
+      291,
+      23
+     ]
+    },
+    {
+     "text": "(B) The spacecraft and astronauts are in continuous free fall together",
+     "page": 4,
+     "rect": [
+      161,
+      405,
+      641,
+      23
+     ]
+    },
+    {
+     "text": "(C) The astronauts have zero mass",
+     "page": 4,
+     "rect": [
+      161,
+      435,
+      329,
+      23
+     ]
+    },
+    {
+     "text": "(D) Gravity acts only on the spacecraft, not the astronauts",
+     "page": 4,
+     "rect": [
+      161,
+      465,
+      537,
+      23
+     ]
+    }
+   ],
+   "correct": 1,
+   "optionsPage": null
+  },
+  {
+   "label": "24.",
+   "page": 4,
+   "kind": "choice",
+   "cat": "MULTIPLE_CHOICE",
+   "prompt": "24. If the mass of Earth were to double while its radius stayed the same, the gravitational acceleration at its surface would:",
+   "qrect": [
+    125,
+    507,
+    940,
+    51
+   ],
+   "options": [
+    {
+     "text": "(A) Stay the same",
+     "page": 4,
+     "rect": [
+      161,
+      571,
+      168,
+      23
+     ]
+    },
+    {
+     "text": "(B) Double",
+     "page": 4,
+     "rect": [
+      161,
+      601,
+      101,
+      23
+     ]
+    },
+    {
+     "text": "(C) Quadruple",
+     "page": 4,
+     "rect": [
+      161,
+      631,
+      133,
+      23
+     ]
+    },
+    {
+     "text": "(D) Reduce by half",
+     "page": 4,
+     "rect": [
+      161,
+      661,
+      175,
+      23
+     ]
+    }
+   ],
+   "correct": 1,
+   "optionsPage": null
+  },
+  {
+   "label": "25.",
+   "page": 4,
+   "kind": "choice",
+   "cat": "MULTIPLE_CHOICE",
+   "prompt": "25. Simple harmonic motion (SHM) is characterized by a restoring force that is:",
+   "qrect": [
+    125,
+    767,
+    733,
+    23
+   ],
+   "options": [
+    {
+     "text": "(A) Constant in magnitude and direction",
+     "page": 4,
+     "rect": [
+      161,
+      803,
+      370,
+      23
+     ]
+    },
+    {
+     "text": "(B) Directly proportional to displacement and directed toward the equilibrium position",
+     "page": 4,
+     "rect": [
+      161,
+      833,
+      785,
+      23
+     ]
+    },
+    {
+     "text": "(C) Directly proportional to velocity",
+     "page": 4,
+     "rect": [
+      161,
+      863,
+      321,
+      23
+     ]
+    },
+    {
+     "text": "(D) Independent of displacement",
+     "page": 4,
+     "rect": [
+      161,
+      893,
+      305,
+      23
+     ]
+    }
+   ],
+   "correct": 1,
+   "optionsPage": null
+  },
+  {
+   "label": "26.",
+   "page": 4,
+   "kind": "choice",
+   "cat": "MULTIPLE_CHOICE",
+   "prompt": "26. At the equilibrium position of an object undergoing SHM:",
+   "qrect": [
+    125,
+    935,
+    559,
+    23
+   ],
+   "options": [
+    {
+     "text": "(A) Velocity is maximum and acceleration is zero",
+     "page": 4,
+     "rect": [
+      161,
+      971,
+      453,
+      23
+     ]
+    },
+    {
+     "text": "(B) Velocity is zero and acceleration is maximum",
+     "page": 4,
+     "rect": [
+      161,
+      1001,
+      453,
+      23
+     ]
+    },
+    {
+     "text": "(C) Both velocity and acceleration are zero",
+     "page": 4,
+     "rect": [
+      161,
+      1031,
+      397,
+      23
+     ]
+    },
+    {
+     "text": "(D) Both velocity and acceleration are maximum",
+     "page": 4,
+     "rect": [
+      161,
+      1061,
+      447,
+      23
+     ]
+    }
+   ],
+   "correct": 0,
+   "optionsPage": null
+  },
+  {
+   "label": "27.",
+   "page": 4,
+   "kind": "choice",
+   "cat": "MULTIPLE_CHOICE",
+   "prompt": "27. The period of a simple pendulum depends on:",
+   "qrect": [
+    125,
+    1103,
+    463,
+    23
+   ],
+   "options": [
+    {
+     "text": "(A) The mass of the bob and the length of the string",
+     "page": 4,
+     "rect": [
+      161,
+      1139,
+      480,
+      23
+     ]
+    },
+    {
+     "text": "(B) The length of the string and gravitational acceleration",
+     "page": 4,
+     "rect": [
+      161,
+      1169,
+      528,
+      23
+     ]
+    },
+    {
+     "text": "(C) The amplitude of swing only",
+     "page": 4,
+     "rect": [
+      161,
+      1199,
+      296,
+      23
+     ]
+    },
+    {
+     "text": "(D) The mass of the bob only",
+     "page": 4,
+     "rect": [
+      161,
+      1229,
+      271,
+      23
+     ]
+    }
+   ],
+   "correct": 1,
+   "optionsPage": null
+  },
+  {
+   "label": "28.",
+   "page": 4,
+   "kind": "choice",
+   "cat": "MULTIPLE_CHOICE",
+   "prompt": "28. A simple pendulum has a length of 1 m. Using g = 10 m/s² and π² ≈ 10, find its period.",
+   "qrect": [
+    125,
+    1271,
+    829,
+    23
+   ],
+   "options": [
+    {
+     "text": "(A) 1 s",
+     "page": 4,
+     "rect": [
+      161,
+      1307,
+      62,
+      23
+     ]
+    },
+    {
+     "text": "(B) 2 s",
+     "page": 4,
+     "rect": [
+      161,
+      1337,
+      62,
+      23
+     ]
+    },
+    {
+     "text": "(C) π s",
+     "page": 4,
+     "rect": [
+      161,
+      1367,
+      63,
+      23
+     ]
+    },
+    {
+     "text": "(D) 4 s",
+     "page": 4,
+     "rect": [
+      161,
+      1397,
+      63,
+      23
+     ]
+    }
+   ],
+   "correct": 1,
+   "optionsPage": null
+  },
+  {
+   "label": "29.",
+   "page": 4,
+   "kind": "choice",
+   "cat": "MULTIPLE_CHOICE",
+   "prompt": "29. If the length of a simple pendulum is quadrupled, its period will:",
+   "qrect": [
+    125,
+    1439,
+    620,
+    23
+   ],
+   "options": [
+    {
+     "text": "(A) Double",
+     "page": 4,
+     "rect": [
+      161,
+      1475,
+      101,
+      23
+     ]
+    },
+    {
+     "text": "(B) Quadruple",
+     "page": 4,
+     "rect": [
+      161,
+      1505,
+      132,
+      23
+     ]
+    },
+    {
+     "text": "(C) Remain the same",
+     "page": 4,
+     "rect": [
+      161,
+      1535,
+      200,
+      23
+     ]
+    },
+    {
+     "text": "(D) Become half",
+     "page": 5,
+     "rect": [
+      161,
+      129,
+      152,
+      23
+     ]
+    }
+   ],
+   "correct": 0,
+   "optionsPage": null
+  },
+  {
+   "label": "30.",
+   "page": 5,
+   "kind": "choice",
+   "cat": "MULTIPLE_CHOICE",
+   "prompt": "30. For a mass–spring system in SHM, increasing the spring constant k (keeping mass constant) will:",
+   "qrect": [
+    125,
+    171,
+    939,
+    23
+   ],
+   "options": [
+    {
+     "text": "(A) Increase the period",
+     "page": 5,
+     "rect": [
+      161,
+      207,
+      214,
+      23
+     ]
+    },
+    {
+     "text": "(B) Decrease the period",
+     "page": 5,
+     "rect": [
+      161,
+      237,
+      223,
+      23
+     ]
+    },
+    {
+     "text": "(C) Not affect the period",
+     "page": 5,
+     "rect": [
+      161,
+      267,
+      224,
+      23
+     ]
+    },
+    {
+     "text": "(D) Make the motion non-periodic",
+     "page": 5,
+     "rect": [
+      161,
+      297,
+      312,
+      23
+     ]
+    }
+   ],
+   "correct": 1,
+   "optionsPage": null
+  },
+  {
+   "label": "31.",
+   "page": 5,
+   "kind": "choice",
+   "cat": "MULTIPLE_CHOICE",
+   "prompt": "31. The amplitude of an oscillating system in SHM represents:",
+   "qrect": [
+    125,
+    339,
+    577,
+    23
+   ],
+   "options": [
+    {
+     "text": "(A) The maximum displacement from equilibrium",
+     "page": 5,
+     "rect": [
+      161,
+      375,
+      452,
+      23
+     ]
+    },
+    {
+     "text": "(B) The total distance traveled in one period",
+     "page": 5,
+     "rect": [
+      161,
+      405,
+      408,
+      23
+     ]
+    },
+    {
+     "text": "(C) The time for one complete oscillation",
+     "page": 5,
+     "rect": [
+      161,
+      435,
+      377,
+      23
+     ]
+    },
+    {
+     "text": "(D) The maximum velocity of the object",
+     "page": 5,
+     "rect": [
+      161,
+      465,
+      364,
+      23
+     ]
+    }
+   ],
+   "correct": 0,
+   "optionsPage": null
+  },
+  {
+   "label": "32.",
+   "page": 5,
+   "kind": "choice",
+   "cat": "MULTIPLE_CHOICE",
+   "prompt": "32. A mass on a spring completes 10 oscillations in 5 seconds. What are its period and frequency?",
+   "qrect": [
+    125,
+    507,
+    917,
+    23
+   ],
+   "options": [
+    {
+     "text": "(A) T = 0.5 s, f = 2 Hz",
+     "page": 5,
+     "rect": [
+      161,
+      543,
+      201,
+      23
+     ]
+    },
+    {
+     "text": "(B) T = 2 s, f = 0.5 Hz",
+     "page": 5,
+     "rect": [
+      161,
+      573,
+      201,
+      23
+     ]
+    },
+    {
+     "text": "(C) T = 5 s, f = 10 Hz",
+     "page": 5,
+     "rect": [
+      161,
+      603,
+      196,
+      23
+     ]
+    },
+    {
+     "text": "(D) T = 0.2 s, f = 5 Hz",
+     "page": 5,
+     "rect": [
+      161,
+      633,
+      202,
+      23
+     ]
+    }
+   ],
+   "correct": 0,
+   "optionsPage": null
+  },
+  {
+   "label": "33.",
+   "page": 5,
+   "kind": "choice",
+   "cat": "MULTIPLE_CHOICE",
+   "prompt": "33. In a transverse wave, the particles of the medium vibrate:",
+   "qrect": [
+    125,
+    739,
+    568,
+    23
+   ],
+   "options": [
+    {
+     "text": "(A) Parallel to the direction of wave propagation",
+     "page": 5,
+     "rect": [
+      161,
+      775,
+      443,
+      23
+     ]
+    },
+    {
+     "text": "(B) Perpendicular to the direction of wave propagation",
+     "page": 5,
+     "rect": [
+      161,
+      805,
+      502,
+      23
+     ]
+    },
+    {
+     "text": "(C) In circles around a fixed point",
+     "page": 5,
+     "rect": [
+      161,
+      835,
+      308,
+      23
+     ]
+    },
+    {
+     "text": "(D) They do not vibrate at all",
+     "page": 5,
+     "rect": [
+      161,
+      865,
+      265,
+      23
+     ]
+    }
+   ],
+   "correct": 1,
+   "optionsPage": null
+  },
+  {
+   "label": "34.",
+   "page": 5,
+   "kind": "choice",
+   "cat": "MULTIPLE_CHOICE",
+   "prompt": "34. Sound waves traveling through air are classified as:",
+   "qrect": [
+    125,
+    907,
+    515,
+    23
+   ],
+   "options": [
+    {
+     "text": "(A) Transverse waves",
+     "page": 5,
+     "rect": [
+      161,
+      943,
+      205,
+      23
+     ]
+    },
+    {
+     "text": "(B) Longitudinal waves",
+     "page": 5,
+     "rect": [
+      161,
+      973,
+      213,
+      23
+     ]
+    },
+    {
+     "text": "(C) Electromagnetic waves",
+     "page": 5,
+     "rect": [
+      161,
+      1003,
+      251,
+      23
+     ]
+    },
+    {
+     "text": "(D) Standing waves only",
+     "page": 5,
+     "rect": [
+      161,
+      1033,
+      228,
+      23
+     ]
+    }
+   ],
+   "correct": 1,
+   "optionsPage": null
+  },
+  {
+   "label": "35.",
+   "page": 5,
+   "kind": "choice",
+   "cat": "MULTIPLE_CHOICE",
+   "prompt": "35. The speed of a wave is related to its wavelength (λ) and frequency (f) by the equation:",
+   "qrect": [
+    125,
+    1075,
+    835,
+    23
+   ],
+   "options": [
+    {
+     "text": "(A) v = λ/f",
+     "page": 5,
+     "rect": [
+      161,
+      1111,
+      92,
+      23
+     ]
+    },
+    {
+     "text": "(B) v = λf",
+     "page": 5,
+     "rect": [
+      161,
+      1141,
+      86,
+      23
+     ]
+    },
+    {
+     "text": "(C) v = f/λ",
+     "page": 5,
+     "rect": [
+      161,
+      1171,
+      93,
+      23
+     ]
+    },
+    {
+     "text": "(D) v = λ + f",
+     "page": 5,
+     "rect": [
+      161,
+      1201,
+      111,
+      23
+     ]
+    }
+   ],
+   "correct": 1,
+   "optionsPage": null
+  },
+  {
+   "label": "36.",
+   "page": 5,
+   "kind": "choice",
+   "cat": "MULTIPLE_CHOICE",
+   "prompt": "36. A wave has a frequency of 250 Hz and a wavelength of 1.4 m. What is its speed?",
+   "qrect": [
+    125,
+    1243,
+    791,
+    23
+   ],
+   "options": [
+    {
+     "text": "(A) 178.6 m/s",
+     "page": 5,
+     "rect": [
+      161,
+      1279,
+      126,
+      23
+     ]
+    },
+    {
+     "text": "(B) 251.4 m/s",
+     "page": 5,
+     "rect": [
+      161,
+      1309,
+      126,
+      23
+     ]
+    },
+    {
+     "text": "(C) 350 m/s",
+     "page": 5,
+     "rect": [
+      161,
+      1339,
+      110,
+      23
+     ]
+    },
+    {
+     "text": "(D) 3500 m/s",
+     "page": 5,
+     "rect": [
+      161,
+      1369,
+      122,
+      23
+     ]
+    }
+   ],
+   "correct": 2,
+   "optionsPage": null
+  },
+  {
+   "label": "37.",
+   "page": 5,
+   "kind": "choice",
+   "cat": "MULTIPLE_CHOICE",
+   "prompt": "37. The pitch of a sound is most closely related to its:",
+   "qrect": [
+    125,
+    1411,
+    494,
+    23
+   ],
+   "options": [
+    {
+     "text": "(A) Amplitude",
+     "page": 5,
+     "rect": [
+      161,
+      1447,
+      128,
+      23
+     ]
+    },
+    {
+     "text": "(B) Frequency",
+     "page": 5,
+     "rect": [
+      161,
+      1477,
+      133,
+      23
+     ]
+    },
+    {
+     "text": "(C) Wave speed",
+     "page": 5,
+     "rect": [
+      161,
+      1507,
+      152,
+      23
+     ]
+    },
+    {
+     "text": "(D) Wavelength, independent of medium",
+     "page": 6,
+     "rect": [
+      161,
+      129,
+      377,
+      23
+     ]
+    }
+   ],
+   "correct": 1,
+   "optionsPage": null
+  },
+  {
+   "label": "38.",
+   "page": 6,
+   "kind": "choice",
+   "cat": "MULTIPLE_CHOICE",
+   "prompt": "38. As a sound wave travels from air into water, which property remains unchanged?",
+   "qrect": [
+    125,
+    171,
+    787,
+    23
+   ],
+   "options": [
+    {
+     "text": "(A) Speed",
+     "page": 6,
+     "rect": [
+      161,
+      207,
+      95,
+      23
+     ]
+    },
+    {
+     "text": "(B) Wavelength",
+     "page": 6,
+     "rect": [
+      161,
+      237,
+      145,
+      23
+     ]
+    },
+    {
+     "text": "(C) Frequency",
+     "page": 6,
+     "rect": [
+      161,
+      267,
+      135,
+      23
+     ]
+    },
+    {
+     "text": "(D) Amplitude",
+     "page": 6,
+     "rect": [
+      161,
+      297,
+      129,
+      23
+     ]
+    }
+   ],
+   "correct": 2,
+   "optionsPage": null
+  },
+  {
+   "label": "39.",
+   "page": 6,
+   "kind": "choice",
+   "cat": "MULTIPLE_CHOICE",
+   "prompt": "39. The loudness of a sound is primarily determined by the wave's:",
+   "qrect": [
+    125,
+    339,
+    621,
+    23
+   ],
+   "options": [
+    {
+     "text": "(A) Frequency",
+     "page": 6,
+     "rect": [
+      161,
+      375,
+      133,
+      23
+     ]
+    },
+    {
+     "text": "(B) Amplitude",
+     "page": 6,
+     "rect": [
+      161,
+      405,
+      128,
+      23
+     ]
+    },
+    {
+     "text": "(C) Wavelength",
+     "page": 6,
+     "rect": [
+      161,
+      435,
+      146,
+      23
+     ]
+    },
+    {
+     "text": "(D) Speed",
+     "page": 6,
+     "rect": [
+      161,
+      465,
+      96,
+      23
+     ]
+    }
+   ],
+   "correct": 1,
+   "optionsPage": null
+  },
+  {
+   "label": "40.",
+   "page": 6,
+   "kind": "choice",
+   "cat": "MULTIPLE_CHOICE",
+   "prompt": "40. Two sound waves interfere constructively when they meet:",
+   "qrect": [
+    125,
+    507,
+    579,
+    23
+   ],
+   "options": [
+    {
+     "text": "(A) In phase, with crest aligning with crest",
+     "page": 6,
+     "rect": [
+      161,
+      543,
+      388,
+      23
+     ]
+    },
+    {
+     "text": "(B) Out of phase, with crest aligning with trough",
+     "page": 6,
+     "rect": [
+      161,
+      573,
+      442,
+      23
+     ]
+    },
+    {
+     "text": "(C) With different frequencies only",
+     "page": 6,
+     "rect": [
+      161,
+      603,
+      318,
+      23
+     ]
+    },
+    {
+     "text": "(D) With different amplitudes only",
+     "page": 6,
+     "rect": [
+      161,
+      633,
+      311,
+      23
+     ]
+    }
+   ],
+   "correct": 0,
+   "optionsPage": null
+  }
+ ]
+}

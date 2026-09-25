@@ -1492,6 +1492,11 @@ class Component extends DCLogic {
     const pats = [label, core].filter((s, i, a) => s && a.indexOf(s) === i)
       .map(s => new RegExp('(^|[^A-Za-z0-9\u0E00-\u0E7F])(' + esc(s) + ')(?![A-Za-z0-9\u0E00-\u0E7F])', s.length <= 2 ? 'g' : 'gi'));
     const cand = page.lines.filter(l => l.top >= qL.top - h * 0.5 && l.top <= qL.bottom + h * 10).sort((a, b) => a.top - b.top);
+    const lw = label.split(/\s+/).filter(Boolean);
+    for (const n of [8, 5, 3]) {
+      if (lw.length <= n || lw.slice(0, n).join(' ').length < 8) continue;
+      pats.push(new RegExp('(^|[^A-Za-z0-9\u0E00-\u0E7F])(' + esc(lw.slice(0, n).join(' ')) + ')(?![A-Za-z0-9\u0E00-\u0E7F])', 'gi'));
+    }
     for (const re of pats) {
       for (const L of cand) {
         const m = this.charMap(L);
@@ -1952,7 +1957,7 @@ class Component extends DCLogic {
     this.drawAnswers(ctx, this.state.answers.filter(a => (a.page || 1) === i + 1));
   }
 
-  groupLines(items, viewport, lib) {
+  groupLines(items, viewport, lib, vec) {
     const frags = [];
     items.forEach(it => {
       if (!it.str || !it.str.trim()) return;
@@ -1961,10 +1966,10 @@ class Component extends DCLogic {
       const w = Math.max(1, (it.width || 0) * viewport.scale);
       frags.push({ str: it.str, x0: t[4], x1: t[4] + w, base: t[5], h });
     });
-    return this.groupFrags(frags);
+    return this.groupFrags(frags, vec && vec.vl);
   }
 
-  groupFrags(frags) {
+  groupFrags(frags, rules) {
     frags.sort((a, b) => a.base - b.base || a.x0 - b.x0);
     const lines = [];
     frags.forEach(fr => {
@@ -1988,9 +1993,10 @@ class Component extends DCLogic {
         }
       });
       const cells = [];
+      const ruled = (a, b) => (rules || []).some(r => r.x > a - 1 && r.x < b + 1 && r.y0 <= l.base && r.y1 >= l.base - l.h * 0.6);
       l.frags.forEach(fr => {
         const c = cells[cells.length - 1];
-        if (c && fr.x0 - c.x1 <= l.h * 1.2) { c.text += (fr.x0 - c.x1 > l.h * 0.15 ? ' ' : '') + fr.str; c.x1 = fr.x1; }
+        if (c && fr.x0 - c.x1 <= l.h * 1.2 && !ruled(c.x1, fr.x0)) { c.text += (fr.x0 - c.x1 > l.h * 0.15 ? ' ' : '') + fr.str; c.x1 = fr.x1; }
         else cells.push({ text: fr.str, x0: fr.x0, x1: fr.x1 });
       });
       return {
@@ -2503,6 +2509,19 @@ class Component extends DCLogic {
     const hc = cells[ci];
     if (!hc) return null;
     const xs = Math.min(W - 4, hc.x0 + h * 0.8);
+    if (page.vec) {
+      const cy = (row.top + row.bottom) / 2;
+      const vs = page.vec.vl.filter(r => r.y0 <= cy + 2 && r.y1 >= cy - 2);
+      const hs = page.vec.hl.filter(r => r.x0 <= xs && r.x1 >= xs);
+      const L = vs.filter(r => r.x < xs).reduce((m, r) => Math.max(m, r.x), -Infinity);
+      const R = vs.filter(r => r.x > xs).reduce((m, r) => Math.min(m, r.x), Infinity);
+      const T = hs.filter(r => r.y < cy - h * 0.2).reduce((m, r) => Math.max(m, r.y), -Infinity);
+      const B = hs.filter(r => r.y > cy + h * 0.2).reduce((m, r) => Math.min(m, r.y), Infinity);
+      if (isFinite(L) && isFinite(R) && isFinite(T) && isFinite(B) && R - L > h * 1.5 && B - T > h * 0.8 && B - T < h * 12) {
+        const px = Math.min(h * 0.4, (R - L) * 0.08), py = Math.min(h * 0.15, (B - T) * 0.1);
+        return this.clampRegion(page, { x: L + px, y: T + py, w: R - L - px * 2, h: B - T - py * 2, lh: Math.min(h * 0.9, (B - T) * 0.8), cell: true });
+      }
+    }
     let data;
     try { data = canvas.getContext('2d').getImageData(0, 0, W, H).data; } catch (err) { data = null; }
     const fallbackRight = cells[ci + 1] ? cells[ci + 1].x0 - h * 0.6 : Math.min(W * 0.96, Math.max.apply(null, page.lines.map(l => l.x1)));
@@ -3593,14 +3612,14 @@ class Component extends DCLogic {
       canvas.width = Math.round(viewport.width);
       canvas.height = Math.round(viewport.height);
       await page.render({ canvasContext: canvas.getContext('2d'), viewport }).promise;
+      let vec = null;
+      try { vec = await this.pdfVectors(page, viewport, lib); } catch (err) { vec = null; }
       let lines = [];
       try {
         const tc = await page.getTextContent();
-        lines = this.groupLines(tc.items, viewport, lib);
+        lines = this.groupLines(tc.items, viewport, lib, vec);
         lines.forEach(l => { if (!l.blanks.length) l.blanks = this.findLineBlanks(canvas, l); });
       } catch (err) {}
-      let vec = null;
-      try { vec = await this.pdfVectors(page, viewport, lib); } catch (err) { vec = null; }
       pages.push({
         canvas,
         lines,
@@ -4151,6 +4170,10 @@ class Component extends DCLogic {
   completeTables(found, pages) {
     let out = found.slice();
     const norm = t => String(t || '').toLowerCase().replace(/[^a-z0-9\u0E00-\u0E7F]+/g, '');
+    const edge = (page, l) => { const H = (page.canvas && page.canvas.height) || 1; return l.bottom < H * 0.1 || l.top > H * 0.9; };
+    const seen = {};
+    pages.forEach((page, pi) => ((page && page.lines) || []).forEach(l => { if (!edge(page, l)) return; const k = norm(l.text).replace(/\d+/g, ''); if (k.length > 3) (seen[k] = seen[k] || new Set()).add(pi); }));
+    const running = l => { const k = norm(l.text).replace(/\d+/g, ''); return !!(seen[k] && seen[k].size > 1); };
     pages.forEach((page, pi) => {
       const lines = (page && page.lines) || [];
       const pn = pi + 1;
@@ -4158,6 +4181,8 @@ class Component extends DCLogic {
         const Hd = lines[hi];
         const hc = Hd.cells || [];
         if (hc.length < 2 || hc.some(c => String(c.text).length > 60)) continue;
+        if ((Hd.blanks && Hd.blanks.length) || this.isInfo(Hd.text) || Component.INFO_TH.test(String(Hd.text)) || Component.INSTRUCTION.test(String(Hd.text))) continue;
+        if (edge(page, Hd) && running(Hd)) continue;
         const h = Hd.h || 16;
         const rows = [];
         let prevB = Hd.bottom, gap0 = null;
@@ -4171,6 +4196,7 @@ class Component extends DCLogic {
           const tx = String(L.text || '').trim();
           if (/^[•●▪\-–*]\s/.test(tx) || Component.Q_RE.test(tx) || (tx.length > 6 && tx === tx.toUpperCase() && /[A-Z]{4}/.test(tx)) || String(tx).replace(/[\s._\-–—…·:=]/g, '').length < 2) break;
           const cs = L.cells && L.cells.length ? L.cells : [{ text: L.text, x0: L.x0, x1: L.x1 }];
+          if (cs.some(z => hc.slice(1).some(c => z.x0 < c.x0 - h * 1.5 && z.x1 > c.x0 + h))) break;
           const filled = hc.map((c, k) => { const x0 = c.x0 - h * 0.8, x1 = hc[k + 1] ? hc[k + 1].x0 - h * 0.4 : Infinity; return cs.some(z => z.x0 < x1 && z.x1 > x0 && (k === 0 || z.x0 > c.x0 - h * 1.5)); });
           if (!filled[0]) break;
           if (rows.length && filled.some((v, k) => v !== rows[0].filled[k])) break;
@@ -4509,7 +4535,7 @@ class Component extends DCLogic {
       const k = this.pickOption(a);
       const med = arr => { const v = arr.slice().sort((x, y) => x - y); return v[Math.floor(v.length / 2)] || 0; };
       const mh = med(a.choiceRects.map(c => c.h)), mw = med(a.choiceRects.map(c => c.w));
-      const sane = c => c && c.h <= mh * 2 && c.w <= Math.max(mw * 2.5, mh * 14);
+      const sane = c => c && c.h <= mh * 2 && c.w <= Math.max(mw * 2.5, mh * 40);
       let r = a.pinned || (k >= 0 ? a.choiceRects[k] : null);
       if (r && !a.pinned && !sane(r)) r = null;
       if (r && r.h > mh * 1.6 && mh > 0) r = { ...r, y: r.y + (r.h - mh) / 2, h: mh };
