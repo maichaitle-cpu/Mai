@@ -10,15 +10,18 @@
 
 ## 2. Image preprocessing (scans only)
 - Straighten, upscale, boost contrast, reduce noise.
+- Find long straight lines in the image (table grids, boxes, answer lines) so scans get the same grid-based placement as digital PDFs.
 
 ## 3. Text reading
 - **Digital PDF:** text and exact positions come from the PDF text layer. Exact lines, boxes and table borders are read from the PDF drawing.
-- **Scan or photo:** Google Vision (the site key, which admin can change) or the built-in OCR as a fallback.
+- **Scan or photo:** Google Vision (key entered by the admin; no key is built into the page) or the built-in OCR. The built-in OCR reads English first and re-reads with Thai only when the page reads poorly; Thai characters are re-joined.
+- Two-column pages: text is split at the column gutter and read left column first.
+- Superscripts in digital PDFs are kept as ^ (3x^5), not flattened (3x5).
 - Lines are split into cells at wide gaps (used for tables and columns). Runs of "……" and "____" become blanks, not text. Noise is dropped.
 - Low-confidence pages fall back to Claude reading the image.
 
 ## 4. Question detection (Claude Sonnet)
-- Input: numbered text lines, plus page images for scans.
+- Input: numbered text lines, plus page images for scans. On scans, a question whose line the OCR missed comes back with a box instead of a line.
 - For each question it returns the label, prompt, kind (box / blank / cell / choice / below), the line where the question ends, the **next** line (where the answer area stops), options with their lines, and a **category**.
 - 20 categories: Short text, Long text, Numeric, Formula + working, Multiple choice, True/False, Select all, Matching, Fill blank, Table short / tick / text, Drawing, Label diagram, Graph plot, Ordering, Circle word, Underline, Skip, Other.
 - Code passes after Claude:
@@ -27,6 +30,7 @@
   - **table finder**: header row + empty columns → one cell per empty cell
   - options found by code when Claude misses them, including options on the next page
 - Name, class, date and instruction lines are dropped.
+- **Coverage check (code + 1 small call when needed):** numbered or lettered question lines and labelled blanks that no question covers are sent back to Claude once, for those lines only.
 
 ## 5. Place and zones (code, free)
 - **Choice questions:** each option's position is found in the page text and adjusted to the printed letter.
@@ -40,7 +44,7 @@
 - **Number cross-check:** a question placed away from its printed number is moved and flagged.
 - Each zone gets an answer length (short / 1 sentence / few sentences / paragraph), a limit box, and the stem text above the question as context.
 
-## 6. Map check (Claude Sonnet, 1 call per page)
+## 6. Map check (Claude, only on pages where code left a question unplaced; every page on Full check)
 - Page image with numbered spaces and a grid. Claude confirms each question's category and marks its start and limit box.
 - If the code found a zone, it is used, and a disagreement is flagged. With no code zone, Claude's box is used and flagged.
 
@@ -48,7 +52,7 @@
 - Short notes of everything printed (passages, values, tables, setups) for use across pages.
 - **Dependencies**: which questions need an earlier answer. Found by phrase matching ("use your answer to 3") plus Claude's own reading.
 
-## 8. Solve (Claude Sonnet)
+## 8. Solve (Claude Sonnet 5, adaptive thinking at medium effort; falls back to Sonnet 4.5 if unavailable)
 - Up to 15 questions per call, from one page, with that page's image. 2 calls run in parallel.
 - Each question carries its category rule, answer length, room, context, the fact sheet and the style settings.
 - Claude returns: the answer, the option number, hidden working, confidence, a check of the question label, keywords, and extras by category (pairs, target word, drawing shapes, several options).
@@ -70,6 +74,7 @@
 
 ## 10. Final check (Claude, if accuracy isn't Standard)
 - Looks at the rendered page and moves answers sitting in the wrong place, but only within their own zone.
+- Balanced: only pages that have flagged answers. Full check: every page.
 
 ## 11. Result editor
 - Page view with a Canva-style editor: move, resize and rotate answers; edit text; draw (pen, line, arrow, box, tick, cross); undo and redo; zoom; per-answer colour and font.
@@ -87,5 +92,6 @@
 - **Realism:** imperfection, cross-outs.
 
 ## Cost per page (approx.)
-- Claude: about $0.05–0.06. Fact sheet: about $0.003–0.005 per multi-page run.
+- Claude: estimated about $0.025 per page before thinking tokens (Sonnet 5 at $2/$10 per million tokens); solving is about half. To be confirmed with a live run.
+- Steps other than solving and double-checking run without thinking. The map check and final check only run where needed.
 - Google Vision: first 1,000 scanned pages a month free, then about $0.0015 per page. Digital PDFs don't use it.

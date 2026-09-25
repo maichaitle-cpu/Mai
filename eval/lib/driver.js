@@ -63,6 +63,8 @@ window.__runDoc = async function (opts) {
     layoutCount: comp._traceRaw && comp._traceRaw.layout ? comp._traceRaw.layout.length : null,
     layout: comp._traceRaw && comp._traceRaw.layout ? comp._traceRaw.layout.map(q => ({ id: q.id, label: q.label, page: q.page, lineId: q.lineId, kind: q.kind, cat: q.cat, recovered: !!q.recovered, fromTable: !!q.fromTable, col: q.col || '', prompt: String(q.prompt || '').slice(0, 60) })) : null,
     calls,
+    zoned: comp._traceRaw && comp._traceRaw.zoned ? comp._traceRaw.zoned.map(q => ({ id: q.id, label: q.label, page: q.page, lineId: q.lineId, kind: q.kind, zone: q.zone, how: q.placeHow || null, untilLineId: q.untilLineId })) : null,
+    assigned: comp._traceRaw && comp._traceRaw.assigned ? comp._traceRaw.assigned.map(q => ({ id: q.id, zone: q.zone, spaceIds: q.spaceIds || null, placedBy: q.placedBy || null })) : null,
     pages: (st.pages || []).map((p, i) => ({
       page: i + 1, w: p.canvas.width, h: p.canvas.height, ocr: !!p.ocr, ocrConf: p.ocrConf || null, ocrFailed: !!p.ocrFailed, prep: p.prep || null,
       lines: (p.lines || []).map(l => ({ id: l.id, top: r(l.top), bottom: r(l.bottom), x0: r(l.x0), x1: r(l.x1), text: l.text, cells: (l.cells || []).map(c => [c.text, r(c.x0), r(c.x1)]) })),

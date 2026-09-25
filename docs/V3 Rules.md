@@ -9,7 +9,7 @@
 ## 2. Files
 1. Every file is converted to PDF pages first.
 2. A digital PDF text layer is always preferred over OCR.
-3. Scans use Google Vision. If Vision fails, the built-in OCR is used. If OCR confidence is low, Claude reads the image.
+3. Scans use Google Vision when the admin has entered a key; otherwise the built-in OCR (English first, Thai only when needed). If OCR confidence is low, Claude reads the image.
 
 ## 3. What counts as a question
 1. Anything that expects the student to write, mark or draw, including sub-parts (a, b, c), blanks and table cells.
@@ -17,7 +17,8 @@
 3. **Always left blank:** Name, Class, Section, Period, Date, Teacher, Student ID, Score, Grade (and ชื่อ, ชั้น, เลขที่, วันที่). Answer spaces on those lines are deleted.
 4. A question split across two pages counts as one question. Options on the next page belong to the question above them.
 5. A line with N blanks gives N questions, left to right.
-6. **Tables:** a header row with 2 or more columns, followed by 2 or more rows with the same fill pattern. A column empty in every row gets one question per cell. The table stops at bullets, numbered questions, ALL-CAPS headings, a change in row spacing or a change in the fill pattern.
+6. **Tables:** a header row with 2 to 8 real columns, followed by 2 or more rows with the same fill pattern. A column empty in every row gets one question per cell. Header text that wraps onto several lines counts as one header. The table stops at bullets, numbered questions, ALL-CAPS headings, Name/Date or "label: value" lines, a change in row spacing or a change in the fill pattern. Page headers and footers are never tables.
+7. **Blanks** on a line are matched by the label printed before them ("Degree: ___"), not handed out left to right.
 
 ## 4. Categories
 Each question gets exactly one category. The category decides how it is answered and drawn.
@@ -46,7 +47,7 @@ Each question gets exactly one category. The category decides how it is answered
 ## 5. Where an answer goes (priority order)
 1. **Table cell / blank:** inside that cell or blank.
 2. **Zone:** from the question's last printed line down to the next printed item in the same column. Claude's "next" line wins if it is closer.
-3. Inside the zone, use its unused spaces top to bottom. Writing lines win over plain gaps.
+3. Inside the zone, use its unused spaces top to bottom. A drawn box wins over everything and the answer never leaves it. Writing lines win over plain gaps, except for working/long answers with a single answer line: working goes in the gap above it and the final line goes on the answer line.
 4. No space, but a gap of at least 2 lines → a space is made in the gap (at most 8 lines).
 5. No gap → same line, right of the question (only if at least 5 characters fit).
 6. **Shared space:** consecutive long questions with no room, followed by one big space → the space is split evenly between them, top to bottom.
@@ -57,7 +58,8 @@ Each question gets exactly one category. The category decides how it is answered
    - across the column divider
    - past the next question
    - in a space already taken
-   - on a graph or picture (a box with ink inside)
+   - on a graph or picture (a box with ink inside, or coloured image pixels)
+   - on the edge of a box or card, a footer bar or other decoration
    - in a box smaller than 6 characters
 
 ## 6. Position checks
@@ -95,3 +97,5 @@ Each question gets exactly one category. The category decides how it is answered
 2. Page images are compressed to under the upload size limit.
 3. The fact sheet only runs for worksheets with 2 or more pages.
 4. Google Vision only runs on pages without a text layer.
+5. The map check only runs on pages where code left a question unplaced, and the final check only on pages with flagged answers (both run everywhere on Full check).
+6. Thinking is used only for solving and double-checking.

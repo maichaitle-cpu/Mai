@@ -19,6 +19,7 @@
     if (!A.size || !B.length) return 0;
     return B.filter(w => A.has(w)).length / Math.max(A.size, B.length);
   };
+  const dice = (a, b) => { const g = t => { t = norm(t).replace(/ /g, ''); const o = []; for (let i = 0; i < t.length - 1; i++) o.push(t.slice(i, i + 2)); return o; }; const A = g(a), B = g(b); if (!A.length || !B.length) return 0; const m = new Map(); A.forEach(x => m.set(x, (m.get(x) || 0) + 1)); let n = 0; B.forEach(x => { if (m.get(x) > 0) { n++; m.set(x, m.get(x) - 1); } }); return 2 * n / (A.length + B.length); };
   const labelKey = s => String(s || '').replace(/[^0-9A-Za-z฀-๿]/g, '').toLowerCase();
 
   function textOf(content) {
@@ -55,8 +56,8 @@
     function matchQ(label, prompt, page) {
       const cm = /Row: (.+?) — Column: (.+)$/.exec(String(prompt || ''));
       if (cm) {
-        const cells = Qs().filter(q => q.kind === 'cell' && norm(q.label) === norm(cm[1]));
-        if (cells.length) return cells.reduce((b, q) => (sim(q.cell.col, cm[2]) + sim(cm[2], q.cell.col) > sim(b.cell.col, cm[2]) + sim(cm[2], b.cell.col) ? q : b));
+        const cells = Qs().filter(q => q.kind === 'cell' && dice(q.label, cm[1]) > 0.75);
+        if (cells.length) return cells.reduce((b, q) => (dice(q.cell.col, cm[2]) > dice(b.cell.col, cm[2]) ? q : b));
       }
       let best = null, bs = -1;
       Qs().forEach(q => {
@@ -146,6 +147,16 @@
           const r = q.cell ? q.cell.row : q.area;
           const on = P.lines.filter(l => cy(l) >= r[1] - 4 && cy(l) <= r[1] + r[3] + 4 && l.x1 > r[0] - 40 && l.x0 < r[0] + r[2] + 40).sort((a, b) => Math.abs(cy(a) - (r[1] + r[3] / 2)) - Math.abs(cy(b) - (r[1] + r[3] / 2)));
           if (on.length) L = on[0];
+        }
+        const optLine = o => { const OP = pages()[(o.page || q.page) - 1]; return OP ? OP.lines.find(l => inRect(l, o.rect, 2)) : null; };
+        if (P.ocr && (!L || (q.options && q.options.some(o => !optLine(o))))) {
+          // OCR missed the question or an option line: answer with boxes, as the prompt asks for scans.
+          const area = q.area || (q.options ? q.options[q.correct].rect : q.qrect);
+          const e = { line: null, page: q.page, label: q.label, prompt: q.prompt, kind: q.kind === 'write' || q.kind === 'cell' ? 'box' : q.kind, cat: q.cat, box: pct(area, P) };
+          if (q.options) e.options = q.options.map(o => ({ text: o.text, box: pct(o.rect, pages()[(o.page || q.page) - 1]) }));
+          const pe = perturb(e, q, P, !!focus);
+          if (pe) out.push(pe);
+          return;
         }
         if (!L) return;
         const e = { line: lineRef(q.page, L), next: nextLine(q), label: q.label, prompt: q.prompt, kind: q.kind === 'write' ? 'box' : q.kind, cat: q.cat };

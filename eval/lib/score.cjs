@@ -9,6 +9,7 @@ const sim = (a, b) => {
   if (!A.size || !B.length) return 0;
   return B.filter(w => A.has(w)).length / Math.max(A.size, B.length);
 };
+const dice = (a, b) => { const g = t => { t = norm(t).replace(/ /g, ''); const o = []; for (let i = 0; i < t.length - 1; i++) o.push(t.slice(i, i + 2)); return o; }; const A = g(a), B = g(b); if (!A.length || !B.length) return 0; const m = new Map(); A.forEach(x => m.set(x, (m.get(x) || 0) + 1)); let n = 0; B.forEach(x => { if (m.get(x) > 0) { n++; m.set(x, m.get(x) - 1); } }); return 2 * n / (A.length + B.length); };
 const labelKey = s => String(s || '').replace(/[^0-9A-Za-z฀-๿]/g, '').toLowerCase();
 const inter = (a, b) => Math.max(0, Math.min(a[0] + a[2], b[0] + b[2]) - Math.max(a[0], b[0])) * Math.max(0, Math.min(a[1] + a[3], b[1] + b[3]) - Math.max(a[1], b[1]));
 const areaOf = r => Math.max(0, r[2]) * Math.max(0, r[3]);
@@ -24,7 +25,7 @@ function matchAnswers(gt, answers) {
     const areas = q.areas || (q.area ? [q.area] : []);
     pool.forEach((a, ai) => {
       if (pages.indexOf(a.page) < 0) return;
-      const lab = labelKey(a.num) === labelKey(q.label) || (q.kind === 'cell' && labelKey(a.num).startsWith(labelKey(q.label)) && q.cell && sim(q.cell.col, String(a.num).split('·').pop()) > 0.3);
+      const lab = labelKey(a.num) === labelKey(q.label) || (q.kind === 'cell' && dice(String(a.num).split('·')[0], q.label) > 0.75 && q.cell && dice(q.cell.col, String(a.num).split('·').pop()) > 0.5);
       const ps = sim(q.prompt, a.question);
       const geo = a.bbox && a.bbox.every(v => v != null) && areas.some(ar => inter(a.bbox, grow(ar, 14)) > 0) ? 0.5 : 0;
       const s = (lab ? 2 : 0) + ps * 3 + geo;
