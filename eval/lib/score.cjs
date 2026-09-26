@@ -25,7 +25,8 @@ function matchAnswers(gt, answers) {
     const areas = q.areas || (q.area ? [q.area] : []);
     pool.forEach((a, ai) => {
       if (pages.indexOf(a.page) < 0) return;
-      const lab = labelKey(a.num) === labelKey(q.label) || (q.kind === 'cell' && dice(String(a.num).split('·')[0], q.label) > 0.75 && q.cell && dice(q.cell.col, String(a.num).split('·').pop()) > 0.5);
+      const ak = labelKey(a.num), qk = labelKey(q.label);
+      const lab = ak === qk || (ak.length >= 12 && qk.startsWith(ak)) || (q.kind === 'cell' && dice(String(a.num).split('·')[0], q.label) > 0.75 && q.cell && dice(q.cell.col, String(a.num).split('·').pop()) > 0.5);
       const ps = sim(q.prompt, a.question);
       const geo = a.bbox && a.bbox.every(v => v != null) && areas.some(ar => inter(a.bbox, grow(ar, 14)) > 0) ? 0.5 : 0;
       const s = (lab ? 2 : 0) + ps * 3 + geo;

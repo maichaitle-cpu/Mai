@@ -12,7 +12,7 @@ const rep = JSON.parse(fs.readFileSync(args[0], 'utf8'));
 
 const ALIASES = [
   [/physics/i, 'physics'], [/polygraph|polynomial/i, 'polygraph'], [/exam.?topics|revision/i, 'exam_revision'],
-  [/phe|2610602/i, 'phe'], [/ice.?cream/i, 'icecream'], [/synth(\d+)/i, m => 'synth' + m[1].padStart(2, '0')],
+  [/phe|2610602/i, 'phe'], [/qualitative|limiting/i, 'qual'], [/ice.?cream/i, 'icecream'], [/synth(\d+)/i, m => 'synth' + m[1].padStart(2, '0')],
 ];
 function gtName() {
   if (args[1]) return args[1];
