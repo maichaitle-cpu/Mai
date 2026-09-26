@@ -269,7 +269,81 @@ def icecream():
     d.save('real/icecream.docx')
 
 
-BUILDERS = {'physics': physics, 'polygraph': polygraph, 'exam_revision': exam_revision, 'phe': phe, 'icecream': icecream}
+def qual():
+    d = Doc('qual')
+    X0, X1 = 101, 1113
+
+    def lines_area(p, a, b):
+        return [X0, d.L(p, a)['top'] - 12, X1 - X0, d.L(p, b)['bottom'] + 6 - d.L(p, a)['top'] + 12]
+
+    def seps(p):
+        return sorted(set(l[2] for l in d.P(p)['vec']['hl'] if l[0] < 110 and l[1] > 1100))
+
+    def gap_area(p, qline):
+        # space between the question line and the grey divider under it
+        top = d.L(p, qline)['bottom'] + 4
+        y = min(v for v in seps(p) if v > top + 20)
+        return [X0, top, X1 - X0, y - top]
+
+    def q(p, label, qls, area, cat='LONG_TEXT', ans='', prompt=None):
+        d.add(label=label, page=p, kind='write', cat=cat, prompt=prompt or ' '.join(d.L(p, i)['text'] for i in qls), qrect=d.rect(p, *qls), areas=[area], answer=ans)
+
+    # Section A: options sit in table cells, two per row
+    key = 'CABCBBCA'
+    for n in range(8):
+        ql = [4, 7, 10, 13, 16, 19, 22, 25][n]
+        opts = []
+        for li in (ql + 1, ql + 2):
+            l = d.L(2, li)
+            for c in l['cells']:
+                opts.append({'text': c[0], 'page': 2, 'rect': [c[1], l['top'], c[2] - c[1], l['bottom'] - l['top']]})
+        assert len(opts) == 4, (n, opts)
+        d.add(label=f'{n + 1}.', page=2, kind='choice', cat='MULTIPLE_CHOICE', prompt=d.L(2, ql)['text'], qrect=d.rect(2, ql), options=opts, correct='ABCD'.index(key[n]))
+    q(3, '(a)', [3, 4], lines_area(3, 5, 8), ans='Add anhydrous copper(II) sulfate: it turns from white to blue if water is present.')
+    q(3, '(b)', [9, 10], lines_area(3, 11, 14), ans='It is pure water, because a pure substance boils at a fixed temperature.')
+    q(3, '(a)', [16, 17], lines_area(3, 18, 21), ans='Clean the loop in concentrated HCl, dip it in the salt and hold it in the hot blue flame; observe the colour.')
+    q(3, '(b)', [22], lines_area(3, 23, 26), ans='To remove traces of the previous sample so its colour does not contaminate the result.')
+    q(4, '(a)', [4, 5], lines_area(4, 6, 9), ans='Add dilute nitric acid then silver nitrate solution; a white precipitate shows chloride.')
+    q(4, '(b)', [10], lines_area(4, 11, 18), cat='SHORT_TEXT', ans='Ag⁺(aq) + Cl⁻(aq) → AgCl(s)')
+    # Section C: table with an empty Inference column, then (a)-(f)
+    hdr = d.L(5, 4)
+    ix0 = hdr['cells'][3][1] - 8
+    rows = [(5, 5), (6, 6), (7, 8), (9, 9)]
+    inf = ['potassium ion (K⁺) present', 'chloride ion (Cl⁻) present', 'iron(II) ion (Fe²⁺) present', 'sulfate ion (SO₄²⁻) present']
+    for (a, b), ans in zip(rows, inf):
+        top, bot = d.L(5, a)['top'] - 10, d.L(5, b)['bottom'] + 10
+        d.add(label=d.L(5, a)['cells'][0][0], page=5, kind='cell', cat='TABLE_SHORT', prompt=d.L(5, a)['text'] + ' — Inference', qrect=d.rect(5, a),
+              areas=[[ix0, top, 1127 - ix0, bot - top]], cell={'row': [ix0, top, 1127 - ix0, bot - top], 'header': d.rect(5, 4), 'col': 'Inference to be completed'}, answer=ans)
+    q(5, '(a)', [10], gap_area(5, 10), ans='Potassium ion K⁺ and chloride ion Cl⁻.')
+    q(5, '(b)', [11], gap_area(5, 11), cat='SHORT_TEXT', ans='KCl')
+    q(5, '(c)', [12], gap_area(5, 12), ans='Iron(II) ion Fe²⁺ and sulfate ion SO₄²⁻.')
+    q(5, '(d)', [13], gap_area(5, 13), cat='SHORT_TEXT', ans='FeSO₄')
+    q(5, '(e)', [14], lines_area(5, 15, 22), cat='SHORT_TEXT', ans='Ba²⁺(aq) + SO₄²⁻(aq) → BaSO₄(s)')
+    q(5, '(f)', [23], gap_area(5, 23), ans='Wear eye protection because the reagents are irritants.')
+    # Section D
+    ctx = d.L(6, 3)['text'] + ' ' + d.L(6, 4)['text'] + ' '
+    q(6, '(a)', [8], lines_area(6, 9, 12), 'FORMULA_WORKING', 'n = cV = 0.200 × 0.0250 = 5.00×10⁻³ mol', ctx + d.L(6, 8)['text'])
+    q(6, '(b)', [13], lines_area(6, 14, 17), 'FORMULA_WORKING', 'n = 0.150 × 0.0200 = 3.00×10⁻³ mol', ctx + d.L(6, 13)['text'])
+    q(6, '(c)', [18], lines_area(6, 19, 22), 'LONG_TEXT', 'NaCl is limiting: 1:1 ratio and 3.00×10⁻³ < 5.00×10⁻³ mol.', ctx + d.L(6, 18)['text'])
+    q(7, '(d)', [1], lines_area(7, 2, 5), 'FORMULA_WORKING', '3.00×10⁻³ mol', ctx + d.L(7, 1)['text'])
+    q(7, '(e)', [6, 7], lines_area(7, 8, 11), 'FORMULA_WORKING', 'm = nM = 3.00×10⁻³ × 143.5 = 0.431 g', ctx + d.L(7, 6)['text'])
+    q(7, '(f)', [12], lines_area(7, 13, 16), 'FORMULA_WORKING', '5.00×10⁻³ − 3.00×10⁻³ = 2.00×10⁻³ mol AgNO₃', ctx + d.L(7, 12)['text'])
+    q(7, '(g)', [17], lines_area(7, 18, 21), 'FORMULA_WORKING', '2.00×10⁻³ / 0.0450 = 0.0444 mol dm⁻³', ctx + d.L(7, 17)['text'])
+    # Student review: Action needed column + priority target lines
+    hdr = d.L(8, 4)
+    ax0 = hdr['cells'][3][1] - 8
+    for li in range(5, 11):
+        l = d.L(8, li)
+        top, bot = l['top'] - 12, l['bottom'] + 12
+        d.add(label=l['cells'][0][0], page=8, kind='cell', cat='TABLE_TEXT', prompt=l['cells'][0][0] + ' — Action needed', qrect=d.rect(8, li),
+              areas=[[ax0, top, 1128 - ax0, bot - top]], cell={'row': [ax0, top, 1128 - ax0, bot - top], 'header': d.rect(8, 4), 'col': 'Action needed'}, answer='Practise with past questions.')
+        opts = [{'text': h, 'page': 8, 'rect': [c[1], l['top'], c[2] - c[1], l['bottom'] - l['top']]} for h, c in zip(('Confident', 'Developing'), l['cells'][1:3])]
+        d.add(label=l['cells'][0][0], page=8, kind='choice', cat='MULTIPLE_CHOICE', prompt=l['cells'][0][0] + ' — tick one box', qrect=d.rect(8, li), options=opts, correct=1)
+    q(8, 'Target', [11], lines_area(8, 12, 15), ans='Limiting reactant calculations.')
+    d.save('real/qual.pdf')
+
+
+BUILDERS = {'physics': physics, 'polygraph': polygraph, 'exam_revision': exam_revision, 'phe': phe, 'icecream': icecream, 'qual': qual}
 
 if __name__ == '__main__':
     for n in (sys.argv[1:] or BUILDERS.keys()):

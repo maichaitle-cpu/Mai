@@ -230,6 +230,7 @@
           a.answer = filler(q && q.answer ? q.answer.length : room, q);
           // Real Claude often writes more than the box holds: simulate it for long-answer categories.
           if (cfg.verbose && /LONG|TABLE_TEXT|OTHER/.test(String(x.cat || (q && q.cat) || ''))) a.answer = filler(Math.max(320, a.answer.length * 3), { answer: null });
+          else if (cfg.verbose && /FORMULA/.test(String(x.cat || (q && q.cat) || ''))) a.answer = 'n = c × V = 0.200 mol dm⁻³ × 0.0250 dm³ from the data given\nsubstitute the values carefully and keep three significant figures\n∴ ' + a.answer;
           if (x.cat === 'DRAWING' || x.cat === 'GRAPH_PLOT' || x.cat === 'LABEL_DIAGRAM') a.shapes = [{ t: 'rect', p: [[20, 20], [80, 80]] }];
           if (x.cat === 'TABLE_TICK') a.answer = '✓';
         }
@@ -256,7 +257,9 @@
 
     function fit(body) {
       const req = jsonIn(textOf(body.messages[0].content));
-      return { answers: (req.answers || []).map(a => ({ id: a.id, answer: String(a.answer).length > a.maxChars ? String(a.answer).slice(0, a.maxChars).replace(/\s+\S*$/, '') : String(a.answer) })) };
+      // sloppy: behaves like a small model that overshoots the limit and leaves multi-line working alone
+      const lim = a => (cfg.sloppy ? Math.round(a.maxChars * 1.25) : a.maxChars);
+      return { answers: (req.answers || []).map(a => ({ id: a.id, answer: cfg.sloppy && /\n/.test(String(a.answer)) ? String(a.answer) : String(a.answer).length > lim(a) ? String(a.answer).slice(0, lim(a)).replace(/\s+\S*$/, '') : String(a.answer) })) };
     }
 
     return {

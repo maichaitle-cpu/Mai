@@ -1,0 +1,1480 @@
+{
+ "doc": "real/qual.pdf",
+ "settings": {},
+ "questions": [
+  {
+   "label": "1.",
+   "page": 2,
+   "kind": "choice",
+   "cat": "MULTIPLE_CHOICE",
+   "prompt": "1. Which flame colour indicates the presence of potassium ions? [1]",
+   "qrect": [
+    101,
+    244,
+    606,
+    22
+   ],
+   "options": [
+    {
+     "text": "A red",
+     "page": 2,
+     "rect": [
+      110,
+      290,
+      51,
+      21
+     ]
+    },
+    {
+     "text": "B yellow",
+     "page": 2,
+     "rect": [
+      621,
+      290,
+      75,
+      21
+     ]
+    },
+    {
+     "text": "C lilac",
+     "page": 2,
+     "rect": [
+      110,
+      349,
+      56,
+      21
+     ]
+    },
+    {
+     "text": "D blue-green",
+     "page": 2,
+     "rect": [
+      621,
+      349,
+      115,
+      21
+     ]
+    }
+   ],
+   "correct": 2
+  },
+  {
+   "label": "2.",
+   "page": 2,
+   "kind": "choice",
+   "cat": "MULTIPLE_CHOICE",
+   "prompt": "2. Which substance is used to test chemically for the presence of water? [1]",
+   "qrect": [
+    101,
+    399,
+    675,
+    22
+   ],
+   "options": [
+    {
+     "text": "A anhydrous copper(II) sulfate",
+     "page": 2,
+     "rect": [
+      110,
+      446,
+      259,
+      20
+     ]
+    },
+    {
+     "text": "B aqueous sodium hydroxide",
+     "page": 2,
+     "rect": [
+      621,
+      446,
+      250,
+      20
+     ]
+    },
+    {
+     "text": "C acidified silver nitrate",
+     "page": 2,
+     "rect": [
+      110,
+      504,
+      201,
+      21
+     ]
+    },
+    {
+     "text": "D limewater",
+     "page": 2,
+     "rect": [
+      621,
+      504,
+      105,
+      21
+     ]
+    }
+   ],
+   "correct": 0
+  },
+  {
+   "label": "3.",
+   "page": 2,
+   "kind": "choice",
+   "cat": "MULTIPLE_CHOICE",
+   "prompt": "3. A white precipitate forms when acidified silver nitrate is added to a solution. Which ion is present? [1]",
+   "qrect": [
+    101,
+    554,
+    920,
+    22
+   ],
+   "options": [
+    {
+     "text": "A bromide",
+     "page": 2,
+     "rect": [
+      110,
+      601,
+      92,
+      21
+     ]
+    },
+    {
+     "text": "B chloride",
+     "page": 2,
+     "rect": [
+      621,
+      601,
+      89,
+      21
+     ]
+    },
+    {
+     "text": "C iodide",
+     "page": 2,
+     "rect": [
+      110,
+      660,
+      74,
+      21
+     ]
+    },
+    {
+     "text": "D sulfate",
+     "page": 2,
+     "rect": [
+      621,
+      660,
+      80,
+      21
+     ]
+    }
+   ],
+   "correct": 1
+  },
+  {
+   "label": "4.",
+   "page": 2,
+   "kind": "choice",
+   "cat": "MULTIPLE_CHOICE",
+   "prompt": "4. Which observation is expected when aqueous sodium hydroxide is added to a solution containing Cu²⁺ ions? [1]",
+   "qrect": [
+    101,
+    709,
+    1018,
+    22
+   ],
+   "options": [
+    {
+     "text": "A green precipitate",
+     "page": 2,
+     "rect": [
+      110,
+      757,
+      165,
+      20
+     ]
+    },
+    {
+     "text": "B white precipitate",
+     "page": 2,
+     "rect": [
+      621,
+      757,
+      160,
+      20
+     ]
+    },
+    {
+     "text": "C light-blue precipitate",
+     "page": 2,
+     "rect": [
+      110,
+      816,
+      194,
+      20
+     ]
+    },
+    {
+     "text": "D red-brown precipitate",
+     "page": 2,
+     "rect": [
+      621,
+      816,
+      203,
+      20
+     ]
+    }
+   ],
+   "correct": 2
+  },
+  {
+   "label": "5.",
+   "page": 2,
+   "kind": "choice",
+   "cat": "MULTIPLE_CHOICE",
+   "prompt": "5. Which reagent is used to test for sulfate ions? [1]",
+   "qrect": [
+    101,
+    857,
+    462,
+    22
+   ],
+   "options": [
+    {
+     "text": "A dilute hydrochloric acid only",
+     "page": 2,
+     "rect": [
+      110,
+      908,
+      255,
+      21
+     ]
+    },
+    {
+     "text": "B acidified barium nitrate solution",
+     "page": 2,
+     "rect": [
+      621,
+      908,
+      285,
+      21
+     ]
+    },
+    {
+     "text": "C aqueous sodium hydroxide",
+     "page": 2,
+     "rect": [
+      110,
+      967,
+      251,
+      21
+     ]
+    },
+    {
+     "text": "D acidified silver nitrate solution",
+     "page": 2,
+     "rect": [
+      621,
+      967,
+      272,
+      21
+     ]
+    }
+   ],
+   "correct": 1
+  },
+  {
+   "label": "6.",
+   "page": 2,
+   "kind": "choice",
+   "cat": "MULTIPLE_CHOICE",
+   "prompt": "6. What is a precipitate? [1]",
+   "qrect": [
+    101,
+    1016,
+    250,
+    22
+   ],
+   "options": [
+    {
+     "text": "A a gas produced in a reaction",
+     "page": 2,
+     "rect": [
+      110,
+      1063,
+      262,
+      21
+     ]
+    },
+    {
+     "text": "B an insoluble solid formed from solutions",
+     "page": 2,
+     "rect": [
+      621,
+      1063,
+      357,
+      21
+     ]
+    },
+    {
+     "text": "C a soluble salt dissolved in water",
+     "page": 2,
+     "rect": [
+      110,
+      1122,
+      291,
+      21
+     ]
+    },
+    {
+     "text": "D a colour change in a flame",
+     "page": 2,
+     "rect": [
+      621,
+      1122,
+      247,
+      21
+     ]
+    }
+   ],
+   "correct": 1
+  },
+  {
+   "label": "7.",
+   "page": 2,
+   "kind": "choice",
+   "cat": "MULTIPLE_CHOICE",
+   "prompt": "7. The limiting reactant is the reactant that... [1]",
+   "qrect": [
+    101,
+    1171,
+    424,
+    22
+   ],
+   "options": [
+    {
+     "text": "A has the greatest mass",
+     "page": 2,
+     "rect": [
+      110,
+      1218,
+      210,
+      21
+     ]
+    },
+    {
+     "text": "B has the highest concentration",
+     "page": 2,
+     "rect": [
+      621,
+      1218,
+      271,
+      21
+     ]
+    },
+    {
+     "text": "C is completely used up first",
+     "page": 2,
+     "rect": [
+      110,
+      1277,
+      243,
+      21
+     ]
+    },
+    {
+     "text": "D is always a solid",
+     "page": 2,
+     "rect": [
+      621,
+      1277,
+      161,
+      21
+     ]
+    }
+   ],
+   "correct": 2
+  },
+  {
+   "label": "8.",
+   "page": 2,
+   "kind": "choice",
+   "cat": "MULTIPLE_CHOICE",
+   "prompt": "8. Which ionic equation represents the formation of silver chloride? [1]",
+   "qrect": [
+    101,
+    1327,
+    625,
+    22
+   ],
+   "options": [
+    {
+     "text": "A Ag⁺(aq) + Cl⁻(aq) → AgCl(s)",
+     "page": 2,
+     "rect": [
+      110,
+      1373,
+      261,
+      21
+     ]
+    },
+    {
+     "text": "B Ag(s) + Cl₂(g) → AgCl(aq)",
+     "page": 2,
+     "rect": [
+      621,
+      1373,
+      243,
+      21
+     ]
+    },
+    {
+     "text": "C AgNO₃(aq) → Ag⁺(aq) + NO₃⁻(aq)",
+     "page": 2,
+     "rect": [
+      110,
+      1432,
+      311,
+      21
+     ]
+    },
+    {
+     "text": "D Na⁺(aq) + Cl⁻(aq) → NaCl(s)",
+     "page": 2,
+     "rect": [
+      621,
+      1432,
+      265,
+      21
+     ]
+    }
+   ],
+   "correct": 0
+  },
+  {
+   "label": "(a)",
+   "page": 3,
+   "kind": "write",
+   "cat": "LONG_TEXT",
+   "prompt": "(a) Describe the chemical test for water using anhydrous copper(II) sulfate. Include the starting colour and the positive result. [2]",
+   "qrect": [
+    113,
+    260,
+    967,
+    46
+   ],
+   "areas": [
+    [
+     101,
+     301,
+     1012,
+     143
+    ]
+   ],
+   "answer": "Add anhydrous copper(II) sulfate: it turns from white to blue if water is present."
+  },
+  {
+   "label": "(b)",
+   "page": 3,
+   "kind": "write",
+   "cat": "LONG_TEXT",
+   "prompt": "(b) A liquid boils sharply at 100 °C at standard atmospheric pressure. Explain what ths suggests about the purity of the water. [2]",
+   "qrect": [
+    113,
+    495,
+    989,
+    46
+   ],
+   "areas": [
+    [
+     101,
+     535,
+     1012,
+     144
+    ]
+   ],
+   "answer": "It is pure water, because a pure substance boils at a fixed temperature."
+  },
+  {
+   "label": "(a)",
+   "page": 3,
+   "kind": "write",
+   "cat": "LONG_TEXT",
+   "prompt": "(a) Describe a safe method for carrying out a flame test on a solid salt. Your method should include how the wire loop is cleaned. [3]",
+   "qrect": [
+    113,
+    784,
+    993,
+    46
+   ],
+   "areas": [
+    [
+     101,
+     859,
+     1012,
+     144
+    ]
+   ],
+   "answer": "Clean the loop in concentrated HCl, dip it in the salt and hold it in the hot blue flame; observe the colour."
+  },
+  {
+   "label": "(b)",
+   "page": 3,
+   "kind": "write",
+   "cat": "LONG_TEXT",
+   "prompt": "(b) Explain why the wire loop must be cleaned before testing a new sample. [1]",
+   "qrect": [
+    113,
+    1054,
+    704,
+    22
+   ],
+   "areas": [
+    [
+     101,
+     1135,
+     1012,
+     144
+    ]
+   ],
+   "answer": "To remove traces of the previous sample so its colour does not contaminate the result."
+  },
+  {
+   "label": "(a)",
+   "page": 4,
+   "kind": "write",
+   "cat": "LONG_TEXT",
+   "prompt": "(a) Describe how to test an aqueous sample for chloride ions. State the reagent(s) and the positive observation. [2]",
+   "qrect": [
+    113,
+    238,
+    985,
+    46
+   ],
+   "areas": [
+    [
+     101,
+     312,
+     1012,
+     144
+    ]
+   ],
+   "answer": "Add dilute nitric acid then silver nitrate solution; a white precipitate shows chloride."
+  },
+  {
+   "label": "(b)",
+   "page": 4,
+   "kind": "write",
+   "cat": "SHORT_TEXT",
+   "prompt": "(b) Write the ionic equation, including state symbols, for the formation of silver chloride. [2]",
+   "qrect": [
+    113,
+    507,
+    805,
+    22
+   ],
+   "areas": [
+    [
+     101,
+     557,
+     1012,
+     290
+    ]
+   ],
+   "answer": "Ag⁺(aq) + Cl⁻(aq) → AgCl(s)"
+  },
+  {
+   "label": "A",
+   "page": 5,
+   "kind": "cell",
+   "cat": "TABLE_SHORT",
+   "prompt": "A Flame test lilac flame — Inference",
+   "qrect": [
+    108,
+    296,
+    494,
+    18
+   ],
+   "areas": [
+    [
+     823,
+     286,
+     304,
+     38
+    ]
+   ],
+   "cell": {
+    "row": [
+     823,
+     286,
+     304,
+     38
+    ],
+    "header": [
+     108,
+     261,
+     934,
+     18
+    ],
+    "col": "Inference to be completed"
+   },
+   "answer": "potassium ion (K⁺) present"
+  },
+  {
+   "label": "A",
+   "page": 5,
+   "kind": "cell",
+   "cat": "TABLE_SHORT",
+   "prompt": "A Acidify, then add aqueous silver nitrate white precipitate — Inference",
+   "qrect": [
+    108,
+    334,
+    541,
+    18
+   ],
+   "areas": [
+    [
+     823,
+     324,
+     304,
+     38
+    ]
+   ],
+   "cell": {
+    "row": [
+     823,
+     324,
+     304,
+     38
+    ],
+    "header": [
+     108,
+     261,
+     934,
+     18
+    ],
+    "col": "Inference to be completed"
+   },
+   "answer": "chloride ion (Cl⁻) present"
+  },
+  {
+   "label": "B",
+   "page": 5,
+   "kind": "cell",
+   "cat": "TABLE_SHORT",
+   "prompt": "B Add aqueous sodium hydroxide green precipitate; surface slowly turns — Inference",
+   "qrect": [
+    108,
+    372,
+    703,
+    19
+   ],
+   "areas": [
+    [
+     823,
+     362,
+     304,
+     59
+    ]
+   ],
+   "cell": {
+    "row": [
+     823,
+     362,
+     304,
+     59
+    ],
+    "header": [
+     108,
+     261,
+     934,
+     18
+    ],
+    "col": "Inference to be completed"
+   },
+   "answer": "iron(II) ion (Fe²⁺) present"
+  },
+  {
+   "label": "B",
+   "page": 5,
+   "kind": "cell",
+   "cat": "TABLE_SHORT",
+   "prompt": "B Acidify, then add aqueous barium nitrate white precipitate — Inference",
+   "qrect": [
+    108,
+    428,
+    541,
+    18
+   ],
+   "areas": [
+    [
+     823,
+     418,
+     304,
+     38
+    ]
+   ],
+   "cell": {
+    "row": [
+     823,
+     418,
+     304,
+     38
+    ],
+    "header": [
+     108,
+     261,
+     934,
+     18
+    ],
+    "col": "Inference to be completed"
+   },
+   "answer": "sulfate ion (SO₄²⁻) present"
+  },
+  {
+   "label": "(a)",
+   "page": 5,
+   "kind": "write",
+   "cat": "LONG_TEXT",
+   "prompt": "(a) Identify the positive ion and negative ion present in solution A. [2]",
+   "qrect": [
+    113,
+    470,
+    613,
+    22
+   ],
+   "areas": [
+    [
+     101,
+     496,
+     1012,
+     57
+    ]
+   ],
+   "answer": "Potassium ion K⁺ and chloride ion Cl⁻."
+  },
+  {
+   "label": "(b)",
+   "page": 5,
+   "kind": "write",
+   "cat": "SHORT_TEXT",
+   "prompt": "(b) Give the formula of the dissolved salt in solution A. [1]",
+   "qrect": [
+    113,
+    566,
+    513,
+    22
+   ],
+   "areas": [
+    [
+     101,
+     592,
+     1012,
+     56
+    ]
+   ],
+   "answer": "KCl"
+  },
+  {
+   "label": "(c)",
+   "page": 5,
+   "kind": "write",
+   "cat": "LONG_TEXT",
+   "prompt": "(c) Identify the positive ion and negative ion present in solution B. [2]",
+   "qrect": [
+    113,
+    661,
+    612,
+    22
+   ],
+   "areas": [
+    [
+     101,
+     687,
+     1012,
+     57
+    ]
+   ],
+   "answer": "Iron(II) ion Fe²⁺ and sulfate ion SO₄²⁻."
+  },
+  {
+   "label": "(d)",
+   "page": 5,
+   "kind": "write",
+   "cat": "SHORT_TEXT",
+   "prompt": "(d) Give the formula of the dissolved salt in solution B. [1]",
+   "qrect": [
+    113,
+    757,
+    513,
+    22
+   ],
+   "areas": [
+    [
+     101,
+     783,
+     1012,
+     56
+    ]
+   ],
+   "answer": "FeSO₄"
+  },
+  {
+   "label": "(e)",
+   "page": 5,
+   "kind": "write",
+   "cat": "SHORT_TEXT",
+   "prompt": "(e) Write the ionic equation, including state symbols, for the sulfate precipitation test. [2]",
+   "qrect": [
+    113,
+    852,
+    781,
+    22
+   ],
+   "areas": [
+    [
+     101,
+     903,
+     1012,
+     290
+    ]
+   ],
+   "answer": "Ba²⁺(aq) + SO₄²⁻(aq) → BaSO₄(s)"
+  },
+  {
+   "label": "(f)",
+   "page": 5,
+   "kind": "write",
+   "cat": "LONG_TEXT",
+   "prompt": "(f) State one safety precaution for this investigation and explain why it is needed. [2]",
+   "qrect": [
+    113,
+    1244,
+    748,
+    22
+   ],
+   "areas": [
+    [
+     101,
+     1270,
+     1012,
+     88
+    ]
+   ],
+   "answer": "Wear eye protection because the reagents are irritants."
+  },
+  {
+   "label": "(a)",
+   "page": 6,
+   "kind": "write",
+   "cat": "FORMULA_WORKING",
+   "prompt": "25.0 cm³ of 0.200 mol dm⁻³ silver nitrate solution is mixed with 20.0 cm³ of 0.150 mol dm⁻³ sodium chloride solution. AgNO₃(aq) + NaCl(aq) → AgCl(s) + NaNO₃(aq) (a) Calculate the amount, in moles, of AgNO₃ used. [1]",
+   "qrect": [
+    113,
+    494,
+    490,
+    22
+   ],
+   "areas": [
+    [
+     101,
+     557,
+     1012,
+     178
+    ]
+   ],
+   "answer": "n = cV = 0.200 × 0.0250 = 5.00×10⁻³ mol"
+  },
+  {
+   "label": "(b)",
+   "page": 6,
+   "kind": "write",
+   "cat": "FORMULA_WORKING",
+   "prompt": "25.0 cm³ of 0.200 mol dm⁻³ silver nitrate solution is mixed with 20.0 cm³ of 0.150 mol dm⁻³ sodium chloride solution. AgNO₃(aq) + NaCl(aq) → AgCl(s) + NaNO₃(aq) (b) Calculate the amount, in moles, of NaCl used. [1]",
+   "qrect": [
+    113,
+    798,
+    472,
+    22
+   ],
+   "areas": [
+    [
+     101,
+     860,
+     1012,
+     178
+    ]
+   ],
+   "answer": "n = 0.150 × 0.0200 = 3.00×10⁻³ mol"
+  },
+  {
+   "label": "(c)",
+   "page": 6,
+   "kind": "write",
+   "cat": "LONG_TEXT",
+   "prompt": "25.0 cm³ of 0.200 mol dm⁻³ silver nitrate solution is mixed with 20.0 cm³ of 0.150 mol dm⁻³ sodium chloride solution. AgNO₃(aq) + NaCl(aq) → AgCl(s) + NaNO₃(aq) (c) Identify the limiting reactant. Justify your answer using the mole ratio. [1]",
+   "qrect": [
+    113,
+    1123,
+    675,
+    22
+   ],
+   "areas": [
+    [
+     101,
+     1185,
+     1012,
+     178
+    ]
+   ],
+   "answer": "NaCl is limiting: 1:1 ratio and 3.00×10⁻³ < 5.00×10⁻³ mol."
+  },
+  {
+   "label": "(d)",
+   "page": 7,
+   "kind": "write",
+   "cat": "FORMULA_WORKING",
+   "prompt": "25.0 cm³ of 0.200 mol dm⁻³ silver nitrate solution is mixed with 20.0 cm³ of 0.150 mol dm⁻³ sodium chloride solution. AgNO₃(aq) + NaCl(aq) → AgCl(s) + NaNO₃(aq) (d) Determine the amount, in moles, of AgCl formed. [1]",
+   "qrect": [
+    113,
+    89,
+    498,
+    22
+   ],
+   "areas": [
+    [
+     101,
+     105,
+     1012,
+     178
+    ]
+   ],
+   "answer": "3.00×10⁻³ mol"
+  },
+  {
+   "label": "(e)",
+   "page": 7,
+   "kind": "write",
+   "cat": "FORMULA_WORKING",
+   "prompt": "25.0 cm³ of 0.200 mol dm⁻³ silver nitrate solution is mixed with 20.0 cm³ of 0.150 mol dm⁻³ sodium chloride solution. AgNO₃(aq) + NaCl(aq) → AgCl(s) + NaNO₃(aq) (e) Calculate the maximum mass of AgCl precipitate formed. Give your answer to three significant figures.",
+   "qrect": [
+    113,
+    345,
+    934,
+    46
+   ],
+   "areas": [
+    [
+     101,
+     432,
+     1012,
+     178
+    ]
+   ],
+   "answer": "m = nM = 3.00×10⁻³ × 143.5 = 0.431 g"
+  },
+  {
+   "label": "(f)",
+   "page": 7,
+   "kind": "write",
+   "cat": "FORMULA_WORKING",
+   "prompt": "25.0 cm³ of 0.200 mol dm⁻³ silver nitrate solution is mixed with 20.0 cm³ of 0.150 mol dm⁻³ sodium chloride solution. AgNO₃(aq) + NaCl(aq) → AgCl(s) + NaNO₃(aq) (f) Calculate the amount, in moles, of the reactant left in excess after the reaction is complete. [2]",
+   "qrect": [
+    113,
+    672,
+    862,
+    22
+   ],
+   "areas": [
+    [
+     101,
+     734,
+     1012,
+     178
+    ]
+   ],
+   "answer": "5.00×10⁻³ − 3.00×10⁻³ = 2.00×10⁻³ mol AgNO₃"
+  },
+  {
+   "label": "(g)",
+   "page": 7,
+   "kind": "write",
+   "cat": "FORMULA_WORKING",
+   "prompt": "25.0 cm³ of 0.200 mol dm⁻³ silver nitrate solution is mixed with 20.0 cm³ of 0.150 mol dm⁻³ sodium chloride solution. AgNO₃(aq) + NaCl(aq) → AgCl(s) + NaNO₃(aq) (g) Calculate the concentration of the excess reactant remaining, in mol dm⁻³. [2]",
+   "qrect": [
+    113,
+    975,
+    720,
+    22
+   ],
+   "areas": [
+    [
+     101,
+     1037,
+     1012,
+     178
+    ]
+   ],
+   "answer": "2.00×10⁻³ / 0.0450 = 0.0444 mol dm⁻³"
+  },
+  {
+   "label": "Flame-test colours and procedure",
+   "page": 8,
+   "kind": "cell",
+   "cat": "TABLE_TEXT",
+   "prompt": "Flame-test colours and procedure — Action needed",
+   "qrect": [
+    105,
+    308,
+    500,
+    19
+   ],
+   "areas": [
+    [
+     677,
+     296,
+     451,
+     43
+    ]
+   ],
+   "cell": {
+    "row": [
+     677,
+     296,
+     451,
+     43
+    ],
+    "header": [
+     105,
+     269,
+     704,
+     20
+    ],
+    "col": "Action needed"
+   },
+   "answer": "Practise with past questions."
+  },
+  {
+   "label": "Flame-test colours and procedure",
+   "page": 8,
+   "kind": "choice",
+   "cat": "MULTIPLE_CHOICE",
+   "prompt": "Flame-test colours and procedure — tick one box",
+   "qrect": [
+    105,
+    308,
+    500,
+    19
+   ],
+   "options": [
+    {
+     "text": "Confident",
+     "page": 8,
+     "rect": [
+      459,
+      308,
+      15,
+      19
+     ]
+    },
+    {
+     "text": "Developing",
+     "page": 8,
+     "rect": [
+      591,
+      308,
+      14,
+      19
+     ]
+    }
+   ],
+   "correct": 1
+  },
+  {
+   "label": "Tests for cations and anions",
+   "page": 8,
+   "kind": "cell",
+   "cat": "TABLE_TEXT",
+   "prompt": "Tests for cations and anions — Action needed",
+   "qrect": [
+    105,
+    350,
+    500,
+    18
+   ],
+   "areas": [
+    [
+     677,
+     338,
+     451,
+     42
+    ]
+   ],
+   "cell": {
+    "row": [
+     677,
+     338,
+     451,
+     42
+    ],
+    "header": [
+     105,
+     269,
+     704,
+     20
+    ],
+    "col": "Action needed"
+   },
+   "answer": "Practise with past questions."
+  },
+  {
+   "label": "Tests for cations and anions",
+   "page": 8,
+   "kind": "choice",
+   "cat": "MULTIPLE_CHOICE",
+   "prompt": "Tests for cations and anions — tick one box",
+   "qrect": [
+    105,
+    350,
+    500,
+    18
+   ],
+   "options": [
+    {
+     "text": "Confident",
+     "page": 8,
+     "rect": [
+      459,
+      350,
+      15,
+      18
+     ]
+    },
+    {
+     "text": "Developing",
+     "page": 8,
+     "rect": [
+      591,
+      350,
+      14,
+      18
+     ]
+    }
+   ],
+   "correct": 1
+  },
+  {
+   "label": "Testing for water and purity",
+   "page": 8,
+   "kind": "cell",
+   "cat": "TABLE_TEXT",
+   "prompt": "Testing for water and purity — Action needed",
+   "qrect": [
+    105,
+    391,
+    500,
+    18
+   ],
+   "areas": [
+    [
+     677,
+     379,
+     451,
+     42
+    ]
+   ],
+   "cell": {
+    "row": [
+     677,
+     379,
+     451,
+     42
+    ],
+    "header": [
+     105,
+     269,
+     704,
+     20
+    ],
+    "col": "Action needed"
+   },
+   "answer": "Practise with past questions."
+  },
+  {
+   "label": "Testing for water and purity",
+   "page": 8,
+   "kind": "choice",
+   "cat": "MULTIPLE_CHOICE",
+   "prompt": "Testing for water and purity — tick one box",
+   "qrect": [
+    105,
+    391,
+    500,
+    18
+   ],
+   "options": [
+    {
+     "text": "Confident",
+     "page": 8,
+     "rect": [
+      459,
+      391,
+      15,
+      18
+     ]
+    },
+    {
+     "text": "Developing",
+     "page": 8,
+     "rect": [
+      591,
+      391,
+      14,
+      18
+     ]
+    }
+   ],
+   "correct": 1
+  },
+  {
+   "label": "Recording practical observations",
+   "page": 8,
+   "kind": "cell",
+   "cat": "TABLE_TEXT",
+   "prompt": "Recording practical observations — Action needed",
+   "qrect": [
+    105,
+    432,
+    500,
+    19
+   ],
+   "areas": [
+    [
+     677,
+     420,
+     451,
+     43
+    ]
+   ],
+   "cell": {
+    "row": [
+     677,
+     420,
+     451,
+     43
+    ],
+    "header": [
+     105,
+     269,
+     704,
+     20
+    ],
+    "col": "Action needed"
+   },
+   "answer": "Practise with past questions."
+  },
+  {
+   "label": "Recording practical observations",
+   "page": 8,
+   "kind": "choice",
+   "cat": "MULTIPLE_CHOICE",
+   "prompt": "Recording practical observations — tick one box",
+   "qrect": [
+    105,
+    432,
+    500,
+    19
+   ],
+   "options": [
+    {
+     "text": "Confident",
+     "page": 8,
+     "rect": [
+      459,
+      432,
+      15,
+      19
+     ]
+    },
+    {
+     "text": "Developing",
+     "page": 8,
+     "rect": [
+      591,
+      432,
+      14,
+      19
+     ]
+    }
+   ],
+   "correct": 1
+  },
+  {
+   "label": "Writing ionic equations",
+   "page": 8,
+   "kind": "cell",
+   "cat": "TABLE_TEXT",
+   "prompt": "Writing ionic equations — Action needed",
+   "qrect": [
+    105,
+    474,
+    500,
+    18
+   ],
+   "areas": [
+    [
+     677,
+     462,
+     451,
+     42
+    ]
+   ],
+   "cell": {
+    "row": [
+     677,
+     462,
+     451,
+     42
+    ],
+    "header": [
+     105,
+     269,
+     704,
+     20
+    ],
+    "col": "Action needed"
+   },
+   "answer": "Practise with past questions."
+  },
+  {
+   "label": "Writing ionic equations",
+   "page": 8,
+   "kind": "choice",
+   "cat": "MULTIPLE_CHOICE",
+   "prompt": "Writing ionic equations — tick one box",
+   "qrect": [
+    105,
+    474,
+    500,
+    18
+   ],
+   "options": [
+    {
+     "text": "Confident",
+     "page": 8,
+     "rect": [
+      459,
+      474,
+      15,
+      18
+     ]
+    },
+    {
+     "text": "Developing",
+     "page": 8,
+     "rect": [
+      591,
+      474,
+      14,
+      18
+     ]
+    }
+   ],
+   "correct": 1
+  },
+  {
+   "label": "Limiting-reactant calculations",
+   "page": 8,
+   "kind": "cell",
+   "cat": "TABLE_TEXT",
+   "prompt": "Limiting-reactant calculations — Action needed",
+   "qrect": [
+    105,
+    515,
+    500,
+    18
+   ],
+   "areas": [
+    [
+     677,
+     503,
+     451,
+     42
+    ]
+   ],
+   "cell": {
+    "row": [
+     677,
+     503,
+     451,
+     42
+    ],
+    "header": [
+     105,
+     269,
+     704,
+     20
+    ],
+    "col": "Action needed"
+   },
+   "answer": "Practise with past questions."
+  },
+  {
+   "label": "Limiting-reactant calculations",
+   "page": 8,
+   "kind": "choice",
+   "cat": "MULTIPLE_CHOICE",
+   "prompt": "Limiting-reactant calculations — tick one box",
+   "qrect": [
+    105,
+    515,
+    500,
+    18
+   ],
+   "options": [
+    {
+     "text": "Confident",
+     "page": 8,
+     "rect": [
+      459,
+      515,
+      15,
+      18
+     ]
+    },
+    {
+     "text": "Developing",
+     "page": 8,
+     "rect": [
+      591,
+      515,
+      14,
+      18
+     ]
+    }
+   ],
+   "correct": 1
+  },
+  {
+   "label": "Target",
+   "page": 8,
+   "kind": "write",
+   "cat": "LONG_TEXT",
+   "prompt": "My priority revision target:",
+   "qrect": [
+    101,
+    569,
+    252,
+    22
+   ],
+   "areas": [
+    [
+     101,
+     616,
+     1012,
+     178
+    ]
+   ],
+   "answer": "Limiting reactant calculations."
+  }
+ ]
+}

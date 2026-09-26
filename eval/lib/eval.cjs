@@ -28,12 +28,14 @@ async function main() {
     try {
       run = await page.evaluate(o => window.__runDoc(o), {
         doc: gt.doc, gt, claude: mode, snapshots: !!opt('snap'),
-        oracleCfg: { mapBoxes: !!opt('map-boxes'), noise: Number(opt('noise', 0)), seed: Number(opt('seed', 1)), verbose: !!opt('verbose') }, settings: gt.settings || {},
+        oracleCfg: { mapBoxes: !!opt('map-boxes'), noise: Number(opt('noise', 0)), seed: Number(opt('seed', 1)), verbose: !!opt('verbose'), sloppy: !!opt('sloppy') }, settings: gt.settings || {},
       });
     } catch (e) {
       run = { apiError: 'harness: ' + e.message, answers: [], pages: [], calls: [] };
     }
     const s = score(gt, run);
+    s.tiny = run.answers.filter(a => a.sizeRatio != null && a.sizeRatio < Number(opt('tiny', 0.6))).map(a => a.num + ' x' + a.sizeRatio);
+    s.cut = run.answers.filter(a => /…$/.test(a.shown || '')).map(a => a.num);
     s.apiError = run.apiError; s.mode = run.mode; s.ms = Date.now() - t0;
     s.calls = run.calls.reduce((m, c) => { m[c.stage] = (m[c.stage] || 0) + 1; return m; }, {});
     s.cost = run.calls.reduce((m, c) => m + (c.cost || 0), 0);
@@ -47,7 +49,7 @@ async function main() {
     fs.writeFileSync(path.join(outDir, name + '.score.json'), JSON.stringify(s, null, 1));
     results.push(s);
     const pc = v => (v == null ? '  -  ' : (v * 100).toFixed(1).padStart(5) + '%');
-    console.log(name.padEnd(22), 'Q', String(s.questions).padStart(3), '| found', pc(s.detectRecall), '| precision', pc(s.detectPrecision), '| location', pc(s.location), '| choice', pc(s.choiceCorrect), s.apiError ? '| ERROR ' + s.apiError.slice(0, 80) : '', mode === 'live' ? '| $' + s.cost.toFixed(4) + ' (' + (s.cost / Math.max(1, s.pages)).toFixed(4) + '/page)' : '| est $' + (s.est / Math.max(1, s.pages)).toFixed(4) + '/page');
+    console.log(name.padEnd(22), 'Q', String(s.questions).padStart(3), '| found', pc(s.detectRecall), '| precision', pc(s.detectPrecision), '| location', pc(s.location), '| choice', pc(s.choiceCorrect), (s.tiny.length || s.cut.length) ? '| tiny ' + s.tiny.length + ' cut ' + s.cut.length : '', s.apiError ? '| ERROR ' + s.apiError.slice(0, 80) : '', mode === 'live' ? '| $' + s.cost.toFixed(4) + ' (' + (s.cost / Math.max(1, s.pages)).toFixed(4) + '/page)' : '| est $' + (s.est / Math.max(1, s.pages)).toFixed(4) + '/page');
   }
   const tot = k => { const n = results.reduce((m, s) => m + s.questions, 0); return results.reduce((m, s) => m + (s[k] == null ? 0 : s[k] * s.questions), 0) / Math.max(1, n); };
   const extra = results.reduce((m, s) => m + s.extra.length, 0);

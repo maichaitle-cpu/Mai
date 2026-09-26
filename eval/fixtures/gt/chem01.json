@@ -1,0 +1,264 @@
+{
+ "doc": "synth/chem01.pdf",
+ "synthetic": true,
+ "questions": [
+  {
+   "label": "A",
+   "page": 1,
+   "kind": "cell",
+   "cat": "TABLE_TEXT",
+   "prompt": "A — Flame test — lilac flame — Inference",
+   "answer": "potassium ion (K⁺) present",
+   "qrect": [
+    91,
+    221,
+    105,
+    41
+   ],
+   "areas": [
+    [
+     800,
+     221,
+     300,
+     41
+    ]
+   ],
+   "cell": {
+    "row": [
+     800,
+     221,
+     300,
+     41
+    ],
+    "header": [
+     800,
+     181,
+     300,
+     41
+    ],
+    "col": "Inference to be completed"
+   }
+  },
+  {
+   "label": "A",
+   "page": 1,
+   "kind": "cell",
+   "cat": "TABLE_TEXT",
+   "prompt": "A — Acidify, then add aqueous silver nitrate — white precipitate — Inference",
+   "answer": "chloride ion (Cl⁻) present",
+   "qrect": [
+    91,
+    262,
+    105,
+    62
+   ],
+   "areas": [
+    [
+     800,
+     262,
+     300,
+     62
+    ]
+   ],
+   "cell": {
+    "row": [
+     800,
+     262,
+     300,
+     62
+    ],
+    "header": [
+     800,
+     181,
+     300,
+     41
+    ],
+    "col": "Inference to be completed"
+   }
+  },
+  {
+   "label": "B",
+   "page": 1,
+   "kind": "cell",
+   "cat": "TABLE_TEXT",
+   "prompt": "B — Add aqueous sodium hydroxide — green precipitate; surface slowly turns brown — Inference",
+   "answer": "iron(II) ion (Fe²⁺) present",
+   "qrect": [
+    91,
+    323,
+    105,
+    62
+   ],
+   "areas": [
+    [
+     800,
+     323,
+     300,
+     62
+    ]
+   ],
+   "cell": {
+    "row": [
+     800,
+     323,
+     300,
+     62
+    ],
+    "header": [
+     800,
+     181,
+     300,
+     41
+    ],
+    "col": "Inference to be completed"
+   }
+  },
+  {
+   "label": "B",
+   "page": 1,
+   "kind": "cell",
+   "cat": "TABLE_TEXT",
+   "prompt": "B — Acidify, then add aqueous barium nitrate — white precipitate — Inference",
+   "answer": "sulfate ion (SO₄²⁻) present",
+   "qrect": [
+    91,
+    385,
+    105,
+    62
+   ],
+   "areas": [
+    [
+     800,
+     385,
+     300,
+     62
+    ]
+   ],
+   "cell": {
+    "row": [
+     800,
+     385,
+     300,
+     62
+    ],
+    "header": [
+     800,
+     181,
+     300,
+     41
+    ],
+    "col": "Inference to be completed"
+   }
+  },
+  {
+   "label": "(a)",
+   "page": 1,
+   "kind": "write",
+   "cat": "LONG_TEXT",
+   "prompt": "Identify the positive ion and negative ion present in solution A.",
+   "answer": "Potassium ion, K⁺ (lilac flame), and chloride ion, Cl⁻ (white precipitate with acidified silver nitrate).",
+   "qrect": [
+    108,
+    474,
+    993,
+    23
+   ],
+   "areas": [
+    [
+     90,
+     497,
+     1011,
+     105
+    ]
+   ]
+  },
+  {
+   "label": "(b)",
+   "page": 1,
+   "kind": "write",
+   "cat": "SHORT_TEXT",
+   "prompt": "Give the formula of the dissolved salt in solution A.",
+   "answer": "KCl",
+   "qrect": [
+    108,
+    629,
+    993,
+    23
+   ],
+   "areas": [
+    [
+     90,
+     651,
+     1011,
+     66
+    ]
+   ]
+  },
+  {
+   "label": "(c)",
+   "page": 1,
+   "kind": "write",
+   "cat": "LONG_TEXT",
+   "prompt": "Identify the positive ion and negative ion present in solution B.",
+   "answer": "Iron(II) ion, Fe²⁺, and sulfate ion, SO₄²⁻.",
+   "qrect": [
+    108,
+    744,
+    993,
+    23
+   ],
+   "areas": [
+    [
+     90,
+     767,
+     1011,
+     105
+    ]
+   ]
+  },
+  {
+   "label": "(d)",
+   "page": 1,
+   "kind": "write",
+   "cat": "SHORT_TEXT",
+   "prompt": "Give the formula of the dissolved salt in solution B.",
+   "answer": "FeSO₄",
+   "qrect": [
+    108,
+    899,
+    993,
+    23
+   ],
+   "areas": [
+    [
+     90,
+     921,
+     1011,
+     66
+    ]
+   ]
+  },
+  {
+   "label": "(e)",
+   "page": 1,
+   "kind": "write",
+   "cat": "LONG_TEXT",
+   "prompt": "Write the ionic equation, including state symbols, for the sulfate precipitation test.",
+   "answer": "Ba²⁺(aq) + SO₄²⁻(aq) → BaSO₄(s)",
+   "qrect": [
+    108,
+    1014,
+    993,
+    23
+   ],
+   "areas": [
+    [
+     90,
+     1037,
+     1011,
+     66
+    ]
+   ]
+  }
+ ]
+}

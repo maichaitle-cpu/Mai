@@ -76,6 +76,8 @@ window.__runDoc = async function (opts) {
       bbox: rect(a.bbox), mark: a.mark ? [r(a.mark.x), r(a.mark.y), r(a.mark.w), r(a.mark.h), a.mark.page || a.page] : null,
       choice: a.choiceRects ? { rects: a.choiceRects.map(c => [r(c.x), r(c.y), r(c.w), r(c.h), c.page || a.page]), options: (a.options || []).map(o => o.label), pick: comp.pickOption(a) } : null,
       slots: (a.slots || []).length, strokes: (a.strokes || []).length, overflow: !!a.overflow, placedBy: a.placedBy || null, flag: a.flag || '',
+      shown: (a.strokes || []).map(s => s.text).join(' '),
+      sizeRatio: (() => { const pg = (st.pages || [])[(a.page || 1) - 1]; const hs = ((pg && pg.lines) || []).map(l => l.bottom - l.top).filter(v => v > 3).sort((x, y) => x - y); const lh = hs[Math.floor(hs.length / 2)] || 0; const ss = (a.strokes || []).map(s => s.size).filter(Boolean); return lh && ss.length ? +(Math.min.apply(null, ss) * comp.handInfo().scale / lh).toFixed(2) : null; })(),
     })),
     shots: null,
     noise: window.__noiseLog ? window.__noiseLog.slice() : [],
