@@ -79,6 +79,7 @@ window.__runDoc = async function (opts) {
       shown: (a.strokes || []).map(s => s.text).join(' '),
       sizeRatio: (() => { const pg = (st.pages || [])[(a.page || 1) - 1]; const hs = ((pg && pg.lines) || []).map(l => l.bottom - l.top).filter(v => v > 3).sort((x, y) => x - y); const lh = hs[Math.floor(hs.length / 2)] || 0; const ss = (a.strokes || []).map(s => s.size).filter(Boolean); return lh && ss.length ? +(Math.min.apply(null, ss) * comp.handInfo().scale / lh).toFixed(2) : null; })(),
     })),
+    audit: comp.selfCheck ? comp.selfCheck(st.answers || [], st.pages || []).map(x => ({ page: x.page, id: x.id, msg: x.msg })) : [],
     shots: null,
     noise: window.__noiseLog ? window.__noiseLog.slice() : [],
   };

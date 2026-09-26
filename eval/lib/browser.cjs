@@ -72,4 +72,4 @@ async function openApp({ onClaude, log = () => {} } = {}) {
   return { browser, page };
 }
 
-module.exports = { openApp, appScript, EVAL, ROOT };
+module.exports = { openApp, appScript, tesseractFile, EVAL, ROOT };

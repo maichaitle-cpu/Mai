@@ -471,6 +471,15 @@
                 <button type="button" aria-label="Zoom in" onClick="{{ onZoomIn }}" style="width: 30px; padding: 6px 0; color: #c9c2ba; background: transparent; border: 1px solid rgba(198,168,116,.24); font-family: 'Cinzel', 'Trirong', serif; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; border-radius: 2px; cursor: pointer; transition-property: color, background, border-color, scale; transition-duration: 150ms; transition-timing-function: cubic-bezier(.2,0,0,1);">+</button>
               </div>
             </div>
+            <sc-if value="{{ hasAudit }}" hint-placeholder-val="{{ false }}">
+              <div data-noprint="1" role="region" aria-label="Self-check" style="display: flex; flex-direction: column; gap: 6px; padding: 12px 14px; background: rgba(224,179,74,.07); border: 1px solid rgba(224,179,74,.45); border-radius: 3px;">
+                <span style="font-family: 'Cinzel', 'Trirong', serif; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: #e0b34a;">{{ auditTitle }}</span>
+                <span style="font-size: 13px; color: #9a918a;">{{ auditHint }}</span>
+                <sc-for list="{{ auditItems }}" as="it" hint-placeholder-count="2">
+                  <button type="button" onClick="{{ it.go }}" style="text-align: left; padding: 6px 10px; font-size: 14px; line-height: 1.35; color: #ece6df; background: transparent; border: 1px solid rgba(224,179,74,.25); border-radius: 2px; cursor: pointer;" style-hover="border-color: #e0b34a;"><span style="color: #e0b34a;">p{{ it.page }}</span> · {{ it.msg }}</button>
+                </sc-for>
+              </div>
+            </sc-if>
             <sc-if value="{{ hasPages }}" hint-placeholder-val="{{ true }}">
               <sc-for list="{{ pages }}" as="p" hint-placeholder-count="1">
                 <div style="display: flex; flex-direction: column; gap: 10px; min-width: 0; overflow-x: auto; overflow-y: hidden;">
@@ -491,6 +500,11 @@
                   <div data-page="{{ p.index }}" style="flex: none; width: {{ zoomW }}; position: relative; overflow: hidden; background-color: #ffffff; box-shadow: 0 20px 60px rgba(0,0,0,.65); outline: 1px solid rgba(198,168,116,.3);">
                     <canvas ref="{{ p.ref }}" aria-label="{{ p.ariaLabel }}" style="display: block; width: 100%; height: auto;"></canvas>
                     <div data-noprint="1" style="position: absolute; inset: 0;">
+                      <sc-for list="{{ p.flags }}" as="fl" hint-placeholder-count="0">
+                        <div aria-hidden="true" style="position: absolute; left: {{ fl.left }}%; top: {{ fl.top }}%; width: {{ fl.w }}%; height: {{ fl.h }}%; border: 2px dashed #d97706; background: rgba(217,119,6,.07); pointer-events: none;">
+                          <span style="position: absolute; right: 0; top: -18px; padding: 1px 5px; font-family: Arial, sans-serif; font-size: 11px; font-weight: 700; line-height: 1.3; color: #fff; background: #d97706; white-space: nowrap;">check {{ fl.n }}</span>
+                        </div>
+                      </sc-for>
                       <sc-for list="{{ p.spaces }}" as="sp" hint-placeholder-count="0">
                         <div aria-hidden="true" style="position: absolute; left: {{ sp.left }}%; top: {{ sp.top }}%; width: {{ sp.w }}%; height: {{ sp.h }}%; border: 1.5px dashed {{ sp.color }}; background: {{ sp.fill }}; pointer-events: none;">
                           <span style="position: absolute; left: 0; top: 0; padding: 1px 5px; font-family: Arial, sans-serif; font-size: 11px; font-weight: 700; line-height: 1.3; color: #fff; background: {{ sp.color }}; white-space: nowrap;">{{ sp.tag }}</span>
@@ -1678,7 +1692,10 @@ class Component extends DCLogic {
         (this.parseJson(out).answers || []).forEach(x => {
           const lim = part.find(p => String(p.id) === String(x.id));
           const t = String(x.answer || '').trim();
-          if (lim && t && (t.length <= lim.maxChars * 1.1 || t.length < String(lim.answer || '').length * 0.9)) byId[String(x.id)] = t;
+          // A "shortened" answer that stops inside a word of the original ("Condensat") is worse than the original.
+          const orig = String(lim && lim.answer || '');
+          const midWord = orig.length > t.length && orig.startsWith(t) && /[\p{L}\p{N}]/u.test(orig.charAt(t.length)) && /[\p{L}\p{N}]$/u.test(t);
+          if (lim && t && !midWord && (t.length <= lim.maxChars * 1.1 || t.length < orig.length * 0.9)) byId[String(x.id)] = t;
         });
       } catch (err) {}
     }
@@ -2524,7 +2541,7 @@ class Component extends DCLogic {
       .replace(/\^\{([0-9n+\-−]{1,6})\}|\^\(([0-9n+\-−]{1,6})\)|\^([+\-−]?[0-9n]+[+\-−]?|[+\-−])/g, (m, a, b, c) => (a || b || c).replace(/./g, ch => SUP[ch] || ch));
   }
   // Bump on every release: debug reports carry it, so a report from an older file is spotted at once.
-  static BUILD = '2026-09-26e';
+  static BUILD = '2026-09-27b';
   static MARKS_RE = /^\s*[\[(]\s*\d{1,3}\s*(marks?|pts?|points?|คะแนน)?\s*[\])]\s*$|^\s*\d{1,3}\s*(marks?|pts?|points?|คะแนน)\s*$/i;
   static Q_RE = /^\s*(ข้อ\s*|Q\s*)?\(?\d{1,3}\s*[.)]/i;
   static OPT_RE = /(^|\s)\(?([กขคงจฉ]|[A-Fa-f])\s*[.)](?=\s|$)/g;
@@ -2862,7 +2879,8 @@ class Component extends DCLogic {
 
   slotsFor(page, r) {
     if (r.single) {
-      return [{ top: r.y, gap: r.h, base: r.base, x: r.x + r.lh * 0.2, w: Math.max(r.lh * 3, r.w - r.lh * 0.4), size: Math.min(r.lh * 1.45, r.h * 0.9) }];
+      // Writing inside a printed sentence (blank or same-line space) stays close to the print size.
+      return [{ top: r.y, gap: r.h, base: r.base, x: r.x + r.lh * 0.2, w: Math.max(r.lh * 3, r.w - r.lh * 0.4), size: Math.min(r.lh * 1.15, r.h * 0.9) }];
     }
     const rules = r.cell ? [] : this.findRules(page.canvas, r);
     const slots = [];
@@ -2885,6 +2903,109 @@ class Component extends DCLogic {
   mctx() {
     if (!this._m) this._m = document.createElement('canvas').getContext('2d');
     return this._m;
+  }
+
+  // The bordered table cell a question line sits in, when it has room below the text: {left, right, bottom}.
+  cellOfLine(page, L, lh) {
+    const W = page.canvas.width;
+    const vls = (page.vec && page.vec.vl) || [];
+    const cl = vls.filter(v => v.x <= L.x0 + lh * 0.5 && v.x >= L.x0 - lh * 3 && v.y0 <= L.top + lh * 0.3 && v.y1 >= L.bottom + lh * 1.5).sort((a, b) => b.x - a.x)[0];
+    const cr = cl && vls.filter(v => v.x > L.x0 + W * 0.3 && v.y0 <= L.top + lh * 0.3 && v.y1 >= L.bottom + lh * 1.5 && Math.abs(v.y1 - cl.y1) < lh).sort((a, b) => a.x - b.x)[0];
+    if (!cl || !cr || Math.min(cl.y1, cr.y1) - L.bottom < lh * 1.5) return null;
+    return { left: cl.x, right: cr.x, bottom: Math.min(cl.y1, cr.y1) };
+  }
+
+  // After a run, look for the mistakes a person would otherwise have to find by eye (code only, no Claude call).
+  // Each item: { page, id (answer id or null), rect, msg }.
+  selfCheck(answers, pages) {
+    const out = [];
+    const seen = new Set();
+    const add = (page, id, rect, msg) => { const k = page + '|' + id + '|' + msg; if (!seen.has(k)) { seen.add(k); out.push({ page, id, rect, msg }); } };
+    const LABEL = /^\s*(?:(?:Q|ข้อ)\s*)?\(?(\d{1,3}|[a-h]|[ivx]{1,4})[.)]\s+\S/;
+    const SUB = /^\s*\(?([a-h]|[ivx]{1,4})[.)]\s/;
+    const txt = a => String(a.text || '').trim();
+    const written = a => txt(a) && txt(a) !== '—';
+    const ov = (a, b) => Math.max(0, Math.min(a.x + a.w, b.x + b.w) - Math.max(a.x, b.x)) * Math.max(0, Math.min(a.y + a.h, b.y + b.h) - Math.max(a.y, b.y));
+    const ctx = this.mctx();
+    const sc = this.handInfo().scale;
+    pages.forEach((page, pi) => {
+      const pn = pi + 1;
+      const lines = page.lines || [];
+      if (!lines.length || !page.canvas) return;
+      const hs = lines.map(l => l.bottom - l.top).filter(v => v > 3).sort((a, b) => a - b);
+      const lh = hs[Math.floor(hs.length / 2)] || 20;
+      const mine = answers.filter(a => (a.page || 1) === pn);
+      const sameCol = (a, b) => a.col == null || b.col == null || a.col < 0 || b.col < 0 || a.col === b.col;
+      const inChoice = l => mine.some(a => a.choiceRects && a.choiceRects.some(r => (r.page || pn) === pn && r.y < l.bottom && r.y + r.h > l.top && r.x < l.x1 && r.x + r.w > l.x0));
+      // Numbered lines under an "Instructions" / "คำชี้แจง" heading are rules, not questions.
+      const byTop = lines.slice().sort((a, b) => a.top - b.top);
+      const HEAD = /^\s*(instructions?|directions?|notes?|rules?|guidance)\b|คำชี้แจง|คําชี้แจง|ข้อกำหนด|ข้อกําหนด|ข้อปฏิบัติ|คำแนะนำ|คําแนะนํา/i;
+      const hasAns = (y0, y1) => mine.some(a => { const l = a.lineId != null ? lines.find(x => x.id === a.lineId) : null; const y = l ? l.top : a.bbox ? a.bbox.y : -1; return y > y0 && y < y1; });
+      // Under a rules heading with no answered question in between: a numbered rule, not a question.
+      const underInstr = l => { const k = byTop.indexOf(l); for (let n = k - 1; n >= 0 && n >= k - 14; n--) { const u = byTop[n]; if (Component.INSTRUCTION.test(String(u.text || '')) || HEAD.test(String(u.text || ''))) return !hasAns(u.top, l.top); } return false; };
+      const labelled = lines.filter(l => LABEL.test(String(l.text || '')) && !this.isInfo(l.text) && !Component.INSTRUCTION.test(String(l.text || '')) && !inChoice(l) && !underInstr(l)).sort((a, b) => a.top - b.top);
+      const labelKey = t => { const m = String(t || '').match(LABEL); return m ? m[1].toLowerCase() : ''; };
+      const numKey = a => ((String(a.num || '').match(/(\d{1,3}|[a-h]|[ivx]{1,4})[.)]?\s*$/i) || [])[1] || '').toLowerCase();
+      const nextLabel = L => labelled.find(n => n !== L && n.top > L.bottom - 1 && sameCol(n, L));
+      const lineOf = a => (a.lineId != null ? lines.find(l => l.id === a.lineId) : null);
+
+      // A printed question label with no answer anywhere in its block.
+      labelled.forEach(L => {
+        const N = nextLabel(L);
+        const end = N ? N.top : page.canvas.height;
+        const inBlock = a => { const l = lineOf(a); if (l) return l.top >= L.top - lh * 0.3 && l.top < end - 1 && sameCol(l, L); return a.bbox && a.bbox.y >= L.top - lh * 0.3 && a.bbox.y < end; };
+        if (mine.some(inBlock)) return;
+        // The last question on a page may be answered on the next page (options or space continue there).
+        if (!N && answers.some(a => (a.page || 1) === pn + 1 && numKey(a) && numKey(a) === labelKey(L.text))) return;
+        if (N && !SUB.test(String(L.text)) && SUB.test(String(N.text))) return; // "1." whose parts (a), (b) follow
+        add(pn, null, { x: L.x0, y: L.top, w: L.x1 - L.x0, h: L.bottom - L.top }, 'Printed question "' + String(L.text).trim().slice(0, 40) + '" has no answer');
+      });
+
+      mine.forEach(a => {
+        const tag = a.num ? String(a.num) : '#' + a.id;
+        const L = lineOf(a);
+        if (a.mark && a.mark.h > lh * 2.2) add(pn, a.id, a.mark, tag + ': the choice mark is taller than one line');
+        if (a.choiceRects && !a.mark && written(a)) add(pn, a.id, a.choiceRects[0] || a.bbox, tag + ': chose "' + txt(a).slice(0, 20) + '" but could not find that option to mark it');
+        if (!written(a) || !a.bbox || a.choiceRects) return;
+        const b = a.bbox;
+        // Far from its own question: above it, or in another column.
+        if (L && b.y + b.h < L.top - lh * 0.5 && !a.sharePrefix) add(pn, a.id, b, tag + ': answer is written above its own question');
+        const pc = L && this.pageCols(page);
+        if (pc && pc.length > 1) { const qc = this.colIdx(page, L.x0), ac = this.colIdx(page, b.x + Math.min(b.w, lh * 4) / 2); if (qc !== ac) add(pn, a.id, b, tag + ': answer is in a different column from its question'); }
+        // Outside its own table cell.
+        const cell = L && this.cellOfLine(page, L, lh);
+        if (cell && b.y + b.h > cell.bottom + lh * 0.5) add(pn, a.id, b, tag + ': answer runs outside its own table row');
+        // Below the next printed question.
+        const N = L && !a.sharePrefix && nextLabel(L);
+        if (N && b.y > N.top + lh * 0.3 && (!cell || b.y > cell.bottom)) add(pn, a.id, b, tag + ': answer is written below the next question (' + String(N.text).trim().slice(0, 12) + ')');
+        // Too small or cut off.
+        const ss = (a.strokes || []).map(st => st.size).filter(Boolean);
+        if (ss.length && Math.min.apply(null, ss) * sc < lh * 0.6) add(pn, a.id, b, tag + ': handwriting is shrunk too small to read');
+        const last = (a.strokes || [])[a.strokes ? a.strokes.length - 1 : 0];
+        if (a.overflow || (last && /…$/.test(String(last.text || '')))) add(pn, a.id, b, tag + ': answer is cut off');
+        // Its own number written into the answer ("1-C").
+        const lab = String(a.num || '').split(/[.\s·)(]+/).filter(Boolean).pop();
+        if (lab && lab.length <= 3 && new RegExp('^\\(?' + lab.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '\\)?\\s*[-–—:)]\\s*\\S').test(txt(a))) add(pn, a.id, b, tag + ': answer repeats its question number');
+        // Written over printed text (underscore/dot lines are answer lines, not text).
+        (a.strokes || []).some(st => {
+          if (!st.text || !st.size) return false;
+          ctx.font = this.handFont(st.size);
+          const r = { x: st.x, y: st.y - st.size * 0.75, w: ctx.measureText(String(st.text)).width, h: st.size * 0.9 };
+          const onBlank = l => (l.blanks || []).some(bk => Math.min(r.x + r.w, bk.x1 + lh) - Math.max(r.x, bk.x0 - lh) >= r.w * 0.6);
+          const hit = lines.find(l => !/^[\s_.\-–—…·]+$/.test(String(l.text || '')) && !onBlank(l) && (l.cells && l.cells.length ? l.cells : [l]).some(c => { const cr = { x: c.x0, y: l.top + (l.bottom - l.top) * 0.2, w: c.x1 - c.x0, h: (l.bottom - l.top) * 0.6 }; return /[\p{L}\p{N}]/u.test(String(c.text || l.text || '')) && ov(r, cr) > Math.min(r.w * r.h, cr.w * cr.h) * 0.15; }));
+          if (hit) add(pn, a.id, b, tag + ': answer is written over printed text ("' + String(hit.text).trim().slice(0, 24) + '")');
+          return !!hit;
+        });
+      });
+
+      // Two answers on top of each other.
+      const txtA = mine.filter(a => written(a) && a.bbox && !a.choiceRects);
+      for (let i = 0; i < txtA.length; i++) for (let j = i + 1; j < txtA.length; j++) {
+        const p = txtA[i].bbox, q = txtA[j].bbox;
+        if (ov(p, q) > Math.min(p.w * p.h, q.w * q.h) * 0.2) add(pn, txtA[j].id, q, (txtA[i].num || '#' + txtA[i].id) + ' and ' + (txtA[j].num || '#' + txtA[j].id) + ': answers overlap');
+      }
+    });
+    return out.sort((x, y) => x.page - y.page || (x.rect ? x.rect.y : 0) - (y.rect ? y.rect.y : 0));
   }
 
   capacity(slots) {
@@ -3455,10 +3576,8 @@ class Component extends DCLogic {
         let y1 = N ? N.top : Math.min(H - lh * 2, L.bottom + lh * 16);
         // A question printed inside a table cell answers inside that cell: its borders end the answer area.
         let rightZ = rightQ;
-        const vls = (page.vec && page.vec.vl) || [];
-        const cl = vls.filter(v => v.x <= L.x0 + lh * 0.5 && v.x >= L.x0 - lh * 3 && v.y0 <= L.top + lh * 0.3 && v.y1 >= L.bottom + lh * 1.5).sort((a, b) => b.x - a.x)[0];
-        const cr = cl && vls.filter(v => v.x > L.x0 + W * 0.3 && v.y0 <= L.top + lh * 0.3 && v.y1 >= L.bottom + lh * 1.5 && Math.abs(v.y1 - cl.y1) < lh).sort((a, b) => a.x - b.x)[0];
-        if (cl && cr && Math.min(cl.y1, cr.y1) - L.bottom >= lh * 1.5) { y1 = Math.min(y1, Math.min(cl.y1, cr.y1)); rightZ = Math.min(rightQ, cr.x - lh * 0.3); }
+        const cell = this.cellOfLine(page, L, lh);
+        if (cell) { y1 = Math.min(y1, cell.bottom); rightZ = Math.min(rightQ, cell.right - lh * 0.3); }
         // An answer line printed on the question's own line, right of its text ("a) What can you determine? ____"), belongs to it.
         const besideLine = sp => sp.type === 'line' && sp.y < L.bottom && sp.y + sp.h > L.top && sp.x >= L.x1 - lh && sp.x < rightHere;
         let zone = spaces.map((sp, n) => ({ sp, n: n + 1 })).filter(z => !used.has(z.n) && (besideLine(z.sp) || (z.sp.y >= y0 - lh * 0.3 && z.sp.y + z.sp.h <= y1 + lh * 0.3)) && (!cols || this.colIdx(page, z.sp.x + Math.min(z.sp.w, lh * 4) / 2) === lc));
@@ -6453,7 +6572,9 @@ class Component extends DCLogic {
         else t = String(a.answer || '').replace(/^\d+\)\s*/, '').trim();
       } else {
         const mult = this.realPick('math').key === 'Answer only' ? 1 : 1.6;
-        t = String(a.answer == null ? '' : a.answer).trim().slice(0, Math.round((room[String(a.id)] || 80) * mult));
+        // Trim to the room at a word boundary, never mid-word ("Condensat"); fitting shortens the rest properly.
+        const full = String(a.answer == null ? '' : a.answer).trim(), lim = Math.round((room[String(a.id)] || 80) * mult);
+        t = full.length <= lim ? full : (full.slice(0, lim + 1).match(/^([\s\S]*\S)\s/) || [null, full.split(/\s/)[0]])[1];
         // A single matching item answered as "1-C" / "1 → C": write only what it matches to.
         if (String(q.cat || '').toUpperCase() === 'MATCHING') {
           const pr = Array.isArray(a.pairs) && a.pairs.length === 1 && a.pairs[0] && a.pairs[0].to != null ? String(a.pairs[0].to).trim() : '';
@@ -6545,11 +6666,13 @@ class Component extends DCLogic {
       }
     }
 
-    const labelCount = {};
-    questions.forEach(q => { if (q.kind === 'cell') return; const k = (q.page || 1) + ':' + normLabel(q.label); labelCount[k] = (labelCount[k] || 0) + 1; });
+    // A real duplicate is the same printed question listed twice: same label AND same line or same wording.
+    // Repeated labels alone are normal ("Copper" in two table columns, "(a)" in two different parts).
+    const pw = q => String(q.prompt || '').toLowerCase().replace(/[^\p{L}\p{N}]+/gu, '').slice(0, 40);
+    const twin = q => questions.some(o => o !== q && o.kind !== 'cell' && (o.page || 1) === (q.page || 1) && normLabel(o.label) === normLabel(q.label) && ((o.lineId != null && o.lineId === q.lineId) || (pw(o) && pw(o) === pw(q))));
     questions.forEach(q => {
       const r = byId[String(q.id)];
-      if (r && normLabel(q.label) && labelCount[(q.page || 1) + ':' + normLabel(q.label)] > 1 && !r.why) {
+      if (r && q.kind !== 'cell' && normLabel(q.label) && twin(q) && !r.why) {
         byId[String(q.id)] = { ...r, low: true, rule: true, why: 'Two answers were given the same question number ' + q.label + '. Check both.' };
       }
     });
@@ -6744,6 +6867,15 @@ class Component extends DCLogic {
     });
   }
 
+  auditNow() {
+    const s = this.state;
+    if (this._auditFor !== s.answers || this._auditPages !== s.pages) {
+      try { this._audit = s.answers && s.answers.length && s.pages && s.pages.length ? this.selfCheck(s.answers, s.pages) : []; } catch (e) { this._audit = []; }
+      this._auditFor = s.answers; this._auditPages = s.pages;
+    }
+    return this._audit || [];
+  }
+
   renderVals() {
     const s = this.state;
     const brandName = this.props.brandName ?? 'Sanguine Archive';
@@ -6884,6 +7016,11 @@ class Component extends DCLogic {
           onRedo: () => this.redoPage(i),
           onAddText: () => this.addText(i),
           onDrawDown: e => this.drawDown(e, i),
+          flags: this.auditNow().map((f, n) => ({ ...f, n: n + 1 })).filter(f => f.page === i + 1 && f.rect).map(f => ({
+            n: f.n,
+            left: ((Math.max(0, f.rect.x - 6) / p.canvas.width) * 100).toFixed(3), top: ((Math.max(0, f.rect.y - 6) / p.canvas.height) * 100).toFixed(3),
+            w: (((f.rect.w + 12) / p.canvas.width) * 100).toFixed(3), h: (((f.rect.h + 12) / p.canvas.height) * 100).toFixed(3),
+          })),
           spaces: s.showSpaces && p.spaces ? p.spaces.map((sp, k) => {
             const owner = p.spaceOwners && p.spaceOwners[k + 1];
             const W = p.canvas.width, H = p.canvas.height;
@@ -6902,6 +7039,17 @@ class Component extends DCLogic {
         };
       }),
       sourceText: s.sourceText,
+      hasAudit: s.screen === 'result' && this.auditNow().length > 0,
+      auditTitle: (() => { const n = this.auditNow().length; return 'Self-check · ' + n + (n === 1 ? ' thing' : ' things') + ' to look at'; })(),
+      auditHint: 'Found by code, not by Claude. Click one to jump to it; fixed items disappear.',
+      auditItems: this.auditNow().map((f, n) => ({
+        page: f.page, msg: '#' + (n + 1) + ' ' + f.msg,
+        go: () => {
+          if (f.id != null) this.setState({ selId: f.id });
+          const el = document.querySelector('[data-page="' + f.page + '"]');
+          if (el && el.scrollIntoView) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        },
+      })),
       textLines: s.sourceText ? this.textLines() : [],
       hasPages: s.pages.length > 0,
       isTextSource: s.pages.length === 0 && !!s.sourceText,
@@ -7094,6 +7242,7 @@ class Component extends DCLogic {
             choice: a.choiceRects ? { rects: a.choiceRects.map(c => [r(c.x), r(c.y), r(c.w), r(c.h), c.page || a.page]), options: (a.options || []).map(o => o.label), pick: this.pickOption(a) } : null,
           })),
           calls: this._callLog || [],
+          audit: this.auditNow().map(f => ({ page: f.page, id: f.id, msg: f.msg, rect: f.rect ? [r(f.rect.x), r(f.rect.y), r(f.rect.w), r(f.rect.h)] : null })),
           sources,
         };
         const url = URL.createObjectURL(new Blob([JSON.stringify(rep, null, 1)], { type: 'application/json' }));

@@ -259,7 +259,7 @@
       const req = jsonIn(textOf(body.messages[0].content));
       // sloppy: behaves like a small model that overshoots the limit and leaves multi-line working alone
       const lim = a => (cfg.sloppy ? Math.round(a.maxChars * 1.25) : a.maxChars);
-      return { answers: (req.answers || []).map(a => ({ id: a.id, answer: cfg.sloppy && /\n/.test(String(a.answer)) ? String(a.answer) : String(a.answer).length > lim(a) ? String(a.answer).slice(0, lim(a)).replace(/\s+\S*$/, '') : String(a.answer) })) };
+      return { answers: (req.answers || []).map(a => ({ id: a.id, answer: cfg.sloppy && /\n/.test(String(a.answer)) ? String(a.answer) : String(a.answer).length > lim(a) ? (String(a.answer).slice(0, lim(a) + 1).match(/^([\s\S]*\S)\s/) || [null, String(a.answer)])[1] : String(a.answer) })) };
     }
 
     return {
