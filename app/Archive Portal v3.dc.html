@@ -1640,7 +1640,7 @@ class Component extends DCLogic {
     const bestY = cl.reduce((b, c) => (Math.abs(c.y + c.h / 2 - cy) < Math.abs(b.y + b.h / 2 - cy) ? c : b));
     const row = cl.filter(c => Math.abs(c.y - bestY.y) < 2);
     const pick = row.reduce((b, c) => (Math.abs(c.x - r.x) < Math.abs(b.x - r.x) ? c : b));
-    if (pick.w > page.canvas.width * 0.5) return r;
+    if (pick.w > page.canvas.width * 0.5) return Math.abs(pick.x - r.x) < r.h * 1.5 && pick.label && pick.label.w < r.h * 3 ? { ...r, label: pick.label } : r;
     return pick;
   }
 
@@ -1854,10 +1854,12 @@ class Component extends DCLogic {
     const rr = k => this.rnd(seed * 19 + k);
     const full = r;
     if (r.label && kind !== 'Underline') r = { x: r.label.x, y: r.y, w: Math.max(r.h * 0.7, r.label.w), h: r.h };
+    else if (kind !== 'Underline' && r.w > r.h * 4) r = { x: r.x, y: r.y, w: r.h * 1.4, h: r.h };
     const h = r.h;
     const sv = 1 + (rr(10) - 0.5) * 0.4 * J;
     const ox = (rr(11) - 0.5) * h * 0.32 * J, oy = (rr(12) - 0.5) * h * 0.24 * J;
-    const rot = (rr(13) - 0.5) * 0.55 * J;
+    const tilt = Math.min(0.275, Math.atan((h * 0.3) / Math.max(h, r.w / 2)));
+    const rot = (rr(13) - 0.5) * 2 * tilt * J;
     const cx = r.x + r.w / 2 + ox, cy = r.y + r.h / 2 + oy;
     const wob = (i, k) => (this.rnd(seed * 31 + i * 7 + k) - 0.5) * h * 0.05 * J;
     ctx.save();
