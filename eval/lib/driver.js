@@ -3,6 +3,7 @@ window.__runDoc = async function (opts) {
   const { doc, settings, gt, claude, oracleCfg, snapshots } = opts;
   const calls = [];
   const comp = new __C();
+  window.__lastComp = comp;
   comp.toast = () => {};
   const oracle = gt ? __makeOracle(gt, oracleCfg || {}, comp) : null;
   const PRICE = { 'claude-sonnet-4-5': [3, 15], 'claude-sonnet-4-6': [3, 15], 'claude-sonnet-5': [2, 10], 'claude-haiku-4-5': [1, 5], 'claude-opus-5': [5, 25] };

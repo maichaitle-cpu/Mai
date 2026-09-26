@@ -2522,6 +2522,20 @@ class Component extends DCLogic {
     return out.map(o => ({ label: o.label, lineId: o.lineId }));
   }
 
+  // Every Claude call of the current run, text only (images are counted, not stored), for the debug report.
+  logCall(body, label, out, ms, usage, served) {
+    const L = this._callLog = this._callLog || [];
+    if (L.length >= 400) return;
+    let chars = 0, images = 0;
+    const texts = [];
+    (body.messages || []).forEach(m => (typeof m.content === 'string' ? [{ type: 'text', text: m.content }] : m.content || []).forEach(b => {
+      if (b.type === 'image') images++;
+      else if (b.type === 'text') { chars += b.text.length; texts.push(b.text); }
+    }));
+    const stage = Object.keys(Component).find(k => /_PROMPT$/.test(k) && Component[k] === body.system) || 'OTHER';
+    L.push({ stage, label, model: body.model, served: served || null, images, inChars: chars + String(body.system || '').length, request: texts.join('\n').slice(0, 20000), response: String(out || '').slice(0, 20000), ms, usage: usage || null });
+  }
+
   trackUsage(model, usage, label, body, out) {
     const u = this._usage = this._usage || { calls: 0, inTok: 0, outTok: 0, cost: 0, estimated: false, byStage: {} };
     let inTok, outTok;
@@ -4369,10 +4383,13 @@ class Component extends DCLogic {
           if (!r.ok) throw new Error(((await r.text()) || '').slice(0, 300) || 'HTTP ' + r.status);
           const j = await r.json();
           this.trackUsage(j.model || body.model, j.usage, label);
+          this.logCall(body, label, j.text, 0, j.usage, j.model);
           return j.text;
         }
+        const t0 = Date.now();
         const out = await window.claude.complete(body);
         this.trackUsage(body.model, null, label, body, out);
+        this.logCall(body, label, out, Date.now() - t0);
         return out;
       } catch (e) {
         const msg = String((e && e.message) || e);
@@ -6528,6 +6545,7 @@ class Component extends DCLogic {
       this.setState({ stageIdx: 4, stageNote: '' });
       this._solveRaw = {};
       this._usage = null;
+      this._callLog = [];
       const T = { times: [], t: performance.now() };
       const tick = name => { const n = performance.now(); T.times.push({ name, ms: Math.round(n - T.t) }); T.t = n; };
       const layout = await this.readLayout(src);
@@ -6953,6 +6971,7 @@ class Component extends DCLogic {
           pages: st.pages.map((p, i) => ({
             page: i + 1, w: p.canvas.width, h: p.canvas.height, ocr: !!p.ocr, ocrConf: p.ocrConf || null, ocrFailed: !!p.ocrFailed, prep: p.prep || null,
             lines: (p.lines || []).map(l => [l.id, r(l.top), r(l.base), String(l.text).slice(0, 60)]),
+            geo: (p.lines || []).map(l => ({ id: l.id, top: r(l.top), bottom: r(l.bottom), x0: r(l.x0), x1: r(l.x1), text: String(l.text).slice(0, 200), cells: (l.cells || []).map(c => [String(c.text).slice(0, 120), r(c.x0), r(c.x1)]) })),
             spaces: (p.spaces || []).map((s, k) => [k + 1, s.type, r(s.x), r(s.y), r(s.w), r(s.h)]),
             owners: p.spaceOwners || {},
           })),
@@ -6960,7 +6979,11 @@ class Component extends DCLogic {
             id: a.id, num: a.num, page: a.page, kind: a.kind, atype: a.atype, zone: a.zone, spaceIds: a.spaceIds, placedBy: a.placedBy,
             qy: st.pages[(a.page || 1) - 1] ? this.qyOf(a, st.pages[(a.page || 1) - 1]) : null, lineId: a.lineId,
             bbox: a.bbox ? [r(a.bbox.x), r(a.bbox.y), r(a.bbox.w), r(a.bbox.h)] : null, flag: a.flag || '', text: String(a.text || '').slice(0, 80),
+            fullText: String(a.text || '').slice(0, 1500), question: String(a.question || '').slice(0, 400),
+            mark: a.mark ? [r(a.mark.x), r(a.mark.y), r(a.mark.w), r(a.mark.h), a.mark.page || a.page] : null,
+            choice: a.choiceRects ? { rects: a.choiceRects.map(c => [r(c.x), r(c.y), r(c.w), r(c.h), c.page || a.page]), options: (a.options || []).map(o => o.label), pick: this.pickOption(a) } : null,
           })),
+          calls: this._callLog || [],
         };
         const url = URL.createObjectURL(new Blob([JSON.stringify(rep, null, 1)], { type: 'application/json' }));
         const link = document.createElement('a');
