@@ -228,6 +228,8 @@
         } else {
           const room = x.targetChars || Math.min(x.maxChars || 40, (q && q.answerChars) || 40);
           a.answer = filler(q && q.answer ? q.answer.length : room, q);
+          // Real Claude often writes more than the box holds: simulate it for long-answer categories.
+          if (cfg.verbose && /LONG|TABLE_TEXT|OTHER/.test(String(x.cat || (q && q.cat) || ''))) a.answer = filler(Math.max(320, a.answer.length * 3), { answer: null });
           if (x.cat === 'DRAWING' || x.cat === 'GRAPH_PLOT' || x.cat === 'LABEL_DIAGRAM') a.shapes = [{ t: 'rect', p: [[20, 20], [80, 80]] }];
           if (x.cat === 'TABLE_TICK') a.answer = '✓';
         }

@@ -28,7 +28,7 @@ async function main() {
     try {
       run = await page.evaluate(o => window.__runDoc(o), {
         doc: gt.doc, gt, claude: mode, snapshots: !!opt('snap'),
-        oracleCfg: { mapBoxes: !!opt('map-boxes'), noise: Number(opt('noise', 0)), seed: Number(opt('seed', 1)) }, settings: gt.settings || {},
+        oracleCfg: { mapBoxes: !!opt('map-boxes'), noise: Number(opt('noise', 0)), seed: Number(opt('seed', 1)), verbose: !!opt('verbose') }, settings: gt.settings || {},
       });
     } catch (e) {
       run = { apiError: 'harness: ' + e.message, answers: [], pages: [], calls: [] };

@@ -3410,7 +3410,13 @@ class Component extends DCLogic {
         const rightHere = beside ? Math.min(rightQ, beside.x0 - lh) : rightQ;
         const y0 = L.bottom, y1 = N ? N.top : Math.min(H - lh * 2, L.bottom + lh * 16);
         let zone = spaces.map((sp, n) => ({ sp, n: n + 1 })).filter(z => !used.has(z.n) && z.sp.y >= y0 - lh * 0.3 && z.sp.y + z.sp.h <= y1 + lh * 0.3 && (!cols || this.colIdx(page, z.sp.x + Math.min(z.sp.w, lh * 4) / 2) === lc));
-        const boxZ = zone.filter(z => z.sp.type === 'box');
+        // The answer box is the first box under the question; only boxes stacked right below it with the same
+        // width belong to it (a gap between a card border and the page frame also looks like a box).
+        const boxZ = zone.filter(z => z.sp.type === 'box').sort((p, r) => p.sp.y - r.sp.y).filter((z, k, arr) => {
+          if (!k) return true;
+          const f = arr[0].sp, prev = arr[k - 1].sp;
+          return Math.abs(z.sp.x - f.x) < lh && Math.abs(z.sp.x + z.sp.w - f.x - f.w) < lh && z.sp.y - (prev.y + prev.h) < lh * 1.5;
+        });
         const lineZ = zone.filter(z => z.sp.type === 'line');
         let answerLine = false;
         if (boxZ.length) {
