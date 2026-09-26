@@ -2356,8 +2356,10 @@ class Component extends DCLogic {
         const fixes = this.parseJson(res).fixes || [];
         fixes.forEach(fx => {
           let nums = (Array.isArray(fx.spaces) ? fx.spaces : []).map(Number).filter(v => v >= 1 && v <= spaces.length);
+          // Only answers shown in this page's check can be moved, and table cells stay in their grid cell.
+          if (!mine.some(a => String(a.id) === String(fx.id))) return;
           const a0 = out.find(a => String(a.id) === String(fx.id));
-          if (!a0) return;
+          if (!a0 || a0.page !== mine.find(a => String(a.id) === String(fx.id)).page || a0.kind === 'cell') return;
           const taken = new Set();
           out.forEach(a => { if (a !== a0 && a.page === a0.page && Array.isArray(a.spaceIds)) a.spaceIds.forEach(v => taken.add(v)); });
           nums = nums.filter(v => !taken.has(v));
@@ -2494,7 +2496,7 @@ class Component extends DCLogic {
   // Numbers in an answer, reading scientific notation (3.00×10⁻³, 2.5 x 10^-4, 1.2e5) as one value.
   static numbersIn(t) {
     const sup = { '⁰': '0', '¹': '1', '²': '2', '³': '3', '⁴': '4', '⁵': '5', '⁶': '6', '⁷': '7', '⁸': '8', '⁹': '9', '⁻': '-', '⁺': '+' };
-    const re = /[-−]?\d+(?:\.\d+)?(?:\s*[×xX*·]\s*10\s*(?:\^\s*\(?\s*([-−+]?\d+)\s*\)?|([⁻⁺]?[⁰¹²³⁴⁵⁶⁷⁸⁹]+))|[eE]([-+]?\d+))?/g;
+    const re = /(?<![A-Za-z\d.])[-−]?\d+(?:\.\d+)?(?:\s*[×xX*·]\s*10\s*(?:\^\s*\(?\s*([-−+]?\d+)\s*\)?|([⁻⁺]?[⁰¹²³⁴⁵⁶⁷⁸⁹]+))|[eE]([-+]?\d+))?/g;
     const out = [];
     String(t || '').replace(/(\d),(?=\d{3}\b)/g, '$1').replace(re, (m, e1, e2, e3) => {
       const base = Number(m.match(/^[-−]?\d+(?:\.\d+)?/)[0].replace('−', '-'));
