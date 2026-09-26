@@ -274,6 +274,15 @@
         else if (stage === 'assign') r = { assign: [] };
         else if (stage === 'pin') r = { question_box: 0, answer_box: 0 };
         else r = { fixes: [] };
+        // breakLayout: 'cut' ends the reply mid-question (output limit), 'quote' leaves a quote unescaped,
+        // 'garbage' returns unreadable text for the first request (both models), testing the page-by-page retry.
+        if (stage === 'layout_text' && cfg.breakLayout) {
+          const txt = JSON.stringify(r, null, 1);
+          cfg._broken = (cfg._broken || 0) + 1;
+          if (cfg.breakLayout === 'cut' && (r.questions || []).length > 8) return txt.slice(0, Math.floor(txt.length * 0.6));
+          if (cfg.breakLayout === 'quote') return txt.replace(/"prompt": "([^"]{6,}?) /, '"prompt": "$1 \"quoted\" '.replace(/\\"/g, '"'));
+          if (cfg.breakLayout === 'garbage' && cfg._broken <= 2) return '{"questions": [ {"line": "p1-l3", "label": "1" "prompt": ';
+        }
         return JSON.stringify(r);
       },
     };

@@ -1380,7 +1380,52 @@ class Component extends DCLogic {
     const a = cleaned.indexOf('{');
     const b = cleaned.lastIndexOf('}');
     if (a === -1 || b === -1) throw new Error('Claude did not return readable JSON for this sheet.');
-    return JSON.parse(cleaned.slice(a, b + 1));
+    try { return JSON.parse(cleaned.slice(a, b + 1)); } catch (err) {
+      const fixed = Component.repairJson(cleaned.slice(a));
+      if (fixed) return fixed;
+      throw err;
+    }
+  }
+
+  // Long replies sometimes come back broken: a quote inside a question's text left unescaped, or the reply
+  // cut off at the output limit. Escape stray quotes, then keep every complete item and close the brackets.
+  static repairJson(src) {
+    let out = '', inStr = false;
+    for (let i = 0; i < src.length; i++) {
+      const c = src[i];
+      if (inStr) {
+        if (c === '\\') { out += c + (src[i + 1] || ''); i++; continue; }
+        if (c === '"') {
+          const rest = src.slice(i + 1).match(/^\s*(.)/);
+          if (!rest || /[,}\]:]/.test(rest[1])) { inStr = false; out += c; } else out += '\\"';
+          continue;
+        }
+        if (c === '\n') { out += '\\n'; continue; }
+        out += c;
+      } else {
+        if (c === '"') inStr = true;
+        out += c;
+      }
+    }
+    try { return JSON.parse(out); } catch (e) {}
+    out = out.replace(/\}\s*\{/g, '},{').replace(/\]\s*\[/g, '],[').replace(/"\s*\n\s*"/g, '",\n"');
+    try { return JSON.parse(out); } catch (e) {}
+    // Cut off: drop the unfinished tail after the last complete value, then close what is still open.
+    for (let cut = out.length; cut > 0; cut = out.lastIndexOf('}', cut - 1)) {
+      const head = out.slice(0, cut + (out[cut] === '}' ? 1 : 0));
+      const stack = [];
+      let s2 = false;
+      for (let i = 0; i < head.length; i++) {
+        const c = head[i];
+        if (s2) { if (c === '\\') i++; else if (c === '"') s2 = false; continue; }
+        if (c === '"') s2 = true; else if (c === '{' || c === '[') stack.push(c); else if (c === '}' || c === ']') stack.pop();
+      }
+      if (s2) continue;
+      const closed = head.replace(/,\s*$/, '') + stack.reverse().map(c => (c === '{' ? '}' : ']')).join('');
+      try { const v = JSON.parse(closed); if (v && typeof v === 'object') Object.defineProperty(v, '__cut', { value: true }); return v; } catch (e) {}
+      if (cut <= 0) break;
+    }
+    return null;
   }
 
   async imageDims(url) {
@@ -2541,7 +2586,7 @@ class Component extends DCLogic {
       .replace(/\^\{([0-9n+\-−]{1,6})\}|\^\(([0-9n+\-−]{1,6})\)|\^([+\-−]?[0-9n]+[+\-−]?|[+\-−])/g, (m, a, b, c) => (a || b || c).replace(/./g, ch => SUP[ch] || ch));
   }
   // Bump on every release: debug reports carry it, so a report from an older file is spotted at once.
-  static BUILD = '2026-09-27b';
+  static BUILD = '2026-09-27c';
   static MARKS_RE = /^\s*[\[(]\s*\d{1,3}\s*(marks?|pts?|points?|คะแนน)?\s*[\])]\s*$|^\s*\d{1,3}\s*(marks?|pts?|points?|คะแนน)\s*$/i;
   static Q_RE = /^\s*(ข้อ\s*|Q\s*)?\(?\d{1,3}\s*[.)]/i;
   static OPT_RE = /(^|\s)\(?([กขคงจฉ]|[A-Fa-f])\s*[.)](?=\s|$)/g;
@@ -4733,11 +4778,15 @@ class Component extends DCLogic {
   async readTextLayout(pages) {
     // Scanned pages: OCR text can be garbled, so their page images go along (max 4 per request).
     const chunks = [];
-    let cur = { text: '', imgs: [] };
+    let cur = { text: '', imgs: [], q: 0, pages: [] };
     pages.forEach((p, pi) => {
       const block = this.textBlock(p, pi);
-      if (cur.text && (cur.text.length + block.length > 40000 || (p.ocr && cur.imgs.length >= 4))) { chunks.push(cur); cur = { text: '', imgs: [] }; }
+      // Keep each request to ~20 questions: very long replies are the ones that come back broken.
+      const qn = (block.match(/\[Q\]/g) || []).length;
+      if (cur.text && (cur.text.length + block.length > 40000 || (p.ocr && cur.imgs.length >= 4) || cur.q + qn > 20)) { chunks.push(cur); cur = { text: '', imgs: [], q: 0, pages: [] }; }
       cur.text += block;
+      cur.q = (cur.q || 0) + qn;
+      (cur.pages = cur.pages || []).push(pi);
       if (p.ocr && p.apiUrl) cur.imgs.push({ n: pi + 1, url: p.apiUrl });
     });
     if (cur.text) chunks.push(cur);
@@ -4749,12 +4798,26 @@ class Component extends DCLogic {
       const content = chunks[c].imgs.length
         ? chunks[c].imgs.map(im => ({ type: 'image', source: { type: 'base64', media_type: 'image/jpeg', data: im.url.split(',')[1] } })).concat([{ type: 'text', text: 'The attached image(s) are pages ' + chunks[c].imgs.map(im => im.n).join(', ') + ' in order. Their text lines below came from OCR and may contain misread characters: take question wording and options from the image, but always answer with the line ids below.\n' + chunks[c].text + tail }])
         : chunks[c].text + tail;
-      const out = await this.askFast({
-        max_tokens: 8000,
-        system: Component.TEXT_LAYOUT_PROMPT,
-        messages: [{ role: 'user', content }],
-      }, 'Reading text layer', raw => { try { const q = this.parseJson(raw).questions; return Array.isArray(q) && (q.length > 0 || !hasQ); } catch (e) { return false; } });
-      (this.parseJson(out).questions || []).forEach(q => { const t = this.textQ(q, pages); if (t) found.push(t); });
+      const ok = raw => { try { const q = this.parseJson(raw).questions; return Array.isArray(q) && (q.length > 0 || !hasQ); } catch (e) { return false; } };
+      let qs = null;
+      try {
+        const out = await this.askFast({ max_tokens: 16000, system: Component.TEXT_LAYOUT_PROMPT, messages: [{ role: 'user', content }] }, 'Reading text layer', ok);
+        const parsed = this.parseJson(out);
+        // A reply cut off mid-way lost the questions after the cut: read those pages again one at a time.
+        if (parsed.__cut && chunks[c].pages.length > 1) throw new Error('cut');
+        qs = parsed.questions || [];
+      } catch (err) {
+        if (/overloaded|rate|429|529|503|busy|too large/i.test(String((err && err.message) || ''))) throw err;
+        // One bad reply must not stop the whole run: read this part again one page at a time.
+        if (chunks[c].pages.length > 1) {
+          const again = chunks[c].pages.map(pi => { const t = this.textBlock(pages[pi], pi); const im = pages[pi].ocr && pages[pi].apiUrl ? [{ n: pi + 1, url: pages[pi].apiUrl }] : []; return { text: t, imgs: im, q: (t.match(/\[Q\]/g) || []).length, pages: [pi] }; });
+          chunks.splice(c + 1, 0, ...again);
+          continue;
+        }
+        this._layoutSkipped = (this._layoutSkipped || []).concat(chunks[c].pages.map(pi => pi + 1));
+        continue;
+      }
+      qs.forEach(q => { const t = this.textQ(q, pages); if (t) found.push(t); });
     }
     return this.recheckText(found, pages);
   }
