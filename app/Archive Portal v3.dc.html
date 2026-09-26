@@ -1028,7 +1028,7 @@ class Component extends DCLogic {
     { key: 'Professional', note: 'Expert, formal, concise and polished' },
   ];
 
-  static INFO_FIELD = /^\s*(student\s*)?(full\s*)?(name|class|period|date|teacher|section|student\s*id|id\s*(no|number)?|score|grade|mark)s?\b\s*[:\-_.]*/i;
+  static INFO_FIELD = /^\s*(student\s*)?(full\s*)?(name|class|period|date|teacher|section|student\s*id|id\s*(no|number)?|score|grade|mark)(s\b|\(s\)|\b)(?=\s*([:：_.\-]|$))\s*[:\-_.]*/i;
 
   static INSTRUCTION = /(คำชี้แจง|คําชี้แจง|ข้อสอบมี\s*\d+|ใช้เวลาในการ|กระดาษคำตอบ|ห้ามทำเครื่องหมาย|^\s*(directions?|instructions?)\b)/i;
 
@@ -2504,9 +2504,10 @@ class Component extends DCLogic {
   // Numbers in an answer, reading scientific notation (3.00×10⁻³, 2.5 x 10^-4, 1.2e5) as one value.
   static numbersIn(t) {
     const sup = { '⁰': '0', '¹': '1', '²': '2', '³': '3', '⁴': '4', '⁵': '5', '⁶': '6', '⁷': '7', '⁸': '8', '⁹': '9', '⁻': '-', '⁺': '+' };
-    const re = /(?<![A-Za-z\d.])[-−]?\d+(?:\.\d+)?(?:\s*[×xX*·]\s*10\s*(?:\^\s*\(?\s*([-−+]?\d+)\s*\)?|([⁻⁺]?[⁰¹²³⁴⁵⁶⁷⁸⁹]+))|[eE]([-+]?\d+))?/g;
+    const re = /(?<![A-Za-z\d.])(?<![A-Za-z][-−])[-−]?\d+(?:\.\d+)?(?:\s*[×xX*·]\s*10\s*(?:\^\s*\(?\s*([-−+]?\d+)\s*\)?|([⁻⁺]?[⁰¹²³⁴⁵⁶⁷⁸⁹]+))|[eE]([-+]?\d+))?/g;
     const out = [];
-    String(t || '').replace(/(\d),(?=\d{3}\b)/g, '$1').replace(re, (m, e1, e2, e3) => {
+    // "(3 sf)", "2 d.p.", "3 significant figures" are rounding notes, not answers.
+    String(t || '').replace(/(\d),(?=\d{3}\b)/g, '$1').replace(/\(?\b\d+\s*(s\.?\s?f\.?|d\.?\s?p\.?|sig\.?\s*figs?|significant\s+figures?|decimal\s+places?)\b\)?/gi, ' ').replace(re, (m, e1, e2, e3) => {
       const base = Number(m.match(/^[-−]?\d+(?:\.\d+)?/)[0].replace('−', '-'));
       const ex = e1 != null ? Number(e1.replace('−', '-')) : e2 != null ? Number(e2.replace(/./g, c => sup[c])) : e3 != null ? Number(e3) : 0;
       out.push(base * Math.pow(10, ex));
