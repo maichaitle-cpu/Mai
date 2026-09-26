@@ -28,7 +28,7 @@ async function main() {
     try {
       run = await page.evaluate(o => window.__runDoc(o), {
         doc: gt.doc, gt, claude: mode, snapshots: !!opt('snap'),
-        oracleCfg: { mapBoxes: !!opt('map-boxes'), noise: Number(opt('noise', 0)), seed: Number(opt('seed', 1)), verbose: !!opt('verbose'), sloppy: !!opt('sloppy') }, settings: gt.settings || {},
+        oracleCfg: { mapBoxes: !!opt('map-boxes'), noise: Number(opt('noise', 0)), seed: Number(opt('seed', 1)), verbose: !!opt('verbose'), sloppy: !!opt('sloppy'), layoutReplay: opt('replay') ? (() => { const r = JSON.parse(fs.readFileSync(opt('replay'), 'utf8')); const c = (r.calls || []).find(c => c.stage === 'TEXT_LAYOUT_PROMPT'); return c ? JSON.parse(String(c.response).replace(/^```(json)?|```\s*$/g, '').trim()) : null; })() : null }, settings: gt.settings || {},
       });
     } catch (e) {
       run = { apiError: 'harness: ' + e.message, answers: [], pages: [], calls: [] };

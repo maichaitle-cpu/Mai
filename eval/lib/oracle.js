@@ -265,7 +265,7 @@
     return {
       complete: async (body, stage) => {
         let r;
-        if (stage === 'layout_text') r = layoutText(body);
+        if (stage === 'layout_text') r = cfg.layoutReplay ? cfg.layoutReplay : layoutText(body);
         else if (stage === 'layout_vision') r = layoutVision(body);
         else if (stage === 'solve') r = solve(body);
         else if (stage === 'map') r = map(body);
