@@ -2523,6 +2523,8 @@ class Component extends DCLogic {
       .replace(/([A-Z][a-z]?)(\d+)(?=\^)/g, (m, el, d) => el + d.replace(/\d/g, c => SUB[c]))
       .replace(/\^\{([0-9n+\-−]{1,6})\}|\^\(([0-9n+\-−]{1,6})\)|\^([+\-−]?[0-9n]+[+\-−]?|[+\-−])/g, (m, a, b, c) => (a || b || c).replace(/./g, ch => SUP[ch] || ch));
   }
+  // Bump on every release: debug reports carry it, so a report from an older file is spotted at once.
+  static BUILD = '2026-09-26e';
   static MARKS_RE = /^\s*[\[(]\s*\d{1,3}\s*(marks?|pts?|points?|คะแนน)?\s*[\])]\s*$|^\s*\d{1,3}\s*(marks?|pts?|points?|คะแนน)\s*$/i;
   static Q_RE = /^\s*(ข้อ\s*|Q\s*)?\(?\d{1,3}\s*[.)]/i;
   static OPT_RE = /(^|\s)\(?([กขคงจฉ]|[A-Fa-f])\s*[.)](?=\s|$)/g;
@@ -7065,11 +7067,14 @@ class Component extends DCLogic {
           traceNodes: sel ? sel.nodes.map((n, k) => ({ stage: n.stage, title: n.title, lines: n.lines.map(x => ({ t: x })), color: col(n.status), glow: n.status === 'ok' ? 'none' : '0 0 0 4px ' + (n.status === 'fail' ? 'rgba(255,107,97,.18)' : 'rgba(224,179,74,.16)'), stem: k < sel.nodes.length - 1 })) : [],
         };
       })(),
-      onDebugReport: () => {
+      onDebugReport: async () => {
         const st = this.state;
         const r = v => Math.round(v);
+        // The worksheet itself rides along (up to 8 MB each) so one upload is enough to reproduce a run.
+        const b64 = f => new Promise(res => { try { const fr = new FileReader(); fr.onload = () => res(String(fr.result).split(',')[1] || null); fr.onerror = () => res(null); fr.readAsDataURL(f); } catch (e) { res(null); } });
+        const sources = await Promise.all(st.files.map(async x => ({ name: x.name, type: x.type || '', data: x.raw && x.raw.size <= 8e6 ? await b64(x.raw) : null })));
         const rep = {
-          version: 'v3', at: new Date().toISOString(), files: st.files.map(x => x.name),
+          version: 'v3', build: Component.BUILD, at: new Date().toISOString(), files: st.files.map(x => x.name),
           mode: this._traceRaw ? this._traceRaw.mode : null, model: this._modelDown ? Component.MODEL_FALLBACK : Component.MODEL,
           usage: this._usage ? { ...this._usage, perPage: this._usage.cost / Math.max(1, st.pages.length) } : null,
           settings: { accuracy: st.accuracy, level: st.level, math: st.math },
@@ -7089,6 +7094,7 @@ class Component extends DCLogic {
             choice: a.choiceRects ? { rects: a.choiceRects.map(c => [r(c.x), r(c.y), r(c.w), r(c.h), c.page || a.page]), options: (a.options || []).map(o => o.label), pick: this.pickOption(a) } : null,
           })),
           calls: this._callLog || [],
+          sources,
         };
         const url = URL.createObjectURL(new Blob([JSON.stringify(rep, null, 1)], { type: 'application/json' }));
         const link = document.createElement('a');

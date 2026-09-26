@@ -22,6 +22,18 @@ function gtName() {
   throw new Error('Cannot tell which worksheet "' + f + '" is. Pass the ground-truth name as the 2nd argument.');
 }
 
+// Which app version made this report, and is it the current one?
+const appSrc = fs.readFileSync(path.join(EVAL, '..', 'app', 'Archive Portal v3.dc.html'), 'utf8');
+const curBuild = (appSrc.match(/static BUILD = '([^']+)'/) || [])[1];
+console.log('report build:', rep.build || '(before build stamps)', '| current build:', curBuild, rep.build === curBuild ? '' : '<-- OLD APP FILE: re-run with the latest .dc.html before debugging');
+// Save the worksheets the report carries, so a run can be replayed without a second upload.
+(rep.sources || []).forEach(src => {
+  if (!src || !src.data) return;
+  const out = path.join(EVAL, 'out', 'sources', src.name);
+  fs.mkdirSync(path.dirname(out), { recursive: true });
+  fs.writeFileSync(out, Buffer.from(src.data, 'base64'));
+  console.log('saved source:', path.relative(EVAL, out));
+});
 const name = gtName();
 const gt = JSON.parse(fs.readFileSync(path.join(EVAL, 'fixtures', 'gt', name + '.json'), 'utf8'));
 const run = {
