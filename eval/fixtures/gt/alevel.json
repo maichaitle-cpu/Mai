@@ -1,0 +1,402 @@
+{
+ "doc": "real/alevel.pdf",
+ "settings": {},
+ "questions": [
+  {
+   "label": "(a)",
+   "page": 1,
+   "kind": "write",
+   "cat": "LONG_TEXT",
+   "prompt": "(a) State the two formulae needed to calculate moles from solution data and mass from moles. Include [2] the required unit for solution volume.",
+   "qrect": [
+    75,
+    486,
+    1032,
+    48
+   ],
+   "areas": [
+    [
+     75,
+     536,
+     989,
+     130
+    ]
+   ],
+   "answer": "The limiting reagent is used up first; the other reagent is left over in excess."
+  },
+  {
+   "label": "(b)",
+   "page": 1,
+   "kind": "write",
+   "cat": "LONG_TEXT",
+   "prompt": "(b) Explain why the limiting reagent cannot always be identified by comparing the two raw mole values [2] directly.",
+   "qrect": [
+    75,
+    683,
+    1032,
+    48
+   ],
+   "areas": [
+    [
+     75,
+     733,
+     989,
+     179
+    ]
+   ],
+   "answer": "The limiting reagent is used up first; the other reagent is left over in excess."
+  },
+  {
+   "label": "(c)",
+   "page": 1,
+   "kind": "write",
+   "cat": "LONG_TEXT",
+   "prompt": "(c) Describe a reliable method for identifying the limiting reagent from a balanced equation. [1]",
+   "qrect": [
+    75,
+    929,
+    1032,
+    22
+   ],
+   "areas": [
+    [
+     75,
+     953,
+     989,
+     155
+    ]
+   ],
+   "answer": "The limiting reagent is used up first; the other reagent is left over in excess."
+  },
+  {
+   "label": "(a)",
+   "page": 2,
+   "kind": "write",
+   "cat": "FORMULA_WORKING",
+   "prompt": "(a) Convert each volume from cm³ to dm³, then calculate the initial moles of each reactant. [4]",
+   "qrect": [
+    78,
+    382,
+    1026,
+    22
+   ],
+   "areas": [
+    [
+     72,
+     406,
+     991,
+     135
+    ]
+   ],
+   "answer": "n = cV = 0.200 × 0.0250 = 5.00×10⁻³ mol"
+  },
+  {
+   "label": "(b)",
+   "page": 2,
+   "kind": "write",
+   "cat": "FORMULA_WORKING",
+   "prompt": "(b) Use the balanced equation to determine which reactant is limiting and which reactant is in excess. Show [3] your comparison clearly.",
+   "qrect": [
+    78,
+    557,
+    1026,
+    45
+   ],
+   "areas": [
+    [
+     72,
+     604,
+     991,
+     158
+    ]
+   ],
+   "answer": "n = cV = 0.200 × 0.0250 = 5.00×10⁻³ mol"
+  },
+  {
+   "label": "(c)",
+   "page": 2,
+   "kind": "write",
+   "cat": "FORMULA_WORKING",
+   "prompt": "(c) Calculate the amount, in moles, of Cu(OH)₂ precipitate formed. [2]",
+   "qrect": [
+    78,
+    778,
+    1026,
+    22
+   ],
+   "areas": [
+    [
+     72,
+     802,
+     991,
+     158
+    ]
+   ],
+   "answer": "n = cV = 0.200 × 0.0250 = 5.00×10⁻³ mol"
+  },
+  {
+   "label": "(d)",
+   "page": 2,
+   "kind": "write",
+   "cat": "FORMULA_WORKING",
+   "prompt": "(d) Calculate the mass, in grams, of Cu(OH)₂ precipitate formed. [3]",
+   "qrect": [
+    78,
+    976,
+    1026,
+    22
+   ],
+   "areas": [
+    [
+     72,
+     1000,
+     991,
+     159
+    ]
+   ],
+   "answer": "n = cV = 0.200 × 0.0250 = 5.00×10⁻³ mol"
+  },
+  {
+   "label": "(e)",
+   "page": 2,
+   "kind": "write",
+   "cat": "FORMULA_WORKING",
+   "prompt": "(e) Calculate the amount, in moles, of the excess reactant remaining after the reaction is complete. [2]",
+   "qrect": [
+    78,
+    1175,
+    1026,
+    22
+   ],
+   "areas": [
+    [
+     72,
+     1199,
+     991,
+     112
+    ]
+   ],
+   "answer": "n = cV = 0.200 × 0.0250 = 5.00×10⁻³ mol"
+  },
+  {
+   "label": "(f)",
+   "page": 2,
+   "kind": "write",
+   "cat": "FORMULA_WORKING",
+   "prompt": "(f) Calculate the mass of the excess reactant remaining after the reaction is complete. [1]",
+   "qrect": [
+    78,
+    1327,
+    1026,
+    22
+   ],
+   "areas": [
+    [
+     72,
+     1351,
+     991,
+     204
+    ]
+   ],
+   "answer": "n = cV = 0.200 × 0.0250 = 5.00×10⁻³ mol"
+  },
+  {
+   "label": "(a)",
+   "page": 3,
+   "kind": "write",
+   "cat": "LONG_TEXT",
+   "prompt": "(a) Define the terms limiting reagent and excess reagent in the context of a precipitation reaction. [2 [2] marks]",
+   "qrect": [
+    80,
+    293,
+    1024,
+    49
+   ],
+   "areas": [
+    [
+     72,
+     344,
+     991,
+     154
+    ]
+   ],
+   "answer": "The limiting reagent is used up first; the other reagent is left over in excess."
+  },
+  {
+   "label": "(b)",
+   "page": 3,
+   "kind": "write",
+   "cat": "LONG_TEXT",
+   "prompt": "(b) State the formula used to calculate moles of a solute in a solution and explain why cm³ must be [2] converted to dm³. [2 marks]",
+   "qrect": [
+    80,
+    515,
+    1024,
+    49
+   ],
+   "areas": [
+    [
+     72,
+     566,
+     991,
+     179
+    ]
+   ],
+   "answer": "The limiting reagent is used up first; the other reagent is left over in excess."
+  },
+  {
+   "label": "(c)",
+   "page": 3,
+   "kind": "write",
+   "cat": "LONG_TEXT",
+   "prompt": "(c) Explain how the coefficients in a balanced equation are used to decide which reagent is limiting. [1 [1] mark]",
+   "qrect": [
+    80,
+    762,
+    1024,
+    49
+   ],
+   "areas": [
+    [
+     72,
+     813,
+     991,
+     204
+    ]
+   ],
+   "answer": "The limiting reagent is used up first; the other reagent is left over in excess."
+  },
+  {
+   "label": "(a)",
+   "page": 4,
+   "kind": "write",
+   "cat": "FORMULA_WORKING",
+   "prompt": "(a) Convert each volume from cm³ to dm³, then calculate the initial moles of each reactant. [4]",
+   "qrect": [
+    114,
+    332,
+    975,
+    22
+   ],
+   "areas": [
+    [
+     72,
+     356,
+     962,
+     158
+    ]
+   ],
+   "answer": "n = cV = 0.200 × 0.0250 = 5.00×10⁻³ mol"
+  },
+  {
+   "label": "(b)",
+   "page": 4,
+   "kind": "write",
+   "cat": "FORMULA_WORKING",
+   "prompt": "(b) Use the balanced equation to determine which reactant is limiting and which reactant is in excess. [3] Show your comparison clearly.",
+   "qrect": [
+    114,
+    530,
+    975,
+    45
+   ],
+   "areas": [
+    [
+     72,
+     577,
+     962,
+     135
+    ]
+   ],
+   "answer": "n = cV = 0.200 × 0.0250 = 5.00×10⁻³ mol"
+  },
+  {
+   "label": "(c)",
+   "page": 4,
+   "kind": "write",
+   "cat": "FORMULA_WORKING",
+   "prompt": "(c) Calculate the amount, in moles, of BaSO₄ precipitate formed. [2]",
+   "qrect": [
+    114,
+    728,
+    975,
+    22
+   ],
+   "areas": [
+    [
+     72,
+     752,
+     962,
+     136
+    ]
+   ],
+   "answer": "n = cV = 0.200 × 0.0250 = 5.00×10⁻³ mol"
+  },
+  {
+   "label": "(d)",
+   "page": 4,
+   "kind": "write",
+   "cat": "FORMULA_WORKING",
+   "prompt": "(d) Calculate the mass, in grams, of BaSO₄ precipitate formed. [3]",
+   "qrect": [
+    114,
+    904,
+    975,
+    22
+   ],
+   "areas": [
+    [
+     72,
+     928,
+     962,
+     135
+    ]
+   ],
+   "answer": "n = cV = 0.200 × 0.0250 = 5.00×10⁻³ mol"
+  },
+  {
+   "label": "(e)",
+   "page": 4,
+   "kind": "write",
+   "cat": "FORMULA_WORKING",
+   "prompt": "(e) Calculate the amount, in moles, of the excess reactant remaining after the reaction is complete. [2]",
+   "qrect": [
+    114,
+    1079,
+    975,
+    22
+   ],
+   "areas": [
+    [
+     72,
+     1103,
+     962,
+     135
+    ]
+   ],
+   "answer": "n = cV = 0.200 × 0.0250 = 5.00×10⁻³ mol"
+  },
+  {
+   "label": "(f)",
+   "page": 4,
+   "kind": "write",
+   "cat": "FORMULA_WORKING",
+   "prompt": "(f) Calculate the final concentration, in mol dm⁻³, of the excess ion Ba²⁺(aq) remaining in the mixture. [1]",
+   "qrect": [
+    114,
+    1254,
+    975,
+    22
+   ],
+   "areas": [
+    [
+     72,
+     1278,
+     962,
+     274
+    ]
+   ],
+   "answer": "n = cV = 0.200 × 0.0250 = 5.00×10⁻³ mol"
+  }
+ ]
+}

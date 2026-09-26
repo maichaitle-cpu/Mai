@@ -3449,7 +3449,14 @@ class Component extends DCLogic {
         }
         const beside = text.filter(l => l !== L && l.x0 > L.x1 + lh && l.x0 < rightQ && l.top < L.bottom && l.bottom > L.top).sort((p, r) => p.x0 - r.x0)[0];
         const rightHere = beside ? Math.min(rightQ, beside.x0 - lh) : rightQ;
-        const y0 = L.bottom, y1 = N ? N.top : Math.min(H - lh * 2, L.bottom + lh * 16);
+        const y0 = L.bottom;
+        let y1 = N ? N.top : Math.min(H - lh * 2, L.bottom + lh * 16);
+        // A question printed inside a table cell answers inside that cell: its borders end the answer area.
+        let rightZ = rightQ;
+        const vls = (page.vec && page.vec.vl) || [];
+        const cl = vls.filter(v => v.x <= L.x0 + lh * 0.5 && v.x >= L.x0 - lh * 3 && v.y0 <= L.top + lh * 0.3 && v.y1 >= L.bottom + lh * 1.5).sort((a, b) => b.x - a.x)[0];
+        const cr = cl && vls.filter(v => v.x > L.x0 + W * 0.3 && v.y0 <= L.top + lh * 0.3 && v.y1 >= L.bottom + lh * 1.5 && Math.abs(v.y1 - cl.y1) < lh).sort((a, b) => a.x - b.x)[0];
+        if (cl && cr && Math.min(cl.y1, cr.y1) - L.bottom >= lh * 1.5) { y1 = Math.min(y1, Math.min(cl.y1, cr.y1)); rightZ = Math.min(rightQ, cr.x - lh * 0.3); }
         // An answer line printed on the question's own line, right of its text ("a) What can you determine? ____"), belongs to it.
         const besideLine = sp => sp.type === 'line' && sp.y < L.bottom && sp.y + sp.h > L.top && sp.x >= L.x1 - lh && sp.x < rightHere;
         let zone = spaces.map((sp, n) => ({ sp, n: n + 1 })).filter(z => !used.has(z.n) && (besideLine(z.sp) || (z.sp.y >= y0 - lh * 0.3 && z.sp.y + z.sp.h <= y1 + lh * 0.3)) && (!cols || this.colIdx(page, z.sp.x + Math.min(z.sp.w, lh * 4) / 2) === lc));
@@ -3475,9 +3482,9 @@ class Component extends DCLogic {
         }
         let how = 'spaces';
         const gx0 = cols ? Math.max(cols[lc].x0 + lh * 0.5, L.x0) : Math.max(lh, Math.min(L.x0, W * 0.5));
-        const band = !zone.length && y1 - y0 >= lh * 2.2 ? this.emptyBand(page, gx0, rightQ, y0 + lh * 0.2, y1 - lh * 0.2) : null;
+        const band = !zone.length && y1 - y0 >= lh * 2.2 ? this.emptyBand(page, gx0, rightZ, y0 + lh * 0.2, y1 - lh * 0.2) : null;
         if (band && band.h >= lh * 1.6) {
-          spaces.push({ type: 'space', x: gx0, y: band.y + lh * 0.1, w: Math.max(lh * 6, rightQ - gx0), h: Math.min(band.h - lh * 0.2, lh * 8), lh, synth: true });
+          spaces.push({ type: 'space', x: gx0, y: band.y + lh * 0.1, w: Math.max(lh * 6, rightZ - gx0), h: Math.min(band.h - lh * 0.2, lh * 8), lh, synth: true });
           zone = [{ sp: spaces[spaces.length - 1], n: spaces.length }];
           how = 'gap';
         } else if (!zone.length && rightHere - (L.x1 + lh) >= lh * 5) {
@@ -3491,7 +3498,7 @@ class Component extends DCLogic {
         zone.forEach(z => used.add(z.n));
         zone = zone.map(z => {
           if (z.sp.type !== 'space') return z;
-          const x0 = Math.max(z.sp.x, Math.min(L.x0 - lh, W * 0.5)), x1 = Math.min(z.sp.x + z.sp.w, rightQ);
+          const x0 = Math.max(z.sp.x, Math.min(L.x0 - lh, W * 0.5)), x1 = Math.min(z.sp.x + z.sp.w, rightZ);
           return x1 - x0 > lh * 4 ? { ...z, sp: { ...z.sp, x: x0, w: x1 - x0 } } : z;
         });
         zone.forEach(z => { spaces[z.n - 1] = z.sp; });
@@ -3510,7 +3517,7 @@ class Component extends DCLogic {
         if (zone.length) {
           const slots = [].concat(...zone.map(z => this.slotsForSpace(page, z.sp)));
           const u = { x0: Math.min.apply(null, zone.map(z => z.sp.x)), y0: Math.min.apply(null, zone.map(z => z.sp.y)), x1: Math.max.apply(null, zone.map(z => z.sp.x + z.sp.w)), y1: Math.max.apply(null, zone.map(z => z.sp.y + z.sp.h)) };
-          upd.limit = { x0: u.x0, y0: u.y0, x1: Math.min(rightQ + lh, Math.max(u.x1, u.x0 + lh * 5)), y1: Math.min(y1, u.y1 + lh * 0.3) };
+          upd.limit = { x0: u.x0, y0: u.y0, x1: Math.min(rightZ + lh, Math.max(u.x1, u.x0 + lh * 5)), y1: Math.min(y1, u.y1 + lh * 0.3) };
           upd.slots = this.clipSlots(slots, upd.limit);
           upd.maxChars = this.capacity(upd.slots);
         }

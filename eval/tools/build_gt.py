@@ -343,7 +343,25 @@ def qual():
     d.save('real/qual.pdf')
 
 
-BUILDERS = {'physics': physics, 'polygraph': polygraph, 'exam_revision': exam_revision, 'phe': phe, 'icecream': icecream, 'qual': qual}
+def alevel():
+    d = Doc('alevel')
+    # Every question is a table row; the answer goes in the empty part of the row, left of the marks column.
+    spec = {
+        1: (75, 1064, [('(a)', [9, 10], 666), ('(b)', [11, 12], 912), ('(c)', [13], 1108)]),
+        2: (72, 1063, [('(a)', [7], 541), ('(b)', [8, 9], 762), ('(c)', [10], 960), ('(d)', [11], 1159), ('(e)', [12], 1311), ('(f)', [13], 1555)]),
+        3: (72, 1063, [('(a)', [4, 5], 498), ('(b)', [6, 7], 745), ('(c)', [8, 9], 1017)]),
+        4: (72, 1034, [('(a)', [6], 514), ('(b)', [7, 8], 712), ('(c)', [9], 888), ('(d)', [10], 1063), ('(e)', [11], 1238), ('(f)', [12], 1552)]),
+    }
+    for pg, (x0, x1, qs) in spec.items():
+        for lab, ql, yb in qs:
+            top = d.L(pg, ql[-1])['bottom'] + 2
+            cat = 'LONG_TEXT' if pg in (1, 3) else 'FORMULA_WORKING'
+            d.add(label=lab, page=pg, kind='write', cat=cat, prompt=' '.join(d.L(pg, i)['text'] for i in ql), qrect=d.rect(pg, *ql),
+                  areas=[[x0, top, x1 - x0, yb - top]], answer='n = cV = 0.200 × 0.0250 = 5.00×10⁻³ mol' if cat == 'FORMULA_WORKING' else 'The limiting reagent is used up first; the other reagent is left over in excess.')
+    d.save('real/alevel.pdf')
+
+
+BUILDERS = {'physics': physics, 'polygraph': polygraph, 'exam_revision': exam_revision, 'phe': phe, 'icecream': icecream, 'qual': qual, 'alevel': alevel}
 
 if __name__ == '__main__':
     for n in (sys.argv[1:] or BUILDERS.keys()):
