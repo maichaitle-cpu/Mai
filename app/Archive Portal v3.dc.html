@@ -2629,7 +2629,7 @@ class Component extends DCLogic {
       .replace(/\^\{([0-9n+\-−]{1,6})\}|\^\(([0-9n+\-−]{1,6})\)|\^([+\-−]?[0-9n]+[+\-−]?|[+\-−])/g, (m, a, b, c) => (a || b || c).replace(/./g, ch => SUP[ch] || ch));
   }
   // Bump on every release: debug reports carry it, so a report from an older file is spotted at once.
-  static BUILD = '2026-09-27e';
+  static BUILD = '2026-09-27f';
   static MARKS_RE = /^\s*[\[(]\s*\d{1,3}\s*(marks?|pts?|points?|คะแนน)?\s*[\])]\s*$|^\s*\d{1,3}\s*(marks?|pts?|points?|คะแนน)\s*$/i;
   static Q_RE = /^\s*(ข้อ\s*|Q\s*)?\(?\d{1,3}\s*[.)]/i;
   static OPT_RE = /(^|\s)\(?([กขคงจฉ]|[A-Fa-f])\s*[.)](?=\s|$)/g;
@@ -4281,7 +4281,7 @@ class Component extends DCLogic {
           if (!starts(L.text)) for (let j = k - 1; j >= Math.max(0, k - 3); j--) { near.push(sorted[j]); if (starts(sorted[j].text)) break; }
           for (let j = k + 1; j <= Math.min(sorted.length - 1, k + 2); j++) { if (starts(sorted[j].text)) break; near.push(sorted[j]); }
           const hit = near.find(l => freeB(l) && Math.abs(l.top - L.top) < L.h * 3.5);
-          if (hit) { L = hit; q = { ...q, kind: 'blank' }; }
+          if (hit) { L = hit; q = { ...q, kind: 'blank', lineId: hit.id }; }
         }
         if (q.kind === 'below') return { ...q, _need: { needsSpace: true, col: this.colOf(page, L, q.prompt), L } };
         region = this.regionFromLine(page, L, q.kind, q.prompt);
@@ -4998,6 +4998,26 @@ class Component extends DCLogic {
   }
 
   async recheckText(found, pages) {
+    // The same question returned twice (same number and wording, pointed at another of its lines): keep the first.
+    const dedupe = list => {
+      const normQ = t => String(t || '').toLowerCase().replace(/[^a-z0-9\u0E00-\u0E7F]+/g, ' ').trim();
+      // Of two copies on different lines, the one on a line with a printed blank wins (the other points at a wrapped line).
+      const keyOf = q => {
+        const lab = String(q.label || '').trim().replace(/[.):\s]+$/, '');
+        const pr = normQ(q.prompt).slice(0, 80);
+        return !lab || pr.length < 12 || q.fromTable ? null : (q.page || 1) + '|' + lab.toLowerCase() + '|' + pr;
+      };
+      const best = new Map();
+      list.forEach(q => {
+        const k = keyOf(q);
+        if (!k) return;
+        const b = best.get(k);
+        if (!b || (q.kind === 'blank' && b.kind !== 'blank')) best.set(k, q);
+      });
+      const blanksOn = q => { const pg = pages[(q.page || 1) - 1]; const L = pg && pg.lines && pg.lines.find(l => l.id === q.lineId); return L && L.blanks ? L.blanks.length : 0; };
+      return list.filter(q => { const k = keyOf(q); if (!k) return true; const b = best.get(k); return b === q || (b.lineId === q.lineId && blanksOn(q) > 1); });
+    };
+    found = dedupe(found);
     const norm = t => String(t || '').toLowerCase().replace(/[^a-z0-9\u0E00-\u0E7F]+/g, ' ').trim();
     const miss = this.uncovered(found, pages);
     if (!miss.length) return found;
@@ -5024,6 +5044,7 @@ class Component extends DCLogic {
         });
       } catch (err) {}
     }
+    found = dedupe(found);
     // A table cell that is nothing but a printed blank ("10 | ____ | 20") and that no question claims is an
     // unanswered blank even when Claude skipped it (common for a table row carried over to the next page).
     this.uncovered(found, pages).forEach(m => {
@@ -5110,9 +5131,42 @@ class Component extends DCLogic {
     const seen = {};
     pages.forEach((page, pi) => ((page && page.lines) || []).forEach(l => { if (!edge(page, l)) return; const k = norm(l.text).replace(/\d+/g, ''); if (k.length > 3) (seen[k] = seen[k] || new Set()).add(pi); }));
     const running = l => { const k = norm(l.text).replace(/\d+/g, ''); return !!(seen[k] && seen[k].size > 1); };
+    let carry = null;
     pages.forEach((page, pi) => {
       const lines = (page && page.lines) || [];
       const pn = pi + 1;
+      // A tick table that ran to the foot of the previous page continues here without its header row.
+      if (carry && carry.pn === pn - 1 && page.vec && page.vec.vl) {
+        const C = carry;
+        carry = null;
+        const top = lines.filter(l => !(edge(page, l) && running(l))).sort((a, b) => a.top - b.top);
+        const rowsC = [];
+        for (const L of top) {
+          const cy = (L.top + L.bottom) / 2;
+          const vs = page.vec.vl.filter(r => r.y0 <= cy + 2 && r.y1 >= cy - 2).map(r => r.x);
+          const boxes = C.cols.map(c => {
+            const lx = vs.filter(x => x < c.cx).reduce((m, x) => Math.max(m, x), -Infinity), rx = vs.filter(x => x > c.cx).reduce((m, x) => Math.min(m, x), Infinity);
+            return isFinite(lx) && isFinite(rx) && rx - lx < c.w * 1.5 && rx - lx > c.w * 0.5 ? { x0: lx + 2, x1: rx - 2, label: c.label } : null;
+          });
+          if (boxes.some(b => !b) || (L.cells || []).length > 1 || L.x1 > C.cols[0].cx - C.cols[0].w / 2 || Component.Q_RE.test(String(L.text || ''))) break;
+          rowsC.push({ L, boxes });
+        }
+        if (rowsC.length) {
+          const ids = new Set(rowsC.map(r => r.L.id));
+          const ex = out.filter(q => (q.page || 1) === pn && ids.has(q.lineId));
+          const lab = {};
+          ex.forEach(q => { if (!lab[q.lineId] && q.label) lab[q.lineId] = String(q.label).replace(/[\s·]+$/, ''); });
+          const add = rowsC.map(r => {
+            const options = r.boxes.map(b => ({ label: b.label, rect: { x: b.x0, y: r.L.top, w: Math.max(4, b.x1 - b.x0), h: r.L.bottom - r.L.top }, tick: true }));
+            return { label: lab[r.L.id] || String(r.L.text || '').trim().slice(0, 28), prompt: (C.intro ? C.intro + ' — ' : '') + 'Row: ' + String(r.L.text || '').trim() + ' — tick one box: ' + options.map(o => o.label).join(' / '), page: pn, lineId: r.L.id, kind: 'choice', options, cat: 'MULTIPLE_CHOICE', fromTable: true };
+          });
+          const drop = new Set(ex);
+          const at0 = out.findIndex(q => drop.has(q) || (q.page || 1) >= pn);
+          out = out.filter(q => !drop.has(q));
+          const at = at0 < 0 ? out.length : Math.min(at0, out.length);
+          out.splice(at, 0, ...add);
+        }
+      }
       for (let hi = 0; hi < lines.length; hi++) {
         const Hd = lines[hi];
         const hc = this.headerCells(page, Hd);
@@ -5210,6 +5264,10 @@ class Component extends DCLogic {
           const options = tickCols.map(k => { const z = emptyTick ? colBox(k, r.L) : cellIn(r.L, k); return { label: String(hc[k].text).trim(), rect: { x: z.x0, y: r.L.top, w: Math.max(4, z.x1 - z.x0), h: r.L.bottom - r.L.top }, tick: true }; });
           added.push({ label: base, prompt: (intro ? intro + ' — ' : '') + 'Row: ' + String(r.L.cells && r.L.cells[0] ? r.L.cells[0].text : r.L.text) + ' — tick one box: ' + options.map(o => o.label).join(' / '), page: pn, lineId: r.L.id, kind: 'choice', headerId: Hd.id, options, cat: 'MULTIPLE_CHOICE', fromTable: true });
         });
+        if (emptyTick && rows.length) {
+          const lastB = rows[rows.length - 1].L.bottom;
+          if (!lines.some(l => l.top > lastB + 1 && !edge(page, l))) carry = { pn, intro, cols: tickCols.map(k => { const z = colBox(k, rows[rows.length - 1].L); return { cx: (z.x0 + z.x1) / 2, w: z.x1 - z.x0, label: String(hc[k].text).trim() }; }) };
+        }
         if (!added.length) continue;
         const drop = new Set(existing);
         const firstIdx = out.findIndex(q => drop.has(q) || ((q.page || 1) === pn && rowIds.has(q.lineId)));

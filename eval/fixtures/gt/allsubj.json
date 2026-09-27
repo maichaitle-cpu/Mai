@@ -19637,6 +19637,108 @@
    }
   },
   {
+   "label": "82h",
+   "page": 49,
+   "kind": "choice",
+   "cat": "MULTIPLE_CHOICE",
+   "prompt": "swim — tick one: Noun / Verb / Adjective",
+   "qrect": [
+    111,
+    129,
+    43,
+    21
+   ],
+   "options": [
+    {
+     "text": "Noun",
+     "page": 49,
+     "rect": [
+      526,
+      116,
+      185,
+      44
+     ]
+    },
+    {
+     "text": "Verb",
+     "page": 49,
+     "rect": [
+      715,
+      116,
+      185,
+      44
+     ]
+    },
+    {
+     "text": "Adjective",
+     "page": 49,
+     "rect": [
+      904,
+      116,
+      185,
+      44
+     ]
+    }
+   ],
+   "correct": 1,
+   "oracleAs": {
+    "kind": "box",
+    "cat": "DRAWING",
+    "line": 0
+   }
+  },
+  {
+   "label": "82i",
+   "page": 49,
+   "kind": "choice",
+   "cat": "MULTIPLE_CHOICE",
+   "prompt": "difficult — tick one: Noun / Verb / Adjective",
+   "qrect": [
+    111,
+    177,
+    59,
+    21
+   ],
+   "options": [
+    {
+     "text": "Noun",
+     "page": 49,
+     "rect": [
+      526,
+      164,
+      185,
+      44
+     ]
+    },
+    {
+     "text": "Verb",
+     "page": 49,
+     "rect": [
+      715,
+      164,
+      185,
+      44
+     ]
+    },
+    {
+     "text": "Adjective",
+     "page": 49,
+     "rect": [
+      904,
+      164,
+      185,
+      44
+     ]
+    }
+   ],
+   "correct": 2,
+   "oracleAs": {
+    "kind": "box",
+    "cat": "DRAWING",
+    "line": 1
+   }
+  },
+  {
    "label": "83",
    "page": 49,
    "kind": "write",

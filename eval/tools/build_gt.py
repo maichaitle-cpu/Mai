@@ -559,16 +559,25 @@ def allsubj():
                             for it2 in rr:
                                 if it2[0].strip() == 'X': kx.append((kp, y, it2[1] * SC))
                     kx.sort()
-                    for ri, r in enumerate(rows):
-                        a, b = row_bounds(p, (r['top'] + r['bottom']) / 2)
+                    # rows that run past the page foot continue at the top of the next page (no header there)
+                    more = []
+                    if j >= len(lines) and p < len(d.pages):
+                        nxt = sorted([l for l in d.P(p + 1)['lines'] if not re.match(r'^Page \d+$', l['text'])], key=lambda l: l['top'])
+                        for l in nxt:
+                            if l['x0'] > 200 or re.match(r'^\d{1,3}\.\s|^[A-Z][a-z]+ (in|each|the|a)\b', l['text']):
+                                break
+                            more.append(l)
+                    for ri, r in enumerate(rows + more):
+                        rp = p if ri < len(rows) else p + 1
+                        a, b = row_bounds(rp, (r['top'] + r['bottom']) / 2)
                         bounds = list(zip(cols[1:-1], cols[2:]))
                         opts = []
                         for (c0, c1), h in zip(bounds, heads[1:]):
-                            opts.append({'text': h[0], 'page': p, 'rect': [c0 + 2, a + 2, c1 - c0 - 4, b - a - 4]})
+                            opts.append({'text': h[0], 'page': rp, 'rect': [c0 + 2, a + 2, c1 - c0 - 4, b - a - 4]})
                         xx = kx[ri][2] if ri < len(kx) else None
                         corr = next((k for k, (c0, c1) in enumerate(bounds) if xx is not None and c0 <= xx <= c1), 0)
-                        d.add(label=f'{n}{"abcdefghij"[ri]}', page=p, kind='choice', cat='MULTIPLE_CHOICE', prompt=r['text'] + ' — tick one: ' + ' / '.join(o['text'] for o in opts),
-                              qrect=d.rect(p, r['id']), options=opts, correct=corr, oracleAs={'kind': 'box', 'cat': 'DRAWING', 'line': r['id']})
+                        d.add(label=f'{n}{"abcdefghij"[ri]}', page=rp, kind='choice', cat='MULTIPLE_CHOICE', prompt=r['text'] + ' — tick one: ' + ' / '.join(o['text'] for o in opts),
+                              qrect=d.rect(rp, r['id']), options=opts, correct=corr, oracleAs={'kind': 'box', 'cat': 'DRAWING', 'line': r['id']})
                     pending = None
                     i = j; continue
                 if m or (L['blanks'] and pending and pending.get('type') == 'fill'):
