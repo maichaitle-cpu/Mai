@@ -28,7 +28,17 @@ async function main() {
     try {
       run = await page.evaluate(o => window.__runDoc(o), {
         doc: gt.doc, gt, claude: mode, snapshots: !!opt('snap'),
-        oracleCfg: { mapBoxes: !!opt('map-boxes'), noise: Number(opt('noise', 0)), seed: Number(opt('seed', 1)), verbose: !!opt('verbose'), sloppy: !!opt('sloppy'), breakLayout: opt('break-layout') || null, breakSolve: !!opt('break-solve'), layoutReplay: opt('replay') ? (() => { const r = JSON.parse(fs.readFileSync(opt('replay'), 'utf8')); const c = (r.calls || []).find(c => c.stage === 'TEXT_LAYOUT_PROMPT'); return c ? JSON.parse(String(c.response).replace(/^```(json)?|```\s*$/g, '').trim()) : null; })() : null }, settings: gt.settings || {},
+        oracleCfg: { mapBoxes: !!opt('map-boxes'), noise: Number(opt('noise', 0)), seed: Number(opt('seed', 1)), verbose: !!opt('verbose'), sloppy: !!opt('sloppy'), breakLayout: opt('break-layout') || null, breakSolve: !!opt('break-solve'), layoutReplay: opt('replay') ? (() => {
+          // Every recorded layout chunk, merged: the oracle hands back the questions for the pages each request shows.
+          const r = JSON.parse(fs.readFileSync(opt('replay'), 'utf8'));
+          const qs = [], seen = new Set();
+          (r.calls || []).filter(c => c.stage === 'TEXT_LAYOUT_PROMPT').forEach(c => {
+            let j = null;
+            try { j = JSON.parse(String(c.response).replace(/^```(json)?|```\s*$/g, '').trim()); } catch (e) { return; }
+            (j.questions || []).forEach(q => { const k = q.line + '|' + q.label; if (!seen.has(k)) { seen.add(k); qs.push(q); } });
+          });
+          return qs.length ? { questions: qs, merged: true } : null;
+        })() : null }, settings: gt.settings || {},
       });
     } catch (e) {
       run = { apiError: 'harness: ' + e.message, answers: [], pages: [], calls: [] };

@@ -122,6 +122,15 @@
       return out;
     }
 
+    function replayFor(body) {
+      const R = cfg.layoutReplay;
+      if (!R.merged) return R;
+      const txt = textOf(body.messages[0].content);
+      const shown = new Set((txt.match(/=== PAGE (\d+) ===/g) || []).map(m => Number(m.match(/\d+/)[0])));
+      const pg = q => Number((String(q.line || '').match(/^p(\d+)-/) || [])[1]);
+      return { questions: R.questions.filter(q => !shown.size || shown.has(pg(q))) };
+    }
+
     function layoutText(body) {
       const txt = textOf(body.messages[0].content);
       const fm = /FOCUS: ([^\n]*?) look like/.exec(txt);
@@ -140,6 +149,12 @@
           const to = r ? r[1] + r[3] : (q.qrect ? q.qrect[1] + q.qrect[3] : 0);
           const refs = P.lines.filter(l => ((q.qrect && inRect(l, q.qrect, 2)) || (q.area && inRect(l, q.area, 2)) || (cy(l) > from && cy(l) < to && q.qrect && cy(l) < q.qrect[1] + q.qrect[3] + 2))).map(l => lineRef(q.page, l));
           if (!refs.some(x => focus.indexOf(x) >= 0)) return;
+        }
+        if (q.oracleAs && !P.ocr) {
+          // Imitates what Claude actually returned for this item in a real run (e.g. tick-table rows as drawings).
+          const RL = P.lines.find(l => inRect(l, q.qrect, 2));
+          if (RL) { const pe = perturb({ line: lineRef(q.page, RL), next: null, label: q.label, prompt: q.prompt, kind: q.oracleAs.kind, cat: q.oracleAs.cat }, q, P, !!focus); if (pe) out.push(pe); }
+          return;
         }
         const qls = q.qrect ? P.lines.filter(l => inRect(l, q.qrect, 2) && !isRule(l.text)) : [];
         let L = qls[qls.length - 1];
@@ -265,7 +280,7 @@
     return {
       complete: async (body, stage) => {
         let r;
-        if (stage === 'layout_text') r = cfg.layoutReplay ? cfg.layoutReplay : layoutText(body);
+        if (stage === 'layout_text') r = cfg.layoutReplay ? replayFor(body) : layoutText(body);
         else if (stage === 'layout_vision') r = layoutVision(body);
         else if (stage === 'solve') r = solve(body);
         else if (stage === 'map') r = map(body);

@@ -4,6 +4,7 @@ window.__runDoc = async function (opts) {
   const calls = [];
   const comp = new __C();
   window.__lastComp = comp;
+    { const acct0 = comp.acct.bind(comp); comp.acct = () => ({ ...acct0(), perUpload: 999, daily: 1e9 }); comp.remainingToday = () => 1e9; }
   comp.toast = () => {};
   const oracle = gt ? __makeOracle(gt, oracleCfg || {}, comp) : null;
   const PRICE = { 'claude-sonnet-4-5': [3, 15], 'claude-sonnet-4-6': [3, 15], 'claude-sonnet-5': [2, 10], 'claude-haiku-4-5': [1, 5], 'claude-opus-5': [5, 25] };

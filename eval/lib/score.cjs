@@ -29,7 +29,11 @@ function matchAnswers(gt, answers) {
       const lab = ak === qk || (ak.length >= 12 && qk.startsWith(ak)) || (q.kind === 'cell' && dice(String(a.num).split('·')[0], q.label) > 0.75 && q.cell && dice(q.cell.col, String(a.num).split('·').pop()) > 0.5);
       const ps = sim(q.prompt, a.question);
       const geo = a.bbox && a.bbox.every(v => v != null) && areas.some(ar => inter(a.bbox, grow(ar, 14)) > 0) ? 0.5 : 0;
-      const s = (lab ? 2 : 0) + ps * 3 + geo;
+      // Table rows often come back unlabelled or relabelled ("82.1", or a prompt of only symbols like "2^3 = 8"):
+      // an answer sitting wholly inside this question's own area, or marked on one of its options, is this question's.
+      const inside = (a.bbox && a.bbox.every(v => v != null) && areas.some(ar => inter(a.bbox, grow(ar, 6)) >= areaOf(a.bbox) * 0.9))
+        || (a.mark && q.options && q.options.some(o => (o.page || q.page) === (a.mark[4] || a.page) && inter(a.mark.slice(0, 4), o.rect) > areaOf(a.mark.slice(0, 4)) * 0.5));
+      const s = (lab ? 2 : 0) + ps * 3 + geo + (inside ? 1.2 : 0);
       if (!lab && s < 1.2) return;
       cands.push({ qi, ai, s });
     });

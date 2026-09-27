@@ -49,6 +49,8 @@ async function main() {
     }
     return route.abort();
   });
+  // UI_SET='{"choicemark":"Cross"}' applies settings; UI_PAGES=2,5,6 saves those result pages as images.
+  if (process.env.UI_SET) await page.addInitScript(v => { window.__uiSet = JSON.parse(v); }, process.env.UI_SET);
   await page.goto('http://eval.local/app/index.html');
   await page.waitForFunction(() => !!window.__comp, null, { timeout: 60000 });
   await page.evaluate(async ({ gt }) => {
@@ -63,13 +65,20 @@ async function main() {
       const file = new File([blob], d.split('/').pop(), { type: blob.type });
       files.push({ id: String(i + 1), name: file.name, size: file.size, type: file.type, raw: file, pct: 100, state: 'done' });
     }
-    comp.setState({ email: 'eval@local', screen: 'vault', ocr: 'Built-in', files });
+    comp.setState({ email: 'eval@local', screen: 'vault', ocr: 'Built-in', files, ...(window.__uiSet || {}) });
     await new Promise(r => setTimeout(r, 300));
     await comp.runPipeline();
   }, { gt });
   await page.waitForFunction(() => window.__comp.state.screen === 'result', null, { timeout: 300000 });
   await page.waitForTimeout(1500);
   await page.screenshot({ path: path.join(outDir, name + '-top.png') });
+  for (const pn of String(process.env.UI_PAGES || '').split(',').filter(Boolean)) {
+    const el = await page.$('[data-page="' + pn + '"]');
+    if (!el) continue;
+    await el.scrollIntoViewIfNeeded();
+    await page.waitForTimeout(600);
+    await el.screenshot({ path: path.join(outDir, name + '-p' + pn + '.png') });
+  }
   const flagged = await page.evaluate(() => (window.__comp.auditNow ? window.__comp.auditNow() : []).map(f => f.page));
   if (flagged.length) {
     await page.evaluate(p => { const el = document.querySelector('[data-page="' + p + '"]'); if (el) el.scrollIntoView({ block: 'center' }); }, flagged[0]);

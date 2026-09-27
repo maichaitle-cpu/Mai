@@ -361,7 +361,287 @@ def alevel():
     d.save('real/alevel.pdf')
 
 
-BUILDERS = {'physics': physics, 'polygraph': polygraph, 'exam_revision': exam_revision, 'phe': phe, 'icecream': icecream, 'qual': qual, 'alevel': alevel}
+def allsubj():
+    """52-page Grade 11 exam: five subjects, each MC, T/F, fill-blank, tables, tick table, short and long answers."""
+    d = Doc('allsubj')
+    items = json.load(open(os.path.join(DUMP, 'allsubj', 'items.json')))
+    key = json.load(open(os.path.join(DUMP, 'allsubj', 'key_items.json')))
+    SC = d.P(1)['w'] / items[0]['w']
+    X0, X1 = 103, 1090
+    # ---- answer key: per subject, number -> text rows (items grouped by baseline)
+    SUBJ = ['Mathematics', 'Chemistry', 'Physics', 'Biology', 'English']
+    krows = []  # (subject, page, y, x0, text, items)
+    subj = None
+    for pi, kp in enumerate(key):
+        rows = {}
+        for it in kp['items']:
+            if it[0].strip() in SUBJ and it[4] > 12:
+                subj = it[0].strip()
+            rows.setdefault(round(it[2]), []).append(it)
+        for y in sorted(rows):
+            r = sorted(rows[y], key=lambda i: i[1])
+            krows.append((subj, pi + 1, y, r[0][1], ' '.join(i[0].strip() for i in r), r))
+    KEY = {}
+    cur = None
+    for sj, kp, y, x0, t, r in krows:
+        m = re.match(r'^(\d{1,3})\.\s', t)
+        if m:
+            cur = (sj, int(m.group(1)))
+            KEY[cur] = {'q': t, 'rows': []}
+        elif cur and cur[0] == sj:
+            KEY[cur]['rows'].append((kp, y, t, r))
+
+    def key_answer(sj, n):
+        k = KEY.get((sj, n))
+        if not k:
+            return ''
+        for kp, y, t, r in k['rows']:
+            m = re.match(r'^(Correct answer|Model answer / marking notes|Model answer):\s*(.*)', t)
+            if m:
+                rest = [m.group(2)]
+                if m.group(1).startswith('Model answer'):
+                    idx = k['rows'].index((kp, y, t, r))
+                    rest += [rr[2] for rr in k['rows'][idx + 1:idx + 8] if not re.match(r'^\d', rr[2])]
+                return ' '.join(rest).strip()
+        return k['q']
+
+    def tf_rects(p, L, it):
+        # "27. T / F ..." in Arial: find the T and F glyph boxes from the text item metrics.
+        W = {'.': 278, ' ': 278, 'T': 611, '/': 278, 'F': 611}
+        txt = it[0]
+        m = re.match(r'^(\d+\.\s)', txt)
+        fs = it[4] / 1.0
+        # font size: item height is the font size for these lines
+        adv = lambda ch: (556 if ch.isdigit() else W.get(ch, 556)) * fs / 1000
+        x = it[1]
+        pos = []
+        for ch in txt[:len(m.group(1)) + 5]:
+            pos.append((ch, x, adv(ch)))
+            x += adv(ch)
+        tt = [q for q in pos if q[0] == 'T'][0]
+        ff = [q for q in pos if q[0] == 'F'][0]
+        mk = lambda q: [round(q[1] * SC) - 2, L['top'], round(q[2] * SC) + 4, L['bottom'] - L['top']]
+        return mk(tt), mk(ff)
+
+    def cols_at(p, y):
+        vl = d.P(p)['vec']['vl']
+        return sorted(set(v[2] for v in vl if v[0] <= y <= v[1]))
+
+    def row_bounds(p, y):
+        hl = sorted(set(h[2] for h in d.P(p)['vec']['hl']))
+        above = [v for v in hl if v <= y]
+        below = [v for v in hl if v > y]
+        return (above[-1] if above else y - 20, below[0] if below else y + 20)
+
+    for sj_i, sj in enumerate(SUBJ):
+        pass
+    # ---- walk the exam pages
+    mode = None
+    subj = None
+    pending = None  # open MC / written question
+    qlines = []
+
+    def flush_written(p_end=None, y_end=None):
+        nonlocal pending
+        if not pending or pending['type'] not in ('short', 'long'):
+            pending = None
+            return
+        q = pending
+        pending = None
+        p = q['page']
+        last = q['lines'][-1]
+        top = last['bottom'] + 4
+        bot = (y_end if (p_end == p and y_end is not None) else 1590) - 4
+        cat = 'LONG_TEXT'
+        d.add(label=q['label'], page=p, kind='write', cat=cat, prompt=' '.join(l['text'] for l in q['lines']),
+              qrect=d.rect(p, *[l['id'] for l in q['lines']]), areas=[[X0, top, X1 - X0, bot - top]], answer=key_answer(subj, q['n']) or 'Answer.')
+
+    def flush_mc():
+        nonlocal pending
+        q = pending
+        pending = None
+        if not q or q['type'] != 'mc':
+            return
+        opts = q['opts']
+        ans = key_answer(subj, q['n'])
+        m = re.match(r'\(([A-D])\)', ans)
+        corr = 'ABCD'.index(m.group(1)) if m else 0
+        d.add(label=q['label'], page=q['page'], kind='choice', cat='MULTIPLE_CHOICE', prompt=' '.join(l['text'] for l in q['lines']),
+              qrect=d.rect(q['page'], *[l['id'] for l in q['lines']]), options=opts, correct=corr)
+
+    for p in range(1, len(d.pages) + 1):
+        P = d.P(p)
+        lines = sorted([l for l in P['lines'] if not re.match(r'^Page \d+$', l['text'])], key=lambda l: (l['top'], l['x0']))
+        pit = items[p - 1]['items']
+        i = 0
+        while i < len(lines):
+            L = lines[i]
+            t = L['text']
+            if t.strip() in SUBJ:
+                if pending and pending['type'] in ('short', 'long'):
+                    flush_written()
+                subj = t.strip(); i += 1; continue
+            if re.match(r'^Choose the letter', t): flush_mc(); mode = 'mc'; i += 1; continue
+            if re.match(r'^Circle T', t): flush_mc(); mode = 'tf'; i += 1; continue
+            if re.match(r'^Fill in each blank', t): flush_mc(); mode = 'fill'; i += 1; continue
+            if re.match(r'^Answer in one to three', t): mode = 'short'; i += 1; continue
+            if re.match(r'^Write a well-organized', t):
+                if pending: flush_written(p, L['top'])
+                mode = 'long'; i += 1; continue
+            if re.match(r'^Answer all questions', t): i += 1; continue
+            m = re.match(r'^(\d{1,3})\.\s', t)
+            if mode == 'mc':
+                om = re.match(r'^\(([A-D])\)\s', t)
+                if m:
+                    flush_mc()
+                    pending = {'type': 'mc', 'n': int(m.group(1)), 'label': m.group(1), 'page': p, 'lines': [L], 'opts': []}
+                elif om and pending:
+                    pending['opts'].append({'text': t, 'page': p, 'rect': [L['x0'] - 2, L['top'], L['x1'] - L['x0'] + 4, L['bottom'] - L['top']]})
+                    if len(pending['opts']) == 4: flush_mc()
+                elif pending and not pending['opts'] and pending['page'] == p:
+                    pending['lines'].append(L)
+                i += 1; continue
+            if mode == 'tf':
+                if m and re.match(r'^\d+\.\s+T\s*/\s*F\b', t):
+                    it = min((x for x in pit if x[0].startswith(m.group(1) + '. T')), key=lambda x: abs(x[2] * SC - L['bottom']))
+                    tr, fr = tf_rects(p, L, it)
+                    qls = [L]
+                    if i + 1 < len(lines) and not re.match(r'^\d+\.', lines[i + 1]['text']) and lines[i + 1]['top'] - L['bottom'] < 12 and lines[i + 1]['x0'] < 110:
+                        qls.append(lines[i + 1]); i += 1
+                    k = KEY.get((subj, int(m.group(1))))
+                    tf = re.match(r'^\d+\.\s+([TF])\b', k['q']).group(1) if k else 'T'
+                    d.add(label=m.group(1), page=p, kind='choice', cat='TRUE_FALSE', prompt=' '.join(l['text'] for l in qls),
+                          qrect=d.rect(p, *[l['id'] for l in qls]), options=[{'text': 'T', 'page': p, 'rect': tr}, {'text': 'F', 'page': p, 'rect': fr}], correct=0 if tf == 'T' else 1)
+                i += 1; continue
+            if mode == 'fill':
+                tm = re.match(r'^(\d{1,3})\.\s+Table', t)
+                km = re.match(r'^(\d{1,3})\.\s+(Classify|For each|Decide|Sort|Tick|Put)', t) or (m and re.search(r'\btick\b', t))
+                if tm:
+                    n = int(tm.group(1)); j = i + 1; hdr = None; rows = []
+                    # rows until next numbered line / instruction (may continue on next page: handled by page loop)
+                    while j < len(lines) and not re.match(r'^(\d{1,3})\.\s', lines[j]['text']) and not re.match(r'^[A-Z][a-z]+ (in|each|the)\b', lines[j]['text']):
+                        if hdr is None: hdr = lines[j]
+                        elif lines[j]['blanks']: rows.append(lines[j])
+                        j += 1
+                    tbl = {'n': n, 'hdr': hdr, 'k': 0, 'hp': p}
+                    pending = {'type': 'table', 'tbl': tbl}
+                    for r in rows: add_table_row(d, p, r, tbl, subj, key_answer, KEY, cols_at, row_bounds)
+                    i = j; continue
+                if pending and pending.get('type') == 'table' and L['blanks'] and not m:
+                    add_table_row(d, p, L, pending['tbl'], subj, key_answer, KEY, cols_at, row_bounds); i += 1; continue
+                if km:
+                    n = int(m.group(1)); j = i + 1
+                    hdr = lines[j]
+                    hdr_row = []
+                    while j < len(lines) and lines[j]['x0'] > 200:
+                        hdr_row.append(lines[j]); j += 1
+                    cols = cols_at(p, hdr['top'] + 10)
+                    heads = []
+                    for hl_ in hdr_row:
+                        for c in hl_['cells']:
+                            heads.append(c)
+                    heads = sorted(heads, key=lambda c: c[1])
+                    mh = []
+                    for c in heads:
+                        if mh and min(mh[-1][2], c[2]) - max(mh[-1][1], c[1]) > 0:
+                            mh[-1] = [mh[-1][0] + ' ' + c[0], min(mh[-1][1], c[1]), max(mh[-1][2], c[2])]
+                        else:
+                            mh.append(list(c))
+                    heads = mh
+                    rows = []
+                    while j < len(lines) and not re.match(r'^(\d{1,3})\.\s|^Answer in|^Write a', lines[j]['text']):
+                        rows.append(lines[j])
+                        j += 1
+                    # key X marks for this table
+                    kx = []
+                    for sj_, kp, y, x0, tt, rr in krows:
+                        if sj_ == subj:
+                            for it2 in rr:
+                                if it2[0].strip() == 'X': kx.append((kp, y, it2[1] * SC))
+                    kx.sort()
+                    for ri, r in enumerate(rows):
+                        a, b = row_bounds(p, (r['top'] + r['bottom']) / 2)
+                        bounds = list(zip(cols[1:-1], cols[2:]))
+                        opts = []
+                        for (c0, c1), h in zip(bounds, heads[1:]):
+                            opts.append({'text': h[0], 'page': p, 'rect': [c0 + 2, a + 2, c1 - c0 - 4, b - a - 4]})
+                        xx = kx[ri][2] if ri < len(kx) else None
+                        corr = next((k for k, (c0, c1) in enumerate(bounds) if xx is not None and c0 <= xx <= c1), 0)
+                        d.add(label=f'{n}{"abcdefghij"[ri]}', page=p, kind='choice', cat='MULTIPLE_CHOICE', prompt=r['text'] + ' — tick one: ' + ' / '.join(o['text'] for o in opts),
+                              qrect=d.rect(p, r['id']), options=opts, correct=corr, oracleAs={'kind': 'box', 'cat': 'DRAWING', 'line': r['id']})
+                    pending = None
+                    i = j; continue
+                if m or (L['blanks'] and pending and pending.get('type') == 'fill'):
+                    if m:
+                        pending = {'type': 'fill', 'n': int(m.group(1)), 'lines': [L], 'k': 0}
+                    else:
+                        pending['lines'].append(L)
+                    if L['blanks']:
+                        full = key_answer(subj, pending['n'])
+                        ans = fill_answer(' '.join(l['text'] for l in pending['lines']), KEY.get((subj, pending['n'])))
+                        for bi, bk in enumerate(L['blanks']):
+                            lab = str(pending['n']) + ('' if pending['k'] == 0 else 'abc'[pending['k']])
+                            pending['k'] += 1
+                            # end of line: the rest of the line, or just above the blank when the margin is too close
+                            area = [bk[0] - 300, L['top'] - 26, X1 + 20 - (bk[0] - 300), L['bottom'] - L['top'] + 30]
+                            if L['x1'] - bk[1] > 20:
+                                # mid-sentence blank: the answer may sit on the blank or just above it
+                                area = [bk[0] - 150, L['top'] - 26, bk[1] - bk[0] + 300, L['bottom'] - L['top'] + 30]
+                            d.add(label=lab, page=p, kind='blank', cat='FILL_BLANK', prompt=' '.join(l['text'] for l in pending['lines']),
+                                  qrect=d.rect(p, *[l['id'] for l in pending['lines']]), areas=[area], answer=ans or 'x', avoidText=True)
+                    i += 1; continue
+                i += 1; continue
+            if mode in ('short', 'long'):
+                if m:
+                    flush_written(p, L['top'])
+                    pending = {'type': mode, 'n': int(m.group(1)), 'label': m.group(1), 'page': p, 'lines': [L]}
+                elif pending and pending['page'] == p and L['top'] - pending['lines'][-1]['bottom'] < 12:
+                    pending['lines'].append(L)
+                i += 1; continue
+            i += 1
+        if pending and pending.get('type') in ('short', 'long') and pending['page'] == p:
+            flush_written(p, 1600)
+        if pending and pending.get('type') == 'mc' and pending['opts']:
+            pass
+    flush_mc()
+    d.save('real/allsubj.pdf')
+
+
+def fill_answer(qtext, k):
+    """The word(s) the key puts in place of ____."""
+    if not k:
+        return ''
+    kt = k['q'] + ' ' + ' '.join(r[2] for r in k['rows'][:2])
+    parts = re.split(r'_{2,}', re.sub(r'^\d+\.\s*', '', qtext))
+    esc = [re.escape(re.sub(r'[\^_]', '', x).strip()) for x in parts]
+    kt2 = re.sub(r'^\d+\.\s*', '', kt)
+    pat = r'\s*(.+?)\s*'.join(e.replace(r'\ ', r'\s*') for e in esc)
+    m = re.search(pat, kt2)
+    if m and m.groups():
+        return m.group(1).strip()
+    tail = kt2.split()
+    return tail[-1].strip('.') if tail else ''
+
+
+def add_table_row(d, p, L, tbl, subj, key_answer, KEY, cols_at, row_bounds):
+    cols = cols_at(p, (L['top'] + L['bottom']) / 2)
+    a, b = row_bounds(p, (L['top'] + L['bottom']) / 2)
+    bl = L['blanks']
+    if len(bl) > 1 and tbl['hdr'] is not None and re.match(r'^Sentence\b', tbl['hdr']['text']):
+        bl = bl[-1:]  # the ____ inside the sentence is the item; the answer goes in the last column
+    for bk in bl:
+        cx = (bk[0] + bk[1]) / 2
+        c0 = max([c for c in cols if c <= cx] or [bk[0] - 40])
+        c1 = min([c for c in cols if c > cx] or [bk[1] + 40])
+        lab = f"{tbl['n']}{'abcdefghijklmnop'[tbl['k']]}"
+        tbl['k'] += 1
+        hdr = tbl['hdr']
+        d.add(label=lab, page=p, kind='blank', cat='FILL_BLANK', prompt=L['text'], qrect=d.rect(p, L['id']),
+              areas=[[c0 + 1, a + 1, c1 - c0 - 2, b - a - 2]], cell={'row': [c0, a, c1 - c0, b - a], 'header': d.rect(p, hdr['id']) if hdr and tbl['hp'] == p else [c0, a - 44, c1 - c0, 40], 'col': ''},
+              answer='1.73')
+
+
+BUILDERS = {'physics': physics, 'polygraph': polygraph, 'exam_revision': exam_revision, 'phe': phe, 'icecream': icecream, 'qual': qual, 'alevel': alevel, 'allsubj': allsubj}
 
 if __name__ == '__main__':
     for n in (sys.argv[1:] or BUILDERS.keys()):

@@ -1462,7 +1462,7 @@ class Component extends DCLogic {
       const col = a.style && a.style.color ? a.style.color : ink.color;
       ctx.fillStyle = col; ctx.strokeStyle = col;
       const marks = this.highlightMarks(a);
-      if (a.mark) this.drawChoiceMark(ctx, a.mark, Number(a.id) || 1, !!(a.options && a.options.length && a.options.every(o => o && o.tick)));
+      if (a.mark) this.drawChoiceMark(ctx, a.mark, Number(a.id) || 1, !!(a.options && a.options.length && a.options.every(o => o && o.tick)), a.markHow);
       (a.strokes || []).forEach((s, si) => {
         ctx.save();
         ctx.font = this.handFont(s.size);
@@ -1525,13 +1525,28 @@ class Component extends DCLogic {
     this._handOv = null;
   }
 
+  glyphWidths(t) {
+    const cache = this._gw || (this._gw = {});
+    const ctx = this.mctx();
+    ctx.font = '100px Arial, Helvetica, "Liberation Sans", sans-serif';
+    // split(''), not Array.from: indexes must match text[k] (Thai combining marks measure 0 wide, which is right).
+    const w = String(t || '').split('').map(ch => {
+      if (cache[ch] == null) { const m = ctx.measureText(ch).width; cache[ch] = m >= 0 ? m : 55; }
+      return cache[ch];
+    });
+    return w.some(v => v > 0) ? w : w.map(() => 1);
+  }
+
   charMap(L) {
     let str = '';
     const xs = [], ws = [];
     (L.cells || []).forEach((c, ci) => {
       if (ci) { str += ' '; xs.push(c.x0); ws.push(0); }
-      const per = (c.x1 - c.x0) / Math.max(1, c.text.length);
-      for (let k = 0; k < c.text.length; k++) { str += c.text[k]; xs.push(c.x0 + per * k); ws.push(per); }
+      // Proportional glyph widths (a sans font measured once, scaled to the cell): "1." is narrower than "W".
+      const cw = this.glyphWidths(c.text);
+      const sc = (c.x1 - c.x0) / Math.max(1e-6, cw.reduce((a, b) => a + b, 0));
+      let x = c.x0;
+      for (let k = 0; k < c.text.length; k++) { str += c.text[k]; xs.push(x); ws.push(cw[k] * sc); x += cw[k] * sc; }
     });
     return { str, xs, ws };
   }
@@ -1578,7 +1593,9 @@ class Component extends DCLogic {
         while ((hit = re.exec(m.str))) {
           const i = hit.index + hit[1].length, n = hit[2].length;
           const x0 = m.xs[i], x1 = m.xs[i + n - 1] + m.ws[i + n - 1];
-          if (sameLine && x0 < col.textEnd - h * 0.5 && !/^\(?[A-Za-z\u0E01-\u0E2E][).]/.test(hit[2])) { if (re.lastIndex === hit.index) re.lastIndex++; continue; }
+          // "27. T / F statement": options printed right after the number are real options, not stem words.
+          const lead = /^\s*(ข้อ\s*)?\(?\d{1,3}\s*[.)]?\s*([A-Za-z\u0E01-\u0E2E]{1,5}\s*[\/|,]\s*)*$/.test(m.str.slice(0, i)) && (/^\s*[\/|,]/.test(m.str.slice(i + n)) || /[\/|,]\s*$/.test(m.str.slice(0, i)));
+          if (sameLine && !lead && x0 < col.textEnd - h * 0.5 && !/^\(?[A-Za-z\u0E01-\u0E2E][).]/.test(hit[2])) { if (re.lastIndex === hit.index) re.lastIndex++; continue; }
           if (x0 >= lim.x0 - h && x1 <= lim.x1 + h * 2) return { x: x0, y: L.top, w: Math.max(L.h * 0.6, x1 - x0), h: L.bottom - L.top };
           if (re.lastIndex === hit.index) re.lastIndex++;
         }
@@ -1701,6 +1718,8 @@ class Component extends DCLogic {
     const row = cl.filter(c => Math.abs(c.y - bestY.y) < 2);
     const pick = row.reduce((b, c) => (Math.abs(c.x - r.x) < Math.abs(b.x - r.x) ? c : b));
     if (pick.w > page.canvas.width * 0.5) return Math.abs(pick.x - r.x) < r.h * 1.5 && pick.label && pick.label.w < r.h * 3 ? { ...r, label: pick.label } : r;
+    // A one-letter option ("T" in "T / F") inks together with its neighbours: keep its own x-extent.
+    if (r.w < r.h * 1.3 && pick.w > r.w * 1.6) return { ...r, y: pick.y, h: pick.h };
     return pick;
   }
 
@@ -1910,20 +1929,22 @@ class Component extends DCLogic {
     return k;
   }
 
-  drawChoiceMark(ctx, r, seed, inBox) {
-    const kind = inBox ? 'Tick' : this.realPick('choicemark').key;
+  drawChoiceMark(ctx, r, seed, inBox, how) {
+    const kind = inBox ? 'Tick' : how || this.realPick('choicemark').key;
     const ink = this.realPick('ink');
     const J = this.handInfo().typed ? 0.2 : Math.max(0.45, this.jitter());
     const rr = k => this.rnd(seed * 19 + k);
     const full = r;
     if (r.label && kind !== 'Underline') r = { x: r.label.x, y: r.y, w: Math.max(r.h * 0.7, r.label.w), h: r.h };
+    else if (inBox && r.w > r.h * 1.4) r = { x: r.x + r.w / 2 - r.h * 0.7, y: r.y, w: r.h * 1.4, h: r.h };
     else if (kind !== 'Underline' && r.w > r.h * 4) r = { x: r.x, y: r.y, w: r.h * 1.4, h: r.h };
     const h = r.h;
     const sv = 1 + (rr(10) - 0.5) * 0.4 * J;
     const ox = (rr(11) - 0.5) * h * 0.32 * J, oy = (rr(12) - 0.5) * h * 0.24 * J;
     const tilt = Math.min(0.275, Math.atan((h * 0.3) / Math.max(h, r.w / 2)));
     const rot = (rr(13) - 0.5) * 2 * tilt * J;
-    const cx = r.x + r.w / 2 + ox, cy = r.y + r.h / 2 + oy;
+    // Line boxes include descender room: capitals and digits sit a little above the box centre.
+    const cx = r.x + r.w / 2 + ox, cy = r.y + r.h * (inBox ? 0.5 : 0.44) + oy;
     const wob = (i, k) => (this.rnd(seed * 31 + i * 7 + k) - 0.5) * h * 0.05 * J;
     ctx.save();
     ctx.globalAlpha = ink.a * (0.82 + rr(14) * 0.18);
@@ -1953,7 +1974,7 @@ class Component extends DCLogic {
       }
       ctx.stroke();
     } else if (kind === 'Cross') {
-      const s = h * (0.5 + rr(1) * 0.18);
+      const s = h * (0.34 + rr(1) * 0.1);
       curve([-s * (0.85 + rr(2) * 0.25), -s * (0.8 + rr(3) * 0.3)], [s * (0.8 + rr(4) * 0.35), s * (0.75 + rr(5) * 0.35)], 20, s * 0.22);
       curve([s * (0.75 + rr(6) * 0.35), -s * (0.85 + rr(7) * 0.3)], [-s * (0.8 + rr(8) * 0.3), s * (0.8 + rr(9) * 0.35)], 22, s * 0.22);
     } else if (kind === 'Tick') {
@@ -2089,7 +2110,7 @@ class Component extends DCLogic {
 
   // Two-column pages: text on the same baseline in both columns arrives as one line. Find the gutter from
   // narrow text runs, split those lines at it, and order lines left column first, then right column.
-  splitColumns(lines, W) {
+  splitColumns(lines, W, vec) {
     const cells = [].concat(...lines.map(l => (l.cells || []).map(c => ({ ...c, l }))));
     // Name / Class / Date lines often run across the gutter of a two-column sheet: they do not decide columns.
     const narrow = cells.filter(c => c.x1 - c.x0 < W * 0.55 && String(c.text).replace(/[\s._\-–—…·]/g, '').length >= 2 && !this.isInfo(c.l.text));
@@ -2111,6 +2132,14 @@ class Component extends DCLogic {
     const L0 = narrow.filter(c => side(c) === 0).length, R0 = narrow.filter(c => side(c) === 1).length;
     const both = lines.filter(l => (l.cells || []).some(c => side(c) === 0) && (l.cells || []).some(c => side(c) === 1) && !(l.cells || []).some(c => side(c) < 0)).length;
     if (L0 < narrow.length * 0.2 || R0 < narrow.length * 0.2 || both < 4) return lines;
+    // A full-width sentence with content on both sides above AND below it: this is a wide table, not two columns.
+    const sideTops = k => lines.filter(l => (l.cells || []).some(c => side(c) === k)).map(l => l.top);
+    const lt = sideTops(0), rt = sideTops(1);
+    // Only a ruled table running across the gutter counts (OCR on scans can merge words across a real gutter).
+    const ruledAcross = !!(vec && vec.hl && vec.hl.filter(r => r.x0 < gx - W * 0.1 && r.x1 > gx + W * 0.1).length >= 3);
+    const spansMid = ruledAcross && lines.some(l => (l.cells || []).some(c => side(c) < 0 && String(c.text || '').replace(/[\s._\-–—…·]/g, '').length >= 12) && !this.isInfo(l.text)
+      && lt.filter(t => t < l.top).length >= 2 && lt.filter(t => t > l.bottom).length >= 2 && rt.filter(t => t < l.top).length >= 2 && rt.filter(t => t > l.bottom).length >= 2);
+    if (spansMid) return lines;
     const part = (l, k) => {
       const cs = l.cells.filter(c => side(c) === k);
       return { ...l, cells: cs, text: cs.map(c => c.text).join(' ').replace(/\s+/g, ' ').trim(), x0: Math.min.apply(null, cs.map(c => c.x0)), x1: Math.max.apply(null, cs.map(c => c.x1)), blanks: (l.blanks || []).filter(b => (k === 0 ? b.x1 < gx : b.x0 > gx)), col: k };
@@ -2600,7 +2629,7 @@ class Component extends DCLogic {
       .replace(/\^\{([0-9n+\-−]{1,6})\}|\^\(([0-9n+\-−]{1,6})\)|\^([+\-−]?[0-9n]+[+\-−]?|[+\-−])/g, (m, a, b, c) => (a || b || c).replace(/./g, ch => SUP[ch] || ch));
   }
   // Bump on every release: debug reports carry it, so a report from an older file is spotted at once.
-  static BUILD = '2026-09-27d';
+  static BUILD = '2026-09-27e';
   static MARKS_RE = /^\s*[\[(]\s*\d{1,3}\s*(marks?|pts?|points?|คะแนน)?\s*[\])]\s*$|^\s*\d{1,3}\s*(marks?|pts?|points?|คะแนน)\s*$/i;
   static Q_RE = /^\s*(ข้อ\s*|Q\s*)?\(?\d{1,3}\s*[.)]/i;
   static OPT_RE = /(^|\s)\(?([กขคงจฉ]|[A-Fa-f])\s*[.)](?=\s|$)/g;
@@ -2760,9 +2789,17 @@ class Component extends DCLogic {
   }
 
   pickBlank(L, prompt) {
-    const free = L.blanks.filter(b => !b.used);
+    let free = L.blanks.filter(b => !b.used);
+    // In a table row, a cell that is only a blank is the answer cell; a ____ inside a sentence cell is part of the item.
+    if (free.length > 1 && L.cells && L.cells.length >= 2) {
+      const whole = free.filter(b => L.cells.some(c => c.x0 <= b.x0 + 2 && c.x1 >= b.x1 - 2 && /^[\s_]+$/.test(String(c.text || ''))));
+      if (whole.length && whole.length < free.length) free = whole;
+    }
     if (free.length === 1 || !prompt) return free[0];
     const norm = t => String(t || '').toLowerCase().replace(/[^a-z0-9\u0E00-\u0E7F]+/g, ' ').trim();
+    // A prompt that is just the printed row names no blank in particular: take them in reading order.
+    const lineN = norm(String(L.text || '').replace(/[_…]{2,}|\.{3,}/g, ' '));
+    if (lineN && norm(String(prompt).replace(/[_…]{2,}|\.{3,}/g, ' ')).indexOf(lineN) >= 0) return free.slice().sort((a, b) => a.x0 - b.x0)[0];
     const tail = norm(String(prompt).split(/\s[—–-]\s|:/).pop()).split(' ').filter(w => w.length > 1);
     if (!tail.length) return free[0];
     const m = this.charMap(L);
@@ -2786,7 +2823,37 @@ class Component extends DCLogic {
     if (kind === 'blank' && L.blanks.some(bk => !bk.used)) {
       const b = this.pickBlank(L, prompt);
       b.used = true;
-      return this.clampRegion(page, { x: b.x0, y: L.top - h * 0.5, w: Math.max(b.x1 - b.x0, h * 3), h: h * 1.7, single: true, base: L.base - h * 0.12, lh: h });
+      const W = page.canvas.width;
+      const right = Math.min(col.x1 + h, W * 0.95);
+      const others = L.blanks.filter(o => o !== b && o.x0 > b.x1).map(o => o.x0 - h * 0.5);
+      // A blank at the end of the line has the rest of the line free; a mid-sentence one gets
+      // a raised spot above the blank for words that are longer than the printed gap.
+      // A blank inside a ruled table cell owns the whole cell: write across it, never above (that is the row above).
+      if (page.vec && page.vec.vl) {
+        const cy = (L.top + L.bottom) / 2, bx = (b.x0 + b.x1) / 2;
+        const vs = page.vec.vl.filter(r => r.y0 <= cy + 2 && r.y1 >= cy - 2).map(r => r.x);
+        const lx = vs.filter(x => x < b.x0 + 2).reduce((m, x) => Math.max(m, x), -Infinity), rx = vs.filter(x => x > b.x1 - 2).reduce((m, x) => Math.min(m, x), Infinity);
+        const ruled = y => (page.vec.hl || []).some(r => r.x0 <= lx + 3 && r.x1 >= rx - 3 && Math.abs(r.y - y) < h * 1.3);
+        if (isFinite(lx) && isFinite(rx) && rx - lx < W * 0.6 && rx - lx > b.x1 - b.x0 && ruled(L.top - h * 0.5) && ruled(L.bottom + h * 0.5)) {
+          const pad = h * 0.3;
+          return this.clampRegion(page, { x: lx + pad, y: L.top - h * 0.5, w: rx - lx - pad * 2, h: h * 1.7, single: true, base: L.base - h * 0.12, lh: h, cellBlank: bx });
+        }
+      }
+      const endOfLine = L.x1 - b.x1 < h * 0.9 && !others.length;
+      // Mid-sentence the printed words start right after the blank: the slot ends there too.
+      const w = endOfLine ? Math.max(b.x1 - b.x0, h * 3, right - b.x0) : b.x1 - b.x0 + h * 0.4;
+      let alt = null;
+      {
+        const prev = page.lines.filter(l => l !== L && l.bottom <= L.top + h * 0.2 && l.x1 > b.x0 - h * 4 && l.x0 < b.x1 + h * 4).reduce((m, l) => Math.max(m, l.bottom), L.top - h * 2);
+        const gap = L.top - prev;
+        const size = Math.min(h * 0.8, gap * 0.9);
+        if (size >= h * 0.5) {
+          const aw = Math.min(h * 12, right - (col.x0 || 0));
+          const ax = Math.max(col.x0 || 0, Math.min(right - aw, (b.x0 + b.x1) / 2 - aw / 2));
+          alt = { x: ax, w: aw, base: L.top - size * 0.1, size, top: prev, gap, center: (b.x0 + b.x1) / 2 };
+        }
+      }
+      return this.clampRegion(page, { x: b.x0, y: L.top - h * 0.5, w, h: h * 1.7, single: true, base: L.base - h * 0.12, lh: h, alt, tight: !endOfLine });
     }
     const below = page.lines.filter(l => l.top > L.bottom + h * 0.3 && this.inCol(l, col)).sort((a, b) => a.top - b.top)[0];
     const top = L.bottom + h * 0.35;
@@ -2939,7 +3006,11 @@ class Component extends DCLogic {
   slotsFor(page, r) {
     if (r.single) {
       // Writing inside a printed sentence (blank or same-line space) stays close to the print size.
-      return [{ top: r.y, gap: r.h, base: r.base, x: r.x + r.lh * 0.2, w: Math.max(r.lh * 3, r.w - r.lh * 0.4), size: Math.min(r.lh * 1.15, r.h * 0.9) }];
+      const s0 = r.tight
+        ? { top: r.y, gap: r.h, base: r.base, x: r.x, w: Math.max(r.lh * 0.8, r.w), size: Math.min(r.lh * 1.15, r.h * 0.9), tight: true }
+        : { top: r.y, gap: r.h, base: r.base, x: r.x + r.lh * 0.2, w: Math.max(r.lh * 3, r.w - r.lh * 0.4), size: Math.min(r.lh * 1.15, r.h * 0.9) };
+      if (r.alt) s0.alt = { top: r.alt.top, gap: r.alt.gap, base: r.alt.base, x: r.alt.x, w: r.alt.w, size: r.alt.size, center: r.alt.center };
+      return [s0];
     }
     const rules = r.cell ? [] : this.findRules(page.canvas, r);
     const slots = [];
@@ -3015,7 +3086,10 @@ class Component extends DCLogic {
         const inBlock = a => { const l = lineOf(a); if (l) return l.top >= L.top - lh * 0.3 && l.top < end - 1 && sameCol(l, L); return a.bbox && a.bbox.y >= L.top - lh * 0.3 && a.bbox.y < end; };
         if (mine.some(inBlock)) return;
         // The last question on a page may be answered on the next page (options or space continue there).
-        if (!N && answers.some(a => (a.page || 1) === pn + 1 && numKey(a) && numKey(a) === labelKey(L.text))) return;
+        const lead = a => ((String(a.num || '').match(/^\s*\(?(\d{1,3})/) || [])[1] || '');
+        const nextTop = (() => { const np = pages[pn]; if (!np || !np.lines) return 0; const f = np.lines.filter(l => LABEL.test(String(l.text || ''))).sort((a, b) => a.top - b.top)[0]; return f ? f.top : Infinity; })();
+        const carried = a => { const np = pages[pn]; const l = np && a.lineId != null ? np.lines.find(x => x.id === a.lineId) : null; return l && l.top < nextTop; };
+        if (!N && answers.some(a => (a.page || 1) === pn + 1 && ((numKey(a) && numKey(a) === labelKey(L.text)) || (lead(a) && lead(a) === labelKey(L.text)) || carried(a)))) return;
         if (N && !SUB.test(String(L.text)) && SUB.test(String(N.text))) return; // "1." whose parts (a), (b) follow
         add(pn, null, { x: L.x0, y: L.top, w: L.x1 - L.x0, h: L.bottom - L.top }, 'Printed question "' + String(L.text).trim().slice(0, 40) + '" has no answer');
       });
@@ -3051,7 +3125,16 @@ class Component extends DCLogic {
           ctx.font = this.handFont(st.size);
           const r = { x: st.x, y: st.y - st.size * 0.75, w: ctx.measureText(String(st.text)).width, h: st.size * 0.9 };
           const onBlank = l => (l.blanks || []).some(bk => Math.min(r.x + r.w, bk.x1 + lh) - Math.max(r.x, bk.x0 - lh) >= r.w * 0.6);
-          const hit = lines.find(l => !/^[\s_.\-–—…·]+$/.test(String(l.text || '')) && !onBlank(l) && (l.cells && l.cells.length ? l.cells : [l]).some(c => { const cr = { x: c.x0, y: l.top + (l.bottom - l.top) * 0.2, w: c.x1 - c.x0, h: (l.bottom - l.top) * 0.6 }; return /[\p{L}\p{N}]/u.test(String(c.text || l.text || '')) && ov(r, cr) > Math.min(r.w * r.h, cr.w * cr.h) * 0.15; }));
+          // Count only the printed letters and digits under the writing (a full stop after a blank is not "text").
+          const inkUnder = l => {
+            const yo = Math.min(r.y + r.h, l.bottom - (l.bottom - l.top) * 0.2) - Math.max(r.y, l.top + (l.bottom - l.top) * 0.2);
+            if (yo <= 0) return 0;
+            const m = this.charMap(l.cells && l.cells.length ? l : { cells: [{ text: l.text, x0: l.x0, x1: l.x1 }] });
+            let wsum = 0;
+            for (let i = 0; i < m.str.length; i++) if (/[\p{L}\p{N}]/u.test(m.str[i])) wsum += Math.max(0, Math.min(r.x + r.w, m.xs[i] + m.ws[i]) - Math.max(r.x, m.xs[i]));
+            return wsum;
+          };
+          const hit = lines.find(l => !/^[\s_.\-–—…·]+$/.test(String(l.text || '')) && !onBlank(l) && inkUnder(l) > Math.max(lh * 0.5, r.w * 0.12));
           if (hit) add(pn, a.id, b, tag + ': answer is written over printed text ("' + String(hit.text).trim().slice(0, 24) + '")');
           return !!hit;
         });
@@ -3072,7 +3155,7 @@ class Component extends DCLogic {
     ctx.font = this.handFont(100);
     const sample = 'the quick brown fox jumps over';
     const em = ctx.measureText(sample).width / sample.length / 100 || 0.4;
-    const chars = slots.reduce((n, s) => n + (s.w / (s.size * em)), 0);
+    const chars = slots.reduce((n, s) => n + Math.max(s.w / (s.size * em), s.alt ? s.alt.w / (s.alt.size * em) : 0), 0);
     return Math.max(6, Math.floor(chars * 0.85));
   }
 
@@ -3124,13 +3207,15 @@ class Component extends DCLogic {
         }
       });
       const out = [];
-      let wi = 0, seg = 0;
+      let wi = 0, seg = 0, wide = false;
       for (let r = 0; r < rows.length && wi < words.length; r++) {
         const row = rows[r];
         ctx.font = this.handFont(row.size);
         while (wi < words.length && words[wi] === '\u0002') { wi++; if (out.length) seg++; }
         if (wi >= words.length) break;
         let line = words[wi++].replace(/^\u0003/, '');
+        // One word wider than its row spills past the space: try a smaller size first.
+        if (ctx.measureText(line).width > row.w * 1.02) wide = true;
         while (wi < words.length && words[wi] !== '\u0002') {
           const nw = words[wi], glue = nw.charCodeAt(0) === 3;
           const cand = line + (glue ? '' : ' ') + (glue ? nw.slice(1) : nw);
@@ -3142,7 +3227,7 @@ class Component extends DCLogic {
       }
       last = out;
       while (wi < words.length && words[wi] === '\u0002') wi++;
-      if (wi >= words.length) return out;
+      if (wi >= words.length && (!wide || s <= min + 1e-6)) return out;
     }
     if (last.length) last[last.length - 1].text += '…';
     return last;
@@ -3747,7 +3832,7 @@ class Component extends DCLogic {
   async assignSpaces(questions, pages, answersById) {
     const out = questions.slice();
     const byPage = {};
-    out.forEach((q, i) => { if (!q.choiceRects && q.kind !== 'cell' && !q.boxOnly && !(q.limit && Component.CATS[q.cat] && ['draw', 'match', 'circle', 'underline'].indexOf(Component.CATS[q.cat].out) >= 0)) (byPage[q.page || 1] = byPage[q.page || 1] || []).push(i); });
+    out.forEach((q, i) => { if (!q.choiceRects && q.kind !== 'cell' && !q.boxOnly && !(q.kind === 'blank' && q.slots && q.slots.length && q.lineId != null) && !(q.limit && Component.CATS[q.cat] && ['draw', 'match', 'circle', 'underline'].indexOf(Component.CATS[q.cat].out) >= 0)) (byPage[q.page || 1] = byPage[q.page || 1] || []).push(i); });
     const keys = Object.keys(byPage);
     const tname = t => ({ short: 'short', sentence: '1 sentence', sentences: 'few sentences', paragraph: 'paragraph' })[t] || '';
     for (let n = 0; n < keys.length; n++) {
@@ -3954,6 +4039,30 @@ class Component extends DCLogic {
     return hits[0] || null;
   }
 
+  // The sheet's own instruction decides the mark: "Circle T or F" gets a circle whatever the default is.
+  markHowOf(q) {
+    const MARK = [[/\bcircle\b|วงกลม|วงล้อม/i, 'Circle'], [/\btick\b|✓|✔|check ?mark/i, 'Tick'], [/\bput an? (cross|x)\b|\bmark (it )?with an? (x|cross)\b|กากบาท/i, 'Cross'], [/\bunderline\b|ขีดเส้นใต้/i, 'Underline']];
+    const hit = t => { const m = MARK.find(([re]) => re.test(String(t || ''))); return m ? m[1] : null; };
+    const own = hit(String(q.prompt || '').split(' Options: ')[0]);
+    if (own) return own;
+    const pages = this.state.pages || [];
+    const pn = q.qpage || q.page || 1;
+    const page = pages[pn - 1];
+    if (!page || !page.lines || q.lineId == null) return null;
+    const L = page.lines.find(l => l.id === q.lineId);
+    if (!L) return null;
+    // Walk up past question stems and options to the nearest section instruction.
+    const up = page.lines.filter(l => l.bottom <= L.top + 1).sort((a, b) => b.top - a.top);
+    const prev = pn > 1 && pages[pn - 2] && pages[pn - 2].lines ? pages[pn - 2].lines.slice().sort((a, b) => b.top - a.top) : [];
+    const INSTR = /^\s*(choose|circle|tick|select|put|mark|underline|write|answer|fill|classify|match|complete|read|decide|state|indicate|วงกลม|เลือก|ทำเครื่องหมาย|ตอบ|เติม)\b/i;
+    for (const l of up.concat(prev)) {
+      const t = String(l.text || '');
+      if (Component.Q_RE.test(t) || /^\s*\(?[A-Da-dก-ง][.)]\s/.test(t)) continue;
+      if (INSTR.test(t)) return hit(t);
+    }
+    return null;
+  }
+
   buildAll(q, byId, pageNum) {
     const cat = q.cat || this.inferCat(q);
     const def = Component.CATS[cat] || Component.CATS.OTHER;
@@ -3963,7 +4072,7 @@ class Component extends DCLogic {
     const tag = o => ({ ...o, cat, parent: q.id, qsrc, limit: q.limit || null });
     const base = () => {
       const a = this.buildAnswer({ ...q, atype: def.atype || q.atype }, byId, pageNum);
-      return tag({ ...a, flag: a.flag || q.mapWhy || (cat === 'OTHER' && a.text ? 'Unusual question type. Check this answer.' : '') });
+      return tag({ ...a, markHow: q.choiceRects ? this.markHowOf(q) : null, flag: a.flag || q.mapWhy || (cat === 'OTHER' && a.text ? 'Unusual question type. Check this answer.' : '') });
     };
     if (!r || !r.text || !page) return [base()];
     const ink = this.realPick('ink').color;
@@ -4114,6 +4223,12 @@ class Component extends DCLogic {
       if (!page) return null;
       if (Component.INSTRUCTION.test(String(q.prompt || ''))) return null;
       if (q.cat === 'SKIP') return null;
+      // "27. T / F statement" (or "... True / False" at the end) returned without options: the options are printed on the line.
+      if (!(q.kind === 'choice' && q.options && q.options.length >= 2) && q.lineId != null) {
+        const TL = page.lines.find(l => l.id === q.lineId);
+        const tm = TL && (String(TL.text).match(/^\s*(?:ข้อ\s*)?\(?\d{1,3}\s*[.)]?\s*(T|True|ถูก)\s*[\/|]\s*(F|False|ผิด)(?=\s|$)/i) || String(TL.text).match(/(?:^|\s)(T|True|ถูก)\s*[\/|]\s*(F|False|ผิด)\s*$/i));
+        if (tm) q = { ...q, kind: 'choice', cat: 'TRUE_FALSE', options: [{ label: tm[1], lineId: TL.id }, { label: tm[2], lineId: TL.id }] };
+      }
       if (q.kind === 'choice' && q.options && q.options.length) {
         const W = page.canvas.width, H = page.canvas.height;
         const n = (v, d) => (isNaN(Number(v)) ? d : Number(v));
@@ -4152,9 +4267,22 @@ class Component extends DCLogic {
         region = this.regionFromCell(page, L, Hd, q.col);
         if (!region) return null;
       } else if (q.lineId != null) {
-        const L = page.lines.find(l => l.id === q.lineId);
+        let L = page.lines.find(l => l.id === q.lineId);
         if (!L) return null;
         if (this.isInfo(L.text) || Component.INSTRUCTION.test(L.text)) return null;
+        // A fill-in pointed at a wrapped line of its sentence: its ____ is on a neighbouring line of the same question.
+        const freeB = l => (l.blanks || []).some(b => !b.used);
+        if ((q.kind === 'blank' || q.kind === 'box') && !freeB(L) && /_{2,}|…{2,}|\.{4,}/.test(String(q.prompt || ''))) {
+          const sorted = page.lines.filter(l => l.col === L.col).sort((a, b) => a.top - b.top);
+          const k = sorted.indexOf(L);
+          const near = [];
+          const starts = t => Component.Q_RE.test(t) || /^\s*\(?[a-hA-H]\s*[.)]\s/.test(t);
+          // A line that starts the question keeps its blank on the lines after it; a wrapped line looks back to the start.
+          if (!starts(L.text)) for (let j = k - 1; j >= Math.max(0, k - 3); j--) { near.push(sorted[j]); if (starts(sorted[j].text)) break; }
+          for (let j = k + 1; j <= Math.min(sorted.length - 1, k + 2); j++) { if (starts(sorted[j].text)) break; near.push(sorted[j]); }
+          const hit = near.find(l => freeB(l) && Math.abs(l.top - L.top) < L.h * 3.5);
+          if (hit) { L = hit; q = { ...q, kind: 'blank' }; }
+        }
         if (q.kind === 'below') return { ...q, _need: { needsSpace: true, col: this.colOf(page, L, q.prompt), L } };
         region = this.regionFromLine(page, L, q.kind, q.prompt);
         if (region.needsSpace) return { ...q, _need: region };
@@ -4255,7 +4383,7 @@ class Component extends DCLogic {
       let lines = [];
       try {
         const tc = await page.getTextContent();
-        lines = this.splitColumns(this.groupLines(tc.items, viewport, lib, vec), canvas.width);
+        lines = this.splitColumns(this.groupLines(tc.items, viewport, lib, vec), canvas.width, vec);
         lines.forEach(l => { if (!l.blanks.length) l.blanks = this.findLineBlanks(canvas, l).filter(b => !this.textOnRule(l, b)); });
       } catch (err) {}
       pages.push({
@@ -4896,6 +5024,16 @@ class Component extends DCLogic {
         });
       } catch (err) {}
     }
+    // A table cell that is nothing but a printed blank ("10 | ____ | 20") and that no question claims is an
+    // unanswered blank even when Claude skipped it (common for a table row carried over to the next page).
+    this.uncovered(found, pages).forEach(m => {
+      const pg = pages[m.page - 1];
+      const L = pg && pg.lines.find(l => l.id === m.id);
+      if (!L || !L.cells || L.cells.length < 2 || !L.blanks || !L.blanks.length) return;
+      if (!L.cells.some(c => /^[\s_]{4,}$/.test(String(c.text || '')) && /_{3,}/.test(String(c.text || '')))) return;
+      if (found.some(q => (q.page || 1) === m.page && q.lineId === L.id)) return;
+      found.push({ label: String(L.cells[0].text || '').replace(/_+/g, '').trim().slice(0, 20), prompt: L.text, page: m.page, lineId: L.id, kind: 'blank', cat: 'FILL_BLANK', options: null, recovered: true });
+    });
     const top = q => { const pg = pages[(q.page || 1) - 1]; const L = pg && pg.lines.find(l => l.id === q.lineId); return L ? L.top : 0; };
     return found.map((q, i) => ({ q, i })).sort((a, b) => (a.q.page || 1) - (b.q.page || 1) || (a.q.recovered || b.q.recovered ? top(a.q) - top(b.q) : a.i - b.i)).map(z => z.q);
   }
@@ -5005,7 +5143,7 @@ class Component extends DCLogic {
           if ((L.blanks && L.blanks.length) || this.isInfo(L.text) || Component.INFO_TH.test(tx) || Component.INSTRUCTION.test(tx) || kv(tx)) break;
           const cs = L.cells && L.cells.length ? L.cells : [{ text: L.text, x0: L.x0, x1: L.x1 }];
           if (cs.some(z => hc.slice(1).some(c => z.x0 < c.x0 - h * 1.5 && z.x1 > c.x0 + h))) break;
-          const filled = hc.map((c, k) => { const x0 = c.x0 - h * 0.8, x1 = hc[k + 1] ? hc[k + 1].x0 - h * 0.4 : Infinity; return cs.some(z => z.x0 < x1 && z.x1 > x0 && (k === 0 || z.x0 > c.x0 - h * 1.5)); });
+          const filled = hc.map((c, k) => { const x0 = k === 0 ? -Infinity : c.x0 - h * 0.8, x1 = hc[k + 1] ? hc[k + 1].x0 - h * 0.4 : Infinity; return cs.some(z => z.x0 < x1 && z.x1 > x0 && (k === 0 || z.x0 > c.x0 - h * 1.5)); });
           if (!filled[0]) break;
           if (rows.length && filled.some((v, k) => v !== rows[0].filled[k])) break;
           if (gap0 == null && rows.length === 1) gap0 = gap;
@@ -5015,7 +5153,26 @@ class Component extends DCLogic {
         if (rows.length < 2) continue;
         const emptyCols = hc.map((c, k) => k).filter(k => k > 0 && rows.every(r => !r.filled[k]));
         const cellIn = (L, k) => { const x0 = hc[k].x0 - h * 0.8, x1 = hc[k + 1] ? hc[k + 1].x0 - h * 0.4 : Infinity; return (L.cells && L.cells.length ? L.cells : [{ text: L.text, x0: L.x0, x1: L.x1 }]).find(z => z.x0 < x1 && z.x1 > x0 && (k === 0 || z.x0 > hc[k].x0 - h * 1.5)); };
-        const tickCols = hc.map((c, k) => k).filter(k => k > 0 && rows.every(r => { const z = cellIn(r.L, k); return z && Component.BOX_GLYPH.test(String(z.text)); }));
+        let tickCols = hc.map((c, k) => k).filter(k => k > 0 && rows.every(r => { const z = cellIn(r.L, k); return z && Component.BOX_GLYPH.test(String(z.text)); }));
+        // Empty columns under a "put a tick in the correct column" instruction are tick boxes too.
+        const colBox = (k, RL) => {
+          const c = hc[k], pv = hc[k - 1], nx = hc[k + 1];
+          // Printed cell borders when the page has them; otherwise halfway between the header texts.
+          if (page.vec && page.vec.vl && RL) {
+            const cx = (c.x0 + c.x1) / 2, cy = (RL.top + RL.bottom) / 2;
+            const vs = page.vec.vl.filter(r => r.y0 <= cy + 2 && r.y1 >= cy - 2).map(r => r.x);
+            const lx = vs.filter(x => x < cx).reduce((m, x) => Math.max(m, x), -Infinity), rx = vs.filter(x => x > cx).reduce((m, x) => Math.min(m, x), Infinity);
+            if (isFinite(lx) && isFinite(rx) && rx - lx > h && lx > (pv ? pv.x1 - h : -Infinity) && rx < (nx ? nx.x0 + h : Infinity)) return { x0: lx + 2, x1: rx - 2 };
+          }
+          const x0 = pv ? (pv.x1 + c.x0) / 2 : c.x0 - h;
+          const x1 = nx ? (c.x1 + nx.x0) / 2 : c.x1 + (c.x0 - x0);
+          return { x0, x1 };
+        };
+        let emptyTick = false;
+        if (tickCols.length < 2 && emptyCols.length >= 2 && emptyCols.length <= 6) {
+          const upTxt = lines.filter(l => l.bottom <= Hd.top + 1 && Hd.top - l.bottom < h * 5).map(l => l.text).join(' ') + ' ' + Hd.text;
+          if (/\btick|✓|✔|check ?mark|put an? (cross|x)\b|mark (it )?with an? (x|cross)|ทำเครื่องหมาย|กาเครื่องหมาย/i.test(upTxt) && emptyCols.every(k => String(hc[k].text).trim().length <= 40)) { tickCols = emptyCols.slice(); emptyTick = true; }
+        }
         if (!emptyCols.length && tickCols.length < 2) {
           // Every cell of these rows is printed: a blank or cell Claude put on one of them has nowhere to go.
           const rowIds0 = new Set(rows.map(r => r.L.id));
@@ -5036,7 +5193,7 @@ class Component extends DCLogic {
         existing.forEach(q => { if (!labelOf[q.lineId] && q.label) labelOf[q.lineId] = String(q.label).replace(/[\s·]+$/, ''); });
         const added = [];
         rows.forEach((r, ri) => emptyCols.forEach(k => {
-          if (r.filled[k]) return;
+          if (r.filled[k] || emptyTick) return;
           const colText = String(hc[k].text).trim();
           if (already.has(r.L.id + '|' + norm(colText))) return;
           const base = labelOf[r.L.id] || String((r.L.cells && r.L.cells[0] ? r.L.cells[0].text : r.L.text) || ('Row ' + (ri + 1))).trim().slice(0, 28);
@@ -5050,7 +5207,7 @@ class Component extends DCLogic {
         }));
         if (tickCols.length >= 2) rows.forEach((r, ri) => {
           const base = labelOf[r.L.id] || String((r.L.cells && r.L.cells[0] ? r.L.cells[0].text : r.L.text) || ('Row ' + (ri + 1))).trim().slice(0, 28);
-          const options = tickCols.map(k => { const z = cellIn(r.L, k); return { label: String(hc[k].text).trim(), rect: { x: z.x0, y: r.L.top, w: Math.max(4, z.x1 - z.x0), h: r.L.bottom - r.L.top }, tick: true }; });
+          const options = tickCols.map(k => { const z = emptyTick ? colBox(k, r.L) : cellIn(r.L, k); return { label: String(hc[k].text).trim(), rect: { x: z.x0, y: r.L.top, w: Math.max(4, z.x1 - z.x0), h: r.L.bottom - r.L.top }, tick: true }; });
           added.push({ label: base, prompt: (intro ? intro + ' — ' : '') + 'Row: ' + String(r.L.cells && r.L.cells[0] ? r.L.cells[0].text : r.L.text) + ' — tick one box: ' + options.map(o => o.label).join(' / '), page: pn, lineId: r.L.id, kind: 'choice', headerId: Hd.id, options, cat: 'MULTIPLE_CHOICE', fromTable: true });
         });
         if (!added.length) continue;
@@ -5371,6 +5528,22 @@ class Component extends DCLogic {
       };
     }
     if (!a.slots) return { ...a, strokes: [], bbox: null, overflow: false };
+    // A tight mid-sentence blank with no room above: shrink the word into the blank rather than cover the next word.
+    if (a.slots.length === 1 && a.slots[0].tight && !a.slots[0].alt && a.text) a = { ...a, minScale: Math.min(a.minScale || 0.72, 0.55) };
+    if (a.slots.length === 1 && a.slots[0].alt && a.text) {
+      // Too long for the printed blank: write it just above the blank, centred on it.
+      const s0 = a.slots[0], ctx = this.mctx();
+      ctx.font = this.handFont(s0.size);
+      const tw = ctx.measureText(String(a.text)).width;
+      // Mid-sentence (tight) the word must fit inside the blank; at a line end a little overhang is fine.
+      if (tw * (s0.tight ? 1.12 : 1) > s0.w * (s0.tight ? 1 : 1.1)) {
+        const al = s0.alt;
+        ctx.font = this.handFont(al.size);
+        const aw = Math.min(al.w, ctx.measureText(String(a.text)).width * 1.3 + al.size);
+        const ax = Math.max(al.x, Math.min(al.x + al.w - aw, al.center - aw / 2));
+        a = { ...a, slots: [{ top: al.top, gap: al.gap, base: al.base, x: ax, w: aw, size: al.size, raised: true }] };
+      }
+    }
     const strokes = this.layoutText(a.sharePrefix && a.text && a.text !== '—' ? a.sharePrefix + ' ' + a.text : a.text, a.slots, a.id, a.minScale);
     const maxSeg = strokes.reduce((m, s) => Math.max(m, s.seg || 0), 0);
     if (maxSeg > 0) strokes.forEach(s => { s.final = s.seg === maxSeg; });
