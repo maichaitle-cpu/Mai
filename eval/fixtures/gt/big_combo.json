@@ -1,0 +1,6939 @@
+{
+"doc": [
+"real/physics.pdf",
+"real/polygraph.pdf",
+"real/qual.pdf",
+"real/alevel.pdf",
+"real/exam_revision.pdf",
+"real/phe.pdf"
+],
+"questions": [
+{
+"label": "1.",
+"page": 1,
+"kind": "choice",
+"cat": "MULTIPLE_CHOICE",
+"prompt": "1. A person pushes a box with a force of 50 N through a displacement of 4 m in the direction of the force. How much work is done?",
+"qrect": [
+125,
+405,
+914,
+51
+],
+"options": [
+{
+"text": "(A) 12.5 J",
+"page": 1,
+"rect": [
+161,
+469,
+91,
+23
+]
+},
+{
+"text": "(B) 46 J",
+"page": 1,
+"rect": [
+161,
+499,
+74,
+23
+]
+},
+{
+"text": "(C) 54 J",
+"page": 1,
+"rect": [
+161,
+529,
+75,
+23
+]
+},
+{
+"text": "(D) 200 J",
+"page": 1,
+"rect": [
+161,
+559,
+87,
+23
+]
+}
+],
+"correct": 3,
+"optionsPage": null
+},
+{
+"label": "2.",
+"page": 1,
+"kind": "choice",
+"cat": "MULTIPLE_CHOICE",
+"prompt": "2. A force of 20 N acts at an angle of 60\u00b0 to the direction of a 5 m displacement. What is the work done?",
+"qrect": [
+125,
+601,
+901,
+51
+],
+"options": [
+{
+"text": "(A) 100 J",
+"page": 1,
+"rect": [
+161,
+665,
+86,
+23
+]
+},
+{
+"text": "(B) 86.6 J",
+"page": 1,
+"rect": [
+161,
+695,
+91,
+23
+]
+},
+{
+"text": "(C) 50 J",
+"page": 1,
+"rect": [
+161,
+725,
+75,
+23
+]
+},
+{
+"text": "(D) 0 J",
+"page": 1,
+"rect": [
+161,
+755,
+63,
+23
+]
+}
+],
+"correct": 2,
+"optionsPage": null
+},
+{
+"label": "3.",
+"page": 1,
+"kind": "choice",
+"cat": "MULTIPLE_CHOICE",
+"prompt": "3. A waiter carries a tray horizontally at constant velocity across a room. What is the work done by the upward force from the waiter's hand on the tray?",
+"qrect": [
+125,
+797,
+940,
+51
+],
+"options": [
+{
+"text": "(A) Positive",
+"page": 1,
+"rect": [
+161,
+861,
+108,
+23
+]
+},
+{
+"text": "(B) Negative",
+"page": 1,
+"rect": [
+161,
+891,
+117,
+23
+]
+},
+{
+"text": "(C) Zero",
+"page": 1,
+"rect": [
+161,
+921,
+79,
+23
+]
+},
+{
+"text": "(D) Cannot be determined",
+"page": 1,
+"rect": [
+161,
+951,
+243,
+23
+]
+}
+],
+"correct": 2,
+"optionsPage": null
+},
+{
+"label": "4.",
+"page": 1,
+"kind": "choice",
+"cat": "MULTIPLE_CHOICE",
+"prompt": "4. A 2 kg object is lifted at constant velocity through a height of 3 m. Find the work done against gravity. (g = 10 m/s\u00b2)",
+"qrect": [
+125,
+993,
+886,
+51
+],
+"options": [
+{
+"text": "(A) 6 J",
+"page": 1,
+"rect": [
+161,
+1057,
+62,
+23
+]
+},
+{
+"text": "(B) 20 J",
+"page": 1,
+"rect": [
+161,
+1087,
+74,
+23
+]
+},
+{
+"text": "(C) 60 J",
+"page": 1,
+"rect": [
+161,
+1117,
+75,
+23
+]
+},
+{
+"text": "(D) 600 J",
+"page": 1,
+"rect": [
+161,
+1147,
+87,
+23
+]
+}
+],
+"correct": 2,
+"optionsPage": null
+},
+{
+"label": "5.",
+"page": 1,
+"kind": "choice",
+"cat": "MULTIPLE_CHOICE",
+"prompt": "5. Power is best defined as:",
+"qrect": [
+125,
+1189,
+258,
+23
+],
+"options": [
+{
+"text": "(A) Work done \u00d7 time",
+"page": 1,
+"rect": [
+161,
+1225,
+199,
+23
+]
+},
+{
+"text": "(B) Work done \u00f7 time",
+"page": 1,
+"rect": [
+161,
+1255,
+199,
+23
+]
+},
+{
+"text": "(C) Force \u00f7 time",
+"page": 1,
+"rect": [
+161,
+1285,
+153,
+23
+]
+},
+{
+"text": "(D) Energy \u00f7 distance",
+"page": 1,
+"rect": [
+161,
+1315,
+204,
+23
+]
+}
+],
+"correct": 1,
+"optionsPage": null
+},
+{
+"label": "6.",
+"page": 1,
+"kind": "choice",
+"cat": "MULTIPLE_CHOICE",
+"prompt": "6. A motor lifts a 500 N load to a height of 10 m in 5 seconds. What is the power output of the motor (ignoring losses)?",
+"qrect": [
+125,
+1357,
+925,
+51
+],
+"options": [
+{
+"text": "(A) 100 W",
+"page": 1,
+"rect": [
+161,
+1421,
+95,
+23
+]
+},
+{
+"text": "(B) 250 W",
+"page": 1,
+"rect": [
+161,
+1451,
+95,
+23
+]
+},
+{
+"text": "(C) 1000 W",
+"page": 1,
+"rect": [
+161,
+1481,
+108,
+23
+]
+},
+{
+"text": "(D) 5000 W",
+"page": 1,
+"rect": [
+161,
+1511,
+108,
+23
+]
+}
+],
+"correct": 2,
+"optionsPage": null
+},
+{
+"label": "7.",
+"page": 2,
+"kind": "choice",
+"cat": "MULTIPLE_CHOICE",
+"prompt": "7. Momentum is defined as the product of:",
+"qrect": [
+125,
+181,
+393,
+23
+],
+"options": [
+{
+"text": "(A) Mass and acceleration",
+"page": 2,
+"rect": [
+161,
+217,
+244,
+23
+]
+},
+{
+"text": "(B) Mass and velocity",
+"page": 2,
+"rect": [
+161,
+247,
+201,
+23
+]
+},
+{
+"text": "(C) Force and time",
+"page": 2,
+"rect": [
+161,
+277,
+175,
+23
+]
+},
+{
+"text": "(D) Force and displacement",
+"page": 2,
+"rect": [
+161,
+307,
+259,
+23
+]
+}
+],
+"correct": 1,
+"optionsPage": null
+},
+{
+"label": "8.",
+"page": 2,
+"kind": "choice",
+"cat": "MULTIPLE_CHOICE",
+"prompt": "8. A 1000 kg car traveling at 20 m/s collides with an identical stationary 1000 kg car, and the two lock together. Find their common velocity after the collision.",
+"qrect": [
+125,
+349,
+938,
+51
+],
+"options": [
+{
+"text": "(A) 5 m/s",
+"page": 2,
+"rect": [
+161,
+413,
+86,
+23
+]
+},
+{
+"text": "(B) 10 m/s",
+"page": 2,
+"rect": [
+161,
+443,
+97,
+23
+]
+},
+{
+"text": "(C) 15 m/s",
+"page": 2,
+"rect": [
+161,
+473,
+98,
+23
+]
+},
+{
+"text": "(D) 20 m/s",
+"page": 2,
+"rect": [
+161,
+503,
+98,
+23
+]
+}
+],
+"correct": 1,
+"optionsPage": null
+},
+{
+"label": "9.",
+"page": 2,
+"kind": "choice",
+"cat": "MULTIPLE_CHOICE",
+"prompt": "9. In a perfectly elastic collision between two objects:",
+"qrect": [
+125,
+545,
+492,
+23
+],
+"options": [
+{
+"text": "(A) Only momentum is conserved",
+"page": 2,
+"rect": [
+161,
+581,
+312,
+23
+]
+},
+{
+"text": "(B) Only kinetic energy is conserved",
+"page": 2,
+"rect": [
+161,
+611,
+336,
+23
+]
+},
+{
+"text": "(C) Both momentum and kinetic energy are conserved",
+"page": 2,
+"rect": [
+161,
+641,
+505,
+23
+]
+},
+{
+"text": "(D) Neither quantity is conserved",
+"page": 2,
+"rect": [
+161,
+671,
+306,
+23
+]
+}
+],
+"correct": 2,
+"optionsPage": null
+},
+{
+"label": "10.",
+"page": 2,
+"kind": "choice",
+"cat": "MULTIPLE_CHOICE",
+"prompt": "10. A 0.5 kg ball moving at 6 m/s hits a wall and bounces straight back with the same speed. What is the magnitude of the change in momentum?",
+"qrect": [
+125,
+713,
+934,
+51
+],
+"options": [
+{
+"text": "(A) 0 kg\u00b7m/s",
+"page": 2,
+"rect": [
+161,
+777,
+114,
+23
+]
+},
+{
+"text": "(B) 3 kg\u00b7m/s",
+"page": 2,
+"rect": [
+161,
+807,
+114,
+23
+]
+},
+{
+"text": "(C) 6 kg\u00b7m/s",
+"page": 2,
+"rect": [
+161,
+837,
+115,
+23
+]
+},
+{
+"text": "(D) 12 kg\u00b7m/s",
+"page": 2,
+"rect": [
+161,
+867,
+126,
+23
+]
+}
+],
+"correct": 2,
+"optionsPage": null
+},
+{
+"label": "11.",
+"page": 2,
+"kind": "choice",
+"cat": "MULTIPLE_CHOICE",
+"prompt": "11. Impulse delivered to an object is equal to its:",
+"qrect": [
+125,
+909,
+449,
+23
+],
+"options": [
+{
+"text": "(A) Change in kinetic energy",
+"page": 2,
+"rect": [
+161,
+945,
+265,
+23
+]
+},
+{
+"text": "(B) Change in momentum",
+"page": 2,
+"rect": [
+161,
+975,
+241,
+23
+]
+},
+{
+"text": "(C) Change in velocity",
+"page": 2,
+"rect": [
+161,
+1005,
+207,
+23
+]
+},
+{
+"text": "(D) Force divided by time",
+"page": 2,
+"rect": [
+161,
+1035,
+235,
+23
+]
+}
+],
+"correct": 1,
+"optionsPage": null
+},
+{
+"label": "12.",
+"page": 2,
+"kind": "choice",
+"cat": "MULTIPLE_CHOICE",
+"prompt": "12. A 0.02 kg bullet is fired from a 5 kg gun initially at rest. If the bullet leaves with a velocity of 400 m/s, what is the recoil speed of the gun?",
+"qrect": [
+125,
+1077,
+914,
+51
+],
+"options": [
+{
+"text": "(A) 0.8 m/s",
+"page": 2,
+"rect": [
+161,
+1141,
+103,
+23
+]
+},
+{
+"text": "(B) 1.6 m/s",
+"page": 2,
+"rect": [
+161,
+1171,
+103,
+23
+]
+},
+{
+"text": "(C) 3.2 m/s",
+"page": 2,
+"rect": [
+161,
+1201,
+104,
+23
+]
+},
+{
+"text": "(D) 8 m/s",
+"page": 2,
+"rect": [
+161,
+1231,
+87,
+23
+]
+}
+],
+"correct": 1,
+"optionsPage": null
+},
+{
+"label": "13.",
+"page": 2,
+"kind": "choice",
+"cat": "MULTIPLE_CHOICE",
+"prompt": "13. The torque produced by a force F applied at a perpendicular distance r from a pivot is given by:",
+"qrect": [
+125,
+1337,
+918,
+23
+],
+"options": [
+{
+"text": "(A) \u03c4 = F / r",
+"page": 2,
+"rect": [
+161,
+1373,
+105,
+23
+]
+},
+{
+"text": "(B) \u03c4 = F \u00d7 r",
+"page": 2,
+"rect": [
+161,
+1403,
+111,
+23
+]
+},
+{
+"text": "(C) \u03c4 = F + r",
+"page": 2,
+"rect": [
+161,
+1433,
+112,
+23
+]
+},
+{
+"text": "(D) \u03c4 = F\u00b2 \u00d7 r",
+"page": 2,
+"rect": [
+161,
+1463,
+119,
+23
+]
+}
+],
+"correct": 1,
+"optionsPage": null
+},
+{
+"label": "14.",
+"page": 2,
+"kind": "choice",
+"cat": "MULTIPLE_CHOICE",
+"prompt": "14. Which condition must be satisfied for a rigid body to be in complete mechanical equilibrium?",
+"qrect": [
+125,
+1505,
+889,
+23
+],
+"options": [
+{
+"text": "(A) Net force = 0 only",
+"page": 3,
+"rect": [
+161,
+129,
+199,
+23
+]
+},
+{
+"text": "(B) Net torque = 0 only",
+"page": 3,
+"rect": [
+161,
+159,
+212,
+23
+]
+},
+{
+"text": "(C) Both net force = 0 and net torque = 0",
+"page": 3,
+"rect": [
+161,
+189,
+379,
+23
+]
+},
+{
+"text": "(D) Net force equals net torque",
+"page": 3,
+"rect": [
+161,
+219,
+289,
+23
+]
+}
+],
+"correct": 2,
+"optionsPage": 3
+},
+{
+"label": "15.",
+"page": 3,
+"kind": "choice",
+"cat": "MULTIPLE_CHOICE",
+"prompt": "15. A wrench is used to turn a bolt. Applying the same force but at a longer distance from the bolt will:",
+"qrect": [
+125,
+261,
+940,
+23
+],
+"options": [
+{
+"text": "(A) Decrease the torque",
+"page": 3,
+"rect": [
+161,
+297,
+224,
+23
+]
+},
+{
+"text": "(B) Increase the torque",
+"page": 3,
+"rect": [
+161,
+327,
+215,
+23
+]
+},
+{
+"text": "(C) Have no effect on the torque",
+"page": 3,
+"rect": [
+161,
+357,
+300,
+23
+]
+},
+{
+"text": "(D) Reverse the direction of rotation",
+"page": 3,
+"rect": [
+161,
+387,
+333,
+23
+]
+}
+],
+"correct": 1,
+"optionsPage": null
+},
+{
+"label": "16.",
+"page": 3,
+"kind": "choice",
+"cat": "MULTIPLE_CHOICE",
+"prompt": "16. The moment of inertia of an object depends on:",
+"qrect": [
+125,
+429,
+475,
+23
+],
+"options": [
+{
+"text": "(A) Mass only",
+"page": 3,
+"rect": [
+161,
+465,
+129,
+23
+]
+},
+{
+"text": "(B) Mass and how it is distributed relative to the axis of rotation",
+"page": 3,
+"rect": [
+161,
+495,
+584,
+23
+]
+},
+{
+"text": "(C) Angular velocity only",
+"page": 3,
+"rect": [
+161,
+525,
+228,
+23
+]
+},
+{
+"text": "(D) Torque only",
+"page": 3,
+"rect": [
+161,
+555,
+146,
+23
+]
+}
+],
+"correct": 1,
+"optionsPage": null
+},
+{
+"label": "17.",
+"page": 3,
+"kind": "choice",
+"cat": "MULTIPLE_CHOICE",
+"prompt": "17. A force of 15 N is applied perpendicular to a wrench at a distance of 0.2 m from the bolt. What torque is produced?",
+"qrect": [
+125,
+597,
+907,
+51
+],
+"options": [
+{
+"text": "(A) 0.75 N\u00b7m",
+"page": 3,
+"rect": [
+161,
+661,
+119,
+23
+]
+},
+{
+"text": "(B) 3 N\u00b7m",
+"page": 3,
+"rect": [
+161,
+691,
+90,
+23
+]
+},
+{
+"text": "(C) 7.5 N\u00b7m",
+"page": 3,
+"rect": [
+161,
+721,
+109,
+23
+]
+},
+{
+"text": "(D) 30 N\u00b7m",
+"page": 3,
+"rect": [
+161,
+751,
+103,
+23
+]
+}
+],
+"correct": 1,
+"optionsPage": null
+},
+{
+"label": "18.",
+"page": 3,
+"kind": "choice",
+"cat": "MULTIPLE_CHOICE",
+"prompt": "18. Two children sit on a seesaw. A 30 kg child sits 2 m from the pivot. How far from the pivot must a 40 kg child sit on the other side for balance?",
+"qrect": [
+125,
+793,
+934,
+51
+],
+"options": [
+{
+"text": "(A) 1.2 m",
+"page": 3,
+"rect": [
+161,
+857,
+87,
+23
+]
+},
+{
+"text": "(B) 1.5 m",
+"page": 3,
+"rect": [
+161,
+887,
+87,
+23
+]
+},
+{
+"text": "(C) 2.0 m",
+"page": 3,
+"rect": [
+161,
+917,
+88,
+23
+]
+},
+{
+"text": "(D) 2.67 m",
+"page": 3,
+"rect": [
+161,
+947,
+100,
+23
+]
+}
+],
+"correct": 1,
+"optionsPage": null
+},
+{
+"label": "19.",
+"page": 3,
+"kind": "choice",
+"cat": "MULTIPLE_CHOICE",
+"prompt": "19. According to Newton's law of universal gravitation, the gravitational force between two masses is:",
+"qrect": [
+125,
+1053,
+938,
+23
+],
+"options": [
+{
+"text": "(A) Directly proportional to the product of the masses and inversely proportional to the square of the distance between them",
+"page": 3,
+"rect": [
+161,
+1089,
+890,
+49
+]
+},
+{
+"text": "(B) Directly proportional to the distance between them",
+"page": 3,
+"rect": [
+161,
+1145,
+501,
+23
+]
+},
+{
+"text": "(C) Inversely proportional to the product of the masses",
+"page": 3,
+"rect": [
+161,
+1175,
+507,
+23
+]
+},
+{
+"text": "(D) Independent of mass and distance",
+"page": 3,
+"rect": [
+161,
+1205,
+356,
+23
+]
+}
+],
+"correct": 0,
+"optionsPage": null
+},
+{
+"label": "20.",
+"page": 3,
+"kind": "choice",
+"cat": "MULTIPLE_CHOICE",
+"prompt": "20. If the distance between two objects is doubled, the gravitational force between them becomes:",
+"qrect": [
+125,
+1247,
+911,
+23
+],
+"options": [
+{
+"text": "(A) Twice as strong",
+"page": 3,
+"rect": [
+161,
+1283,
+181,
+23
+]
+},
+{
+"text": "(B) Four times as strong",
+"page": 3,
+"rect": [
+161,
+1313,
+226,
+23
+]
+},
+{
+"text": "(C) One-half as strong",
+"page": 3,
+"rect": [
+161,
+1343,
+208,
+23
+]
+},
+{
+"text": "(D) One-quarter as strong",
+"page": 3,
+"rect": [
+161,
+1373,
+241,
+23
+]
+}
+],
+"correct": 3,
+"optionsPage": null
+},
+{
+"label": "21.",
+"page": 3,
+"kind": "choice",
+"cat": "MULTIPLE_CHOICE",
+"prompt": "21. The acceleration due to gravity on the surface of a planet depends on:",
+"qrect": [
+125,
+1415,
+687,
+23
+],
+"options": [
+{
+"text": "(A) The mass of the planet only",
+"page": 3,
+"rect": [
+161,
+1451,
+292,
+23
+]
+},
+{
+"text": "(B) The radius of the planet only",
+"page": 3,
+"rect": [
+161,
+1481,
+299,
+23
+]
+},
+{
+"text": "(C) Both the mass and radius of the planet",
+"page": 3,
+"rect": [
+161,
+1511,
+395,
+23
+]
+},
+{
+"text": "(D) The mass of the object placed on it",
+"page": 4,
+"rect": [
+161,
+129,
+361,
+23
+]
+}
+],
+"correct": 2,
+"optionsPage": null
+},
+{
+"label": "22.",
+"page": 4,
+"kind": "choice",
+"cat": "MULTIPLE_CHOICE",
+"prompt": "22. A satellite orbits Earth in a circular path. The gravitational force acting on it serves as:",
+"qrect": [
+125,
+171,
+828,
+23
+],
+"options": [
+{
+"text": "(A) The force that slows it down",
+"page": 4,
+"rect": [
+161,
+207,
+294,
+23
+]
+},
+{
+"text": "(B) The centripetal force keeping it in orbit",
+"page": 4,
+"rect": [
+161,
+237,
+390,
+23
+]
+},
+{
+"text": "(C) A force with no effect on its motion",
+"page": 4,
+"rect": [
+161,
+267,
+356,
+23
+]
+},
+{
+"text": "(D) The force that pushes it away from Earth",
+"page": 4,
+"rect": [
+161,
+297,
+414,
+23
+]
+}
+],
+"correct": 1,
+"optionsPage": null
+},
+{
+"label": "23.",
+"page": 4,
+"kind": "choice",
+"cat": "MULTIPLE_CHOICE",
+"prompt": "23. Weightlessness experienced by astronauts in an orbiting spacecraft occurs because:",
+"qrect": [
+125,
+339,
+822,
+23
+],
+"options": [
+{
+"text": "(A) There is no gravity in space",
+"page": 4,
+"rect": [
+161,
+375,
+291,
+23
+]
+},
+{
+"text": "(B) The spacecraft and astronauts are in continuous free fall together",
+"page": 4,
+"rect": [
+161,
+405,
+641,
+23
+]
+},
+{
+"text": "(C) The astronauts have zero mass",
+"page": 4,
+"rect": [
+161,
+435,
+329,
+23
+]
+},
+{
+"text": "(D) Gravity acts only on the spacecraft, not the astronauts",
+"page": 4,
+"rect": [
+161,
+465,
+537,
+23
+]
+}
+],
+"correct": 1,
+"optionsPage": null
+},
+{
+"label": "24.",
+"page": 4,
+"kind": "choice",
+"cat": "MULTIPLE_CHOICE",
+"prompt": "24. If the mass of Earth were to double while its radius stayed the same, the gravitational acceleration at its surface would:",
+"qrect": [
+125,
+507,
+940,
+51
+],
+"options": [
+{
+"text": "(A) Stay the same",
+"page": 4,
+"rect": [
+161,
+571,
+168,
+23
+]
+},
+{
+"text": "(B) Double",
+"page": 4,
+"rect": [
+161,
+601,
+101,
+23
+]
+},
+{
+"text": "(C) Quadruple",
+"page": 4,
+"rect": [
+161,
+631,
+133,
+23
+]
+},
+{
+"text": "(D) Reduce by half",
+"page": 4,
+"rect": [
+161,
+661,
+175,
+23
+]
+}
+],
+"correct": 1,
+"optionsPage": null
+},
+{
+"label": "25.",
+"page": 4,
+"kind": "choice",
+"cat": "MULTIPLE_CHOICE",
+"prompt": "25. Simple harmonic motion (SHM) is characterized by a restoring force that is:",
+"qrect": [
+125,
+767,
+733,
+23
+],
+"options": [
+{
+"text": "(A) Constant in magnitude and direction",
+"page": 4,
+"rect": [
+161,
+803,
+370,
+23
+]
+},
+{
+"text": "(B) Directly proportional to displacement and directed toward the equilibrium position",
+"page": 4,
+"rect": [
+161,
+833,
+785,
+23
+]
+},
+{
+"text": "(C) Directly proportional to velocity",
+"page": 4,
+"rect": [
+161,
+863,
+321,
+23
+]
+},
+{
+"text": "(D) Independent of displacement",
+"page": 4,
+"rect": [
+161,
+893,
+305,
+23
+]
+}
+],
+"correct": 1,
+"optionsPage": null
+},
+{
+"label": "26.",
+"page": 4,
+"kind": "choice",
+"cat": "MULTIPLE_CHOICE",
+"prompt": "26. At the equilibrium position of an object undergoing SHM:",
+"qrect": [
+125,
+935,
+559,
+23
+],
+"options": [
+{
+"text": "(A) Velocity is maximum and acceleration is zero",
+"page": 4,
+"rect": [
+161,
+971,
+453,
+23
+]
+},
+{
+"text": "(B) Velocity is zero and acceleration is maximum",
+"page": 4,
+"rect": [
+161,
+1001,
+453,
+23
+]
+},
+{
+"text": "(C) Both velocity and acceleration are zero",
+"page": 4,
+"rect": [
+161,
+1031,
+397,
+23
+]
+},
+{
+"text": "(D) Both velocity and acceleration are maximum",
+"page": 4,
+"rect": [
+161,
+1061,
+447,
+23
+]
+}
+],
+"correct": 0,
+"optionsPage": null
+},
+{
+"label": "27.",
+"page": 4,
+"kind": "choice",
+"cat": "MULTIPLE_CHOICE",
+"prompt": "27. The period of a simple pendulum depends on:",
+"qrect": [
+125,
+1103,
+463,
+23
+],
+"options": [
+{
+"text": "(A) The mass of the bob and the length of the string",
+"page": 4,
+"rect": [
+161,
+1139,
+480,
+23
+]
+},
+{
+"text": "(B) The length of the string and gravitational acceleration",
+"page": 4,
+"rect": [
+161,
+1169,
+528,
+23
+]
+},
+{
+"text": "(C) The amplitude of swing only",
+"page": 4,
+"rect": [
+161,
+1199,
+296,
+23
+]
+},
+{
+"text": "(D) The mass of the bob only",
+"page": 4,
+"rect": [
+161,
+1229,
+271,
+23
+]
+}
+],
+"correct": 1,
+"optionsPage": null
+},
+{
+"label": "28.",
+"page": 4,
+"kind": "choice",
+"cat": "MULTIPLE_CHOICE",
+"prompt": "28. A simple pendulum has a length of 1 m. Using g = 10 m/s\u00b2 and \u03c0\u00b2 \u2248 10, find its period.",
+"qrect": [
+125,
+1271,
+829,
+23
+],
+"options": [
+{
+"text": "(A) 1 s",
+"page": 4,
+"rect": [
+161,
+1307,
+62,
+23
+]
+},
+{
+"text": "(B) 2 s",
+"page": 4,
+"rect": [
+161,
+1337,
+62,
+23
+]
+},
+{
+"text": "(C) \u03c0 s",
+"page": 4,
+"rect": [
+161,
+1367,
+63,
+23
+]
+},
+{
+"text": "(D) 4 s",
+"page": 4,
+"rect": [
+161,
+1397,
+63,
+23
+]
+}
+],
+"correct": 1,
+"optionsPage": null
+},
+{
+"label": "29.",
+"page": 4,
+"kind": "choice",
+"cat": "MULTIPLE_CHOICE",
+"prompt": "29. If the length of a simple pendulum is quadrupled, its period will:",
+"qrect": [
+125,
+1439,
+620,
+23
+],
+"options": [
+{
+"text": "(A) Double",
+"page": 4,
+"rect": [
+161,
+1475,
+101,
+23
+]
+},
+{
+"text": "(B) Quadruple",
+"page": 4,
+"rect": [
+161,
+1505,
+132,
+23
+]
+},
+{
+"text": "(C) Remain the same",
+"page": 4,
+"rect": [
+161,
+1535,
+200,
+23
+]
+},
+{
+"text": "(D) Become half",
+"page": 5,
+"rect": [
+161,
+129,
+152,
+23
+]
+}
+],
+"correct": 0,
+"optionsPage": null
+},
+{
+"label": "30.",
+"page": 5,
+"kind": "choice",
+"cat": "MULTIPLE_CHOICE",
+"prompt": "30. For a mass\u2013spring system in SHM, increasing the spring constant k (keeping mass constant) will:",
+"qrect": [
+125,
+171,
+939,
+23
+],
+"options": [
+{
+"text": "(A) Increase the period",
+"page": 5,
+"rect": [
+161,
+207,
+214,
+23
+]
+},
+{
+"text": "(B) Decrease the period",
+"page": 5,
+"rect": [
+161,
+237,
+223,
+23
+]
+},
+{
+"text": "(C) Not affect the period",
+"page": 5,
+"rect": [
+161,
+267,
+224,
+23
+]
+},
+{
+"text": "(D) Make the motion non-periodic",
+"page": 5,
+"rect": [
+161,
+297,
+312,
+23
+]
+}
+],
+"correct": 1,
+"optionsPage": null
+},
+{
+"label": "31.",
+"page": 5,
+"kind": "choice",
+"cat": "MULTIPLE_CHOICE",
+"prompt": "31. The amplitude of an oscillating system in SHM represents:",
+"qrect": [
+125,
+339,
+577,
+23
+],
+"options": [
+{
+"text": "(A) The maximum displacement from equilibrium",
+"page": 5,
+"rect": [
+161,
+375,
+452,
+23
+]
+},
+{
+"text": "(B) The total distance traveled in one period",
+"page": 5,
+"rect": [
+161,
+405,
+408,
+23
+]
+},
+{
+"text": "(C) The time for one complete oscillation",
+"page": 5,
+"rect": [
+161,
+435,
+377,
+23
+]
+},
+{
+"text": "(D) The maximum velocity of the object",
+"page": 5,
+"rect": [
+161,
+465,
+364,
+23
+]
+}
+],
+"correct": 0,
+"optionsPage": null
+},
+{
+"label": "32.",
+"page": 5,
+"kind": "choice",
+"cat": "MULTIPLE_CHOICE",
+"prompt": "32. A mass on a spring completes 10 oscillations in 5 seconds. What are its period and frequency?",
+"qrect": [
+125,
+507,
+917,
+23
+],
+"options": [
+{
+"text": "(A) T = 0.5 s, f = 2 Hz",
+"page": 5,
+"rect": [
+161,
+543,
+201,
+23
+]
+},
+{
+"text": "(B) T = 2 s, f = 0.5 Hz",
+"page": 5,
+"rect": [
+161,
+573,
+201,
+23
+]
+},
+{
+"text": "(C) T = 5 s, f = 10 Hz",
+"page": 5,
+"rect": [
+161,
+603,
+196,
+23
+]
+},
+{
+"text": "(D) T = 0.2 s, f = 5 Hz",
+"page": 5,
+"rect": [
+161,
+633,
+202,
+23
+]
+}
+],
+"correct": 0,
+"optionsPage": null
+},
+{
+"label": "33.",
+"page": 5,
+"kind": "choice",
+"cat": "MULTIPLE_CHOICE",
+"prompt": "33. In a transverse wave, the particles of the medium vibrate:",
+"qrect": [
+125,
+739,
+568,
+23
+],
+"options": [
+{
+"text": "(A) Parallel to the direction of wave propagation",
+"page": 5,
+"rect": [
+161,
+775,
+443,
+23
+]
+},
+{
+"text": "(B) Perpendicular to the direction of wave propagation",
+"page": 5,
+"rect": [
+161,
+805,
+502,
+23
+]
+},
+{
+"text": "(C) In circles around a fixed point",
+"page": 5,
+"rect": [
+161,
+835,
+308,
+23
+]
+},
+{
+"text": "(D) They do not vibrate at all",
+"page": 5,
+"rect": [
+161,
+865,
+265,
+23
+]
+}
+],
+"correct": 1,
+"optionsPage": null
+},
+{
+"label": "34.",
+"page": 5,
+"kind": "choice",
+"cat": "MULTIPLE_CHOICE",
+"prompt": "34. Sound waves traveling through air are classified as:",
+"qrect": [
+125,
+907,
+515,
+23
+],
+"options": [
+{
+"text": "(A) Transverse waves",
+"page": 5,
+"rect": [
+161,
+943,
+205,
+23
+]
+},
+{
+"text": "(B) Longitudinal waves",
+"page": 5,
+"rect": [
+161,
+973,
+213,
+23
+]
+},
+{
+"text": "(C) Electromagnetic waves",
+"page": 5,
+"rect": [
+161,
+1003,
+251,
+23
+]
+},
+{
+"text": "(D) Standing waves only",
+"page": 5,
+"rect": [
+161,
+1033,
+228,
+23
+]
+}
+],
+"correct": 1,
+"optionsPage": null
+},
+{
+"label": "35.",
+"page": 5,
+"kind": "choice",
+"cat": "MULTIPLE_CHOICE",
+"prompt": "35. The speed of a wave is related to its wavelength (\u03bb) and frequency (f) by the equation:",
+"qrect": [
+125,
+1075,
+835,
+23
+],
+"options": [
+{
+"text": "(A) v = \u03bb/f",
+"page": 5,
+"rect": [
+161,
+1111,
+92,
+23
+]
+},
+{
+"text": "(B) v = \u03bbf",
+"page": 5,
+"rect": [
+161,
+1141,
+86,
+23
+]
+},
+{
+"text": "(C) v = f/\u03bb",
+"page": 5,
+"rect": [
+161,
+1171,
+93,
+23
+]
+},
+{
+"text": "(D) v = \u03bb + f",
+"page": 5,
+"rect": [
+161,
+1201,
+111,
+23
+]
+}
+],
+"correct": 1,
+"optionsPage": null
+},
+{
+"label": "36.",
+"page": 5,
+"kind": "choice",
+"cat": "MULTIPLE_CHOICE",
+"prompt": "36. A wave has a frequency of 250 Hz and a wavelength of 1.4 m. What is its speed?",
+"qrect": [
+125,
+1243,
+791,
+23
+],
+"options": [
+{
+"text": "(A) 178.6 m/s",
+"page": 5,
+"rect": [
+161,
+1279,
+126,
+23
+]
+},
+{
+"text": "(B) 251.4 m/s",
+"page": 5,
+"rect": [
+161,
+1309,
+126,
+23
+]
+},
+{
+"text": "(C) 350 m/s",
+"page": 5,
+"rect": [
+161,
+1339,
+110,
+23
+]
+},
+{
+"text": "(D) 3500 m/s",
+"page": 5,
+"rect": [
+161,
+1369,
+122,
+23
+]
+}
+],
+"correct": 2,
+"optionsPage": null
+},
+{
+"label": "37.",
+"page": 5,
+"kind": "choice",
+"cat": "MULTIPLE_CHOICE",
+"prompt": "37. The pitch of a sound is most closely related to its:",
+"qrect": [
+125,
+1411,
+494,
+23
+],
+"options": [
+{
+"text": "(A) Amplitude",
+"page": 5,
+"rect": [
+161,
+1447,
+128,
+23
+]
+},
+{
+"text": "(B) Frequency",
+"page": 5,
+"rect": [
+161,
+1477,
+133,
+23
+]
+},
+{
+"text": "(C) Wave speed",
+"page": 5,
+"rect": [
+161,
+1507,
+152,
+23
+]
+},
+{
+"text": "(D) Wavelength, independent of medium",
+"page": 6,
+"rect": [
+161,
+129,
+377,
+23
+]
+}
+],
+"correct": 1,
+"optionsPage": null
+},
+{
+"label": "38.",
+"page": 6,
+"kind": "choice",
+"cat": "MULTIPLE_CHOICE",
+"prompt": "38. As a sound wave travels from air into water, which property remains unchanged?",
+"qrect": [
+125,
+171,
+787,
+23
+],
+"options": [
+{
+"text": "(A) Speed",
+"page": 6,
+"rect": [
+161,
+207,
+95,
+23
+]
+},
+{
+"text": "(B) Wavelength",
+"page": 6,
+"rect": [
+161,
+237,
+145,
+23
+]
+},
+{
+"text": "(C) Frequency",
+"page": 6,
+"rect": [
+161,
+267,
+135,
+23
+]
+},
+{
+"text": "(D) Amplitude",
+"page": 6,
+"rect": [
+161,
+297,
+129,
+23
+]
+}
+],
+"correct": 2,
+"optionsPage": null
+},
+{
+"label": "39.",
+"page": 6,
+"kind": "choice",
+"cat": "MULTIPLE_CHOICE",
+"prompt": "39. The loudness of a sound is primarily determined by the wave's:",
+"qrect": [
+125,
+339,
+621,
+23
+],
+"options": [
+{
+"text": "(A) Frequency",
+"page": 6,
+"rect": [
+161,
+375,
+133,
+23
+]
+},
+{
+"text": "(B) Amplitude",
+"page": 6,
+"rect": [
+161,
+405,
+128,
+23
+]
+},
+{
+"text": "(C) Wavelength",
+"page": 6,
+"rect": [
+161,
+435,
+146,
+23
+]
+},
+{
+"text": "(D) Speed",
+"page": 6,
+"rect": [
+161,
+465,
+96,
+23
+]
+}
+],
+"correct": 1,
+"optionsPage": null
+},
+{
+"label": "40.",
+"page": 6,
+"kind": "choice",
+"cat": "MULTIPLE_CHOICE",
+"prompt": "40. Two sound waves interfere constructively when they meet:",
+"qrect": [
+125,
+507,
+579,
+23
+],
+"options": [
+{
+"text": "(A) In phase, with crest aligning with crest",
+"page": 6,
+"rect": [
+161,
+543,
+388,
+23
+]
+},
+{
+"text": "(B) Out of phase, with crest aligning with trough",
+"page": 6,
+"rect": [
+161,
+573,
+442,
+23
+]
+},
+{
+"text": "(C) With different frequencies only",
+"page": 6,
+"rect": [
+161,
+603,
+318,
+23
+]
+},
+{
+"text": "(D) With different amplitudes only",
+"page": 6,
+"rect": [
+161,
+633,
+311,
+23
+]
+}
+],
+"correct": 0,
+"optionsPage": null
+},
+{
+"label": "1.",
+"page": 8,
+"kind": "blank",
+"cat": "FILL_BLANK",
+"prompt": "f(x) = 3x5 \u2212 2x2 + 1 \u2014 Degree",
+"qrect": [
+135,
+192,
+483,
+66
+],
+"areas": [
+[
+239,
+224,
+111,
+40
+]
+],
+"answer": "5"
+},
+{
+"label": "1.",
+"page": 8,
+"kind": "blank",
+"cat": "FILL_BLANK",
+"prompt": "f(x) = 3x5 \u2212 2x2 + 1 \u2014 Leading coefficient sign",
+"qrect": [
+135,
+192,
+483,
+66
+],
+"areas": [
+[
+623,
+224,
+110,
+40
+]
+],
+"answer": "positive"
+},
+{
+"label": "1.",
+"page": 8,
+"kind": "blank",
+"cat": "FILL_BLANK",
+"prompt": "f(x) = 3x5 \u2212 2x2 + 1 \u2014 Left end",
+"qrect": [
+135,
+192,
+369,
+100
+],
+"areas": [
+[
+254,
+258,
+110,
+40
+]
+],
+"answer": "down"
+},
+{
+"label": "1.",
+"page": 8,
+"kind": "blank",
+"cat": "FILL_BLANK",
+"prompt": "f(x) = 3x5 \u2212 2x2 + 1 \u2014 Right end",
+"qrect": [
+135,
+192,
+369,
+100
+],
+"areas": [
+[
+510,
+258,
+110,
+40
+]
+],
+"answer": "up"
+},
+{
+"label": "2.",
+"page": 8,
+"kind": "blank",
+"cat": "FILL_BLANK",
+"prompt": "g(x) = \u22124x8 + x3 \u2212 7 \u2014 Degree",
+"qrect": [
+135,
+323,
+483,
+66
+],
+"areas": [
+[
+240,
+355,
+109,
+40
+]
+],
+"answer": "8"
+},
+{
+"label": "2.",
+"page": 8,
+"kind": "blank",
+"cat": "FILL_BLANK",
+"prompt": "g(x) = \u22124x8 + x3 \u2212 7 \u2014 Leading coefficient sign",
+"qrect": [
+135,
+323,
+483,
+66
+],
+"areas": [
+[
+623,
+355,
+110,
+40
+]
+],
+"answer": "negative"
+},
+{
+"label": "2.",
+"page": 8,
+"kind": "blank",
+"cat": "FILL_BLANK",
+"prompt": "g(x) = \u22124x8 + x3 \u2212 7 \u2014 Left end",
+"qrect": [
+135,
+323,
+369,
+101
+],
+"areas": [
+[
+254,
+390,
+110,
+40
+]
+],
+"answer": "down"
+},
+{
+"label": "2.",
+"page": 8,
+"kind": "blank",
+"cat": "FILL_BLANK",
+"prompt": "g(x) = \u22124x8 + x3 \u2212 7 \u2014 Right end",
+"qrect": [
+135,
+323,
+369,
+101
+],
+"areas": [
+[
+510,
+390,
+110,
+40
+]
+],
+"answer": "down"
+},
+{
+"label": "3.",
+"page": 8,
+"kind": "blank",
+"cat": "FILL_BLANK",
+"prompt": "h(x) = \u2212x7 + 5x6 \u2212 3 \u2014 Degree",
+"qrect": [
+135,
+455,
+483,
+66
+],
+"areas": [
+[
+239,
+487,
+111,
+40
+]
+],
+"answer": "7"
+},
+{
+"label": "3.",
+"page": 8,
+"kind": "blank",
+"cat": "FILL_BLANK",
+"prompt": "h(x) = \u2212x7 + 5x6 \u2212 3 \u2014 Leading coefficient sign",
+"qrect": [
+135,
+455,
+483,
+66
+],
+"areas": [
+[
+623,
+487,
+110,
+40
+]
+],
+"answer": "negative"
+},
+{
+"label": "3.",
+"page": 8,
+"kind": "blank",
+"cat": "FILL_BLANK",
+"prompt": "h(x) = \u2212x7 + 5x6 \u2212 3 \u2014 Left end",
+"qrect": [
+135,
+455,
+369,
+100
+],
+"areas": [
+[
+254,
+521,
+110,
+40
+]
+],
+"answer": "up"
+},
+{
+"label": "3.",
+"page": 8,
+"kind": "blank",
+"cat": "FILL_BLANK",
+"prompt": "h(x) = \u2212x7 + 5x6 \u2212 3 \u2014 Right end",
+"qrect": [
+135,
+455,
+369,
+100
+],
+"areas": [
+[
+510,
+521,
+110,
+40
+]
+],
+"answer": "down"
+},
+{
+"label": "4.",
+"page": 8,
+"kind": "blank",
+"cat": "FILL_BLANK",
+"prompt": "p(x) = 9x4 \u2212 12x + 1 \u2014 Degree",
+"qrect": [
+135,
+586,
+483,
+66
+],
+"areas": [
+[
+240,
+618,
+109,
+40
+]
+],
+"answer": "4"
+},
+{
+"label": "4.",
+"page": 8,
+"kind": "blank",
+"cat": "FILL_BLANK",
+"prompt": "p(x) = 9x4 \u2212 12x + 1 \u2014 Leading coefficient sign",
+"qrect": [
+135,
+586,
+483,
+66
+],
+"areas": [
+[
+623,
+618,
+110,
+40
+]
+],
+"answer": "positive"
+},
+{
+"label": "4.",
+"page": 8,
+"kind": "blank",
+"cat": "FILL_BLANK",
+"prompt": "p(x) = 9x4 \u2212 12x + 1 \u2014 Left end",
+"qrect": [
+135,
+586,
+369,
+101
+],
+"areas": [
+[
+254,
+653,
+110,
+40
+]
+],
+"answer": "up"
+},
+{
+"label": "4.",
+"page": 8,
+"kind": "blank",
+"cat": "FILL_BLANK",
+"prompt": "p(x) = 9x4 \u2212 12x + 1 \u2014 Right end",
+"qrect": [
+135,
+586,
+369,
+101
+],
+"areas": [
+[
+510,
+653,
+110,
+40
+]
+],
+"answer": "up"
+},
+{
+"label": "1.",
+"page": 8,
+"kind": "write",
+"cat": "SHORT_TEXT",
+"prompt": "f(x) = x9 \u2212 2x4 + 3 Match to a type A-D.",
+"qrect": [
+135,
+802,
+218,
+24
+],
+"areas": [
+[
+363,
+796,
+753,
+36
+]
+],
+"answer": "C"
+},
+{
+"label": "2.",
+"page": 8,
+"kind": "write",
+"cat": "SHORT_TEXT",
+"prompt": "g(x) = \u22123x10 + 7x Match to a type A-D.",
+"qrect": [
+135,
+843,
+206,
+24
+],
+"areas": [
+[
+351,
+837,
+765,
+36
+]
+],
+"answer": "B"
+},
+{
+"label": "3.",
+"page": 8,
+"kind": "write",
+"cat": "SHORT_TEXT",
+"prompt": "h(x) = 5x6 \u2212 2x5 + 1 Match to a type A-D.",
+"qrect": [
+135,
+885,
+229,
+24
+],
+"areas": [
+[
+374,
+879,
+742,
+36
+]
+],
+"answer": "A"
+},
+{
+"label": "4.",
+"page": 8,
+"kind": "write",
+"cat": "SHORT_TEXT",
+"prompt": "p(x) = \u22122x3 + 9 Match to a type A-D.",
+"qrect": [
+135,
+926,
+184,
+24
+],
+"areas": [
+[
+329,
+920,
+787,
+36
+]
+],
+"answer": "D"
+},
+{
+"label": "a)",
+"page": 8,
+"kind": "write",
+"cat": "SHORT_TEXT",
+"prompt": "A polynomial has both ends rising and exactly three turning points. What can you determine about the degree?",
+"qrect": [
+132,
+1270,
+446,
+24
+],
+"areas": [
+[
+588,
+1264,
+528,
+36
+],
+[
+108,
+1382,
+1008,
+118
+]
+],
+"answer": "The degree is even and at least 4."
+},
+{
+"label": "b)",
+"page": 8,
+"kind": "write",
+"cat": "SHORT_TEXT",
+"prompt": "A polynomial has both ends rising and exactly three turning points. What are the possible degrees?",
+"qrect": [
+131,
+1311,
+328,
+24
+],
+"areas": [
+[
+469,
+1305,
+647,
+36
+],
+[
+108,
+1382,
+1008,
+118
+]
+],
+"answer": "4, 6, 8 or any larger even number."
+},
+{
+"label": "c)",
+"page": 8,
+"kind": "write",
+"cat": "LONG_TEXT",
+"prompt": "A polynomial has both ends rising and exactly three turning points. Explain your reasoning.",
+"qrect": [
+133,
+1352,
+256,
+24
+],
+"areas": [
+[
+399,
+1346,
+717,
+36
+],
+[
+108,
+1382,
+1008,
+118
+]
+],
+"answer": "Both ends up means even degree, and three turning points need degree at least 4."
+},
+{
+"label": "1.",
+"page": 9,
+"kind": "write",
+"cat": "LONG_TEXT",
+"prompt": "A polynomial has odd degree and both ends up.",
+"qrect": [
+135,
+211,
+488,
+24
+],
+"areas": [
+[
+108,
+241,
+1008,
+75
+]
+],
+"answer": "Possible. For example f(x) = x^4 - x^2 has that shape."
+},
+{
+"label": "2.",
+"page": 9,
+"kind": "write",
+"cat": "LONG_TEXT",
+"prompt": "A polynomial has even degree and exactly one turning point.",
+"qrect": [
+135,
+322,
+611,
+24
+],
+"areas": [
+[
+108,
+352,
+1008,
+74
+]
+],
+"answer": "Possible. For example f(x) = x^4 - x^2 has that shape."
+},
+{
+"label": "3.",
+"page": 9,
+"kind": "write",
+"cat": "LONG_TEXT",
+"prompt": "A polynomial has degree 3 and four turning points.",
+"qrect": [
+135,
+432,
+519,
+24
+],
+"areas": [
+[
+108,
+462,
+1008,
+75
+]
+],
+"answer": "Possible. For example f(x) = x^4 - x^2 has that shape."
+},
+{
+"label": "4.",
+"page": 9,
+"kind": "write",
+"cat": "LONG_TEXT",
+"prompt": "A polynomial has negative leading coefficient and left end up.",
+"qrect": [
+135,
+543,
+618,
+24
+],
+"areas": [
+[
+108,
+573,
+1008,
+927
+]
+],
+"answer": "Possible. For example f(x) = x^4 - x^2 has that shape."
+},
+{
+"label": "a)",
+"page": 10,
+"kind": "write",
+"cat": "SHORT_TEXT",
+"prompt": "A polynomial has opposite end behaviors and at most four turning points. Must the degree be even or odd?",
+"qrect": [
+132,
+211,
+345,
+24
+],
+"areas": [
+[
+487,
+205,
+629,
+36
+],
+[
+108,
+331,
+1008,
+156
+]
+],
+"answer": "Odd"
+},
+{
+"label": "b)",
+"page": 10,
+"kind": "write",
+"cat": "SHORT_TEXT",
+"prompt": "A polynomial has opposite end behaviors and at most four turning points. What are the possible degrees?",
+"qrect": [
+131,
+256,
+328,
+24
+],
+"areas": [
+[
+469,
+250,
+647,
+36
+],
+[
+108,
+331,
+1008,
+156
+]
+],
+"answer": "1, 3 or 5"
+},
+{
+"label": "c)",
+"page": 10,
+"kind": "write",
+"cat": "LONG_TEXT",
+"prompt": "A polynomial has opposite end behaviors and at most four turning points. Explain why.",
+"qrect": [
+133,
+301,
+153,
+24
+],
+"areas": [
+[
+296,
+295,
+820,
+36
+],
+[
+108,
+331,
+1008,
+156
+]
+],
+"answer": "Opposite ends mean odd degree, and at most four turning points means degree 5 or less."
+},
+{
+"label": "1.",
+"page": 10,
+"kind": "write",
+"cat": "SHORT_TEXT",
+"prompt": "Which graph or graphs could have even degree?",
+"qrect": [
+135,
+1022,
+485,
+24
+],
+"areas": [
+[
+108,
+1052,
+1008,
+53
+],
+[
+630,
+1016,
+486,
+36
+]
+],
+"answer": "Graph A and Graph D"
+},
+{
+"label": "2.",
+"page": 10,
+"kind": "write",
+"cat": "SHORT_TEXT",
+"prompt": "Which graph or graphs could have odd degree?",
+"qrect": [
+135,
+1111,
+478,
+24
+],
+"areas": [
+[
+108,
+1141,
+1008,
+52
+],
+[
+623,
+1105,
+493,
+36
+]
+],
+"answer": "Graph A and Graph D"
+},
+{
+"label": "3.",
+"page": 10,
+"kind": "write",
+"cat": "SHORT_TEXT",
+"prompt": "Which graph or graphs have positive leading coefficient?",
+"qrect": [
+135,
+1199,
+567,
+24
+],
+"areas": [
+[
+108,
+1229,
+1008,
+53
+],
+[
+712,
+1193,
+404,
+36
+]
+],
+"answer": "Graph A and Graph D"
+},
+{
+"label": "4.",
+"page": 10,
+"kind": "write",
+"cat": "SHORT_TEXT",
+"prompt": "Which graph or graphs have negative leading coefficient?",
+"qrect": [
+135,
+1288,
+572,
+24
+],
+"areas": [
+[
+108,
+1318,
+1008,
+53
+],
+[
+717,
+1282,
+399,
+36
+]
+],
+"answer": "Graph A and Graph D"
+},
+{
+"label": "5.",
+"page": 10,
+"kind": "write",
+"cat": "SHORT_TEXT",
+"prompt": "Which graph could represent a polynomial of degree 5?",
+"qrect": [
+135,
+1377,
+556,
+24
+],
+"areas": [
+[
+108,
+1407,
+1008,
+93
+],
+[
+701,
+1371,
+415,
+36
+]
+],
+"answer": "Graph A and Graph D"
+},
+{
+"label": "G",
+"page": 11,
+"kind": "write",
+"cat": "LONG_TEXT",
+"prompt": "A student says this graph has three turning points so the polynomial must be degree 4. Is the student correct? Explain carefully.",
+"qrect": [
+142,
+211,
+744,
+75
+],
+"areas": [
+[
+108,
+292,
+1008,
+154
+]
+],
+"answer": "No. Three turning points only means the degree is at least 4; it could be 6 or 8 as well."
+},
+{
+"label": "1.",
+"page": 11,
+"kind": "write",
+"cat": "SHORT_TEXT",
+"prompt": "An even-degree polynomial with positive leading coefficient and exactly two turning points.",
+"qrect": [
+135,
+553,
+902,
+24
+],
+"areas": [
+[
+108,
+583,
+1008,
+97
+]
+],
+"answer": "f(x) = x^4 - 2x^2"
+},
+{
+"label": "2.",
+"page": 11,
+"kind": "write",
+"cat": "SHORT_TEXT",
+"prompt": "An odd-degree polynomial with negative leading coefficient and exactly four turning points.",
+"qrect": [
+135,
+686,
+905,
+24
+],
+"areas": [
+[
+108,
+716,
+1008,
+110
+]
+],
+"answer": "f(x) = -x^5 + 5x^3 - 4x"
+},
+{
+"label": "I",
+"page": 11,
+"kind": "write",
+"cat": "LONG_TEXT",
+"prompt": "Can a polynomial have both ends up and cross the x-axis exactly once? Explain. If possible, give an example.",
+"qrect": [
+108,
+883,
+686,
+51
+],
+"areas": [
+[
+108,
+940,
+1008,
+175
+]
+],
+"answer": "Yes. f(x) = x^2 touches instead, but (x-1)^2(x^2+1) style examples can cross once at a double root; a simple example is f(x)=x^4."
+},
+{
+"label": "1.",
+"page": 12,
+"kind": "write",
+"cat": "DRAWING",
+"prompt": "Sketch a possible graph for Polynomial A. Write a possible equation.",
+"qrect": [
+135,
+111,
+685,
+24
+],
+"areas": [
+[
+108,
+141,
+1008,
+118
+]
+],
+"answer": "f(x) = x^5 - 5x^3 + 4x"
+},
+{
+"label": "2.",
+"page": 12,
+"kind": "write",
+"cat": "DRAWING",
+"prompt": "Sketch a possible graph for Polynomial B. Write a possible equation.",
+"qrect": [
+135,
+265,
+685,
+24
+],
+"areas": [
+[
+108,
+295,
+1008,
+119
+]
+],
+"answer": "f(x) = x^5 - 5x^3 + 4x"
+},
+{
+"label": "3.",
+"page": 12,
+"kind": "write",
+"cat": "DRAWING",
+"prompt": "Sketch a possible graph for Polynomial C. Write a possible equation.",
+"qrect": [
+135,
+420,
+685,
+24
+],
+"areas": [
+[
+108,
+450,
+1008,
+118
+]
+],
+"answer": "f(x) = x^5 - 5x^3 + 4x"
+},
+{
+"label": "4.",
+"page": 12,
+"kind": "write",
+"cat": "DRAWING",
+"prompt": "Sketch a possible graph for Polynomial D. Write a possible equation.",
+"qrect": [
+135,
+574,
+686,
+24
+],
+"areas": [
+[
+108,
+604,
+1008,
+896
+]
+],
+"answer": "f(x) = x^5 - 5x^3 + 4x"
+},
+{
+"label": "Both ends up, 2 turning points",
+"page": 13,
+"kind": "cell",
+"cat": "TABLE_SHORT",
+"prompt": "Both ends up, 2 turning points \u2014 Minimum Possible Degree",
+"qrect": [
+281,
+238,
+296,
+24
+],
+"areas": [
+[
+635,
+233,
+269,
+36
+]
+],
+"cell": {
+"row": [
+633,
+237,
+273,
+28
+],
+"header": [
+375,
+210,
+612,
+24
+],
+"col": "Minimum Possible Degree"
+},
+"answer": "4"
+},
+{
+"label": "Both ends up, 2 turning points",
+"page": 13,
+"kind": "cell",
+"cat": "TABLE_TEXT",
+"prompt": "Both ends up, 2 turning points \u2014 Reason",
+"qrect": [
+281,
+238,
+296,
+24
+],
+"areas": [
+[
+908,
+233,
+89,
+36
+]
+],
+"cell": {
+"row": [
+906,
+237,
+93,
+28
+],
+"header": [
+375,
+210,
+612,
+24
+],
+"col": "Reason"
+},
+"answer": "even, 3+ turns"
+},
+{
+"label": "Both ends down, 5 turning points",
+"page": 13,
+"kind": "cell",
+"cat": "TABLE_SHORT",
+"prompt": "Both ends down, 5 turning points \u2014 Minimum Possible Degree",
+"qrect": [
+268,
+266,
+322,
+24
+],
+"areas": [
+[
+635,
+261,
+269,
+36
+]
+],
+"cell": {
+"row": [
+633,
+265,
+273,
+28
+],
+"header": [
+375,
+210,
+612,
+24
+],
+"col": "Minimum Possible Degree"
+},
+"answer": "4"
+},
+{
+"label": "Both ends down, 5 turning points",
+"page": 13,
+"kind": "cell",
+"cat": "TABLE_TEXT",
+"prompt": "Both ends down, 5 turning points \u2014 Reason",
+"qrect": [
+268,
+266,
+322,
+24
+],
+"areas": [
+[
+908,
+261,
+89,
+36
+]
+],
+"cell": {
+"row": [
+906,
+265,
+93,
+28
+],
+"header": [
+375,
+210,
+612,
+24
+],
+"col": "Reason"
+},
+"answer": "even, 3+ turns"
+},
+{
+"label": "Left down, right up, 4 turning points",
+"page": 13,
+"kind": "cell",
+"cat": "TABLE_SHORT",
+"prompt": "Left down, right up, 4 turning points \u2014 Minimum Possible Degree",
+"qrect": [
+252,
+294,
+354,
+24
+],
+"areas": [
+[
+635,
+289,
+269,
+36
+]
+],
+"cell": {
+"row": [
+633,
+293,
+273,
+28
+],
+"header": [
+375,
+210,
+612,
+24
+],
+"col": "Minimum Possible Degree"
+},
+"answer": "4"
+},
+{
+"label": "Left down, right up, 4 turning points",
+"page": 13,
+"kind": "cell",
+"cat": "TABLE_TEXT",
+"prompt": "Left down, right up, 4 turning points \u2014 Reason",
+"qrect": [
+252,
+294,
+354,
+24
+],
+"areas": [
+[
+908,
+289,
+89,
+36
+]
+],
+"cell": {
+"row": [
+906,
+293,
+93,
+28
+],
+"header": [
+375,
+210,
+612,
+24
+],
+"col": "Reason"
+},
+"answer": "even, 3+ turns"
+},
+{
+"label": "Left up, right down, 3 turning points",
+"page": 13,
+"kind": "cell",
+"cat": "TABLE_SHORT",
+"prompt": "Left up, right down, 3 turning points \u2014 Minimum Possible Degree",
+"qrect": [
+252,
+322,
+354,
+24
+],
+"areas": [
+[
+635,
+317,
+269,
+36
+]
+],
+"cell": {
+"row": [
+633,
+321,
+273,
+28
+],
+"header": [
+375,
+210,
+612,
+24
+],
+"col": "Minimum Possible Degree"
+},
+"answer": "4"
+},
+{
+"label": "Left up, right down, 3 turning points",
+"page": 13,
+"kind": "cell",
+"cat": "TABLE_TEXT",
+"prompt": "Left up, right down, 3 turning points \u2014 Reason",
+"qrect": [
+252,
+322,
+354,
+24
+],
+"areas": [
+[
+908,
+317,
+89,
+36
+]
+],
+"cell": {
+"row": [
+906,
+321,
+93,
+28
+],
+"header": [
+375,
+210,
+612,
+24
+],
+"col": "Reason"
+},
+"answer": "even, 3+ turns"
+},
+{
+"label": "Both ends up, 0 turning points",
+"page": 13,
+"kind": "cell",
+"cat": "TABLE_SHORT",
+"prompt": "Both ends up, 0 turning points \u2014 Minimum Possible Degree",
+"qrect": [
+281,
+349,
+296,
+24
+],
+"areas": [
+[
+635,
+345,
+269,
+36
+]
+],
+"cell": {
+"row": [
+633,
+349,
+273,
+28
+],
+"header": [
+375,
+210,
+612,
+24
+],
+"col": "Minimum Possible Degree"
+},
+"answer": "4"
+},
+{
+"label": "Both ends up, 0 turning points",
+"page": 13,
+"kind": "cell",
+"cat": "TABLE_TEXT",
+"prompt": "Both ends up, 0 turning points \u2014 Reason",
+"qrect": [
+281,
+349,
+296,
+24
+],
+"areas": [
+[
+908,
+345,
+89,
+36
+]
+],
+"cell": {
+"row": [
+906,
+349,
+93,
+28
+],
+"header": [
+375,
+210,
+612,
+24
+],
+"col": "Reason"
+},
+"answer": "even, 3+ turns"
+},
+{
+"label": "Opposite end behavior, 6 turning points",
+"page": 13,
+"kind": "cell",
+"cat": "TABLE_SHORT",
+"prompt": "Opposite end behavior, 6 turning points \u2014 Minimum Possible Degree",
+"qrect": [
+237,
+377,
+384,
+24
+],
+"areas": [
+[
+635,
+373,
+269,
+35
+]
+],
+"cell": {
+"row": [
+633,
+377,
+273,
+27
+],
+"header": [
+375,
+210,
+612,
+24
+],
+"col": "Minimum Possible Degree"
+},
+"answer": "4"
+},
+{
+"label": "Opposite end behavior, 6 turning points",
+"page": 13,
+"kind": "cell",
+"cat": "TABLE_TEXT",
+"prompt": "Opposite end behavior, 6 turning points \u2014 Reason",
+"qrect": [
+237,
+377,
+384,
+24
+],
+"areas": [
+[
+908,
+373,
+89,
+35
+]
+],
+"cell": {
+"row": [
+906,
+377,
+93,
+27
+],
+"header": [
+375,
+210,
+612,
+24
+],
+"col": "Reason"
+},
+"answer": "even, 3+ turns"
+},
+{
+"label": "a)",
+"page": 13,
+"kind": "write",
+"cat": "LONG_TEXT",
+"prompt": "A polynomial has degree 20. What can you determine with certainty about its graph?",
+"qrect": [
+132,
+652,
+574,
+24
+],
+"areas": [
+[
+716,
+646,
+400,
+36
+],
+[
+108,
+727,
+1008,
+773
+]
+],
+"answer": "It has even degree, so both ends point the same way, and it has at most 19 turning points."
+},
+{
+"label": "b)",
+"page": 13,
+"kind": "write",
+"cat": "LONG_TEXT",
+"prompt": "A polynomial has degree 20. What can you not determine?",
+"qrect": [
+131,
+697,
+318,
+24
+],
+"areas": [
+[
+459,
+691,
+657,
+36
+],
+[
+108,
+727,
+1008,
+773
+]
+],
+"answer": "Whether the ends go up or down and how many turning points it really has."
+},
+{
+"label": "1.",
+"page": 15,
+"kind": "choice",
+"cat": "MULTIPLE_CHOICE",
+"prompt": "1. Which flame colour indicates the presence of potassium ions? [1]",
+"qrect": [
+101,
+244,
+606,
+22
+],
+"options": [
+{
+"text": "A red",
+"page": 15,
+"rect": [
+110,
+290,
+51,
+21
+]
+},
+{
+"text": "B yellow",
+"page": 15,
+"rect": [
+621,
+290,
+75,
+21
+]
+},
+{
+"text": "C lilac",
+"page": 15,
+"rect": [
+110,
+349,
+56,
+21
+]
+},
+{
+"text": "D blue-green",
+"page": 15,
+"rect": [
+621,
+349,
+115,
+21
+]
+}
+],
+"correct": 2
+},
+{
+"label": "2.",
+"page": 15,
+"kind": "choice",
+"cat": "MULTIPLE_CHOICE",
+"prompt": "2. Which substance is used to test chemically for the presence of water? [1]",
+"qrect": [
+101,
+399,
+675,
+22
+],
+"options": [
+{
+"text": "A anhydrous copper(II) sulfate",
+"page": 15,
+"rect": [
+110,
+446,
+259,
+20
+]
+},
+{
+"text": "B aqueous sodium hydroxide",
+"page": 15,
+"rect": [
+621,
+446,
+250,
+20
+]
+},
+{
+"text": "C acidified silver nitrate",
+"page": 15,
+"rect": [
+110,
+504,
+201,
+21
+]
+},
+{
+"text": "D limewater",
+"page": 15,
+"rect": [
+621,
+504,
+105,
+21
+]
+}
+],
+"correct": 0
+},
+{
+"label": "3.",
+"page": 15,
+"kind": "choice",
+"cat": "MULTIPLE_CHOICE",
+"prompt": "3. A white precipitate forms when acidified silver nitrate is added to a solution. Which ion is present? [1]",
+"qrect": [
+101,
+554,
+920,
+22
+],
+"options": [
+{
+"text": "A bromide",
+"page": 15,
+"rect": [
+110,
+601,
+92,
+21
+]
+},
+{
+"text": "B chloride",
+"page": 15,
+"rect": [
+621,
+601,
+89,
+21
+]
+},
+{
+"text": "C iodide",
+"page": 15,
+"rect": [
+110,
+660,
+74,
+21
+]
+},
+{
+"text": "D sulfate",
+"page": 15,
+"rect": [
+621,
+660,
+80,
+21
+]
+}
+],
+"correct": 1
+},
+{
+"label": "4.",
+"page": 15,
+"kind": "choice",
+"cat": "MULTIPLE_CHOICE",
+"prompt": "4. Which observation is expected when aqueous sodium hydroxide is added to a solution containing Cu\u00b2\u207a ions? [1]",
+"qrect": [
+101,
+709,
+1018,
+22
+],
+"options": [
+{
+"text": "A green precipitate",
+"page": 15,
+"rect": [
+110,
+757,
+165,
+20
+]
+},
+{
+"text": "B white precipitate",
+"page": 15,
+"rect": [
+621,
+757,
+160,
+20
+]
+},
+{
+"text": "C light-blue precipitate",
+"page": 15,
+"rect": [
+110,
+816,
+194,
+20
+]
+},
+{
+"text": "D red-brown precipitate",
+"page": 15,
+"rect": [
+621,
+816,
+203,
+20
+]
+}
+],
+"correct": 2
+},
+{
+"label": "5.",
+"page": 15,
+"kind": "choice",
+"cat": "MULTIPLE_CHOICE",
+"prompt": "5. Which reagent is used to test for sulfate ions? [1]",
+"qrect": [
+101,
+857,
+462,
+22
+],
+"options": [
+{
+"text": "A dilute hydrochloric acid only",
+"page": 15,
+"rect": [
+110,
+908,
+255,
+21
+]
+},
+{
+"text": "B acidified barium nitrate solution",
+"page": 15,
+"rect": [
+621,
+908,
+285,
+21
+]
+},
+{
+"text": "C aqueous sodium hydroxide",
+"page": 15,
+"rect": [
+110,
+967,
+251,
+21
+]
+},
+{
+"text": "D acidified silver nitrate solution",
+"page": 15,
+"rect": [
+621,
+967,
+272,
+21
+]
+}
+],
+"correct": 1
+},
+{
+"label": "6.",
+"page": 15,
+"kind": "choice",
+"cat": "MULTIPLE_CHOICE",
+"prompt": "6. What is a precipitate? [1]",
+"qrect": [
+101,
+1016,
+250,
+22
+],
+"options": [
+{
+"text": "A a gas produced in a reaction",
+"page": 15,
+"rect": [
+110,
+1063,
+262,
+21
+]
+},
+{
+"text": "B an insoluble solid formed from solutions",
+"page": 15,
+"rect": [
+621,
+1063,
+357,
+21
+]
+},
+{
+"text": "C a soluble salt dissolved in water",
+"page": 15,
+"rect": [
+110,
+1122,
+291,
+21
+]
+},
+{
+"text": "D a colour change in a flame",
+"page": 15,
+"rect": [
+621,
+1122,
+247,
+21
+]
+}
+],
+"correct": 1
+},
+{
+"label": "7.",
+"page": 15,
+"kind": "choice",
+"cat": "MULTIPLE_CHOICE",
+"prompt": "7. The limiting reactant is the reactant that... [1]",
+"qrect": [
+101,
+1171,
+424,
+22
+],
+"options": [
+{
+"text": "A has the greatest mass",
+"page": 15,
+"rect": [
+110,
+1218,
+210,
+21
+]
+},
+{
+"text": "B has the highest concentration",
+"page": 15,
+"rect": [
+621,
+1218,
+271,
+21
+]
+},
+{
+"text": "C is completely used up first",
+"page": 15,
+"rect": [
+110,
+1277,
+243,
+21
+]
+},
+{
+"text": "D is always a solid",
+"page": 15,
+"rect": [
+621,
+1277,
+161,
+21
+]
+}
+],
+"correct": 2
+},
+{
+"label": "8.",
+"page": 15,
+"kind": "choice",
+"cat": "MULTIPLE_CHOICE",
+"prompt": "8. Which ionic equation represents the formation of silver chloride? [1]",
+"qrect": [
+101,
+1327,
+625,
+22
+],
+"options": [
+{
+"text": "A Ag\u207a(aq) + Cl\u207b(aq) \u2192 AgCl(s)",
+"page": 15,
+"rect": [
+110,
+1373,
+261,
+21
+]
+},
+{
+"text": "B Ag(s) + Cl\u2082(g) \u2192 AgCl(aq)",
+"page": 15,
+"rect": [
+621,
+1373,
+243,
+21
+]
+},
+{
+"text": "C AgNO\u2083(aq) \u2192 Ag\u207a(aq) + NO\u2083\u207b(aq)",
+"page": 15,
+"rect": [
+110,
+1432,
+311,
+21
+]
+},
+{
+"text": "D Na\u207a(aq) + Cl\u207b(aq) \u2192 NaCl(s)",
+"page": 15,
+"rect": [
+621,
+1432,
+265,
+21
+]
+}
+],
+"correct": 0
+},
+{
+"label": "(a)",
+"page": 16,
+"kind": "write",
+"cat": "LONG_TEXT",
+"prompt": "(a) Describe the chemical test for water using anhydrous copper(II) sulfate. Include the starting colour and the positive result. [2]",
+"qrect": [
+113,
+260,
+967,
+46
+],
+"areas": [
+[
+101,
+301,
+1012,
+143
+]
+],
+"answer": "Add anhydrous copper(II) sulfate: it turns from white to blue if water is present."
+},
+{
+"label": "(b)",
+"page": 16,
+"kind": "write",
+"cat": "LONG_TEXT",
+"prompt": "(b) A liquid boils sharply at 100 \u00b0C at standard atmospheric pressure. Explain what ths suggests about the purity of the water. [2]",
+"qrect": [
+113,
+495,
+989,
+46
+],
+"areas": [
+[
+101,
+535,
+1012,
+144
+]
+],
+"answer": "It is pure water, because a pure substance boils at a fixed temperature."
+},
+{
+"label": "(a)",
+"page": 16,
+"kind": "write",
+"cat": "LONG_TEXT",
+"prompt": "(a) Describe a safe method for carrying out a flame test on a solid salt. Your method should include how the wire loop is cleaned. [3]",
+"qrect": [
+113,
+784,
+993,
+46
+],
+"areas": [
+[
+101,
+859,
+1012,
+144
+]
+],
+"answer": "Clean the loop in concentrated HCl, dip it in the salt and hold it in the hot blue flame; observe the colour."
+},
+{
+"label": "(b)",
+"page": 16,
+"kind": "write",
+"cat": "LONG_TEXT",
+"prompt": "(b) Explain why the wire loop must be cleaned before testing a new sample. [1]",
+"qrect": [
+113,
+1054,
+704,
+22
+],
+"areas": [
+[
+101,
+1135,
+1012,
+144
+]
+],
+"answer": "To remove traces of the previous sample so its colour does not contaminate the result."
+},
+{
+"label": "(a)",
+"page": 17,
+"kind": "write",
+"cat": "LONG_TEXT",
+"prompt": "(a) Describe how to test an aqueous sample for chloride ions. State the reagent(s) and the positive observation. [2]",
+"qrect": [
+113,
+238,
+985,
+46
+],
+"areas": [
+[
+101,
+312,
+1012,
+144
+]
+],
+"answer": "Add dilute nitric acid then silver nitrate solution; a white precipitate shows chloride."
+},
+{
+"label": "(b)",
+"page": 17,
+"kind": "write",
+"cat": "SHORT_TEXT",
+"prompt": "(b) Write the ionic equation, including state symbols, for the formation of silver chloride. [2]",
+"qrect": [
+113,
+507,
+805,
+22
+],
+"areas": [
+[
+101,
+557,
+1012,
+290
+]
+],
+"answer": "Ag\u207a(aq) + Cl\u207b(aq) \u2192 AgCl(s)"
+},
+{
+"label": "A",
+"page": 18,
+"kind": "cell",
+"cat": "TABLE_SHORT",
+"prompt": "A Flame test lilac flame \u2014 Inference",
+"qrect": [
+108,
+296,
+494,
+18
+],
+"areas": [
+[
+823,
+286,
+304,
+38
+]
+],
+"cell": {
+"row": [
+823,
+286,
+304,
+38
+],
+"header": [
+108,
+261,
+934,
+18
+],
+"col": "Inference to be completed"
+},
+"answer": "potassium ion (K\u207a) present"
+},
+{
+"label": "A",
+"page": 18,
+"kind": "cell",
+"cat": "TABLE_SHORT",
+"prompt": "A Acidify, then add aqueous silver nitrate white precipitate \u2014 Inference",
+"qrect": [
+108,
+334,
+541,
+18
+],
+"areas": [
+[
+823,
+324,
+304,
+38
+]
+],
+"cell": {
+"row": [
+823,
+324,
+304,
+38
+],
+"header": [
+108,
+261,
+934,
+18
+],
+"col": "Inference to be completed"
+},
+"answer": "chloride ion (Cl\u207b) present"
+},
+{
+"label": "B",
+"page": 18,
+"kind": "cell",
+"cat": "TABLE_SHORT",
+"prompt": "B Add aqueous sodium hydroxide green precipitate; surface slowly turns \u2014 Inference",
+"qrect": [
+108,
+372,
+703,
+19
+],
+"areas": [
+[
+823,
+362,
+304,
+59
+]
+],
+"cell": {
+"row": [
+823,
+362,
+304,
+59
+],
+"header": [
+108,
+261,
+934,
+18
+],
+"col": "Inference to be completed"
+},
+"answer": "iron(II) ion (Fe\u00b2\u207a) present"
+},
+{
+"label": "B",
+"page": 18,
+"kind": "cell",
+"cat": "TABLE_SHORT",
+"prompt": "B Acidify, then add aqueous barium nitrate white precipitate \u2014 Inference",
+"qrect": [
+108,
+428,
+541,
+18
+],
+"areas": [
+[
+823,
+418,
+304,
+38
+]
+],
+"cell": {
+"row": [
+823,
+418,
+304,
+38
+],
+"header": [
+108,
+261,
+934,
+18
+],
+"col": "Inference to be completed"
+},
+"answer": "sulfate ion (SO\u2084\u00b2\u207b) present"
+},
+{
+"label": "(a)",
+"page": 18,
+"kind": "write",
+"cat": "LONG_TEXT",
+"prompt": "(a) Identify the positive ion and negative ion present in solution A. [2]",
+"qrect": [
+113,
+470,
+613,
+22
+],
+"areas": [
+[
+101,
+496,
+1012,
+57
+]
+],
+"answer": "Potassium ion K\u207a and chloride ion Cl\u207b."
+},
+{
+"label": "(b)",
+"page": 18,
+"kind": "write",
+"cat": "SHORT_TEXT",
+"prompt": "(b) Give the formula of the dissolved salt in solution A. [1]",
+"qrect": [
+113,
+566,
+513,
+22
+],
+"areas": [
+[
+101,
+592,
+1012,
+56
+]
+],
+"answer": "KCl"
+},
+{
+"label": "(c)",
+"page": 18,
+"kind": "write",
+"cat": "LONG_TEXT",
+"prompt": "(c) Identify the positive ion and negative ion present in solution B. [2]",
+"qrect": [
+113,
+661,
+612,
+22
+],
+"areas": [
+[
+101,
+687,
+1012,
+57
+]
+],
+"answer": "Iron(II) ion Fe\u00b2\u207a and sulfate ion SO\u2084\u00b2\u207b."
+},
+{
+"label": "(d)",
+"page": 18,
+"kind": "write",
+"cat": "SHORT_TEXT",
+"prompt": "(d) Give the formula of the dissolved salt in solution B. [1]",
+"qrect": [
+113,
+757,
+513,
+22
+],
+"areas": [
+[
+101,
+783,
+1012,
+56
+]
+],
+"answer": "FeSO\u2084"
+},
+{
+"label": "(e)",
+"page": 18,
+"kind": "write",
+"cat": "SHORT_TEXT",
+"prompt": "(e) Write the ionic equation, including state symbols, for the sulfate precipitation test. [2]",
+"qrect": [
+113,
+852,
+781,
+22
+],
+"areas": [
+[
+101,
+903,
+1012,
+290
+]
+],
+"answer": "Ba\u00b2\u207a(aq) + SO\u2084\u00b2\u207b(aq) \u2192 BaSO\u2084(s)"
+},
+{
+"label": "(f)",
+"page": 18,
+"kind": "write",
+"cat": "LONG_TEXT",
+"prompt": "(f) State one safety precaution for this investigation and explain why it is needed. [2]",
+"qrect": [
+113,
+1244,
+748,
+22
+],
+"areas": [
+[
+101,
+1270,
+1012,
+88
+]
+],
+"answer": "Wear eye protection because the reagents are irritants."
+},
+{
+"label": "(a)",
+"page": 19,
+"kind": "write",
+"cat": "FORMULA_WORKING",
+"prompt": "25.0 cm\u00b3 of 0.200 mol dm\u207b\u00b3 silver nitrate solution is mixed with 20.0 cm\u00b3 of 0.150 mol dm\u207b\u00b3 sodium chloride solution. AgNO\u2083(aq) + NaCl(aq) \u2192 AgCl(s) + NaNO\u2083(aq) (a) Calculate the amount, in moles, of AgNO\u2083 used. [1]",
+"qrect": [
+113,
+494,
+490,
+22
+],
+"areas": [
+[
+101,
+557,
+1012,
+178
+]
+],
+"answer": "n = cV = 0.200 \u00d7 0.0250 = 5.00\u00d710\u207b\u00b3 mol"
+},
+{
+"label": "(b)",
+"page": 19,
+"kind": "write",
+"cat": "FORMULA_WORKING",
+"prompt": "25.0 cm\u00b3 of 0.200 mol dm\u207b\u00b3 silver nitrate solution is mixed with 20.0 cm\u00b3 of 0.150 mol dm\u207b\u00b3 sodium chloride solution. AgNO\u2083(aq) + NaCl(aq) \u2192 AgCl(s) + NaNO\u2083(aq) (b) Calculate the amount, in moles, of NaCl used. [1]",
+"qrect": [
+113,
+798,
+472,
+22
+],
+"areas": [
+[
+101,
+860,
+1012,
+178
+]
+],
+"answer": "n = 0.150 \u00d7 0.0200 = 3.00\u00d710\u207b\u00b3 mol"
+},
+{
+"label": "(c)",
+"page": 19,
+"kind": "write",
+"cat": "LONG_TEXT",
+"prompt": "25.0 cm\u00b3 of 0.200 mol dm\u207b\u00b3 silver nitrate solution is mixed with 20.0 cm\u00b3 of 0.150 mol dm\u207b\u00b3 sodium chloride solution. AgNO\u2083(aq) + NaCl(aq) \u2192 AgCl(s) + NaNO\u2083(aq) (c) Identify the limiting reactant. Justify your answer using the mole ratio. [1]",
+"qrect": [
+113,
+1123,
+675,
+22
+],
+"areas": [
+[
+101,
+1185,
+1012,
+178
+]
+],
+"answer": "NaCl is limiting: 1:1 ratio and 3.00\u00d710\u207b\u00b3 < 5.00\u00d710\u207b\u00b3 mol."
+},
+{
+"label": "(d)",
+"page": 20,
+"kind": "write",
+"cat": "FORMULA_WORKING",
+"prompt": "25.0 cm\u00b3 of 0.200 mol dm\u207b\u00b3 silver nitrate solution is mixed with 20.0 cm\u00b3 of 0.150 mol dm\u207b\u00b3 sodium chloride solution. AgNO\u2083(aq) + NaCl(aq) \u2192 AgCl(s) + NaNO\u2083(aq) (d) Determine the amount, in moles, of AgCl formed. [1]",
+"qrect": [
+113,
+89,
+498,
+22
+],
+"areas": [
+[
+101,
+105,
+1012,
+178
+]
+],
+"answer": "3.00\u00d710\u207b\u00b3 mol"
+},
+{
+"label": "(e)",
+"page": 20,
+"kind": "write",
+"cat": "FORMULA_WORKING",
+"prompt": "25.0 cm\u00b3 of 0.200 mol dm\u207b\u00b3 silver nitrate solution is mixed with 20.0 cm\u00b3 of 0.150 mol dm\u207b\u00b3 sodium chloride solution. AgNO\u2083(aq) + NaCl(aq) \u2192 AgCl(s) + NaNO\u2083(aq) (e) Calculate the maximum mass of AgCl precipitate formed. Give your answer to three significant figures.",
+"qrect": [
+113,
+345,
+934,
+46
+],
+"areas": [
+[
+101,
+432,
+1012,
+178
+]
+],
+"answer": "m = nM = 3.00\u00d710\u207b\u00b3 \u00d7 143.5 = 0.431 g"
+},
+{
+"label": "(f)",
+"page": 20,
+"kind": "write",
+"cat": "FORMULA_WORKING",
+"prompt": "25.0 cm\u00b3 of 0.200 mol dm\u207b\u00b3 silver nitrate solution is mixed with 20.0 cm\u00b3 of 0.150 mol dm\u207b\u00b3 sodium chloride solution. AgNO\u2083(aq) + NaCl(aq) \u2192 AgCl(s) + NaNO\u2083(aq) (f) Calculate the amount, in moles, of the reactant left in excess after the reaction is complete. [2]",
+"qrect": [
+113,
+672,
+862,
+22
+],
+"areas": [
+[
+101,
+734,
+1012,
+178
+]
+],
+"answer": "5.00\u00d710\u207b\u00b3 \u2212 3.00\u00d710\u207b\u00b3 = 2.00\u00d710\u207b\u00b3 mol AgNO\u2083"
+},
+{
+"label": "(g)",
+"page": 20,
+"kind": "write",
+"cat": "FORMULA_WORKING",
+"prompt": "25.0 cm\u00b3 of 0.200 mol dm\u207b\u00b3 silver nitrate solution is mixed with 20.0 cm\u00b3 of 0.150 mol dm\u207b\u00b3 sodium chloride solution. AgNO\u2083(aq) + NaCl(aq) \u2192 AgCl(s) + NaNO\u2083(aq) (g) Calculate the concentration of the excess reactant remaining, in mol dm\u207b\u00b3. [2]",
+"qrect": [
+113,
+975,
+720,
+22
+],
+"areas": [
+[
+101,
+1037,
+1012,
+178
+]
+],
+"answer": "2.00\u00d710\u207b\u00b3 / 0.0450 = 0.0444 mol dm\u207b\u00b3"
+},
+{
+"label": "Flame-test colours and procedure",
+"page": 21,
+"kind": "cell",
+"cat": "TABLE_TEXT",
+"prompt": "Flame-test colours and procedure \u2014 Action needed",
+"qrect": [
+105,
+308,
+500,
+19
+],
+"areas": [
+[
+677,
+296,
+451,
+43
+]
+],
+"cell": {
+"row": [
+677,
+296,
+451,
+43
+],
+"header": [
+105,
+269,
+704,
+20
+],
+"col": "Action needed"
+},
+"answer": "Practise with past questions."
+},
+{
+"label": "Flame-test colours and procedure",
+"page": 21,
+"kind": "choice",
+"cat": "MULTIPLE_CHOICE",
+"prompt": "Flame-test colours and procedure \u2014 tick one box",
+"qrect": [
+105,
+308,
+500,
+19
+],
+"options": [
+{
+"text": "Confident",
+"page": 21,
+"rect": [
+459,
+308,
+15,
+19
+]
+},
+{
+"text": "Developing",
+"page": 21,
+"rect": [
+591,
+308,
+14,
+19
+]
+}
+],
+"correct": 1
+},
+{
+"label": "Tests for cations and anions",
+"page": 21,
+"kind": "cell",
+"cat": "TABLE_TEXT",
+"prompt": "Tests for cations and anions \u2014 Action needed",
+"qrect": [
+105,
+350,
+500,
+18
+],
+"areas": [
+[
+677,
+338,
+451,
+42
+]
+],
+"cell": {
+"row": [
+677,
+338,
+451,
+42
+],
+"header": [
+105,
+269,
+704,
+20
+],
+"col": "Action needed"
+},
+"answer": "Practise with past questions."
+},
+{
+"label": "Tests for cations and anions",
+"page": 21,
+"kind": "choice",
+"cat": "MULTIPLE_CHOICE",
+"prompt": "Tests for cations and anions \u2014 tick one box",
+"qrect": [
+105,
+350,
+500,
+18
+],
+"options": [
+{
+"text": "Confident",
+"page": 21,
+"rect": [
+459,
+350,
+15,
+18
+]
+},
+{
+"text": "Developing",
+"page": 21,
+"rect": [
+591,
+350,
+14,
+18
+]
+}
+],
+"correct": 1
+},
+{
+"label": "Testing for water and purity",
+"page": 21,
+"kind": "cell",
+"cat": "TABLE_TEXT",
+"prompt": "Testing for water and purity \u2014 Action needed",
+"qrect": [
+105,
+391,
+500,
+18
+],
+"areas": [
+[
+677,
+379,
+451,
+42
+]
+],
+"cell": {
+"row": [
+677,
+379,
+451,
+42
+],
+"header": [
+105,
+269,
+704,
+20
+],
+"col": "Action needed"
+},
+"answer": "Practise with past questions."
+},
+{
+"label": "Testing for water and purity",
+"page": 21,
+"kind": "choice",
+"cat": "MULTIPLE_CHOICE",
+"prompt": "Testing for water and purity \u2014 tick one box",
+"qrect": [
+105,
+391,
+500,
+18
+],
+"options": [
+{
+"text": "Confident",
+"page": 21,
+"rect": [
+459,
+391,
+15,
+18
+]
+},
+{
+"text": "Developing",
+"page": 21,
+"rect": [
+591,
+391,
+14,
+18
+]
+}
+],
+"correct": 1
+},
+{
+"label": "Recording practical observations",
+"page": 21,
+"kind": "cell",
+"cat": "TABLE_TEXT",
+"prompt": "Recording practical observations \u2014 Action needed",
+"qrect": [
+105,
+432,
+500,
+19
+],
+"areas": [
+[
+677,
+420,
+451,
+43
+]
+],
+"cell": {
+"row": [
+677,
+420,
+451,
+43
+],
+"header": [
+105,
+269,
+704,
+20
+],
+"col": "Action needed"
+},
+"answer": "Practise with past questions."
+},
+{
+"label": "Recording practical observations",
+"page": 21,
+"kind": "choice",
+"cat": "MULTIPLE_CHOICE",
+"prompt": "Recording practical observations \u2014 tick one box",
+"qrect": [
+105,
+432,
+500,
+19
+],
+"options": [
+{
+"text": "Confident",
+"page": 21,
+"rect": [
+459,
+432,
+15,
+19
+]
+},
+{
+"text": "Developing",
+"page": 21,
+"rect": [
+591,
+432,
+14,
+19
+]
+}
+],
+"correct": 1
+},
+{
+"label": "Writing ionic equations",
+"page": 21,
+"kind": "cell",
+"cat": "TABLE_TEXT",
+"prompt": "Writing ionic equations \u2014 Action needed",
+"qrect": [
+105,
+474,
+500,
+18
+],
+"areas": [
+[
+677,
+462,
+451,
+42
+]
+],
+"cell": {
+"row": [
+677,
+462,
+451,
+42
+],
+"header": [
+105,
+269,
+704,
+20
+],
+"col": "Action needed"
+},
+"answer": "Practise with past questions."
+},
+{
+"label": "Writing ionic equations",
+"page": 21,
+"kind": "choice",
+"cat": "MULTIPLE_CHOICE",
+"prompt": "Writing ionic equations \u2014 tick one box",
+"qrect": [
+105,
+474,
+500,
+18
+],
+"options": [
+{
+"text": "Confident",
+"page": 21,
+"rect": [
+459,
+474,
+15,
+18
+]
+},
+{
+"text": "Developing",
+"page": 21,
+"rect": [
+591,
+474,
+14,
+18
+]
+}
+],
+"correct": 1
+},
+{
+"label": "Limiting-reactant calculations",
+"page": 21,
+"kind": "cell",
+"cat": "TABLE_TEXT",
+"prompt": "Limiting-reactant calculations \u2014 Action needed",
+"qrect": [
+105,
+515,
+500,
+18
+],
+"areas": [
+[
+677,
+503,
+451,
+42
+]
+],
+"cell": {
+"row": [
+677,
+503,
+451,
+42
+],
+"header": [
+105,
+269,
+704,
+20
+],
+"col": "Action needed"
+},
+"answer": "Practise with past questions."
+},
+{
+"label": "Limiting-reactant calculations",
+"page": 21,
+"kind": "choice",
+"cat": "MULTIPLE_CHOICE",
+"prompt": "Limiting-reactant calculations \u2014 tick one box",
+"qrect": [
+105,
+515,
+500,
+18
+],
+"options": [
+{
+"text": "Confident",
+"page": 21,
+"rect": [
+459,
+515,
+15,
+18
+]
+},
+{
+"text": "Developing",
+"page": 21,
+"rect": [
+591,
+515,
+14,
+18
+]
+}
+],
+"correct": 1
+},
+{
+"label": "Target",
+"page": 21,
+"kind": "write",
+"cat": "LONG_TEXT",
+"prompt": "My priority revision target:",
+"qrect": [
+101,
+569,
+252,
+22
+],
+"areas": [
+[
+101,
+616,
+1012,
+178
+]
+],
+"answer": "Limiting reactant calculations."
+},
+{
+"label": "(a)",
+"page": 23,
+"kind": "write",
+"cat": "LONG_TEXT",
+"prompt": "(a) State the two formulae needed to calculate moles from solution data and mass from moles. Include [2] the required unit for solution volume.",
+"qrect": [
+75,
+486,
+1032,
+48
+],
+"areas": [
+[
+75,
+536,
+989,
+130
+]
+],
+"answer": "The limiting reagent is used up first; the other reagent is left over in excess."
+},
+{
+"label": "(b)",
+"page": 23,
+"kind": "write",
+"cat": "LONG_TEXT",
+"prompt": "(b) Explain why the limiting reagent cannot always be identified by comparing the two raw mole values [2] directly.",
+"qrect": [
+75,
+683,
+1032,
+48
+],
+"areas": [
+[
+75,
+733,
+989,
+179
+]
+],
+"answer": "The limiting reagent is used up first; the other reagent is left over in excess."
+},
+{
+"label": "(c)",
+"page": 23,
+"kind": "write",
+"cat": "LONG_TEXT",
+"prompt": "(c) Describe a reliable method for identifying the limiting reagent from a balanced equation. [1]",
+"qrect": [
+75,
+929,
+1032,
+22
+],
+"areas": [
+[
+75,
+953,
+989,
+155
+]
+],
+"answer": "The limiting reagent is used up first; the other reagent is left over in excess."
+},
+{
+"label": "(a)",
+"page": 24,
+"kind": "write",
+"cat": "FORMULA_WORKING",
+"prompt": "(a) Convert each volume from cm\u00b3 to dm\u00b3, then calculate the initial moles of each reactant. [4]",
+"qrect": [
+78,
+382,
+1026,
+22
+],
+"areas": [
+[
+72,
+406,
+991,
+135
+]
+],
+"answer": "n = cV = 0.200 \u00d7 0.0250 = 5.00\u00d710\u207b\u00b3 mol"
+},
+{
+"label": "(b)",
+"page": 24,
+"kind": "write",
+"cat": "FORMULA_WORKING",
+"prompt": "(b) Use the balanced equation to determine which reactant is limiting and which reactant is in excess. Show [3] your comparison clearly.",
+"qrect": [
+78,
+557,
+1026,
+45
+],
+"areas": [
+[
+72,
+604,
+991,
+158
+]
+],
+"answer": "n = cV = 0.200 \u00d7 0.0250 = 5.00\u00d710\u207b\u00b3 mol"
+},
+{
+"label": "(c)",
+"page": 24,
+"kind": "write",
+"cat": "FORMULA_WORKING",
+"prompt": "(c) Calculate the amount, in moles, of Cu(OH)\u2082 precipitate formed. [2]",
+"qrect": [
+78,
+778,
+1026,
+22
+],
+"areas": [
+[
+72,
+802,
+991,
+158
+]
+],
+"answer": "n = cV = 0.200 \u00d7 0.0250 = 5.00\u00d710\u207b\u00b3 mol"
+},
+{
+"label": "(d)",
+"page": 24,
+"kind": "write",
+"cat": "FORMULA_WORKING",
+"prompt": "(d) Calculate the mass, in grams, of Cu(OH)\u2082 precipitate formed. [3]",
+"qrect": [
+78,
+976,
+1026,
+22
+],
+"areas": [
+[
+72,
+1000,
+991,
+159
+]
+],
+"answer": "n = cV = 0.200 \u00d7 0.0250 = 5.00\u00d710\u207b\u00b3 mol"
+},
+{
+"label": "(e)",
+"page": 24,
+"kind": "write",
+"cat": "FORMULA_WORKING",
+"prompt": "(e) Calculate the amount, in moles, of the excess reactant remaining after the reaction is complete. [2]",
+"qrect": [
+78,
+1175,
+1026,
+22
+],
+"areas": [
+[
+72,
+1199,
+991,
+112
+]
+],
+"answer": "n = cV = 0.200 \u00d7 0.0250 = 5.00\u00d710\u207b\u00b3 mol"
+},
+{
+"label": "(f)",
+"page": 24,
+"kind": "write",
+"cat": "FORMULA_WORKING",
+"prompt": "(f) Calculate the mass of the excess reactant remaining after the reaction is complete. [1]",
+"qrect": [
+78,
+1327,
+1026,
+22
+],
+"areas": [
+[
+72,
+1351,
+991,
+204
+]
+],
+"answer": "n = cV = 0.200 \u00d7 0.0250 = 5.00\u00d710\u207b\u00b3 mol"
+},
+{
+"label": "(a)",
+"page": 25,
+"kind": "write",
+"cat": "LONG_TEXT",
+"prompt": "(a) Define the terms limiting reagent and excess reagent in the context of a precipitation reaction. [2 [2] marks]",
+"qrect": [
+80,
+293,
+1024,
+49
+],
+"areas": [
+[
+72,
+344,
+991,
+154
+]
+],
+"answer": "The limiting reagent is used up first; the other reagent is left over in excess."
+},
+{
+"label": "(b)",
+"page": 25,
+"kind": "write",
+"cat": "LONG_TEXT",
+"prompt": "(b) State the formula used to calculate moles of a solute in a solution and explain why cm\u00b3 must be [2] converted to dm\u00b3. [2 marks]",
+"qrect": [
+80,
+515,
+1024,
+49
+],
+"areas": [
+[
+72,
+566,
+991,
+179
+]
+],
+"answer": "The limiting reagent is used up first; the other reagent is left over in excess."
+},
+{
+"label": "(c)",
+"page": 25,
+"kind": "write",
+"cat": "LONG_TEXT",
+"prompt": "(c) Explain how the coefficients in a balanced equation are used to decide which reagent is limiting. [1 [1] mark]",
+"qrect": [
+80,
+762,
+1024,
+49
+],
+"areas": [
+[
+72,
+813,
+991,
+204
+]
+],
+"answer": "The limiting reagent is used up first; the other reagent is left over in excess."
+},
+{
+"label": "(a)",
+"page": 26,
+"kind": "write",
+"cat": "FORMULA_WORKING",
+"prompt": "(a) Convert each volume from cm\u00b3 to dm\u00b3, then calculate the initial moles of each reactant. [4]",
+"qrect": [
+114,
+332,
+975,
+22
+],
+"areas": [
+[
+72,
+356,
+962,
+158
+]
+],
+"answer": "n = cV = 0.200 \u00d7 0.0250 = 5.00\u00d710\u207b\u00b3 mol"
+},
+{
+"label": "(b)",
+"page": 26,
+"kind": "write",
+"cat": "FORMULA_WORKING",
+"prompt": "(b) Use the balanced equation to determine which reactant is limiting and which reactant is in excess. [3] Show your comparison clearly.",
+"qrect": [
+114,
+530,
+975,
+45
+],
+"areas": [
+[
+72,
+577,
+962,
+135
+]
+],
+"answer": "n = cV = 0.200 \u00d7 0.0250 = 5.00\u00d710\u207b\u00b3 mol"
+},
+{
+"label": "(c)",
+"page": 26,
+"kind": "write",
+"cat": "FORMULA_WORKING",
+"prompt": "(c) Calculate the amount, in moles, of BaSO\u2084 precipitate formed. [2]",
+"qrect": [
+114,
+728,
+975,
+22
+],
+"areas": [
+[
+72,
+752,
+962,
+136
+]
+],
+"answer": "n = cV = 0.200 \u00d7 0.0250 = 5.00\u00d710\u207b\u00b3 mol"
+},
+{
+"label": "(d)",
+"page": 26,
+"kind": "write",
+"cat": "FORMULA_WORKING",
+"prompt": "(d) Calculate the mass, in grams, of BaSO\u2084 precipitate formed. [3]",
+"qrect": [
+114,
+904,
+975,
+22
+],
+"areas": [
+[
+72,
+928,
+962,
+135
+]
+],
+"answer": "n = cV = 0.200 \u00d7 0.0250 = 5.00\u00d710\u207b\u00b3 mol"
+},
+{
+"label": "(e)",
+"page": 26,
+"kind": "write",
+"cat": "FORMULA_WORKING",
+"prompt": "(e) Calculate the amount, in moles, of the excess reactant remaining after the reaction is complete. [2]",
+"qrect": [
+114,
+1079,
+975,
+22
+],
+"areas": [
+[
+72,
+1103,
+962,
+135
+]
+],
+"answer": "n = cV = 0.200 \u00d7 0.0250 = 5.00\u00d710\u207b\u00b3 mol"
+},
+{
+"label": "(f)",
+"page": 26,
+"kind": "write",
+"cat": "FORMULA_WORKING",
+"prompt": "(f) Calculate the final concentration, in mol dm\u207b\u00b3, of the excess ion Ba\u00b2\u207a(aq) remaining in the mixture. [1]",
+"qrect": [
+114,
+1254,
+975,
+22
+],
+"areas": [
+[
+72,
+1278,
+962,
+274
+]
+],
+"answer": "n = cV = 0.200 \u00d7 0.0250 = 5.00\u00d710\u207b\u00b3 mol"
+},
+{
+"label": "1.",
+"page": 27,
+"kind": "write",
+"cat": "LONG_TEXT",
+"prompt": "Rewrite the following informal sentence using a formal academic tone and precise vocabulary: \"Pythons are crazy huge and totally ruin the environment!\"",
+"qrect": [
+105,
+626,
+813,
+65
+],
+"areas": [
+[
+105,
+702,
+981,
+105
+]
+],
+"answer": "Burmese pythons are extremely large and cause serious damage to the local ecosystem."
+},
+{
+"label": "A.",
+"page": 27,
+"kind": "write",
+"cat": "LONG_TEXT",
+"prompt": "A. Topic Sentence: What is its purpose in a paragraph?",
+"qrect": [
+105,
+967,
+475,
+20
+],
+"areas": [
+[
+105,
+998,
+981,
+105
+]
+],
+"answer": "A clear research question keeps the search focused, so you only collect sources that actually help answer it and you do not waste time on unrelated data."
+},
+{
+"label": "B.",
+"page": 27,
+"kind": "write",
+"cat": "LONG_TEXT",
+"prompt": "B. Supporting Details: What type of information should go here?",
+"qrect": [
+105,
+1120,
+561,
+20
+],
+"areas": [
+[
+105,
+1151,
+981,
+105
+]
+],
+"answer": "A clear research question keeps the search focused, so you only collect sources that actually help answer it and you do not waste time on unrelated data."
+},
+{
+"label": "C.",
+"page": 27,
+"kind": "write",
+"cat": "LONG_TEXT",
+"prompt": "C. Essay Conclusion: How should an effective conclusion structure wrap up an essay?",
+"qrect": [
+105,
+1273,
+738,
+20
+],
+"areas": [
+[
+105,
+1304,
+981,
+105
+]
+],
+"answer": "A clear research question keeps the search focused, so you only collect sources that actually help answer it and you do not waste time on unrelated data."
+},
+{
+"label": "3.",
+"page": 28,
+"kind": "write",
+"cat": "LONG_TEXT",
+"prompt": "Why do informative writers use visual aids or graphics when presenting complex data?",
+"qrect": [
+105,
+204,
+749,
+20
+],
+"areas": [
+[
+105,
+235,
+981,
+105
+]
+],
+"answer": "A clear research question keeps the search focused, so you only collect sources that actually help answer it and you do not waste time on unrelated data."
+},
+{
+"label": "A.",
+"page": 28,
+"kind": "write",
+"cat": "LONG_TEXT",
+"prompt": "A. Research Questions: Why is a clear research question important before you start looking for data?",
+"qrect": [
+105,
+574,
+875,
+20
+],
+"areas": [
+[
+105,
+605,
+981,
+105
+]
+],
+"answer": "A clear research question keeps the search focused, so you only collect sources that actually help answer it and you do not waste time on unrelated data."
+},
+{
+"label": "B.",
+"page": 28,
+"kind": "write",
+"cat": "LONG_TEXT",
+"prompt": "B. Refining Queries: If your initial online search yields irrelevant results, what specific steps should you take to refine your search strategy?",
+"qrect": [
+105,
+727,
+958,
+47
+],
+"areas": [
+[
+105,
+785,
+981,
+105
+]
+],
+"answer": "A clear research question keeps the search focused, so you only collect sources that actually help answer it and you do not waste time on unrelated data."
+},
+{
+"label": "Primary Source",
+"page": 28,
+"kind": "cell",
+"cat": "TABLE_TEXT",
+"prompt": "Primary Source \u2014 Definition (In your own words)",
+"qrect": [
+121,
+1104,
+143,
+20
+],
+"areas": [
+[
+431,
+1084,
+477,
+97
+]
+],
+"cell": {
+"row": [
+429,
+1086,
+481,
+93
+],
+"header": [
+121,
+1052,
+879,
+19
+],
+"col": "Definition (In your own words)"
+},
+"answer": "A first-hand record made at the time of the event."
+},
+{
+"label": "Primary Source",
+"page": 28,
+"kind": "cell",
+"cat": "TABLE_TEXT",
+"prompt": "Primary Source \u2014 Example",
+"qrect": [
+121,
+1104,
+143,
+20
+],
+"areas": [
+[
+912,
+1084,
+172,
+97
+]
+],
+"cell": {
+"row": [
+910,
+1086,
+176,
+93
+],
+"header": [
+121,
+1052,
+879,
+19
+],
+"col": "Example"
+},
+"answer": "A diary"
+},
+{
+"label": "Secondary Source",
+"page": 28,
+"kind": "cell",
+"cat": "TABLE_TEXT",
+"prompt": "Secondary Source \u2014 Definition (In your own words)",
+"qrect": [
+121,
+1197,
+163,
+20
+],
+"areas": [
+[
+431,
+1177,
+477,
+97
+]
+],
+"cell": {
+"row": [
+429,
+1179,
+481,
+93
+],
+"header": [
+121,
+1052,
+879,
+19
+],
+"col": "Definition (In your own words)"
+},
+"answer": "A first-hand record made at the time of the event."
+},
+{
+"label": "Secondary Source",
+"page": 28,
+"kind": "cell",
+"cat": "TABLE_TEXT",
+"prompt": "Secondary Source \u2014 Example",
+"qrect": [
+121,
+1197,
+163,
+20
+],
+"areas": [
+[
+912,
+1177,
+172,
+97
+]
+],
+"cell": {
+"row": [
+910,
+1179,
+176,
+93
+],
+"header": [
+121,
+1052,
+879,
+19
+],
+"col": "Example"
+},
+"answer": "A diary"
+},
+{
+"label": "A.",
+"page": 29,
+"kind": "write",
+"cat": "LONG_TEXT",
+"prompt": "A. Paraphrasing vs. Direct Quoting: What is the main structural and formatting difference between paraphrasing an author and directly quoting them?",
+"qrect": [
+105,
+204,
+866,
+47
+],
+"areas": [
+[
+105,
+262,
+981,
+105
+]
+],
+"answer": "A clear research question keeps the search focused, so you only collect sources that actually help answer it and you do not waste time on unrelated data."
+},
+{
+"label": "B.",
+"page": 29,
+"kind": "write",
+"cat": "LONG_TEXT",
+"prompt": "B. Synthesizing Information: Explain what it means to synthesize information from multiple texts.",
+"qrect": [
+105,
+384,
+852,
+20
+],
+"areas": [
+[
+105,
+415,
+981,
+105
+]
+],
+"answer": "A clear research question keeps the search focused, so you only collect sources that actually help answer it and you do not waste time on unrelated data."
+},
+{
+"label": "A.",
+"page": 29,
+"kind": "write",
+"cat": "LONG_TEXT",
+"prompt": "A. Authority & Publisher Reputation: What should you check about an author or publisher to evaluate credibility?",
+"qrect": [
+105,
+754,
+894,
+47
+],
+"areas": [
+[
+105,
+812,
+981,
+105
+]
+],
+"answer": "A clear research question keeps the search focused, so you only collect sources that actually help answer it and you do not waste time on unrelated data."
+},
+{
+"label": "B.",
+"page": 29,
+"kind": "write",
+"cat": "LONG_TEXT",
+"prompt": "B. Domain Extensions: Why are .gov and .edu domains usually considered more reliable than .com or .net?",
+"qrect": [
+105,
+934,
+952,
+20
+],
+"areas": [
+[
+105,
+965,
+981,
+105
+]
+],
+"answer": "A clear research question keeps the search focused, so you only collect sources that actually help answer it and you do not waste time on unrelated data."
+},
+{
+"label": "C.",
+"page": 29,
+"kind": "write",
+"cat": "LONG_TEXT",
+"prompt": "C. Publication Dates: Why is the date of publication critical when researching rapidly changing fields?",
+"qrect": [
+105,
+1087,
+883,
+20
+],
+"areas": [
+[
+105,
+1118,
+981,
+105
+]
+],
+"answer": "A clear research question keeps the search focused, so you only collect sources that actually help answer it and you do not waste time on unrelated data."
+},
+{
+"label": "A.",
+"page": 30,
+"kind": "write",
+"cat": "LONG_TEXT",
+"prompt": "A. Preventing Plagiarism: What note-taking techniques can you use while researching to prevent accidental plagiarism?",
+"qrect": [
+105,
+204,
+935,
+47
+],
+"areas": [
+[
+105,
+262,
+981,
+105
+]
+],
+"answer": "A clear research question keeps the search focused, so you only collect sources that actually help answer it and you do not waste time on unrelated data."
+},
+{
+"label": "B.",
+"page": 30,
+"kind": "write",
+"cat": "LONG_TEXT",
+"prompt": "B. Explicit Verbal Attributions: What is the purpose of using verbal attributions (e.g., \"According to researcher...\") when delivering evidence in a speech or presentation?",
+"qrect": [
+105,
+384,
+976,
+47
+],
+"areas": [
+[
+105,
+442,
+981,
+105
+]
+],
+"answer": "A clear research question keeps the search focused, so you only collect sources that actually help answer it and you do not waste time on unrelated data."
+},
+{
+"label": "C.",
+"page": 30,
+"kind": "write",
+"cat": "LONG_TEXT",
+"prompt": "C. Structured Outlines: How do structured outlines help organize evidence before speaking or writing?",
+"qrect": [
+105,
+564,
+893,
+20
+],
+"areas": [
+[
+105,
+595,
+981,
+105
+]
+],
+"answer": "A clear research question keeps the search focused, so you only collect sources that actually help answer it and you do not waste time on unrelated data."
+},
+{
+"label": "1.",
+"page": 30,
+"kind": "write",
+"cat": "LONG_TEXT",
+"prompt": "What does this story show about cultural differences, communication barriers, and loneliness?",
+"qrect": [
+105,
+1060,
+812,
+20
+],
+"areas": [
+[
+105,
+1091,
+981,
+105
+]
+],
+"answer": "A clear research question keeps the search focused, so you only collect sources that actually help answer it and you do not waste time on unrelated data."
+},
+{
+"label": "2.",
+"page": 30,
+"kind": "write",
+"cat": "LONG_TEXT",
+"prompt": "How does the summer camp setting help bridge cultural and political divides between the young women?",
+"qrect": [
+105,
+1356,
+905,
+20
+],
+"areas": [
+[
+105,
+1387,
+981,
+105
+]
+],
+"answer": "A clear research question keeps the search focused, so you only collect sources that actually help answer it and you do not waste time on unrelated data."
+},
+{
+"label": "3.",
+"page": 31,
+"kind": "write",
+"cat": "LONG_TEXT",
+"prompt": "What is the fundamental global purpose of shared human rights outlined in this text?",
+"qrect": [
+105,
+204,
+732,
+20
+],
+"areas": [
+[
+105,
+235,
+981,
+105
+]
+],
+"answer": "A clear research question keeps the search focused, so you only collect sources that actually help answer it and you do not waste time on unrelated data."
+},
+{
+"label": "4.",
+"page": 31,
+"kind": "write",
+"cat": "LONG_TEXT",
+"prompt": "Why does the author argue that true peace requires more than just the absence of physical warfare?",
+"qrect": [
+105,
+499,
+859,
+20
+],
+"areas": [
+[
+105,
+530,
+981,
+105
+]
+],
+"answer": "A clear research question keeps the search focused, so you only collect sources that actually help answer it and you do not waste time on unrelated data."
+},
+{
+"label": "5.",
+"page": 31,
+"kind": "write",
+"cat": "LONG_TEXT",
+"prompt": "How does the father preserve his Native American heritage while living in an urban environment?",
+"qrect": [
+105,
+795,
+846,
+20
+],
+"areas": [
+[
+105,
+826,
+981,
+105
+]
+],
+"answer": "A clear research question keeps the search focused, so you only collect sources that actually help answer it and you do not waste time on unrelated data."
+},
+{
+"label": "1.",
+"page": 31,
+"kind": "write",
+"cat": "LONG_TEXT",
+"prompt": "What role do dedicated individuals play in preventing animal species from going extinct?",
+"qrect": [
+105,
+1291,
+765,
+20
+],
+"areas": [
+[
+105,
+1322,
+981,
+105
+]
+],
+"answer": "A clear research question keeps the search focused, so you only collect sources that actually help answer it and you do not waste time on unrelated data."
+},
+{
+"label": "2.",
+"page": 32,
+"kind": "write",
+"cat": "LONG_TEXT",
+"prompt": "What does this text explain about natural adaptations and human fascination with natural beauty?",
+"qrect": [
+105,
+204,
+848,
+20
+],
+"areas": [
+[
+105,
+235,
+981,
+105
+]
+],
+"answer": "A clear research question keeps the search focused, so you only collect sources that actually help answer it and you do not waste time on unrelated data."
+},
+{
+"label": "3.",
+"page": 32,
+"kind": "write",
+"cat": "LONG_TEXT",
+"prompt": "Why does the author encourage readers to look past sensationalized \"monster\" stories about pythons?",
+"qrect": [
+105,
+499,
+873,
+20
+],
+"areas": [
+[
+105,
+530,
+981,
+105
+]
+],
+"answer": "A clear research question keeps the search focused, so you only collect sources that actually help answer it and you do not waste time on unrelated data."
+},
+{
+"label": "4.",
+"page": 32,
+"kind": "write",
+"cat": "LONG_TEXT",
+"prompt": "How does using a non-human (bat) perspective challenge human assumptions of superiority?",
+"qrect": [
+105,
+795,
+800,
+20
+],
+"areas": [
+[
+105,
+826,
+981,
+105
+]
+],
+"answer": "A clear research question keeps the search focused, so you only collect sources that actually help answer it and you do not waste time on unrelated data."
+},
+{
+"label": "5.",
+"page": 32,
+"kind": "write",
+"cat": "LONG_TEXT",
+"prompt": "How does the story explore natural disasters, tragedy, trauma, and internal conflict?",
+"qrect": [
+105,
+1090,
+720,
+20
+],
+"areas": [
+[
+105,
+1121,
+981,
+105
+]
+],
+"answer": "A clear research question keeps the search focused, so you only collect sources that actually help answer it and you do not waste time on unrelated data."
+},
+{
+"label": "Metaphor",
+"page": 33,
+"kind": "cell",
+"cat": "TABLE_TEXT",
+"prompt": "Metaphor \u2014 Definition (In your own words)",
+"qrect": [
+121,
+324,
+90,
+20
+],
+"areas": [
+[
+369,
+304,
+441,
+89
+]
+],
+"cell": {
+"row": [
+367,
+306,
+445,
+85
+],
+"header": [
+121,
+272,
+853,
+19
+],
+"col": "Definition (In your own words)"
+},
+"answer": "A comparison that says one thing is another thing."
+},
+{
+"label": "Metaphor",
+"page": 33,
+"kind": "cell",
+"cat": "TABLE_TEXT",
+"prompt": "Metaphor \u2014 Original Example",
+"qrect": [
+121,
+324,
+90,
+20
+],
+"areas": [
+[
+814,
+304,
+270,
+89
+]
+],
+"cell": {
+"row": [
+812,
+306,
+274,
+85
+],
+"header": [
+121,
+272,
+853,
+19
+],
+"col": "Original Example"
+},
+"answer": "Her voice was music."
+},
+{
+"label": "Simile",
+"page": 33,
+"kind": "cell",
+"cat": "TABLE_TEXT",
+"prompt": "Simile \u2014 Definition (In your own words)",
+"qrect": [
+121,
+409,
+58,
+20
+],
+"areas": [
+[
+369,
+389,
+441,
+90
+]
+],
+"cell": {
+"row": [
+367,
+391,
+445,
+86
+],
+"header": [
+121,
+272,
+853,
+19
+],
+"col": "Definition (In your own words)"
+},
+"answer": "A comparison that says one thing is another thing."
+},
+{
+"label": "Simile",
+"page": 33,
+"kind": "cell",
+"cat": "TABLE_TEXT",
+"prompt": "Simile \u2014 Original Example",
+"qrect": [
+121,
+409,
+58,
+20
+],
+"areas": [
+[
+814,
+389,
+270,
+90
+]
+],
+"cell": {
+"row": [
+812,
+391,
+274,
+86
+],
+"header": [
+121,
+272,
+853,
+19
+],
+"col": "Original Example"
+},
+"answer": "Her voice was music."
+},
+{
+"label": "Personification",
+"page": 33,
+"kind": "cell",
+"cat": "TABLE_TEXT",
+"prompt": "Personification \u2014 Definition (In your own words)",
+"qrect": [
+121,
+495,
+140,
+20
+],
+"areas": [
+[
+369,
+475,
+441,
+89
+]
+],
+"cell": {
+"row": [
+367,
+477,
+445,
+85
+],
+"header": [
+121,
+272,
+853,
+19
+],
+"col": "Definition (In your own words)"
+},
+"answer": "A comparison that says one thing is another thing."
+},
+{
+"label": "Personification",
+"page": 33,
+"kind": "cell",
+"cat": "TABLE_TEXT",
+"prompt": "Personification \u2014 Original Example",
+"qrect": [
+121,
+495,
+140,
+20
+],
+"areas": [
+[
+814,
+475,
+270,
+89
+]
+],
+"cell": {
+"row": [
+812,
+477,
+274,
+85
+],
+"header": [
+121,
+272,
+853,
+19
+],
+"col": "Original Example"
+},
+"answer": "Her voice was music."
+},
+{
+"label": "A.",
+"page": 33,
+"kind": "write",
+"cat": "LONG_TEXT",
+"prompt": "A. Character's Internal Conflict: What is an internal conflict, and how does it differ from an external conflict?",
+"qrect": [
+105,
+723,
+952,
+20
+],
+"areas": [
+[
+105,
+754,
+981,
+105
+]
+],
+"answer": "A clear research question keeps the search focused, so you only collect sources that actually help answer it and you do not waste time on unrelated data."
+},
+{
+"label": "B.",
+"page": 33,
+"kind": "write",
+"cat": "LONG_TEXT",
+"prompt": "B. Symbolism: How do authors use symbols to add deeper meaning to a story?",
+"qrect": [
+105,
+876,
+674,
+20
+],
+"areas": [
+[
+105,
+907,
+981,
+105
+]
+],
+"answer": "A clear research question keeps the search focused, so you only collect sources that actually help answer it and you do not waste time on unrelated data."
+},
+{
+"label": "C.",
+"page": 33,
+"kind": "write",
+"cat": "LONG_TEXT",
+"prompt": "C. Narrative Point of View (POV): Explain how point of view affects what the audience thinks and feels about characters.",
+"qrect": [
+105,
+1029,
+946,
+47
+],
+"areas": [
+[
+105,
+1087,
+981,
+105
+]
+],
+"answer": "A clear research question keeps the search focused, so you only collect sources that actually help answer it and you do not waste time on unrelated data."
+},
+{
+"label": "D.",
+"page": 33,
+"kind": "write",
+"cat": "LONG_TEXT",
+"prompt": "D. Underlying Theme: How do you determine the underlying theme of a literary text?",
+"qrect": [
+105,
+1209,
+741,
+20
+],
+"areas": [
+[
+105,
+1240,
+981,
+105
+]
+],
+"answer": "A clear research question keeps the search focused, so you only collect sources that actually help answer it and you do not waste time on unrelated data."
+},
+{
+"label": "Task 1",
+"page": 34,
+"kind": "write",
+"cat": "LONG_TEXT",
+"prompt": "Prompt: Think about the overarching theme of human relationships. Why is it often difficult for individuals from different cultures, political backgrounds, or generations to connect? Based on what you read in these texts, what does it take for human beings to truly understand one another, overcome conflict, and build meaningful relationships?",
+"qrect": [
+105,
+318,
+977,
+107
+],
+"areas": [
+[
+105,
+442,
+981,
+187
+]
+],
+"answer": "A clear research question keeps the search focused, so you only collect sources that actually help answer it and you do not waste time on unrelated data."
+},
+{
+"label": "Task 2",
+"page": 34,
+"kind": "write",
+"cat": "LONG_TEXT",
+"prompt": "Prompt: Think about the overall relationship between humans and the natural world. How do these texts challenge the idea that humans control nature? What responsibilities do humans have toward wildlife and the planet, and how should we cope when nature presents dangerous power or natural disasters?",
+"qrect": [
+105,
+846,
+965,
+78
+],
+"areas": [
+[
+105,
+941,
+981,
+188
+]
+],
+"answer": "A clear research question keeps the search focused, so you only collect sources that actually help answer it and you do not waste time on unrelated data."
+},
+{
+"label": "1.",
+"page": 36,
+"kind": "write",
+"cat": "FORMULA_WORKING",
+"prompt": "1. \u0e1b\u0e25\u0e48\u0e2d\u0e22\u0e44\u0e02\u0e48\u0e44\u0e01\u0e48\u0e14\u0e34\u0e1a\u0e43\u0e2b\u0e49\u0e15\u0e01\u0e1a\u0e19\u0e1f\u0e2d\u0e07\u0e19\u0e49\u0e33 \u0e16\u0e49\u0e32\u0e0a\u0e48\u0e27\u0e07\u0e40\u0e27\u0e25\u0e32\u0e02\u0e13\u0e30\u0e44\u0e02\u0e48\u0e01\u0e23\u0e30\u0e17\u0e1a\u0e1f\u0e2d\u0e07\u0e19\u0e49\u0e33\u0e08\u0e19\u0e2b\u0e22\u0e38\u0e14\u0e40\u0e04\u0e25\u0e37\u0e48\u0e2d\u0e19\u0e17\u0e35\u0e48\u0e21\u0e35\u0e04\u0e48\u0e32 2.5 \u0e27\u0e34\u0e19\u0e32\u0e17\u0e35 \u0e41\u0e25\u0e30\u0e41\u0e23\u0e07\u0e40\u0e09\u0e25\u0e35\u0e48\u0e22\u0e17\u0e35\u0e48\u0e1f\u0e2d\u0e07\u0e19\u0e49\u0e33\u0e01\u0e23\u0e30\u0e17\u0e33\u0e15\u0e48\u0e2d\u0e44\u0e02\u0e48\u0e21\u0e35\u0e04\u0e48\u0e32 0.1 \u0e19\u0e34\u0e27\u0e15\u0e31\u0e19 \u0e01\u0e32\u0e23\u0e14\u0e25\u0e17\u0e35\u0e48\u0e40\u0e01\u0e34\u0e14\u0e02\u0e36\u0e49\u0e19\u0e21\u0e35\u0e04\u0e48\u0e32\u0e40\u0e17\u0e48\u0e32\u0e43\u0e14 (0.5 \u0e04\u0e30\u0e41\u0e19\u0e19)",
+"qrect": [
+144,
+144,
+842,
+81
+],
+"areas": [
+[
+175,
+231,
+910,
+386
+]
+],
+"avoid": [],
+"answer": "I = F\u0394t\n= ...\n\u2234 0.25 N\u00b7s"
+},
+{
+"label": "2.",
+"page": 36,
+"kind": "write",
+"cat": "FORMULA_WORKING",
+"prompt": "2. \u0e43\u0e0a\u0e49\u0e04\u0e49\u0e2d\u0e19\u0e21\u0e27\u0e25 0.5 \u0e01\u0e34\u0e42\u0e25\u0e01\u0e23\u0e31\u0e21\u0e15\u0e2d\u0e01\u0e15\u0e30\u0e1b\u0e39\u0e43\u0e19\u0e41\u0e19\u0e27\u0e23\u0e30\u0e14\u0e31\u0e1a\u0e14\u0e31\u0e07\u0e23\u0e39\u0e1b \u0e43\u0e19\u0e02\u0e13\u0e30\u0e17\u0e35\u0e48\u0e04\u0e49\u0e2d\u0e19\u0e40\u0e23\u0e34\u0e48\u0e21\u0e01\u0e23\u0e30\u0e17\u0e1a\u0e2b\u0e31\u0e27\u0e15\u0e30\u0e1b\u0e39 \u0e04\u0e49\u0e2d\u0e19\u0e21\u0e35\u0e02\u0e19\u0e32\u0e14\u0e04\u0e27\u0e32\u0e21\u0e40\u0e23\u0e47\u0e27 8.0 \u0e40\u0e21\u0e15\u0e23\u0e15\u0e48\u0e2d\u0e27\u0e34\u0e19\u0e32\u0e17\u0e35 \u0e2b\u0e25\u0e31\u0e07\u0e08\u0e32\u0e01\u0e01\u0e23\u0e30\u0e17\u0e1a\u0e2b\u0e31\u0e27\u0e15\u0e30\u0e1b\u0e39\u0e41\u0e25\u0e49\u0e27 \u0e04\u0e49\u0e2d\u0e19\u0e2a\u0e30\u0e17\u0e49\u0e2d\u0e19\u0e01\u0e25\u0e31\u0e1a\u0e14\u0e49\u0e27\u0e22\u0e02\u0e19\u0e32\u0e14\u0e04\u0e27\u0e32\u0e21\u0e40\u0e23\u0e47\u0e27\u0e40\u0e17\u0e48\u0e32\u0e40\u0e14\u0e34\u0e21 \u0e16\u0e49\u0e32\u0e0a\u0e48\u0e27\u0e07\u0e40\u0e27\u0e25\u0e32\u0e17\u0e35\u0e48\u0e04\u0e49\u0e2d\u0e19\u0e01\u0e23\u0e30\u0e17\u0e1a\u0e2b\u0e31\u0e27\u0e15\u0e30\u0e1b\u0e39\u0e40\u0e1b\u0e47\u0e19 1 \u0e21\u0e34\u0e25\u0e25\u0e34\u0e27\u0e34\u0e19\u0e32\u0e17\u0e35 \u0e41\u0e23\u0e07\u0e14\u0e25\u0e40\u0e09\u0e25\u0e35\u0e48\u0e22\u0e17\u0e35\u0e48\u0e04\u0e49\u0e2d\u0e19\u0e01\u0e23\u0e30\u0e17\u0e33\u0e15\u0e48\u0e2d\u0e2b\u0e31\u0e27\u0e15\u0e30\u0e1b\u0e39\u0e40\u0e1b\u0e47\u0e19\u0e40\u0e17\u0e48\u0e32\u0e43\u0e14 \u0e41\u0e25\u0e30\u0e01\u0e32\u0e23\u0e14\u0e25\u0e17\u0e35\u0e48\u0e04\u0e49\u0e2d\u0e19\u0e01\u0e23\u0e30\u0e17\u0e33\u0e15\u0e48\u0e2d\u0e2b\u0e31\u0e27\u0e15\u0e30\u0e1b\u0e39\u0e40\u0e1b\u0e47\u0e19\u0e40\u0e17\u0e48\u0e32\u0e43\u0e14 (1.0 \u0e04\u0e30\u0e41\u0e19\u0e19)",
+"qrect": [
+144,
+620,
+936,
+171
+],
+"areas": [
+[
+175,
+797,
+910,
+666
+]
+],
+"avoid": [
+[
+190,
+811,
+164,
+234
+]
+],
+"answer": "I = F\u0394t\n= ...\n\u2234 4.0 N\u00b7s, 8000 N"
+},
+{
+"label": "3.",
+"page": 37,
+"kind": "write",
+"cat": "FORMULA_WORKING",
+"prompt": "3. \u0e08\u0e32\u0e01\u0e23\u0e39\u0e1b \u0e40\u0e1b\u0e47\u0e19\u0e01\u0e23\u0e32\u0e1f\u0e23\u0e30\u0e2b\u0e27\u0e48\u0e32\u0e07\u0e42\u0e21\u0e40\u0e21\u0e19\u0e15\u0e31\u0e21\u0e01\u0e31\u0e1a\u0e40\u0e27\u0e25\u0e32\u0e02\u0e2d\u0e07\u0e27\u0e31\u0e15\u0e16\u0e38\u0e2b\u0e19\u0e36\u0e48\u0e07 \u0e08\u0e07\u0e2b\u0e32 \u0e02\u0e19\u0e32\u0e14\u0e02\u0e2d\u0e07\u0e41\u0e23\u0e07\u0e25\u0e31\u0e1e\u0e18\u0e4c\u0e17\u0e35\u0e48\u0e01\u0e23\u0e30\u0e17\u0e33\u0e15\u0e48\u0e2d\u0e27\u0e31\u0e15\u0e16\u0e38\u0e43\u0e19 0-5 \u0e27\u0e34\u0e19\u0e32\u0e17\u0e35, 5-10 \u0e27\u0e34\u0e19\u0e32\u0e17\u0e35 \u0e41\u0e25\u0e30 10-15 \u0e27\u0e34\u0e19\u0e32\u0e17\u0e35 (1.0 \u0e04\u0e30\u0e41\u0e19\u0e19)",
+"qrect": [
+144,
+144,
+834,
+81
+],
+"areas": [
+[
+175,
+231,
+910,
+567
+]
+],
+"avoid": [
+[
+196,
+243,
+368,
+178
+]
+],
+"answer": "I = F\u0394t\n= ...\n\u2234 4 N, 0 N, 2 N"
+},
+{
+"label": "4.",
+"page": 37,
+"kind": "write",
+"cat": "FORMULA_WORKING",
+"prompt": "4. \u0e21\u0e27\u0e25 8 \u0e01\u0e34\u0e42\u0e25\u0e01\u0e23\u0e31\u0e21 \u0e40\u0e04\u0e25\u0e37\u0e48\u0e2d\u0e19\u0e17\u0e35\u0e48\u0e44\u0e1b\u0e17\u0e32\u0e07\u0e17\u0e34\u0e28\u0e15\u0e30\u0e27\u0e31\u0e19\u0e2d\u0e2d\u0e01\u0e14\u0e49\u0e27\u0e22\u0e04\u0e27\u0e32\u0e21\u0e40\u0e23\u0e47\u0e27 20 \u0e40\u0e21\u0e15\u0e23\u0e15\u0e48\u0e2d\u0e27\u0e34\u0e19\u0e32\u0e17\u0e35 \u0e44\u0e1b\u0e0a\u0e19\u0e01\u0e31\u0e1a\u0e21\u0e27\u0e25 2 \u0e01\u0e34\u0e42\u0e25\u0e01\u0e23\u0e31\u0e21 \u0e17\u0e35\u0e48 \u0e40\u0e04\u0e25\u0e37\u0e48\u0e2d\u0e19\u0e17\u0e35\u0e48\u0e44\u0e1b\u0e17\u0e32\u0e07\u0e17\u0e34\u0e28\u0e15\u0e30\u0e27\u0e31\u0e19\u0e15\u0e01\u0e14\u0e49\u0e27\u0e22\u0e04\u0e27\u0e32\u0e21\u0e40\u0e23\u0e47\u0e27 10 \u0e40\u0e21\u0e15\u0e23\u0e15\u0e48\u0e2d\u0e27\u0e34\u0e19\u0e32\u0e17\u0e35 \u0e41\u0e25\u0e49\u0e27\u0e21\u0e27\u0e25\u0e41\u0e23\u0e01\u0e22\u0e31\u0e07\u0e04\u0e07\u0e40\u0e04\u0e25\u0e37\u0e48\u0e2d\u0e19\u0e17\u0e35\u0e48\u0e44\u0e1b\u0e17\u0e32\u0e07\u0e17\u0e34\u0e28\u0e15\u0e30\u0e27\u0e31\u0e19\u0e2d\u0e2d\u0e01 \u0e14\u0e49\u0e27\u0e22\u0e04\u0e27\u0e32\u0e21\u0e40\u0e23\u0e47\u0e27 10 \u0e40\u0e21\u0e15\u0e23\u0e15\u0e48\u0e2d\u0e27\u0e34\u0e19\u0e32\u0e17\u0e35 \u0e1e\u0e25\u0e31\u0e07\u0e07\u0e32\u0e19\u0e08\u0e25\u0e19\u0e4c\u0e23\u0e27\u0e21\u0e40\u0e1b\u0e25\u0e35\u0e48\u0e22\u0e19\u0e44\u0e1b\u0e40\u0e17\u0e48\u0e32\u0e43\u0e14 (1.5 \u0e04\u0e30\u0e41\u0e19\u0e19)",
+"qrect": [
+144,
+801,
+933,
+127
+],
+"areas": [
+[
+175,
+934,
+910,
+588
+]
+],
+"avoid": [],
+"answer": "I = F\u0394t\n= ...\n\u2234 1200 J"
+},
+{
+"label": "5.",
+"page": 38,
+"kind": "write",
+"cat": "FORMULA_WORKING",
+"prompt": "5. \u0e27\u0e31\u0e15\u0e16\u0e38 A \u0e41\u0e25\u0e30 B \u0e21\u0e35\u0e21\u0e27\u0e25\u0e40\u0e17\u0e48\u0e32\u0e01\u0e31\u0e19 0.1 \u0e01\u0e34\u0e42\u0e25\u0e01\u0e23\u0e31\u0e21 \u0e27\u0e31\u0e15\u0e16\u0e38 A \u0e40\u0e04\u0e25\u0e37\u0e48\u0e2d\u0e19\u0e17\u0e35\u0e48\u0e40\u0e02\u0e49\u0e32\u0e0a\u0e19\u0e27\u0e31\u0e15\u0e16\u0e38 B \u0e17\u0e35\u0e48\u0e2d\u0e22\u0e39\u0e48\u0e19\u0e34\u0e48\u0e07 \u0e14\u0e49\u0e27\u0e22\u0e04\u0e27\u0e32\u0e21\u0e40\u0e23\u0e47\u0e27 20 \u0e40\u0e21\u0e15\u0e23\u0e15\u0e48\u0e2d \u0e27\u0e34\u0e19\u0e32\u0e17\u0e35 \u0e14\u0e31\u0e07\u0e23\u0e39\u0e1b \u0e16\u0e49\u0e32\u0e01\u0e32\u0e23\u0e0a\u0e19\u0e40\u0e1b\u0e47\u0e19\u0e41\u0e1a\u0e1a\u0e22\u0e37\u0e14\u0e2b\u0e22\u0e38\u0e48\u0e19\u0e2b\u0e25\u0e31\u0e07\u0e08\u0e32\u0e01\u0e01\u0e32\u0e23\u0e0a\u0e19\u0e41\u0e25\u0e49\u0e27 \u0e27\u0e31\u0e15\u0e16\u0e38 B \u0e40\u0e04\u0e25\u0e37\u0e48\u0e2d\u0e19\u0e17\u0e35\u0e48\u0e44\u0e1b\u0e1a\u0e19\u0e1e\u0e37\u0e49\u0e19\u0e17\u0e35\u0e48\u0e21\u0e35\u0e41\u0e23\u0e07\u0e40\u0e2a\u0e35\u0e22\u0e14\u0e17\u0e32\u0e19 0.2 \u0e19\u0e34\u0e27\u0e15\u0e31\u0e19 \u0e40\u0e21\u0e37\u0e48\u0e2d\u0e40\u0e27\u0e25\u0e32\u0e1c\u0e48\u0e32\u0e19\u0e44\u0e1b 5 \u0e27\u0e34\u0e19\u0e32\u0e17\u0e35 \u0e27\u0e31\u0e15\u0e16\u0e38 B \u0e21\u0e35\u0e42\u0e21\u0e40\u0e21\u0e19\u0e15\u0e31\u0e21\u0e02\u0e19\u0e32\u0e14\u0e40\u0e17\u0e48\u0e32\u0e43\u0e14 \u0e41\u0e25\u0e30\u0e21\u0e35\u0e17\u0e34\u0e28\u0e17\u0e32\u0e07\u0e43\u0e14 (1.0 \u0e04\u0e30\u0e41\u0e19\u0e19)",
+"qrect": [
+144,
+144,
+929,
+126
+],
+"areas": [
+[
+175,
+276,
+910,
+486
+]
+],
+"avoid": [
+[
+192,
+298,
+414,
+78
+]
+],
+"answer": "I = F\u0394t\n= ...\n\u2234 0.2 kg\u00b7m/s \u0e17\u0e34\u0e28\u0e15\u0e30\u0e27\u0e31\u0e19\u0e2d\u0e2d\u0e01"
+},
+{
+"label": "6.",
+"page": 38,
+"kind": "write",
+"cat": "FORMULA_WORKING",
+"prompt": "6. \u0e2a\u0e1b\u0e23\u0e34\u0e07\u0e40\u0e2a\u0e49\u0e19\u0e2b\u0e19\u0e36\u0e48\u0e07\u0e21\u0e35\u0e04\u0e48\u0e32\u0e04\u0e07\u0e15\u0e31\u0e27\u0e2a\u0e1b\u0e23\u0e34\u0e07 2500 \u0e19\u0e34\u0e27\u0e15\u0e31\u0e19\u0e15\u0e48\u0e2d\u0e40\u0e21\u0e15\u0e23 \u0e27\u0e32\u0e07\u0e2d\u0e22\u0e39\u0e48\u0e1a\u0e19\u0e1e\u0e37\u0e49\u0e19\u0e23\u0e30\u0e14\u0e31\u0e1a\u0e1c\u0e34\u0e27\u0e25\u0e37\u0e48\u0e19 \u0e42\u0e14\u0e22\u0e1b\u0e25\u0e32\u0e22\u0e02\u0e49\u0e32\u0e07\u0e2b\u0e19\u0e36\u0e48\u0e07\u0e15\u0e23\u0e36\u0e07\u0e44\u0e27\u0e49\u0e01\u0e31\u0e1a\u0e1c\u0e19\u0e31\u0e07 \u0e40\u0e21\u0e37\u0e48\u0e2d\u0e19\u0e33\u0e27\u0e31\u0e15\u0e16\u0e38\u0e21\u0e27\u0e25 1.0 \u0e01\u0e34\u0e42\u0e25\u0e01\u0e23\u0e31\u0e21 \u0e2d\u0e31\u0e14\u0e2a\u0e1b\u0e23\u0e34\u0e07\u0e40\u0e02\u0e49\u0e32\u0e44\u0e1b\u0e08\u0e32\u0e01\u0e15\u0e33\u0e41\u0e2b\u0e19\u0e48\u0e07\u0e2a\u0e21\u0e14\u0e38\u0e25\u0e40\u0e1b\u0e47\u0e19\u0e23\u0e30\u0e22\u0e30 10 \u0e40\u0e0b\u0e19\u0e15\u0e34\u0e40\u0e21\u0e15\u0e23 \u0e40\u0e21\u0e37\u0e48\u0e2d\u0e1b\u0e25\u0e48\u0e2d\u0e22\u0e21\u0e27\u0e25 1.0 \u0e01\u0e34\u0e42\u0e25\u0e01\u0e23\u0e31\u0e21 \u0e08\u0e30\u0e40\u0e04\u0e25\u0e37\u0e48\u0e2d\u0e19\u0e17\u0e35\u0e48\u0e44\u0e1b\u0e0a\u0e19\u0e27\u0e31\u0e15\u0e16\u0e38\u0e21\u0e27\u0e25 4.0 \u0e01\u0e34\u0e42\u0e25\u0e01\u0e23\u0e31\u0e21\u0e17\u0e35\u0e48\u0e2d\u0e22\u0e39\u0e48\u0e2b\u0e48\u0e32\u0e07\u0e2d\u0e2d\u0e01\u0e44\u0e1b 40 \u0e40\u0e0b\u0e19\u0e15\u0e34\u0e40\u0e21\u0e15\u0e23 \u0e16\u0e49\u0e32\u0e01\u0e32\u0e23\u0e0a\u0e19\u0e40\u0e1b\u0e47\u0e19\u0e41\u0e1a\u0e1a\u0e22\u0e37\u0e14\u0e2b\u0e22\u0e38\u0e48\u0e19 \u0e08\u0e07\u0e2b\u0e32\u0e04\u0e27\u0e32\u0e21\u0e40\u0e23\u0e47\u0e27\u0e02\u0e2d\u0e07\u0e21\u0e27\u0e25 4.0 \u0e01\u0e34\u0e42\u0e25\u0e01\u0e23\u0e31\u0e21\u0e2b\u0e25\u0e31\u0e07\u0e0a\u0e19 (2.0 \u0e04\u0e30\u0e41\u0e19\u0e19)",
+"qrect": [
+144,
+765,
+937,
+173
+],
+"areas": [
+[
+175,
+944,
+910,
+581
+]
+],
+"avoid": [
+[
+204,
+964,
+450,
+94
+]
+],
+"answer": "I = F\u0394t\n= ...\n\u2234 2.0 m/s"
+},
+{
+"label": "7.",
+"page": 39,
+"kind": "write",
+"cat": "FORMULA_WORKING",
+"prompt": "7. \u0e1b\u0e37\u0e19\u0e43\u0e2b\u0e0d\u0e48\u0e21\u0e27\u0e25 250 \u0e01\u0e34\u0e42\u0e25\u0e01\u0e23\u0e31\u0e21 \u0e14\u0e49\u0e32\u0e19\u0e2b\u0e25\u0e31\u0e07\u0e22\u0e36\u0e14\u0e15\u0e34\u0e14\u0e01\u0e31\u0e1a\u0e2a\u0e1b\u0e23\u0e34\u0e07 \u0e40\u0e21\u0e37\u0e48\u0e2d\u0e22\u0e34\u0e07\u0e01\u0e23\u0e30\u0e2a\u0e38\u0e19\u0e1b\u0e37\u0e19\u0e21\u0e27\u0e25 5 \u0e01\u0e34\u0e42\u0e25\u0e01\u0e23\u0e31\u0e21 \u0e2d\u0e2d\u0e01\u0e44\u0e1b\u0e14\u0e49\u0e27\u0e22\u0e04\u0e27\u0e32\u0e21\u0e40\u0e23\u0e47\u0e27 250 \u0e40\u0e21\u0e15\u0e23\u0e15\u0e48\u0e2d\u0e27\u0e34\u0e19\u0e32\u0e17\u0e35 \u0e43\u0e19\u0e41\u0e19\u0e27\u0e23\u0e32\u0e1a \u0e1b\u0e23\u0e32\u0e01\u0e0f\u0e27\u0e48\u0e32\u0e1b\u0e37\u0e19\u0e16\u0e2d\u0e22\u0e2b\u0e25\u0e31\u0e07\u0e14\u0e31\u0e19\u0e2a\u0e1b\u0e23\u0e34\u0e07\u0e40\u0e02\u0e49\u0e32\u0e44\u0e1b \u0e16\u0e49\u0e32\u0e04\u0e48\u0e32\u0e04\u0e07\u0e17\u0e35\u0e48\u0e02\u0e2d\u0e07\u0e2a\u0e1b\u0e23\u0e34\u0e07\u0e40\u0e17\u0e48\u0e32\u0e01\u0e31\u0e1a 2,500 \u0e19\u0e34\u0e27\u0e15\u0e31\u0e19 \u0e15\u0e48\u0e2d\u0e40\u0e21\u0e15\u0e23 \u0e08\u0e07\u0e2b\u0e32\u0e27\u0e48\u0e32\u0e2a\u0e1b\u0e23\u0e34\u0e07\u0e08\u0e30\u0e16\u0e39\u0e01\u0e01\u0e14\u0e40\u0e02\u0e49\u0e32\u0e44\u0e1b\u0e40\u0e1b\u0e47\u0e19\u0e23\u0e30\u0e22\u0e30\u0e17\u0e32\u0e07\u0e40\u0e17\u0e48\u0e32\u0e44\u0e23 (1.5 \u0e04\u0e30\u0e41\u0e19\u0e19)",
+"qrect": [
+144,
+144,
+940,
+126
+],
+"areas": [
+[
+175,
+276,
+910,
+453
+]
+],
+"avoid": [],
+"answer": "I = F\u0394t\n= ...\n\u2234 0.5 m"
+},
+{
+"label": "8.",
+"page": 39,
+"kind": "write",
+"cat": "FORMULA_WORKING",
+"prompt": "8. \u0e19\u0e32\u0e22\u0e1c\u0e2d\u0e21\u0e21\u0e27\u0e25 60 \u0e01\u0e34\u0e42\u0e25\u0e01\u0e23\u0e31\u0e21 \u0e41\u0e25\u0e30\u0e19\u0e32\u0e22\u0e2d\u0e49\u0e27\u0e19\u0e21\u0e27\u0e25 80 \u0e01\u0e34\u0e42\u0e25\u0e01\u0e23\u0e31\u0e21 \u0e22\u0e37\u0e19\u0e0a\u0e34\u0e14\u0e15\u0e34\u0e14\u0e01\u0e31\u0e19\u0e2d\u0e22\u0e39\u0e48\u0e1a\u0e19\u0e25\u0e32\u0e19\u0e19\u0e49\u0e33\u0e41\u0e02\u0e47\u0e07\u0e23\u0e32\u0e1a\u0e25\u0e37\u0e48\u0e19 \u0e19\u0e32\u0e22\u0e2d\u0e49\u0e27\u0e19\u0e1c\u0e25\u0e31\u0e01 \u0e19\u0e32\u0e22\u0e1c\u0e2d\u0e21\u0e2d\u0e2d\u0e01\u0e44\u0e1b \u0e17\u0e33\u0e43\u0e2b\u0e49\u0e19\u0e32\u0e22\u0e1c\u0e2d\u0e21\u0e40\u0e04\u0e25\u0e37\u0e48\u0e2d\u0e19\u0e17\u0e35\u0e48\u0e14\u0e49\u0e27\u0e22\u0e2d\u0e31\u0e15\u0e23\u0e32\u0e40\u0e23\u0e47\u0e27 2 \u0e40\u0e21\u0e15\u0e23\u0e15\u0e48\u0e2d\u0e27\u0e34\u0e19\u0e32\u0e17\u0e35 \u0e2b\u0e25\u0e31\u0e07\u0e08\u0e32\u0e01\u0e19\u0e31\u0e49\u0e19 10 \u0e27\u0e34\u0e19\u0e32\u0e17\u0e35 \u0e04\u0e19\u0e17\u0e31\u0e49\u0e07\u0e2a\u0e2d\u0e07\u0e08\u0e30\u0e2d\u0e22\u0e39\u0e48\u0e2b\u0e48\u0e32\u0e07\u0e01\u0e31\u0e19\u0e40\u0e17\u0e48\u0e32\u0e44\u0e23 (1.5 \u0e04\u0e30\u0e41\u0e19\u0e19)",
+"qrect": [
+144,
+733,
+936,
+125
+],
+"areas": [
+[
+175,
+864,
+910,
+590
+]
+],
+"avoid": [],
+"answer": "I = F\u0394t\n= ...\n\u2234 17.5 m"
+}
+],
+"settings": {}
+}

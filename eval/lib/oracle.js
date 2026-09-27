@@ -274,6 +274,8 @@
         else if (stage === 'assign') r = { assign: [] };
         else if (stage === 'pin') r = { question_box: 0, answer_box: 0 };
         else r = { fixes: [] };
+        // breakSolve: the first two solve replies of 5+ questions come back empty (thinking used the whole budget).
+        if (stage === 'solve' && cfg.breakSolve && (r.answers || []).length >= 5 && (cfg._brokeSolve = (cfg._brokeSolve || 0) + 1) <= 2) return '';
         // breakLayout: 'cut' ends the reply mid-question (output limit), 'quote' leaves a quote unescaped,
         // 'garbage' returns unreadable text for the first request (both models), testing the page-by-page retry.
         if (stage === 'layout_text' && cfg.breakLayout) {
