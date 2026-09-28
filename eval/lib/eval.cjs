@@ -28,7 +28,7 @@ async function main() {
     try {
       run = await page.evaluate(o => window.__runDoc(o), {
         doc: gt.doc, gt, claude: mode, snapshots: !!opt('snap'),
-        oracleCfg: { mapBoxes: !!opt('map-boxes'), noise: Number(opt('noise', 0)), seed: Number(opt('seed', 1)), verbose: !!opt('verbose'), sloppy: !!opt('sloppy'), breakLayout: opt('break-layout') || null, breakSolve: !!opt('break-solve'), layoutReplay: opt('replay') ? (() => {
+        oracleCfg: { mapBoxes: !opt('no-map-boxes'), noise: Number(opt('noise', 0)), seed: Number(opt('seed', 1)), verbose: !!opt('verbose'), sloppy: !!opt('sloppy'), breakLayout: opt('break-layout') || null, breakSolve: !!opt('break-solve'), layoutReplay: opt('replay') ? (() => {
           // Every recorded layout chunk, merged: the oracle hands back the questions for the pages each request shows.
           const r = JSON.parse(fs.readFileSync(opt('replay'), 'utf8'));
           const qs = [], seen = new Set();

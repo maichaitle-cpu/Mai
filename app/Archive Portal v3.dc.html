@@ -2629,7 +2629,7 @@ class Component extends DCLogic {
       .replace(/\^\{([0-9n+\-−]{1,6})\}|\^\(([0-9n+\-−]{1,6})\)|\^([+\-−]?[0-9n]+[+\-−]?|[+\-−])/g, (m, a, b, c) => (a || b || c).replace(/./g, ch => SUP[ch] || ch));
   }
   // Bump on every release: debug reports carry it, so a report from an older file is spotted at once.
-  static BUILD = '2026-09-27f';
+  static BUILD = '2026-09-28a';
   static MARKS_RE = /^\s*[\[(]\s*\d{1,3}\s*(marks?|pts?|points?|คะแนน)?\s*[\])]\s*$|^\s*\d{1,3}\s*(marks?|pts?|points?|คะแนน)\s*$/i;
   static Q_RE = /^\s*(ข้อ\s*|Q\s*)?\(?\d{1,3}\s*[.)]/i;
   static OPT_RE = /(^|\s)\(?([กขคงจฉ]|[A-Fa-f])\s*[.)](?=\s|$)/g;
@@ -2836,7 +2836,10 @@ class Component extends DCLogic {
         const ruled = y => (page.vec.hl || []).some(r => r.x0 <= lx + 3 && r.x1 >= rx - 3 && Math.abs(r.y - y) < h * 1.3);
         if (isFinite(lx) && isFinite(rx) && rx - lx < W * 0.6 && rx - lx > b.x1 - b.x0 && ruled(L.top - h * 0.5) && ruled(L.bottom + h * 0.5)) {
           const pad = h * 0.3;
-          return this.clampRegion(page, { x: lx + pad, y: L.top - h * 0.5, w: rx - lx - pad * 2, h: h * 1.7, single: true, base: L.base - h * 0.12, lh: h, cellBlank: bx });
+          // Write on the printed blank when the rest of the cell holds a short answer; otherwise use the whole cell.
+          const fromBlank = rx - pad - b.x0 >= h * 3;
+          const x0 = fromBlank ? b.x0 : lx + pad;
+          return this.clampRegion(page, { x: x0, y: L.top - h * 0.5, w: rx - pad - x0, h: h * 1.7, single: true, base: L.base - h * 0.12, lh: h, cellBlank: bx, cellX0: lx + pad });
         }
       }
       const endOfLine = L.x1 - b.x1 < h * 0.9 && !others.length;
@@ -3009,6 +3012,7 @@ class Component extends DCLogic {
       const s0 = r.tight
         ? { top: r.y, gap: r.h, base: r.base, x: r.x, w: Math.max(r.lh * 0.8, r.w), size: Math.min(r.lh * 1.15, r.h * 0.9), tight: true }
         : { top: r.y, gap: r.h, base: r.base, x: r.x + r.lh * 0.2, w: Math.max(r.lh * 3, r.w - r.lh * 0.4), size: Math.min(r.lh * 1.15, r.h * 0.9) };
+      if (r.cellX0 != null) s0.cellX0 = r.cellX0;
       if (r.alt) s0.alt = { top: r.alt.top, gap: r.alt.gap, base: r.alt.base, x: r.alt.x, w: r.alt.w, size: r.alt.size, center: r.alt.center };
       return [s0];
     }
@@ -3954,7 +3958,9 @@ class Component extends DCLogic {
   async mapPages(questions, pages) {
     const out = questions.map(q => ({ ...q, cat: this.fixCat(q, q.cat) }));
     const byPage = {};
-    out.forEach((q, i) => { if (!q.choiceRects && q.kind !== 'cell' && q.cat !== 'SKIP') (byPage[q.page || 1] = byPage[q.page || 1] || []).push(i); });
+    // A blank already placed on its printed ____ is exact: Claude's rough box must not replace it.
+    const onBlank = q => q.kind === 'blank' && q.lineId != null && q.slots && q.slots.length;
+    out.forEach((q, i) => { if (!q.choiceRects && q.kind !== 'cell' && q.cat !== 'SKIP' && !onBlank(q)) (byPage[q.page || 1] = byPage[q.page || 1] || []).push(i); });
     const keys = Object.keys(byPage);
     for (let n = 0; n < keys.length; n++) {
       const p = Number(keys[n]), page = pages[p - 1];
@@ -5588,6 +5594,12 @@ class Component extends DCLogic {
     if (!a.slots) return { ...a, strokes: [], bbox: null, overflow: false };
     // A tight mid-sentence blank with no room above: shrink the word into the blank rather than cover the next word.
     if (a.slots.length === 1 && a.slots[0].tight && !a.slots[0].alt && a.text) a = { ...a, minScale: Math.min(a.minScale || 0.72, 0.55) };
+    if (a.slots.length === 1 && a.slots[0].cellX0 != null && a.text) {
+      const s0 = a.slots[0], ctx = this.mctx();
+      ctx.font = this.handFont(s0.size);
+      const tw = ctx.measureText(String(a.text)).width;
+      if (tw > s0.w && s0.x > s0.cellX0) a = { ...a, slots: [{ ...s0, w: s0.w + (s0.x - s0.cellX0), x: s0.cellX0 }] };
+    }
     if (a.slots.length === 1 && a.slots[0].alt && a.text) {
       // Too long for the printed blank: write it just above the blank, centred on it.
       const s0 = a.slots[0], ctx = this.mctx();
