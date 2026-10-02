@@ -3790,7 +3790,7 @@
      215
     ]
    ],
-   "answer": "2 = 2 , so x = 5. Page 8"
+   "answer": "2 = 2 , so x = 5."
   },
   {
    "label": "84",
@@ -4010,7 +4010,7 @@
      691
     ]
    ],
-   "answer": "A strong answer explains that standard deviation measures how spread out (how much variation there is in) a set of data values around the mean. A small standard deviation means the test scores are clustered close to the mean (students performed consistently, with similar results), while a large standard deviation means the scores are spread widely above and below the mean (much more variability in performance between students). Page 9"
+   "answer": "A strong answer explains that standard deviation measures how spread out (how much variation there is in) a set of data values around the mean. A small standard deviation means the test scores are clustered close to the mean (students performed consistently, with similar results), while a large standard deviation means the scores are spread widely above and below the mean (much more variability in performance between students)."
   },
   {
    "label": "94",
@@ -4032,7 +4032,7 @@
      1424
     ]
    ],
-   "answer": "A strong answer explains that a permutation is an arrangement where order matters (e.g., ranking runners 1st, 2nd, and 3rd place in a race - swapping two runners' positions creates a different outcome), while a combination is a selection where order does not matter (e.g., choosing 3 students out of a class to form a group - the same three students form the same group regardless of the order they were picked). Page 10"
+   "answer": "A strong answer explains that a permutation is an arrangement where order matters (e.g., ranking runners 1st, 2nd, and 3rd place in a race - swapping two runners' positions creates a different outcome), while a combination is a selection where order does not matter (e.g., choosing 3 students out of a class to form a group - the same three students form the same group regardless of the order they were picked)."
   },
   {
    "label": "1",
@@ -7903,7 +7903,7 @@
      1396
     ]
    ],
-   "answer": "A good answer describes reacting fixed-length magnesium ribbon with HCl of varying concentrations (e.g., diluting a stock solution), keeping temperature, volume of acid, and ribbon length/mass constant (controlled variables), measuring the time taken for the ribbon to fully dissolve or the volume of hydrogen gas collected over time, repeating each concentration for reliability, and presenting the results in a table and a graph of rate (1/time) against concentration. Page 18"
+   "answer": "A good answer describes reacting fixed-length magnesium ribbon with HCl of varying concentrations (e.g., diluting a stock solution), keeping temperature, volume of acid, and ribbon length/mass constant (controlled variables), measuring the time taken for the ribbon to fully dissolve or the volume of hydrogen gas collected over time, repeating each concentration for reliability, and presenting the results in a table and a graph of rate (1/time) against concentration."
   },
   {
    "label": "93",
@@ -7947,7 +7947,7 @@
      691
     ]
    ],
-   "answer": "A strong answer explains that a compound is formed when elements chemically bond together in a fixed ratio and can only be broken down by a chemical reaction (e.g., water, H2O), while a mixture consists of two or more substances that are only physically combined, in variable proportions, and can be separated by physical methods (e.g., salt water can be separated by evaporation, or sand and iron filings can be separated using a magnet). Page 19"
+   "answer": "A strong answer explains that a compound is formed when elements chemically bond together in a fixed ratio and can only be broken down by a chemical reaction (e.g., water, H2O), while a mixture consists of two or more substances that are only physically combined, in variable proportions, and can be separated by physical methods (e.g., salt water can be separated by evaporation, or sand and iron filings can be separated using a magnet)."
   },
   {
    "label": "1",
@@ -11833,7 +11833,7 @@
      1076
     ]
    ],
-   "answer": "A good answer describes connecting the components in a single closed loop (battery to switch to bulb and back to battery) so current can flow. Adding a second bulb in series increases the total resistance of the circuit, reducing the current, so both bulbs glow more dimly than a single bulb alone. Adding a second bulb in parallel keeps the voltage across each bulb equal to the battery voltage, so each bulb glows at roughly its normal brightness, while the total current drawn from the battery increases. Page 27"
+   "answer": "A good answer describes connecting the components in a single closed loop (battery to switch to bulb and back to battery) so current can flow. Adding a second bulb in series increases the total resistance of the circuit, reducing the current, so both bulbs glow more dimly than a single bulb alone. Adding a second bulb in parallel keeps the voltage across each bulb equal to the battery voltage, so each bulb glows at roughly its normal brightness, while the total current drawn from the battery increases."
   },
   {
    "label": "92",
@@ -11899,7 +11899,7 @@
      1424
     ]
    ],
-   "answer": "A strong answer states that energy cannot be created or destroyed, only transformed from one form to another (or transferred between objects). As the ball rises, its kinetic energy is progressively converted into gravitational potential energy; at the highest point its kinetic energy is momentarily zero while its potential energy is at a maximum; as it falls, potential energy converts back into kinetic energy, so the total mechanical energy stays constant throughout (ignoring small losses to air resistance). Page 28"
+   "answer": "A strong answer states that energy cannot be created or destroyed, only transformed from one form to another (or transferred between objects). As the ball rises, its kinetic energy is progressively converted into gravitational potential energy; at the highest point its kinetic energy is momentarily zero while its potential energy is at a maximum; as it falls, potential energy converts back into kinetic energy, so the total mechanical energy stays constant throughout (ignoring small losses to air resistance)."
   },
   {
    "label": "1",
@@ -15638,7 +15638,7 @@
      424
     ]
    ],
-   "answer": "Any two of: arteries carry blood away from the heart, veins carry blood toward the heart; artery walls are thicker and more muscular than vein walls; arteries usually carry oxygenated blood (except the pulmonary artery) while veins usually carry deoxygenated blood (except the pulmonary vein); veins contain valves to prevent backflow of blood, arteries generally do not. Page 35"
+   "answer": "Any two of: arteries carry blood away from the heart, veins carry blood toward the heart; artery walls are thicker and more muscular than vein walls; arteries usually carry oxygenated blood (except the pulmonary artery) while veins usually carry deoxygenated blood (except the pulmonary vein); veins contain valves to prevent backflow of blood, arteries generally do not."
   },
   {
    "label": "84",
@@ -15814,7 +15814,7 @@
      830
     ]
    ],
-   "answer": "A complete answer traces: right atrium -> right ventricle -> pulmonary artery -> lungs (gas exchange, blood picks up oxygen and releases carbon dioxide) -> pulmonary vein -> left atrium -> left ventricle -> aorta -> body tissues -> vena cava -> back to the right atrium. Double circulation (separate pulmonary and systemic loops) keeps oxygenated and deoxygenated blood from mixing and allows blood to be re-pressurized by the left ventricle after returning from the lower-pressure lungs, so oxygenated blood reaches body tissues at higher pressure and more efficiently. Page 36"
+   "answer": "A complete answer traces: right atrium -> right ventricle -> pulmonary artery -> lungs (gas exchange, blood picks up oxygen and releases carbon dioxide) -> pulmonary vein -> left atrium -> left ventricle -> aorta -> body tissues -> vena cava -> back to the right atrium. Double circulation (separate pulmonary and systemic loops) keeps oxygenated and deoxygenated blood from mixing and allows blood to be re-pressurized by the left ventricle after returning from the lower-pressure lungs, so oxygenated blood reaches body tissues at higher pressure and more efficiently."
   },
   {
    "label": "92",
@@ -15880,7 +15880,7 @@
      1396
     ]
    ],
-   "answer": "A strong answer defines osmosis as the movement of water across a semi-permeable membrane from an area of high water concentration to an area of low water concentration. In a hypertonic solution, water would move out of the plant cell by osmosis; the cytoplasm would shrink away from the cell wall (plasmolysis), and the cell would lose turgor pressure, becoming flaccid. Page 37"
+   "answer": "A strong answer defines osmosis as the movement of water across a semi-permeable membrane from an area of high water concentration to an area of low water concentration. In a hypertonic solution, water would move out of the plant cell by osmosis; the cytoplasm would shrink away from the cell wall (plasmolysis), and the cell would lose turgor pressure, becoming flaccid."
   },
   {
    "label": "1",
@@ -19824,7 +19824,7 @@
      215
     ]
    ],
-   "answer": "The error is subject-verb agreement: \"each\" is singular, so the verb should be \"has\", not \"have\". Corrected: \"Each of the students has submitted their assignment.\" Page 45"
+   "answer": "The error is subject-verb agreement: \"each\" is singular, so the verb should be \"has\", not \"have\". Corrected: \"Each of the students has submitted their assignment.\""
   },
   {
    "label": "87",
@@ -20000,7 +20000,7 @@
      691
     ]
    ],
-   "answer": "Graded on a rubric: coherent, engaging short narrative; a clearly identifiable, correctly used example of alliteration; a clearly identifiable, correctly used example of onomatopoeia; and correct grammar and spelling. Page 46"
+   "answer": "Graded on a rubric: coherent, engaging short narrative; a clearly identifiable, correctly used example of alliteration; a clearly identifiable, correctly used example of onomatopoeia; and correct grammar and spelling."
   }
  ]
 }

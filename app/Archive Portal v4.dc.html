@@ -8,6 +8,7 @@
 <body>
 <x-dc>
 <helmet>
+  <link rel="icon" type="image/png" href="assets/logo.png">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
@@ -71,10 +72,7 @@
     <div style="position: relative; min-height: 100vh; display: flex; flex-direction: column;">
       <header style="display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 24px clamp(20px, 5vw, 64px); animation: fadeIn 500ms ease both;">
         <div style="display: flex; align-items: center; gap: 12px;">
-          <div style="position: relative; width: 26px; height: 26px; flex: none;">
-            <div style="position: absolute; inset: 0; border: 1px solid #a68b56; transform: rotate(45deg);"></div>
-            <div style="position: absolute; inset: 7px; background: #a3121f; transform: rotate(45deg);"></div>
-          </div>
+          <img src="assets/logo.png" alt="" width="40" height="40" style="display: block; width: 40px; height: 40px; flex: none; border-radius: 50%; object-fit: cover; box-shadow: 0 0 0 1px rgba(198,168,116,.35);">
           <span style="font-family: 'Cinzel', 'Trirong', serif; font-size: 13px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: #d8c397;">{{ brandName }}</span>
         </div>
         <div style="display: flex; align-items: center; gap: 16px; flex-wrap: wrap;">
@@ -170,15 +168,106 @@
     </div>
   </sc-if>
 
+  <sc-if value="{{ isHand }}" hint-placeholder-val="{{ false }}">
+    <div data-screen-label="My handwriting" style="position: relative; min-height: 100vh; display: flex; flex-direction: column;">
+      <header style="position: sticky; top: 0; z-index: 5; display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; padding: 18px clamp(20px, 4vw, 56px); background: rgba(10,6,7,.72); backdrop-filter: blur(20px) saturate(160%); border-bottom: 1px solid rgba(198,168,116,.16);">
+        <div style="display: flex; align-items: center; gap: 14px;">
+          <img src="assets/logo.png" alt="" width="36" height="36" style="display: block; width: 36px; height: 36px; flex: none; border-radius: 50%; object-fit: cover; box-shadow: 0 0 0 1px rgba(198,168,116,.35);">
+          <span style="font-family: 'Cinzel', 'Trirong', serif; font-size: 12px; letter-spacing: .22em; text-transform: uppercase; color: #d8c397;">{{ brandName }}</span>
+          <span style="width: 1px; height: 18px; background: rgba(198,168,116,.24);"></span>
+          <span style="font-size: 14px; color: #8f8680;">My handwriting</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 18px; flex-wrap: wrap;">
+          <span style="font-size: 14px; color: #c9c2ba;">{{ email }}</span>
+          <button type="button" onClick="{{ onHwBack }}" style="flex: none; white-space: nowrap; padding: 9px 16px; font-family: 'Cinzel', 'Trirong', serif; font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: #c9c2ba; background: transparent; border: 1px solid rgba(198,168,116,.28); border-radius: 2px; cursor: pointer; transition-property: color, border-color, background, scale; transition-duration: 150ms;" style-hover="color: #ece6df; border-color: #a68b56; background: rgba(166,139,86,.08);" style-active="scale: .96;">Back to deposit</button>
+        </div>
+      </header>
+
+      <main style="flex: 1; width: 100%; max-width: 1180px; margin: 0 auto; padding: clamp(32px, 5vw, 64px) clamp(20px, 4vw, 56px) 80px; display: flex; flex-direction: column; gap: 40px;">
+        <div style="display: flex; flex-direction: column; gap: 12px;">
+          <p style="margin: 0; font-family: 'Cinzel', 'Trirong', serif; font-size: 11px; letter-spacing: .22em; text-transform: uppercase; color: #8f8680;">Vault II · Your hand</p>
+          <h1 style="margin: 0; font-family: 'Cinzel', 'Trirong', serif; font-weight: 700; font-size: clamp(28px, 4vw, 44px); line-height: 1.12; color: #ece6df;">My handwriting font</h1>
+          <p style="margin: 0; max-width: 62ch; font-size: 18px; line-height: 1.6; color: #c9c2ba; text-wrap: pretty;">Fill the template: write each letter, number and symbol 10 times in its row. When a sheet is written, every character is drawn from one of your 10 versions at random, so repeated letters never look identical. Samples are saved to {{ email }}.</p>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 14px; padding: 20px; background: #150c0d; border: 1px solid rgba(198,168,116,.22);">
+          <span style="font-family: 'Cinzel', 'Trirong', serif; font-size: 11px; letter-spacing: .22em; text-transform: uppercase; color: #8f8680;">Your handwritings</span>
+          <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+            <sc-for list="{{ hwFonts }}" as="ft" hint-placeholder-count="2">
+              <button type="button" onClick="{{ ft.pick }}" style="padding: 8px 14px; font-size: 14px; line-height: 1.3; white-space: nowrap; max-width: 100%; overflow: hidden; text-overflow: ellipsis; color: {{ ft.ink }}; background: {{ ft.bg }}; border: 1px solid {{ ft.border }}; border-radius: 2px; cursor: pointer; transition-property: color, background, border-color; transition-duration: 150ms;" style-hover="border-color: #a68b56;">{{ ft.name }}</button>
+            </sc-for>
+            <button type="button" onClick="{{ onFontNew }}" style="padding: 8px 14px; font-size: 14px; line-height: 1.3; white-space: nowrap; color: #d8c397; background: transparent; border: 1px dashed rgba(198,168,116,.5); border-radius: 2px; cursor: pointer;" style-hover="border-color: #a68b56; color: #ece6df;">+ New handwriting</button>
+          </div>
+          <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+            <label for="hw-name" style="font-size: 14px; color: #c9c2ba;">Name</label>
+            <input id="hw-name" type="text" maxlength="40" value="{{ hwName }}" onInput="{{ onFontName }}" style="flex: 1 1 220px; max-width: 360px; box-sizing: border-box; padding: 10px 12px; font-size: 16px; color: #ece6df; background: #0f0809; border: 1px solid rgba(198,168,116,.28); border-radius: 2px; outline: none;" style-focus="border-color: #a68b56;">
+            <button type="button" onClick="{{ onFontDelete }}" style="padding: 10px 18px; font-family: 'Cinzel', 'Trirong', serif; font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: #c9c2ba; background: transparent; border: 1px solid rgba(198,168,116,.28); border-radius: 2px; cursor: pointer; transition-property: color, border-color, background, scale; transition-duration: 150ms;" style-hover="color: #ece6df; border-color: #a68b56; background: rgba(166,139,86,.08);" style-active="scale: .96;">{{ hwDeleteLabel }}</button>
+          </div>
+          <p style="margin: 0; font-size: 14px; color: #8f8680;">The boxes below edit the selected handwriting. Every handwriting appears in the style panel's Handwriting list.</p>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 10px;">
+          <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 8px;">
+            <input type="file" accept=".json,application/json" ref="{{ hwFileRef }}" onChange="{{ onHwFile }}" style="display: none;">
+            <button type="button" onClick="{{ onHwImport }}" style="padding: 10px 18px; font-family: 'Cinzel', 'Trirong', serif; font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: #c9c2ba; background: transparent; border: 1px solid rgba(198,168,116,.28); border-radius: 2px; cursor: pointer; transition-property: color, border-color, background, scale; transition-duration: 150ms;" style-hover="color: #ece6df; border-color: #a68b56; background: rgba(166,139,86,.08);" style-active="scale: .96;">Import handwriting file</button>
+            <button type="button" onClick="{{ onHwExport }}" style="padding: 10px 18px; font-family: 'Cinzel', 'Trirong', serif; font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: #c9c2ba; background: transparent; border: 1px solid rgba(198,168,116,.28); border-radius: 2px; cursor: pointer; transition-property: color, border-color, background, scale; transition-duration: 150ms;" style-hover="color: #ece6df; border-color: #a68b56; background: rgba(166,139,86,.08);" style-active="scale: .96;">Export handwriting file</button>
+            <span role="status" style="font-size: 14px; color: #d8c397;">{{ hwMsg }}</span>
+          </div>
+          <div style="display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; font-size: 14px; color: #c9c2ba;">
+            <span>{{ hwProgressLabel }}</span>
+            <span style="color: #8f8680;">{{ hwCompleteLabel }}</span>
+          </div>
+          <div style="height: 4px; background: rgba(198,168,116,.16);"><div style="height: 100%; width: {{ hwProgressPct }}; background: #a3121f; transition: width 300ms cubic-bezier(.2,0,0,1);"></div></div>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 16px;">
+          <div style="display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;">
+            <div role="group" aria-label="Character set" style="display: flex; gap: 2px; padding: 2px; border: 1px solid rgba(198,168,116,.28); border-radius: 3px;">
+              <sc-for list="{{ hwTabs }}" as="t" hint-placeholder-count="4">
+                <button type="button" onClick="{{ t.pick }}" style="padding: 7px 14px; font-size: 13px; font-weight: 600; color: {{ t.ink }}; background: {{ t.bg }}; border: none; border-radius: 2px; cursor: pointer; transition-property: color, background; transition-duration: 150ms;">{{ t.label }}</button>
+              </sc-for>
+            </div>
+            <span style="font-size: 14px; color: #8f8680;">Write in each box. It saves as you lift the pen. Letters with several strokes (i, t, x) can be finished in the same box.</span>
+          </div>
+          <div style="overflow-x: auto; border-top: 2px solid rgba(198,168,116,.3);">
+            <div style="min-width: 820px; display: flex; flex-direction: column;">
+              <sc-for list="{{ hwRows }}" as="row" hint-placeholder-count="26">
+                <div style="display: grid; grid-template-columns: 76px repeat(10, minmax(0, 1fr)); gap: 6px; align-items: center; padding: 8px 0; border-bottom: 1px solid rgba(198,168,116,.16);">
+                  <div style="display: flex; flex-direction: column; gap: 2px; padding-left: 4px;">
+                    <span style="font-family: 'EB Garamond', serif; font-size: 34px; line-height: 1; color: {{ row.ink }};">{{ row.ch }}</span>
+                    <button type="button" onClick="{{ row.clear }}" title="Clear this row" style="align-self: flex-start; padding: 0; font-size: 12px; color: #8f8680; background: none; border: none; cursor: pointer;" style-hover="color: #ece6df;">{{ row.count }} / 10</button>
+                  </div>
+                  <sc-for list="{{ row.cells }}" as="cell" hint-placeholder-count="10">
+                    <div style="position: relative; aspect-ratio: 1 / 1;">
+                      <canvas ref="{{ cell.ref }}" width="200" height="200" aria-label="{{ cell.aria }}" style="display: block; width: 100%; height: 100%; background: #f3ecdc; cursor: crosshair; touch-action: none; outline: 1px solid {{ cell.border }};"></canvas>
+                      <button type="button" onClick="{{ cell.erase }}" aria-label="Erase box" style="display: {{ cell.eraseShow }}; position: absolute; right: 0; top: 0; width: 20px; height: 20px; padding: 0; font-size: 14px; line-height: 1; color: #f3ecdc; background: rgba(32,24,20,.7); border: none; cursor: pointer;" style-hover="background: #a3121f;">×</button>
+                    </div>
+                  </sc-for>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 14px; border-top: 1px solid rgba(198,168,116,.2); padding-top: 32px;">
+          <div style="display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;">
+            <span style="font-family: 'Cinzel', 'Trirong', serif; font-size: 11px; letter-spacing: .22em; text-transform: uppercase; color: #8f8680;">Try your font</span>
+            <button type="button" onClick="{{ onHwReroll }}" style="padding: 9px 16px; font-size: 14px; color: #c9c2ba; background: transparent; border: 1px solid rgba(198,168,116,.28); border-radius: 2px; cursor: pointer; transition-property: color, border-color, scale; transition-duration: 150ms;" style-hover="color: #ece6df; border-color: #a68b56;" style-active="scale: .96;">Re-roll variants</button>
+          </div>
+          <input type="text" value="{{ hwText }}" onInput="{{ onHwText }}" aria-label="Preview text" style="width: 100%; box-sizing: border-box; padding: 12px 14px; font-size: 17px; color: #ece6df; background: #150c0d; border: 1px solid rgba(198,168,116,.28); border-radius: 2px; outline: none;" style-focus="border-color: #a68b56;">
+          <canvas ref="{{ hwPrevRef }}" width="1800" height="420" style="display: block; width: 100%; background: #f3ecdc; box-shadow: 0 8px 24px rgba(0,0,0,.5);"></canvas>
+          <p style="margin: 0; font-size: 14px; color: #8f8680;">Characters you have not written yet use the Quick pen font. To write a worksheet in your hand, open Handwriting in the style panel and choose My handwriting.</p>
+        </div>
+      </main>
+    </div>
+  </sc-if>
+
   <sc-if value="{{ isVault }}" hint-placeholder-val="{{ false }}">
     <div style="position: relative; min-height: 100vh; display: flex; flex-direction: column;">
 
       <header style="position: sticky; top: 0; z-index: 5; display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; padding: 18px clamp(20px, 4vw, 56px); background: rgba(10,6,7,.72); backdrop-filter: blur(20px) saturate(160%); border-bottom: 1px solid rgba(198,168,116,.16); animation: fadeIn 500ms ease both;">
         <div style="display: flex; align-items: center; gap: 14px;">
-          <div style="position: relative; width: 28px; height: 28px; flex: none;">
-            <div style="position: absolute; inset: 0; border: 1px solid #a68b56; transform: rotate(45deg);"></div>
-            <div style="position: absolute; inset: 8px; background: #a3121f; transform: rotate(45deg);"></div>
-          </div>
+          <img src="assets/logo.png" alt="" width="36" height="36" style="display: block; width: 36px; height: 36px; flex: none; border-radius: 50%; object-fit: cover; box-shadow: 0 0 0 1px rgba(198,168,116,.35);">
           <span style="font-family: 'Cinzel', 'Trirong', serif; font-size: 12px; letter-spacing: .22em; text-transform: uppercase; color: #d8c397;">{{ brandName }}</span>
           <span style="width: 1px; height: 18px; background: rgba(198,168,116,.24);"></span>
           <span style="font-size: 14px; color: #8f8680;">Deposit</span>
@@ -193,6 +282,7 @@
             {{ usageLabel }}
           </span>
           <span style="font-size: 14px; color: #c9c2ba;">{{ email }}</span>
+          <button type="button" onClick="{{ onHwOpen }}" style="flex: none; white-space: nowrap; padding: 9px 16px; font-family: 'Cinzel', 'Trirong', serif; font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: #d8c397; background: transparent; border: 1px solid rgba(198,168,116,.28); border-radius: 2px; cursor: pointer; transition-property: color, border-color, background, scale; transition-duration: 150ms;" style-hover="color: #ece6df; border-color: #a68b56; background: rgba(166,139,86,.08);" style-active="scale: .96;">My handwriting</button>
           <button type="button" onClick="{{ onSignOut }}" style="flex: none; white-space: nowrap; padding: 9px 16px; font-family: 'Cinzel', 'Trirong', serif; font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: #c9c2ba; background: transparent; border: 1px solid rgba(198,168,116,.28); border-radius: 2px; cursor: pointer; transition-property: color, border-color, background, scale; transition-duration: 150ms; transition-timing-function: cubic-bezier(.2,0,0,1);" style-hover="color: #ece6df; border-color: #a68b56; background: rgba(166,139,86,.08);" style-active="scale: .96;">Sign out</button>
         </div>
       </header>
@@ -309,6 +399,17 @@
               </div>
             </div>
 
+            <sc-if value="{{ showFileMode }}" hint-placeholder-val="{{ false }}">
+              <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 24px;">
+                <span style="font-family: 'Cinzel', 'Trirong', serif; font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: #a68b56;">Admin · Multiple files</span>
+                <div role="group" aria-label="Multiple files" style="display: flex; flex-wrap: wrap; gap: 8px;">
+                  <sc-for list="{{ fileModeOpts }}" as="m" hint-placeholder-count="2">
+                    <button type="button" aria-pressed="{{ m.on }}" onClick="{{ m.pick }}" style="white-space: nowrap; padding: 10px 16px; font-size: 15px; color: {{ m.ink }}; background: {{ m.bg }}; border: 1px solid {{ m.border }}; border-radius: 2px; cursor: pointer; transition-property: background, border-color, color, scale; transition-duration: 150ms;" style-hover="border-color: #a68b56;" style-active="scale: .97;">{{ m.label }}</button>
+                  </sc-for>
+                </div>
+                <span style="font-size: 14px; line-height: 1.45; color: #9a918a;">{{ fileModeNote }}</span>
+              </div>
+            </sc-if>
             <div style="display: flex; align-items: center; gap: 16px; flex-wrap: wrap; margin-top: 28px;">
               <button type="button" onClick="{{ onSeal }}" disabled="{{ sealDisabled }}" style="flex: none; white-space: nowrap; padding: 15px 34px; font-family: 'Cinzel', 'Trirong', serif; font-size: 12px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: #ece6df; background: linear-gradient(180deg, #cc1615 0%, #a3121f 60%, #7a0f16 100%); border: 1px solid #e2453f; box-shadow: inset 0 1px 0 rgba(255,220,200,.25), 0 6px 18px rgba(163,18,31,.35); border-radius: 2px; cursor: pointer; transition-property: background, box-shadow, scale; transition-duration: 220ms; transition-timing-function: cubic-bezier(.2,0,0,1);" style-hover="background: linear-gradient(180deg, #e2453f 0%, #cc1615 55%, #a3121f 100%); box-shadow: inset 0 1px 0 rgba(255,220,200,.3), 0 10px 30px rgba(204,22,21,.5); box-shadow: 0 0 24px rgba(163,18,31,.45);" style-active="scale: .96;">{{ sealLabel }}</button>
               <button type="button" onClick="{{ onClear }}" style="padding: 15px 22px; font-family: 'Cinzel', 'Trirong', serif; font-size: 12px; letter-spacing: .18em; text-transform: uppercase; color: #8f8680; background: transparent; border: 1px solid transparent; border-radius: 2px; cursor: pointer; transition-property: color, border-color, scale; transition-duration: 150ms; transition-timing-function: cubic-bezier(.2,0,0,1);" style-hover="color: #c9c2ba; border-color: rgba(198,168,116,.22);" style-active="scale: .96;">Clear</button>
@@ -352,10 +453,7 @@
     <div style="position: relative; min-height: 100vh; display: flex; flex-direction: column;">
       <header style="display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; padding: 18px clamp(20px, 4vw, 56px); background: rgba(10,6,7,.72); backdrop-filter: blur(20px) saturate(160%); border-bottom: 1px solid rgba(198,168,116,.16);">
         <div style="display: flex; align-items: center; gap: 14px;">
-          <div style="position: relative; width: 28px; height: 28px; flex: none;">
-            <div style="position: absolute; inset: 0; border: 1px solid #a68b56; transform: rotate(45deg);"></div>
-            <div style="position: absolute; inset: 8px; background: #a3121f; transform: rotate(45deg);"></div>
-          </div>
+          <img src="assets/logo.png" alt="" width="36" height="36" style="display: block; width: 36px; height: 36px; flex: none; border-radius: 50%; object-fit: cover; box-shadow: 0 0 0 1px rgba(198,168,116,.35);">
           <span style="font-family: 'Cinzel', 'Trirong', serif; font-size: 12px; letter-spacing: .22em; text-transform: uppercase; color: #d8c397;">{{ brandName }}</span>
           <span style="width: 1px; height: 18px; background: rgba(198,168,116,.24);"></span>
           <span style="font-size: 14px; color: #8f8680;">Working</span>
@@ -410,15 +508,27 @@
     <div style="position: relative; min-height: 100vh; display: flex; flex-direction: column;">
       <header style="position: sticky; top: 0; z-index: 5; display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; padding: 18px clamp(20px, 4vw, 56px); background: rgba(10,6,7,.72); backdrop-filter: blur(20px) saturate(160%); border-bottom: 1px solid rgba(198,168,116,.16); animation: fadeIn 400ms ease both;">
         <div style="display: flex; align-items: center; gap: 14px;">
-          <div style="position: relative; width: 28px; height: 28px; flex: none;">
-            <div style="position: absolute; inset: 0; border: 1px solid #a68b56; transform: rotate(45deg);"></div>
-            <div style="position: absolute; inset: 8px; background: #a3121f; transform: rotate(45deg);"></div>
-          </div>
+          <img src="assets/logo.png" alt="" width="36" height="36" style="display: block; width: 36px; height: 36px; flex: none; border-radius: 50%; object-fit: cover; box-shadow: 0 0 0 1px rgba(198,168,116,.35);">
           <span style="font-family: 'Cinzel', 'Trirong', serif; font-size: 12px; letter-spacing: .22em; text-transform: uppercase; color: #d8c397;">{{ brandName }}</span>
           <span style="width: 1px; height: 18px; background: rgba(198,168,116,.24);"></span>
           <span style="font-size: 14px; color: #8f8680;">Completed worksheet</span>
         </div>
         <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
+          <sc-if value="{{ multiFile }}" hint-placeholder-val="{{ false }}">
+            <div role="group" aria-label="Uploaded files" style="flex: none; display: flex; align-items: center; gap: 8px; padding: 4px 4px 4px 12px; border: 1px solid rgba(198,168,116,.28); border-radius: 2px;">
+              <span style="display: flex; flex-direction: column; min-width: 0; max-width: 220px;">
+                <span style="font-family: 'Cinzel', 'Trirong', serif; font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: #a68b56;">{{ fileCounter }}</span>
+                <span data-no-i18n="1" style="font-size: 13px; color: #d6cfc7; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{ curFileName }}</span>
+              </span>
+              <button type="button" aria-label="Previous file" onClick="{{ onPrevFile }}" disabled="{{ prevDisabled }}" style="flex: none; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; color: #c9c2ba; background: transparent; border: 1px solid rgba(198,168,116,.24); border-radius: 2px; cursor: pointer; transition-property: color, border-color, scale; transition-duration: 150ms;" style-hover="color: #fff; border-color: #a68b56;" style-active="scale: .94;">
+                <svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M10 3L5 8l5 5"></path></svg>
+              </button>
+              <button type="button" onClick="{{ onNextFile }}" disabled="{{ nextDisabled }}" style="flex: none; display: flex; align-items: center; gap: 8px; white-space: nowrap; padding: 10px 14px; font-family: 'Cinzel', 'Trirong', serif; font-size: 11px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: #ffffff; background: #a3121f; border: 1px solid #e2453f; border-radius: 2px; cursor: pointer; transition-property: background, opacity, scale; transition-duration: 150ms;" style-hover="background: #c01a28;" style-active="scale: .96;">
+                {{ nextFileLabel }}
+                <svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3l5 5-5 5"></path></svg>
+              </button>
+            </div>
+          </sc-if>
           <div role="group" aria-label="Language" style="flex: none; display: flex; gap: 2px; padding: 2px; border: 1px solid rgba(198,168,116,.28); border-radius: 3px;">
             <button type="button" aria-pressed="{{ isEn }}" onClick="{{ setEn }}" style="padding: 5px 10px; font-size: 13px; font-weight: 600; color: {{ enInk }}; background: {{ enBg }}; border: none; border-radius: 2px; cursor: pointer; transition-property: color, background; transition-duration: 150ms;">EN</button>
             <button type="button" aria-pressed="{{ isTh }}" onClick="{{ setTh }}" style="padding: 5px 10px; font-family: 'Trirong', serif; font-size: 13px; font-weight: 600; color: {{ thInk }}; background: {{ thBg }}; border: none; border-radius: 2px; cursor: pointer; transition-property: color, background; transition-duration: 150ms;">ไทย</button>
@@ -513,7 +623,7 @@
                       <sc-for list="{{ p.hits }}" as="h" hint-placeholder-count="0">
                         <div role="button" tabIndex="0" data-hit="{{ h.hid }}" aria-label="{{ h.aria }}" onPointerDown="{{ h.onDown }}" onKeyDown="{{ h.onKey }}" style="position: absolute; left: {{ h.left }}%; top: {{ h.top }}%; width: {{ h.w }}%; height: {{ h.h }}%; border: 1.5px {{ h.lineStyle }} {{ h.border }}; background: {{ h.bg }}; border-radius: 3px; cursor: grab; touch-action: none; transform: rotate({{ h.rot }}deg); transition-property: border-color, background; transition-duration: 150ms;" style-hover="border-color: rgba(27,47,107,.5);">
                           <sc-if value="{{ h.selected }}" hint-placeholder-val="{{ false }}">
-                            <div aria-label="Resize" onPointerDown="{{ h.onResize }}" style="position: absolute; right: -8px; bottom: -8px; width: 16px; height: 16px; background: #fbf7f2; border: 2px solid #a3121f; border-radius: 3px; box-shadow: 0 2px 6px rgba(0,0,0,.3); cursor: nwse-resize; touch-action: none;"></div>
+                            <div aria-label="Resize" onPointerDown="{{ h.onResize }}" style="position: absolute; right: -20px; bottom: -20px; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; cursor: nwse-resize; touch-action: none;"><span aria-hidden="true" style="width: 16px; height: 16px; background: #fbf7f2; border: 2px solid #a3121f; border-radius: 3px; box-shadow: 0 2px 6px rgba(0,0,0,.3); pointer-events: none;"></span></div>
                             <div aria-hidden="true" style="position: absolute; left: -5px; top: -5px; width: 10px; height: 10px; background: #fbf7f2; border: 2px solid #a3121f; border-radius: 50%;"></div>
                             <div aria-hidden="true" style="position: absolute; right: -5px; top: -5px; width: 10px; height: 10px; background: #fbf7f2; border: 2px solid #a3121f; border-radius: 50%;"></div>
                             <div aria-hidden="true" style="position: absolute; left: -5px; bottom: -5px; width: 10px; height: 10px; background: #fbf7f2; border: 2px solid #a3121f; border-radius: 50%;"></div>
@@ -960,7 +1070,341 @@ class Component extends DCLogic {
     { key: 'reenie', label: 'Messy', family: 'Reenie Beanie', weight: 400, scale: 1.12, ink: '#1b2f6b' },
     { key: 'apple', label: 'Cursive', family: 'Homemade Apple', weight: 400, scale: 0.66, ink: '#1b2f6b' },
     { key: 'normal', label: 'Normal font', family: 'Arial', weight: 400, scale: 0.74, ink: '#111111', typed: true },
+    { key: 'mine', label: 'My handwriting', family: 'Caveat', weight: 600, scale: 1, ink: '#1b2f6b', mine: true },
   ];
+
+  static HW_SETS = {
+    lower: 'abcdefghijklmnopqrstuvwxyz'.split(''),
+    upper: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split(''),
+    num: '0123456789'.split(''),
+    sym: ['.', ',', '!', '?', "'", '"', '-', '(', ')', ':', ';', '/', '+', '=', '%', '&', '@', '#', '$', '*', '_'],
+  };
+
+  hwBase() { return 'sanguine-hw:' + String(this.state.email || '').trim().toLowerCase(); }
+  hwKeyFor(id) { return id === 'f1' ? this.hwBase() : this.hwBase() + ':' + id; }
+  hwMeta() {
+    const mk = this.hwBase() + '#meta';
+    if (this._metaFor !== mk) {
+      this._metaFor = mk;
+      let m = null;
+      try { m = JSON.parse(localStorage.getItem(mk) || 'null'); } catch (e) {}
+      this._meta = m && m.list && m.list.length ? m : { active: 'f1', list: [{ id: 'f1', name: 'My handwriting' }] };
+    }
+    return this._meta;
+  }
+  hwMetaSave() { try { localStorage.setItem(this._metaFor, JSON.stringify(this._meta)); } catch (e) {} }
+  hwActive() { const m = this.hwMeta(); return m.list.find(f => f.id === m.active) || m.list[0]; }
+  hwDataFor(id) {
+    const k = this.hwKeyFor(id);
+    this._hwc = this._hwc || {};
+    if (!this._hwc[k]) { try { this._hwc[k] = JSON.parse(localStorage.getItem(k) || '{}') || {}; } catch (e) { this._hwc[k] = {}; } }
+    return this._hwc[k];
+  }
+  hwData() { return this.hwDataFor(this.hwActive().id); }
+  hwReset() { this._metaFor = null; this._meta = null; this._hwc = {}; this._cells = {}; this._live = null; this._confirmDel = false; }
+  hwPersist() { try { localStorage.setItem(this.hwKeyFor(this.hwActive().id), JSON.stringify(this.hwData())); } catch (e) {} }
+  hwRepaintAll() { Object.keys(this._cells || {}).forEach(k => { const q = k.split('|'); this.hwPaintCell(q[0], Number(q[1])); }); }
+  handList() {
+    return Component.HANDS.filter(h => h.key !== 'mine').concat(this.hwMeta().list.map(f => ({ key: 'mine:' + f.id, label: f.name, family: 'Caveat', weight: 600, scale: 1, ink: '#1b2f6b', mine: true, fontId: f.id })));
+  }
+  hwAll() { return [].concat(Component.HW_SETS.lower, Component.HW_SETS.upper, Component.HW_SETS.num, Component.HW_SETS.sym); }
+  hwSetOf(ch) { const S = Component.HW_SETS; return Object.keys(S).find(k => S[k].includes(ch)) || 'lower'; }
+
+  hwPathD(strokes, pad) {
+    return (strokes || []).map(st => st.map((p, i) => (i ? 'L' : 'M') + p[0] + ' ' + p[1]).join(' ') + (st.length === 1 ? ' l0.001 0' : '')).join(' ');
+  }
+
+  hwDrawStrokes(ctx, strokes, px, py, ux, uy) {
+    strokes.forEach(st => {
+      if (!st.length) return;
+      ctx.beginPath();
+      ctx.moveTo(px(st[0][0]), py(st[0][1]));
+      if (st.length === 1) ctx.lineTo(px(st[0][0]) + 0.1, py(st[0][1]));
+      for (let i = 1; i < st.length - 1; i++) {
+        const mx = (st[i][0] + st[i + 1][0]) / 2, my = (st[i][1] + st[i + 1][1]) / 2;
+        ctx.quadraticCurveTo(px(st[i][0]), py(st[i][1]), px(mx), py(my));
+      }
+      if (st.length > 1) ctx.lineTo(px(st[st.length - 1][0]), py(st[st.length - 1][1]));
+      ctx.stroke();
+    });
+  }
+
+  // Draws one word from the account's saved samples, picking a random variant per character.
+  fillWord(ctx, word, size, seed, force) {
+    const hi = this.handInfo();
+    if (!force && !hi.mine) { ctx.fillText(word, 0, 0); return; }
+    const H = this.hwDataFor(force ? this.hwActive().id : (hi.fontId || this.hwActive().id));
+    const U = size * 1.5;
+    ctx.save();
+    ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+    ctx.lineWidth = Math.max(1.2, size * 0.065);
+    let x = 0;
+    word.split('').forEach((ch, i) => {
+      const adv = ctx.measureText(ch).width;
+      const vs = (H[ch] || []).filter(Boolean);
+      if (!vs || !vs.length) { ctx.fillText(ch, x, 0); x += adv; return; }
+      const v = vs[Math.floor(this.rnd(seed * 131 + i * 17 + 7) * vs.length) % vs.length];
+      const gw = Math.max(0.001, (v.b[1] - v.b[0]) * U);
+      const kx = Math.min(1, (adv * 1.1) / gw);
+      const ox = x + (adv - gw * kx) / 2;
+      this.hwDrawStrokes(ctx, v.s, a => ox + (a - v.b[0]) * U * kx, b => (b - 0.72) * U);
+      x += adv;
+    });
+    ctx.restore();
+  }
+
+  hwPaintPad() {
+    const c = this._padEl; if (!c) return;
+    const ctx = c.getContext('2d'), W = c.width;
+    ctx.clearRect(0, 0, W, W);
+    ctx.fillStyle = '#f3ecdc'; ctx.fillRect(0, 0, W, W);
+    ctx.font = "600 " + Math.round(W * 0.78) + "px 'Caveat', cursive";
+    ctx.fillStyle = 'rgba(40,30,20,.07)'; ctx.textAlign = 'center'; ctx.textBaseline = 'alphabetic';
+    ctx.fillText(this.state.hwChar || 'a', W / 2, W * 0.72);
+    ctx.textAlign = 'left';
+    [[0.2, 'rgba(163,18,31,.25)'], [0.45, 'rgba(40,30,20,.18)'], [0.72, 'rgba(163,18,31,.5)']].forEach(([y, col]) => {
+      ctx.strokeStyle = col; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(0, y * W); ctx.lineTo(W, y * W); ctx.stroke();
+    });
+    ctx.strokeStyle = '#1b2f6b'; ctx.lineWidth = W * 0.016; ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+    this.hwDrawStrokes(ctx, (this._ps || []).concat(this._cur ? [this._cur] : []), a => a * W, b => b * W);
+  }
+
+  hwPadRef = el => {
+    if (!el || this._padEl === el) return;
+    this._padEl = el;
+    const pt = e => { const r = el.getBoundingClientRect(); return [Math.round(((e.clientX - r.left) / r.width) * 1000) / 1000, Math.round(((e.clientY - r.top) / r.height) * 1000) / 1000]; };
+    el.addEventListener('pointerdown', e => { e.preventDefault(); try { el.setPointerCapture(e.pointerId); } catch (x) {} this._cur = [pt(e)]; this.hwPaintPad(); });
+    el.addEventListener('pointermove', e => {
+      if (!this._cur) return;
+      const p = pt(e), l = this._cur[this._cur.length - 1];
+      if (Math.hypot(p[0] - l[0], p[1] - l[1]) > 0.006) { this._cur.push(p); this.hwPaintPad(); }
+    });
+    const end = () => { if (!this._cur) return; (this._ps = this._ps || []).push(this._cur); this._cur = null; this.hwPaintPad(); };
+    el.addEventListener('pointerup', end);
+    el.addEventListener('pointercancel', end);
+    this.hwPaintPad();
+  };
+
+  hwCellRef(ch, i) {
+    const key = ch + '|' + i;
+    this._cr = this._cr || {}; this._cells = this._cells || {};
+    if (!this._cr[key]) this._cr[key] = el => {
+      if (!el || this._cells[key] === el) return;
+      this._cells[key] = el;
+      const pt = e => { const r = el.getBoundingClientRect(); return [Math.round(((e.clientX - r.left) / r.width) * 1000) / 1000, Math.round(((e.clientY - r.top) / r.height) * 1000) / 1000]; };
+      el.addEventListener('pointerdown', e => { e.preventDefault(); try { el.setPointerCapture(e.pointerId); } catch (x) {} this._live = { key, pts: [pt(e)] }; this.hwPaintCell(ch, i); });
+      el.addEventListener('pointermove', e => {
+        const L = this._live; if (!L || L.key !== key) return;
+        const p = pt(e), l = L.pts[L.pts.length - 1];
+        if (Math.hypot(p[0] - l[0], p[1] - l[1]) > 0.008) { L.pts.push(p); this.hwPaintCell(ch, i); }
+      });
+      const end = () => {
+        const L = this._live; if (!L || L.key !== key) return;
+        this._live = null;
+        const H = this.hwData(); H[ch] = H[ch] || [];
+        const en = H[ch][i] || { s: [], b: [1, 0] };
+        en.s.push(L.pts);
+        let x0 = 9, x1 = -9;
+        en.s.forEach(st => st.forEach(q => { x0 = Math.min(x0, q[0]); x1 = Math.max(x1, q[0]); }));
+        if (x1 - x0 < 0.04) { const m = (x0 + x1) / 2; x0 = m - 0.02; x1 = m + 0.02; }
+        en.b = [x0, x1];
+        for (let k = 0; k < 10; k++) if (H[ch][k] === undefined) H[ch][k] = null;
+        H[ch][i] = en;
+        this.hwPersist(); this.hwPaintCell(ch, i);
+        this.setState(st => ({ hwTick: (st.hwTick || 0) + 1 }), () => this.hwPaintPrev());
+      };
+      el.addEventListener('pointerup', end);
+      el.addEventListener('pointercancel', end);
+      this.hwPaintCell(ch, i);
+    };
+    return this._cr[key];
+  }
+
+  hwPaintCell(ch, i) {
+    const key = ch + '|' + i, c = this._cells && this._cells[key]; if (!c) return;
+    const ctx = c.getContext('2d'), W = c.width, H = this.hwData();
+    ctx.clearRect(0, 0, W, W); ctx.fillStyle = '#f3ecdc'; ctx.fillRect(0, 0, W, W);
+    ctx.font = '600 ' + Math.round(W * 0.78) + "px 'Caveat', cursive";
+    ctx.fillStyle = 'rgba(40,30,20,.08)'; ctx.textAlign = 'center'; ctx.textBaseline = 'alphabetic';
+    ctx.fillText(ch, W / 2, W * 0.72); ctx.textAlign = 'left';
+    [[0.2, 'rgba(163,18,31,.22)'], [0.45, 'rgba(40,30,20,.15)'], [0.72, 'rgba(163,18,31,.5)']].forEach(([y, col]) => {
+      ctx.strokeStyle = col; ctx.lineWidth = 1.5; ctx.beginPath(); ctx.moveTo(0, y * W); ctx.lineTo(W, y * W); ctx.stroke();
+    });
+    const en = H[ch] && H[ch][i], L = this._live && this._live.key === key ? this._live.pts : null;
+    const strokes = (en ? en.s : []).concat(L ? [L] : []);
+    ctx.strokeStyle = '#1b2f6b'; ctx.lineWidth = W * 0.03; ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+    this.hwDrawStrokes(ctx, strokes, a => a * W, b => b * W);
+  }
+
+  hwPrevRef = el => { if (el) { this._prevEl = el; this.hwPaintPrev(); } };
+
+  hwPaintPrev() {
+    const c = this._prevEl; if (!c) return;
+    const ctx = c.getContext('2d'), size = 84;
+    ctx.clearRect(0, 0, c.width, c.height);
+    ctx.fillStyle = '#f3ecdc'; ctx.fillRect(0, 0, c.width, c.height);
+    ctx.font = '600 ' + size + "px 'Caveat', cursive";
+    ctx.fillStyle = '#1b2f6b'; ctx.textBaseline = 'alphabetic';
+    const space = ctx.measureText(' ').width, lh = size * 1.55, pad = 50;
+    let x = pad, y = size * 1.1, wi = 0;
+    String(this.state.hwText || '').split(' ').forEach(w => {
+      if (!w) return;
+      const ww = ctx.measureText(w).width;
+      if (x + ww > c.width - pad && x > pad) { x = pad; y += lh; }
+      ctx.save(); ctx.translate(x, y);
+      this.fillWord(ctx, w, size, (this._hwSeed || 1) * 977 + wi++, true);
+      ctx.restore();
+      x += ww + space;
+    });
+  }
+
+  hwNextChar(from) {
+    const H = this.hwData(), all = this.hwAll(), i0 = all.indexOf(from);
+    for (let k = 1; k <= all.length; k++) {
+      const ch = all[(i0 + k) % all.length];
+      if (((H[ch] || []).filter(Boolean).length) < 10) return ch;
+    }
+    return from;
+  }
+
+  hwVals() {
+    const s = this.state, H = this.hwData(), cur = s.hwChar || 'a', set = s.hwSet || 'lower';
+    const cnt = ch => Math.min(10, (H[ch] || []).filter(Boolean).length);
+    const all = this.hwAll();
+    const done = all.reduce((n, ch) => n + cnt(ch), 0), full = all.filter(ch => cnt(ch) >= 10).length;
+    const tab = (k, label) => ({ label, ink: set === k ? '#ffffff' : '#c9c2ba', bg: set === k ? 'rgba(163,18,31,.28)' : 'transparent', pick: () => this.setState({ hwSet: k }) });
+    const have = H[cur] || [];
+    const rows = Component.HW_SETS[set].map(ch => ({
+      ch, count: cnt(ch), ink: cnt(ch) >= 10 ? '#d8c397' : '#c9c2ba',
+      clear: () => { H[ch] = []; this.hwPersist(); for (let i = 0; i < 10; i++) this.hwPaintCell(ch, i); this.setState(st => ({ hwTick: (st.hwTick || 0) + 1 }), () => this.hwPaintPrev()); },
+      cells: Array.from({ length: 10 }, (_, i) => {
+        const f = !!(H[ch] && H[ch][i]);
+        return { ref: this.hwCellRef(ch, i), aria: ch + ' sample ' + (i + 1), border: f ? 'rgba(166,139,86,.7)' : 'rgba(198,168,116,.25)', eraseShow: f ? 'block' : 'none',
+          erase: () => { if (H[ch]) H[ch][i] = null; this.hwPersist(); this.hwPaintCell(ch, i); this.setState(st => ({ hwTick: (st.hwTick || 0) + 1 }), () => this.hwPaintPrev()); } };
+      }),
+    }));
+    const pickChar = ch => { this._ps = []; this._cur = null; this.setState({ hwChar: ch, hwSet: this.hwSetOf(ch) }, () => this.hwPaintPad()); };
+    return {
+      isHand: s.screen === 'hand',
+      hwProgressLabel: done + ' of ' + all.length * 10 + ' samples written',
+      hwCompleteLabel: full + ' of ' + all.length + ' characters complete',
+      hwProgressPct: (done / (all.length * 10) * 100).toFixed(1) + '%',
+      hwCharLabel: cur,
+      hwCount: cnt(cur),
+      hwSaveLabel: cnt(cur) >= 9 ? 'Save last sample' : 'Save sample ' + (cnt(cur) + 1) + ' of 10',
+      hwRows: rows,
+      hwFonts: this.hwMeta().list.map(f => { const on = f.id === this.hwMeta().active; return { name: f.name || 'Untitled', ink: on ? '#ffffff' : '#c9c2ba', bg: on ? 'rgba(163,18,31,.28)' : 'transparent', border: on ? '#a3121f' : 'rgba(198,168,116,.28)', pick: () => { this.hwMeta().active = f.id; this.hwMetaSave(); this._confirmDel = false; this.setState(st => ({ hwTick: (st.hwTick || 0) + 1, hwMsg: '' }), () => { this.hwRepaintAll(); this.hwPaintPrev(); }); } }; }),
+      hwName: this.hwActive().name,
+      hwDeleteLabel: this._confirmDel ? 'Confirm delete' : 'Delete',
+      onFontName: e => { this.hwActive().name = e.target.value; this.hwMetaSave(); this.setState(st => ({ hwTick: (st.hwTick || 0) + 1 })); },
+      onFontNew: () => {
+        const m = this.hwMeta(), id = 'f' + Date.now().toString(36);
+        m.list.push({ id, name: 'Handwriting ' + (m.list.length + 1) }); m.active = id; this.hwMetaSave(); this._confirmDel = false;
+        this.setState(st => ({ hwTick: (st.hwTick || 0) + 1, hwMsg: '', hwSet: 'lower', hwChar: 'a' }), () => { this.hwRepaintAll(); this.hwPaintPrev(); });
+      },
+      onFontDelete: () => {
+        const m = this.hwMeta();
+        if (m.list.length < 2) { this.setState({ hwMsg: 'Keep at least one handwriting.' }); return; }
+        if (!this._confirmDel) { this._confirmDel = true; this.setState(st => ({ hwTick: (st.hwTick || 0) + 1 })); return; }
+        const id = m.active, k = this.hwKeyFor(id);
+        try { localStorage.removeItem(k); } catch (e) {}
+        if (this._hwc) delete this._hwc[k];
+        m.list = m.list.filter(f => f.id !== id); m.active = m.list[0].id; this.hwMetaSave(); this._confirmDel = false;
+        if (this.state.hand === 'mine:' + id) { this.setState({ hand: 'caveat' }); try { localStorage.setItem(this.hwBase() + '#hand', 'caveat'); } catch (e) {} }
+        this.setState(st => ({ hwTick: (st.hwTick || 0) + 1, hwMsg: 'Deleted.' }), () => { this.hwRepaintAll(); this.hwPaintPrev(); });
+      },
+      hwMsg: s.hwMsg || '',
+      hwFileRef: el => { this._hwFile = el; },
+      onHwImport: () => this._hwFile && this._hwFile.click(),
+      onHwExport: () => {
+        const H = this.hwData(), g = {}, K = 0.7, r = v => Math.round(v * 1000) / 1000;
+        this.hwAll().forEach(ch => {
+          const vs = (H[ch] || []).filter(Boolean);
+          if (vs.length) g[ch] = vs.map(v => ({ s: v.s.map(st => [].concat.apply([], st.map(q => [r(q[0] / K), r((q[1] - 0.72) / K)]))), x0: r(v.b[0] / K), x1: r(v.b[1] / K) }));
+        });
+        const n = Object.keys(g).length;
+        if (!n) { this.setState({ hwMsg: 'Nothing to export yet. Write some characters first.' }); return; }
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(new Blob([JSON.stringify({ kind: 'sanguine-handwriting', v: 1, name: this.hwActive().name, glyphs: g })], { type: 'application/json' }));
+        a.download = (this.hwActive().name || 'my-handwriting').replace(/[^\w\-]+/g, '-') + '.json'; document.body.appendChild(a); a.click(); a.remove();
+        this.setState({ hwMsg: 'Exported ' + n + ' characters.' });
+      },
+      onHwFile: e => {
+        const f = e.target.files && e.target.files[0]; e.target.value = '';
+        if (!f) return;
+        const rd = new FileReader();
+        rd.onload = () => {
+          try {
+            const j = JSON.parse(String(rd.result)), g = j && j.glyphs;
+            if (!g || typeof g !== 'object') throw new Error('x');
+            const K = 0.7, H = {}; let n = 0;
+            Object.keys(g).forEach(ch => {
+              if (!Array.isArray(g[ch])) return;
+              const vs = g[ch].slice(0, 10).map(v => {
+                const st = (v.s || []).map(fl => { const o = []; for (let i = 0; i + 1 < fl.length; i += 2) o.push([Math.round(fl[i] * K * 1000) / 1000, Math.round((0.72 + fl[i + 1] * K) * 1000) / 1000]); return o; }).filter(a => a.length);
+                if (!st.length) return null;
+                let x0 = v.x0 != null ? v.x0 * K : 9, x1 = v.x1 != null ? v.x1 * K : -9;
+                if (v.x0 == null) st.forEach(a => a.forEach(q => { x0 = Math.min(x0, q[0]); x1 = Math.max(x1, q[0]); }));
+                if (x1 - x0 < 0.04) { const m = (x0 + x1) / 2; x0 = m - 0.02; x1 = m + 0.02; }
+                return { s: st, b: [x0, x1] };
+              });
+              while (vs.length < 10) vs.push(null);
+              if (vs.some(Boolean)) { H[ch] = vs; n++; }
+            });
+            if (!n) throw new Error('x');
+            const m = this.hwMeta(), id = 'f' + Date.now().toString(36), nm = String(j.name || f.name.replace(/\.json$/i, '')).slice(0, 40);
+            m.list.push({ id, name: nm }); m.active = id; this.hwMetaSave();
+            this._hwc = this._hwc || {}; this._hwc[this.hwKeyFor(id)] = H; this.hwPersist();
+            this.hwRepaintAll();
+            this.setState(st => ({ hwMsg: 'Imported “' + nm + '” as a new handwriting (' + n + ' characters).', hwTick: (st.hwTick || 0) + 1 }), () => this.hwPaintPrev());
+          } catch (err) { this.setState({ hwMsg: 'That file is not a handwriting file.' }); }
+        };
+        rd.readAsText(f);
+      },
+      hwTabs: [tab('lower', 'a–z'), tab('upper', 'A–Z'), tab('num', '0–9'), tab('sym', 'Symbols')],
+      hwChars: Component.HW_SETS[set].map(ch => ({
+        ch, count: cnt(ch) >= 10 ? '✓' : String(cnt(ch)), aria: ch + ', ' + cnt(ch) + ' of 10',
+        ink: ch === cur ? '#ffffff' : '#c9c2ba',
+        bg: ch === cur ? 'rgba(163,18,31,.28)' : cnt(ch) >= 10 ? 'rgba(166,139,86,.12)' : 'transparent',
+        border: ch === cur ? '#a3121f' : 'rgba(198,168,116,.22)',
+        countInk: cnt(ch) >= 10 ? '#d8c397' : '#8f8680',
+        pick: () => pickChar(ch),
+      })),
+      hwSlots: Array.from({ length: 10 }, (_, i) => {
+        const v = have[i];
+        return {
+          n: i + 1, d: v ? this.hwPathD(v.s) : '',
+          bg: v ? '#f3ecdc' : 'transparent', border: v ? '#a68b56' : 'rgba(198,168,116,.22)',
+          numInk: v ? '#6b5a3c' : '#8f8680', cursor: v ? 'pointer' : 'default',
+          title: v ? 'Delete sample ' + (i + 1) : 'Sample ' + (i + 1) + ' not written yet',
+          remove: () => { if (!v) return; H[cur].splice(i, 1); this.hwPersist(); this.setState(st => ({ hwTick: (st.hwTick || 0) + 1 }), () => this.hwPaintPrev()); },
+        };
+      }),
+      hwText: s.hwText == null ? 'The quick brown fox jumps over 13 lazy dogs, again & again!' : s.hwText,
+      onHwText: e => this.setState({ hwText: e.target.value }, () => this.hwPaintPrev()),
+      onHwReroll: () => { this._hwSeed = (this._hwSeed || 1) + 1; this.hwPaintPrev(); },
+      onHwOpen: () => { this.hwData(); this._ps = []; this._cur = null; this.setState({ screen: 'hand' }, () => { this.hwPaintPad(); this.hwPaintPrev(); }); },
+      onHwBack: () => this.setState({ screen: 'vault' }),
+      onHwUndo: () => { if (this._ps && this._ps.length) { this._ps.pop(); this.hwPaintPad(); } },
+      onHwClear: () => { this._ps = []; this._cur = null; this.hwPaintPad(); },
+      onHwSave: () => {
+        const ps = (this._ps || []).filter(st => st.length);
+        if (!ps.length) return;
+        let x0 = 9, x1 = -9;
+        ps.forEach(st => st.forEach(p => { x0 = Math.min(x0, p[0]); x1 = Math.max(x1, p[0]); }));
+        if (x1 - x0 < 0.02) { x0 -= 0.02; x1 += 0.02; }
+        (H[cur] = H[cur] || []);
+        if (H[cur].length >= 10) H[cur].shift();
+        H[cur].push({ s: ps, b: [x0, x1] });
+        this.hwPersist();
+        this._ps = []; this._cur = null;
+        const nxt = H[cur].length >= 10 ? this.hwNextChar(cur) : cur;
+        this.setState(st => ({ hwChar: nxt, hwSet: this.hwSetOf(nxt), hwTick: (st.hwTick || 0) + 1 }), () => { this.hwPaintPad(); this.hwPaintPrev(); });
+      },
+      hwPadRef: this.hwPadRef,
+      hwPrevRef: this.hwPrevRef,
+    };
+  }
 
   static REAL = {
     imperfection: [
@@ -1491,7 +1935,7 @@ class Component extends DCLogic {
           ctx.rotate(rot);
           ctx.translate(-ww * sc / 2, 0);
           ctx.scale(sc, sc);
-          ctx.fillText(word, 0, 0);
+          this.fillWord(ctx, word, s.size, seed);
           if (strike) this.drawStrike(ctx, ww, s.size, seed);
           ctx.restore();
           pos.push({ x, w: ww * sc, on: !strike && !!marks && marks.has(si + ':' + wi), seed });
@@ -2629,7 +3073,7 @@ class Component extends DCLogic {
       .replace(/\^\{([0-9n+\-−]{1,6})\}|\^\(([0-9n+\-−]{1,6})\)|\^([+\-−]?[0-9n]+[+\-−]?|[+\-−])/g, (m, a, b, c) => (a || b || c).replace(/./g, ch => SUP[ch] || ch));
   }
   // Bump on every release: debug reports carry it, so a report from an older file is spotted at once.
-  static BUILD = '2026-09-28a';
+  static BUILD = '2026-10-02a';
   static MARKS_RE = /^\s*[\[(]\s*\d{1,3}\s*(marks?|pts?|points?|คะแนน)?\s*[\])]\s*$|^\s*\d{1,3}\s*(marks?|pts?|points?|คะแนน)\s*$/i;
   static Q_RE = /^\s*(ข้อ\s*|Q\s*)?\(?\d{1,3}\s*[.)]/i;
   static OPT_RE = /(^|\s)\(?([กขคงจฉ]|[A-Fa-f])\s*[.)](?=\s|$)/g;
@@ -5421,7 +5865,7 @@ class Component extends DCLogic {
   async saveToHistory(answers) {
     const pages = this.state.pages || [];
     if (!pages.length) return;
-    const file = this.state.files[0] || {};
+    const file = this.curFile();
     const email = String(this.state.email || '').trim().toLowerCase();
     const isNew = !this._entryId;
     const id = this._entryId || (this._entryId = Date.now() + '-' + Math.random().toString(36).slice(2, 7));
@@ -5441,7 +5885,7 @@ class Component extends DCLogic {
       level, hand,
       pages: blobs,
       source: file.raw ? { blob: file.raw, name: file.name, type: file.type || file.raw.type || '' } : null,
-      sources: this.state.files.filter(x => x.raw).map(x => ({ blob: x.raw, name: x.name, type: x.type || x.raw.type || '' })),
+      sources: this.combineOn() ? this.state.files.filter(x => x.raw).map(x => ({ blob: x.raw, name: x.name, type: x.type || x.raw.type || '' })) : file.raw ? [{ blob: file.raw, name: file.name, type: file.type || file.raw.type || '' }] : [],
     };
     try {
       await this.tx('readwrite', st => st.put(entry));
@@ -5530,7 +5974,7 @@ class Component extends DCLogic {
         const c = this.composite(p, this.state.answers.filter(a => (a.page || 1) === i + 1));
         return { w: c.width, h: c.height, dataUrl: c.toDataURL('image/jpeg', 0.88) };
       });
-      await this.buildPdf(imgs, (this.state.files[0] || {}).name);
+      await this.buildPdf(imgs, this.curFile().name);
       this.flushSave();
       this.toast('success', 'PDF downloaded', 'This version is also in your History.');
     } catch (err) {
@@ -6041,7 +6485,7 @@ class Component extends DCLogic {
     };
     const row = g => Object.assign({ hasPicker: false, pickerValue: '#000000', onPicker: () => {}, pickerLabel: '' }, g);
     if (tab === 'pen') return [
-      { title: 'Handwriting', note: 'Each style is sized to fit the answer boxes.', opts: Component.HANDS.map(h => opt('hand', h, h.label, {
+      { title: 'Handwriting', note: 'Each style is sized to fit the answer boxes.', opts: this.handList().map(h => opt('hand', h, h.label, {
         hasSample: true, family: "'" + h.family + "', " + (h.typed ? 'Helvetica, sans-serif' : 'cursive'), weight: h.weight, sampleSize: Math.round(24 * h.scale) + 'px',
       })) },
       { title: 'Thai handwriting', note: this.realPick('thaihand').note, opts: Component.REAL.thaihand.map(o => opt('thaihand', o, null, {
@@ -6099,6 +6543,9 @@ class Component extends DCLogic {
  "Click to place a tick": "คลิกเพื่อวางเครื่องหมายถูก", "Click to place a cross": "คลิกเพื่อวางกากบาท", "Zoom in": "ขยาย", "Zoom out": "ย่อ",
  "Debug report": "รายงานดีบัก",
  "Workflow trace": "ติดตามขั้นตอน",
+ "Next file": "ไฟล์ถัดไป", "Last file": "ไฟล์สุดท้าย",
+ "Separate files": "แยกไฟล์", "Combine into one": "รวมเป็นไฟล์เดียว", "Admin · Multiple files": "แอดมิน · หลายไฟล์",
+ "Each file is completed on its own. Use Next file on the result page.": "ทำแต่ละไฟล์แยกกัน กดไฟล์ถัดไปในหน้าผลลัพธ์",
  "Writing the worksheet fact sheet": "กำลังสรุปข้อมูลของใบงาน",
  "Answer length": "ความยาวคำตอบ",
  "Short": "สั้น",
@@ -6413,6 +6860,7 @@ class Component extends DCLogic {
     [/^Unlimited$/, 'ไม่จำกัด'],
     [/^(\d+) pages per upload$/, 'สูงสุด $1 หน้าต่อครั้ง'],
     [/^Stage (\d+) of (\d+)$/, 'ขั้นที่ $1 จาก $2'],
+    [/^File (\d+) of (\d+)$/, 'ไฟล์ $1 จาก $2'],
     [/^(\d+) answers? written$/, 'เขียนแล้ว $1 คำตอบ'],
     [/^(\d+) to check$/, 'ต้องตรวจ $1 รายการ'],
     [/^(\d+) worksheets?$/, '$1 ใบงาน'],
@@ -6859,7 +7307,9 @@ class Component extends DCLogic {
   }
 
   handInfo() {
-    return Component.HANDS.find(h => h.key === (this._handOv || this.state.hand)) || Component.HANDS[0];
+    const k = this._handOv || this.state.hand;
+    if (String(k).indexOf('mine:') === 0) { const f = this.hwMeta().list.find(x => 'mine:' + x.id === k) || this.hwActive(); return { key: k, label: f.name, family: 'Caveat', weight: 600, scale: 1, ink: '#1b2f6b', mine: true, fontId: f.id }; }
+    return Component.HANDS.find(h => h.key === k) || Component.HANDS[0];
   }
 
   handFont(size) {
@@ -7074,8 +7524,21 @@ class Component extends DCLogic {
     return byId;
   }
 
-  async runPipeline() {
-    const all = this.state.files.filter(x => x.raw);
+  combineOn() {
+    return this.acct().role === 'Admin' && this.state.fileMode === 'combine' && (this.state.files || []).filter(x => x.raw).length > 1;
+  }
+
+  curFile() {
+    const all = (this.state.files || []).filter(x => x.raw);
+    if (this.combineOn()) return { ...all[0], raw: all[0] && all[0].raw, name: all.map(x => x.name.replace(/\.[^.]+$/, '')).join(' + ').slice(0, 120) };
+    return all[Math.min(this.state.fileIdx || 0, Math.max(0, all.length - 1))] || {};
+  }
+
+  async runPipeline(idx) {
+    const files = this.state.files.filter(x => x.raw);
+    const fi = Math.max(0, Math.min(idx != null ? idx : (this.state.fileIdx || 0), files.length - 1));
+    if (this.state.fileIdx !== fi) await new Promise(r => this.setState({ fileIdx: fi }, r));
+    const all = this.combineOn() ? files : files.slice(fi, fi + 1);
     const first = all[0];
     if (!first) return;
     this.flushSave();
@@ -7092,7 +7555,7 @@ class Component extends DCLogic {
       }
       const cap = Math.min(this.acct().perUpload, this.remainingToday());
       if (src.pages.length > cap) {
-        this.toast('info', 'Only the first ' + cap + ' pages will be processed', 'The combined files have ' + src.pages.length + ' pages.');
+        this.toast('info', 'Only the first ' + cap + ' pages will be processed', (all.length > 1 ? 'The combined files have ' : '"' + first.name + '" has ') + src.pages.length + ' pages.');
         src.pages = src.pages.slice(0, cap);
       }
       if (!src.pages.length) throw new Error('No pages could be read from the uploaded files.');
@@ -7250,6 +7713,7 @@ class Component extends DCLogic {
       pwToggleLabel: s.showPw ? 'Hide' : 'Show',
       pwToggleAria: s.showPw ? 'Hide password' : 'Show password',
       onTogglePw: () => this.setState(st => ({ showPw: !st.showPw })),
+      ...this.hwVals(),
       isVault: s.screen === 'vault',
       email: s.email,
       password: s.password,
@@ -7289,13 +7753,13 @@ class Component extends DCLogic {
         })),
       })),
       typedNote: this.handInfo().typed,
-      hands: Component.HANDS.map(h => ({
+      hands: this.handList().map(h => ({
         key: h.key,
         label: h.label,
         family: "'" + h.family + "', " + (h.typed ? 'Helvetica, sans-serif' : 'cursive'),
         weight: h.weight,
         sampleSize: Math.round(26 * h.scale) + 'px',
-        pick: () => { this.setState({ hand: h.key }); try { document.fonts.load(h.weight + " 40px '" + h.family + "'"); } catch (e) {} },
+        pick: () => { this.setState({ hand: h.key }); try { localStorage.setItem(this.hwBase() + '#hand', h.key); } catch (e) {} try { document.fonts.load(h.weight + " 40px '" + h.family + "'"); } catch (e) {} },
         bg: s.hand === h.key ? 'rgba(163,18,31,.18)' : 'transparent',
         border: s.hand === h.key ? '#a3121f' : 'rgba(198,168,116,.22)',
         ink: s.hand === h.key ? '#ece6df' : '#8f8680',
@@ -7305,7 +7769,27 @@ class Component extends DCLogic {
 
       isProcess: s.screen === 'process',
       isResult: s.screen === 'result',
-      activeFileName: ((s.files[0] && s.files[0].name) || 'Worksheet') + (s.files.length > 1 ? ' + ' + (s.files.length - 1) + ' more' : ''),
+      activeFileName: (this.curFile().name || 'Worksheet') + (s.files.length > 1 && !this.combineOn() ? ' (file ' + ((s.fileIdx || 0) + 1) + ' of ' + s.files.length + ')' : ''),
+      ...(() => {
+        const n = s.files.filter(x => x.raw).length, i = s.fileIdx || 0;
+        const isAdm = this.acct().role === 'Admin';
+        const mode = s.fileMode === 'combine' ? 'combine' : 'separate';
+        const modeOpt = (k, label) => ({ label, on: mode === k, ink: mode === k ? '#ffffff' : '#c9c2ba', bg: mode === k ? 'rgba(163,18,31,.28)' : 'transparent', border: mode === k ? '#a3121f' : 'rgba(198,168,116,.24)', pick: () => this.setState({ fileMode: k }) });
+        const go = k => { this.flushSave(); this._entryId = null; this._traceRaw = null; this.runPipeline(k); };
+        return {
+          showFileMode: isAdm && n > 1,
+          fileModeOpts: [modeOpt('separate', 'Separate files'), modeOpt('combine', 'Combine into one')],
+          fileModeNote: mode === 'combine' ? 'All ' + n + ' files are merged into one worksheet, in the order listed, with one result and one PDF.' : 'Each file is completed on its own. Use Next file on the result page.',
+          multiFile: n > 1 && !this.combineOn(),
+          fileCounter: 'File ' + (i + 1) + ' of ' + n,
+          curFileName: this.curFile().name || 'Worksheet',
+          prevDisabled: !(i > 0),
+          nextDisabled: !(i < n - 1),
+          nextFileLabel: i < n - 1 ? 'Next file' : 'Last file',
+          onPrevFile: () => { if (i > 0) go(i - 1); },
+          onNextFile: () => { if (i < n - 1) go(i + 1); },
+        };
+      })(),
       stageCounter: 'Stage ' + Math.min(s.stageIdx + 1, Component.STAGES.length) + ' of ' + Component.STAGES.length,
       railPct: Math.round((Math.min(s.stageIdx, Component.STAGES.length - 1) / (Component.STAGES.length - 1)) * 100),
       stages: Component.STAGES.map((st, i) => {
@@ -7418,7 +7902,7 @@ class Component extends DCLogic {
         this.flushSave();
         this._entryId = null;
         this.releaseUrls();
-        this.setState({ screen: 'vault', files: [], stageIdx: 0, answers: [], apiError: '', pages: [], sourceText: '', stageNote: '', selId: null });
+        this.setState({ screen: 'vault', files: [], fileIdx: 0, stageIdx: 0, answers: [], apiError: '', pages: [], sourceText: '', stageNote: '', selId: null });
       },
 
       pageCap: this.acct().perUpload,
@@ -7678,7 +8162,7 @@ class Component extends DCLogic {
       selFonts: (() => {
         const a = s.answers.find(x => x.id === s.selId);
         const cur = (a && a.style && a.style.hand) || s.hand;
-        return Component.HANDS.map(h => ({
+        return this.handList().map(h => ({
           label: h.label, on: cur === h.key,
           family: "'" + h.family + "', " + (h.typed ? 'sans-serif' : 'cursive'),
           ink: cur === h.key ? '#ece6df' : '#b3aaa3', bg: cur === h.key ? 'rgba(163,18,31,.22)' : 'transparent', border: cur === h.key ? '#a3121f' : 'rgba(198,168,116,.2)',
@@ -7735,11 +8219,11 @@ class Component extends DCLogic {
           const ok = Component.LEDGER.some(
             u => u.email.toLowerCase() === s.email.trim().toLowerCase() && u.hash === h
           );
-          if (ok) this.setState({ busy: false, screen: 'vault' });
+          if (ok) { this.hwReset(); let hd = null; try { hd = localStorage.getItem(this.hwBase() + '#hand'); } catch (e) {} if (hd && String(hd).indexOf('mine:') === 0 && !this.hwMeta().list.some(f => 'mine:' + f.id === hd)) hd = null; this.setState({ busy: false, screen: 'vault', hand: hd || 'caveat' }); }
           else this.setState({ busy: false, error: 'That email or password is incorrect. Check both and try again.' });
         }, () => this.setState({ busy: false, error: 'This browser cannot check passwords here. Open the page over https.' }));
       },
-      onSignOut: () => { this.flushSave(); this._entryId = null; this.setState({ screen: 'login', password: '', files: [], sealed: false, selId: null }); },
+      onSignOut: () => { this.flushSave(); this._entryId = null; this.hwReset(); this.setState({ screen: 'login', password: '', files: [], sealed: false, selId: null, hand: 'caveat', hwMsg: '' }); },
 
       onPick: () => this.fileRef.current && this.fileRef.current.click(),
       onInputChange: e => { this.addFiles(e.target.files); e.target.value = ''; },
@@ -7747,7 +8231,7 @@ class Component extends DCLogic {
       onDragLeave: e => { e.preventDefault(); this.setState({ dragging: false }); },
       onDrop: e => { e.preventDefault(); this.addFiles(e.dataTransfer.files); },
 
-      onSeal: () => this.runPipeline(),
+      onSeal: () => this.runPipeline(0),
       onClear: () => this.setState({ files: [], sealed: false }),
     };
   }

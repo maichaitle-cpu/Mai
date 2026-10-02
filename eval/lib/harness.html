@@ -7,7 +7,7 @@
 window.React = { createRef: () => ({ current: null }) };
 class DCLogic {
   constructor() { this.props = { allowMultiple: true, verifyPlacement: true, brandName: 'Sanguine Archive' }; }
-  setState(s) { const v = typeof s === 'function' ? s(this.state) : s; Object.assign(this.state, v || {}); }
+  setState(s, cb) { const v = typeof s === 'function' ? s(this.state) : s; Object.assign(this.state, v || {}); if (typeof cb === 'function') cb(); }
 }
 </script>
 <script src="/app.js"></script>

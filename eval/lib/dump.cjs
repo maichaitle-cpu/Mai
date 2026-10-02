@@ -14,7 +14,7 @@ async function main() {
   const res = await page.evaluate(async doc => {
     const comp = new __C();
     comp.toast = () => {};
-    { const acct0 = comp.acct.bind(comp); comp.acct = () => ({ ...acct0(), perUpload: 999, daily: 1e9 }); comp.remainingToday = () => 1e9; }
+    { const acct0 = comp.acct.bind(comp); comp.acct = () => ({ ...acct0(), role: 'Admin', perUpload: 999, daily: 1e9 }); comp.remainingToday = () => 1e9; }
     comp.state.email = 'eval@local';
     const blob = await (await fetch('/' + doc)).blob();
     const src = await comp.prepareSource(new File([blob], doc.split('/').pop(), { type: blob.type }));

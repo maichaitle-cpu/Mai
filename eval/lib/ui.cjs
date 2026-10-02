@@ -26,7 +26,7 @@ async function main() {
   fs.mkdirSync(outDir, { recursive: true });
   const gt = JSON.parse(fs.readFileSync(path.join(EVAL, 'fixtures', 'gt', name + '.json'), 'utf8'));
   // Expose the component instance so the test can drive it (class field runs in the constructor).
-  const html = fs.readFileSync(path.join(ROOT, 'app', 'Archive Portal v3.dc.html'), 'utf8')
+  const html = fs.readFileSync(path.join(ROOT, 'app', 'Archive Portal v4.dc.html'), 'utf8')
     .replace(/class Component extends DCLogic \{/, 'class Component extends DCLogic {\n  __uiExpose = (window.__comp = this, window.__C = this.constructor, 0);')
     .replace('<script src="./support.js"></script>', '<script src="./support.js"></script><script src="/lib/oracle.js"></script>');
   const { chromium } = require(path.join(require('child_process').execSync('npm root -g').toString().trim(), 'playwright'));
@@ -43,6 +43,7 @@ async function main() {
       const rel = decodeURIComponent(url.slice('http://eval.local/'.length).split('?')[0]);
       if (rel === 'app/index.html') return route.fulfill({ body: html, contentType: 'text/html' });
       if (rel === 'app/support.js') return route.fulfill({ body: fs.readFileSync(path.join(ROOT, 'app', 'support.js')), contentType: 'application/javascript' });
+      if (rel.startsWith('app/assets/') && fs.existsSync(path.join(ROOT, rel))) return route.fulfill({ body: fs.readFileSync(path.join(ROOT, rel)) });
       const file = rel.startsWith('lib/') ? path.join(EVAL, rel) : path.join(EVAL, 'fixtures', rel);
       if (fs.existsSync(file)) return route.fulfill({ body: fs.readFileSync(file) });
       return route.fulfill({ status: 404, body: 'missing' });

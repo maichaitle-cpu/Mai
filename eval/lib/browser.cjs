@@ -4,7 +4,7 @@ const path = require('path');
 
 const EVAL = path.resolve(__dirname, '..');
 const ROOT = path.resolve(EVAL, '..');
-const APP_FILE = process.env.APP_FILE || path.join(ROOT, 'app', 'Archive Portal v3.dc.html');
+const APP_FILE = process.env.APP_FILE || path.join(ROOT, 'app', 'Archive Portal v4.dc.html');
 
 function loadPlaywright() {
   try { return require('playwright'); } catch (e) {}

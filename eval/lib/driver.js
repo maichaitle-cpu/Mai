@@ -4,7 +4,7 @@ window.__runDoc = async function (opts) {
   const calls = [];
   const comp = new __C();
   window.__lastComp = comp;
-    { const acct0 = comp.acct.bind(comp); comp.acct = () => ({ ...acct0(), perUpload: 999, daily: 1e9 }); comp.remainingToday = () => 1e9; }
+    { const acct0 = comp.acct.bind(comp); comp.acct = () => ({ ...acct0(), role: 'Admin', perUpload: 999, daily: 1e9 }); comp.remainingToday = () => 1e9; }
   comp.toast = () => {};
   const oracle = gt ? __makeOracle(gt, oracleCfg || {}, comp) : null;
   const PRICE = { 'claude-sonnet-4-5': [3, 15], 'claude-sonnet-4-6': [3, 15], 'claude-sonnet-5': [2, 10], 'claude-haiku-4-5': [1, 5], 'claude-opus-5': [5, 25] };
@@ -44,7 +44,8 @@ window.__runDoc = async function (opts) {
       }
     },
   };
-  Object.assign(comp.state, { email: 'eval@local', ocr: 'Built-in', gkey: '' }, settings || {});
+  // Multi-file fixtures are one worksheet split into files (photos of pages): run them combined, as v3 did.
+  Object.assign(comp.state, { email: 'eval@local', ocr: 'Built-in', gkey: '', fileMode: 'combine', fileIdx: 0 }, settings || {});
   const docs = Array.isArray(doc) ? doc : [doc];
   comp.state.files = [];
   for (const [i, d] of docs.entries()) {

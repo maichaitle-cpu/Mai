@@ -401,7 +401,7 @@ def allsubj():
                 rest = [m.group(2)]
                 if m.group(1).startswith('Model answer'):
                     idx = k['rows'].index((kp, y, t, r))
-                    rest += [rr[2] for rr in k['rows'][idx + 1:idx + 8] if not re.match(r'^\d', rr[2])]
+                    rest += [rr[2] for rr in k['rows'][idx + 1:idx + 8] if not re.match(r'^\d|^Page \d+$', rr[2])]
                 return ' '.join(rest).strip()
         return k['q']
 

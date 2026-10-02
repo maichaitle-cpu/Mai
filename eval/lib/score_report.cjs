@@ -23,7 +23,7 @@ function gtName() {
 }
 
 // Which app version made this report, and is it the current one?
-const appSrc = fs.readFileSync(path.join(EVAL, '..', 'app', 'Archive Portal v3.dc.html'), 'utf8');
+const appSrc = fs.readFileSync(path.join(EVAL, '..', 'app', 'Archive Portal v4.dc.html'), 'utf8');
 const curBuild = (appSrc.match(/static BUILD = '([^']+)'/) || [])[1];
 console.log('report build:', rep.build || '(before build stamps)', '| current build:', curBuild, rep.build === curBuild ? '' : '<-- OLD APP FILE: re-run with the latest .dc.html before debugging');
 // Save the worksheets the report carries, so a run can be replayed without a second upload.
