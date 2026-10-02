@@ -2,6 +2,7 @@
 // detection: every printed question answered once, nothing invented.
 // location: the answer sits in that question's real answer area (or on the chosen option).
 
+const { gradeText, gradeWritten } = require('./grade.cjs');
 const norm = s => String(s || '').toLowerCase().replace(/[^a-z0-9฀-๿]+/g, ' ').trim();
 const words = s => norm(s).split(' ').filter(w => w.length > 1);
 const sim = (a, b) => {
@@ -96,6 +97,38 @@ function locate(q, a, run) {
   return { ok: true, why: '' };
 }
 
+// Is the answer right (not just well placed)? Choices by the option marked, text against the key.
+function typeOf(q) {
+  if (q.options) return q.cat === 'TRUE_FALSE' ? 'true/false' : / — tick one/.test(String(q.prompt || '')) ? 'tick table' : 'multiple choice';
+  if (q.kind === 'blank') return q.cell ? 'table cell' : 'fill-in';
+  if (q.kind === 'cell') return 'table cell';
+  return 'written';
+}
+function gradeOf(q, a, L) {
+  const type = typeOf(q);
+  if (q.options) {
+    if (q.correct == null) return { type, right: null };
+    if (!a) return { type, right: false, why: 'not answered' };
+    return { type, right: L.correct === true, why: L.correct === true ? '' : 'expected ' + JSON.stringify(q.options[q.correct].text) };
+  }
+  if (!q.answer) return { type, right: null };
+  if (type === 'written') return { type, ...gradeWritten(q.answer, a && a.text) };
+  return { type, ...gradeText(q.answer, a && a.text) };
+}
+
+function answerSummary(rows) {
+  const by = {};
+  rows.forEach(r => {
+    if (!r.type) return;
+    const b = by[r.type] = by[r.type] || { n: 0, right: 0, wrong: 0, ungraded: 0, approx: false };
+    b.n++;
+    if (r.approx) b.approx = true;
+    if (r.right === true) b.right++; else if (r.right === false) b.wrong++; else b.ungraded++;
+  });
+  const obj = Object.entries(by).filter(([k]) => k !== 'written').reduce((m, [, v]) => ({ right: m.right + v.right, graded: m.graded + v.right + v.wrong }), { right: 0, graded: 0 });
+  return { byType: by, objectiveRight: obj.graded ? obj.right / obj.graded : null, objectiveGraded: obj.graded };
+}
+
 function scaleGT(gt, widths) {
   if (!gt.basePage) return gt;
   const sc = p => (widths[(p || 1) - 1] || gt.basePage[0]) / gt.basePage[0];
@@ -117,8 +150,10 @@ function score(gt0, run) {
     if (!a) return { q: q.label, page: q.page, found: false, located: false, why: 'not detected' };
     const L = locate(q, a, run);
     const empty = !String(a.text || '').trim() && a.kind !== 'draw';
-    return { q: q.label, page: q.page, found: true, located: L.ok && !empty, correct: L.correct, why: empty ? 'empty answer' : L.why, answerId: a.id, flag: a.flag };
+    const g = gradeOf(q, a, L);
+    return { q: q.label, page: q.page, found: true, located: L.ok && !empty, correct: L.correct, why: empty ? 'empty answer' : L.why, answerId: a.id, flag: a.flag, type: g.type, right: g.right, gradeWhy: g.why, approx: !!g.approx };
   });
+  rows.forEach((r, i) => { if (!r.found) { const g = gradeOf(gt.questions[i], null, {}); Object.assign(r, { type: g.type, right: g.right, gradeWhy: 'not answered', approx: !!g.approx }); } });
   const n = rows.length;
   const found = rows.filter(r => r.found).length;
   const located = rows.filter(r => r.located).length;
@@ -130,6 +165,7 @@ function score(gt0, run) {
     detectPrecision: found + extra.length ? found / (found + extra.length) : 1,
     location: n ? located / n : 1,
     choiceCorrect: choiceRows.length ? choiceRows.filter(r => r.correct).length / choiceRows.length : null,
+    answers: answerSummary(rows),
     extra: extra.map(a => ({ id: a.id, num: a.num, page: a.page, text: String(a.text).slice(0, 40), bbox: a.bbox })),
     failures: rows.filter(r => !r.located),
     rows,

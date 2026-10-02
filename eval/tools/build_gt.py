@@ -387,9 +387,25 @@ def allsubj():
         m = re.match(r'^(\d{1,3})\.\s', t)
         if m:
             cur = (sj, int(m.group(1)))
-            KEY[cur] = {'q': t, 'rows': []}
+            KEY[cur] = {'q': t, 'qitems': r, 'rows': []}
         elif cur and cur[0] == sj:
             KEY[cur]['rows'].append((kp, y, t, r))
+
+    BOLD = 'g_d0_f2'
+
+    def bold_answers(sj, n, table=False):
+        """The key prints each answer in bold where the blank was; questions and given table cells are regular."""
+        k = KEY.get((sj, n))
+        if not k:
+            return []
+        rows = [k['qitems']] + [r for _, _, _, r in k['rows']]
+        out = []
+        for ri, r in enumerate(rows):
+            its = [i for i in r if len(i) > 5 and re.search(r'\w', i[0]) and not re.match(r'^Page \d+$', i[0])]
+            if table and (ri == 0 or all(i[5] == BOLD for i in its)):
+                continue  # table title and header rows
+            out += [i[0].strip() for i in its if i[5] == BOLD and not re.match(r'^\d{1,3}\.\s', i[0])]
+        return out
 
     def key_answer(sj, n):
         k = KEY.get((sj, n))
@@ -401,7 +417,11 @@ def allsubj():
                 rest = [m.group(2)]
                 if m.group(1).startswith('Model answer'):
                     idx = k['rows'].index((kp, y, t, r))
-                    rest += [rr[2] for rr in k['rows'][idx + 1:idx + 8] if not re.match(r'^\d|^Page \d+$', rr[2])]
+                    for rr in k['rows'][idx + 1:idx + 8]:
+                        if re.match(r'^(Write a|Answer in|Circle T|Fill in|Choose the)', rr[2]):
+                            break  # the next section's instruction, not part of this answer
+                        if not re.match(r'^\d|^Page \d+$', rr[2]):
+                            rest.append(rr[2])
                 return ' '.join(rest).strip()
         return k['q']
 
@@ -523,7 +543,7 @@ def allsubj():
                         if hdr is None: hdr = lines[j]
                         elif lines[j]['blanks']: rows.append(lines[j])
                         j += 1
-                    tbl = {'n': n, 'hdr': hdr, 'k': 0, 'hp': p}
+                    tbl = {'n': n, 'hdr': hdr, 'k': 0, 'hp': p, 'answers': bold_answers(subj, n, table=True)}
                     pending = {'type': 'table', 'tbl': tbl}
                     for r in rows: add_table_row(d, p, r, tbl, subj, key_answer, KEY, cols_at, row_bounds)
                     i = j; continue
@@ -587,8 +607,11 @@ def allsubj():
                         pending['lines'].append(L)
                     if L['blanks']:
                         full = key_answer(subj, pending['n'])
-                        ans = fill_answer(' '.join(l['text'] for l in pending['lines']), KEY.get((subj, pending['n'])))
+                        bold = bold_answers(subj, pending['n'])
+                        if len(bold) > 1 and len(set(bold)) == 1 and ';' in bold[0]:
+                            bold = [x.strip() for x in bold[0].split(';')]  # "phenotype; genotype" printed in both blanks
                         for bi, bk in enumerate(L['blanks']):
+                            ans = bold[pending['k']] if pending['k'] < len(bold) else fill_answer(' '.join(l['text'] for l in pending['lines']), KEY.get((subj, pending['n'])))
                             lab = str(pending['n']) + ('' if pending['k'] == 0 else 'abc'[pending['k']])
                             pending['k'] += 1
                             # end of line: the rest of the line, or just above the blank when the margin is too close
@@ -647,7 +670,7 @@ def add_table_row(d, p, L, tbl, subj, key_answer, KEY, cols_at, row_bounds):
         hdr = tbl['hdr']
         d.add(label=lab, page=p, kind='blank', cat='FILL_BLANK', prompt=L['text'], qrect=d.rect(p, L['id']),
               areas=[[c0 + 1, a + 1, c1 - c0 - 2, b - a - 2]], cell={'row': [c0, a, c1 - c0, b - a], 'header': d.rect(p, hdr['id']) if hdr and tbl['hp'] == p else [c0, a - 44, c1 - c0, 40], 'col': ''},
-              answer='1.73')
+              answer=tbl['answers'][tbl['k'] - 1] if tbl['k'] - 1 < len(tbl['answers']) else '')
 
 
 BUILDERS = {'physics': physics, 'polygraph': polygraph, 'exam_revision': exam_revision, 'phe': phe, 'icecream': icecream, 'qual': qual, 'alevel': alevel, 'allsubj': allsubj}

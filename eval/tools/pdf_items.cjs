@@ -9,7 +9,7 @@ const pdfjs = require(require('path').join(__dirname, '..', 'node_modules', 'pdf
   for (let p = 1; p <= doc.numPages; p++) {
     const pg = await doc.getPage(p); const vp = pg.getViewport({ scale: 1 });
     const tc = await pg.getTextContent();
-    out.push({ w: vp.width, h: vp.height, items: tc.items.filter(i => i.str.trim()).map(i => [i.str, +i.transform[4].toFixed(1), +(vp.height - i.transform[5]).toFixed(1), +i.width.toFixed(1), +i.height.toFixed(1)]) });
+    out.push({ w: vp.width, h: vp.height, items: tc.items.filter(i => i.str.trim()).map(i => [i.str, +i.transform[4].toFixed(1), +(vp.height - i.transform[5]).toFixed(1), +i.width.toFixed(1), +i.height.toFixed(1), i.fontName]) });
   }
   require('fs').writeFileSync(process.argv[3], JSON.stringify(out));
 })();

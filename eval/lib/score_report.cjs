@@ -44,6 +44,11 @@ if (!(rep.pages || []).some(p => p.geo)) console.log('Note: this report is from 
 const s = score(gt, run);
 const pc = v => (v == null ? '-' : (v * 100).toFixed(1) + '%');
 console.log(name, '| questions', s.questions, '| found', pc(s.detectRecall), '| invented', s.extra.length, '| location', pc(s.location), '| choice correct', pc(s.choiceCorrect));
+{
+  const A = s.answers, by = A.byType;
+  console.log('ANSWERS RIGHT (objective, exact):', pc(A.objectiveRight), '(' + A.objectiveGraded + ' graded)');
+  Object.entries(by).forEach(([k, v]) => console.log('   ' + k.padEnd(16), String(v.right).padStart(3) + ' right ', String(v.wrong).padStart(3) + ' wrong', v.ungraded ? ' ' + v.ungraded + ' not gradable here' : '', v.approx ? '  (approximate: key points / final value)' : '', v.right + v.wrong ? ' → ' + pc(v.right / (v.right + v.wrong)) : ''));
+}
 console.log('run mode:', rep.mode || '?', '| model asked:', rep.model || '?', '| pages:', run.pages.length);
 
 const calls = rep.calls || [];
@@ -64,6 +69,15 @@ if (calls.length) {
   Object.entries(by).sort((a, b) => b[1].cost - a[1].cost).forEach(([k, v]) => console.log('   ' + k.padEnd(12), String(v.n).padStart(3), 'calls  $' + v.cost.toFixed(4)));
 }
 
+{
+  const wrong = s.rows.filter(r => r.right === false);
+  if (wrong.length) console.log('\n--- wrong answers (' + wrong.length + ') ---');
+  wrong.forEach(r => {
+    const a = run.answers.find(x => x.id === r.answerId);
+    console.log('  WRONG p' + r.page, String(r.q).slice(0, 8).padEnd(8), r.type.padEnd(15), 'gave', JSON.stringify(a ? String(a.text).slice(0, 50) : null).padEnd(30), '|', r.gradeWhy || '');
+  });
+  console.log('');
+}
 s.failures.forEach(f => console.log('  MISS p' + f.page, String(f.q).slice(0, 30).padEnd(30), f.why));
 s.extra.forEach(e => console.log('  INVENTED p' + e.page, String(e.num).slice(0, 30), JSON.stringify(e.text)));
 if (showAnswers) {

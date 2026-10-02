@@ -2414,7 +2414,7 @@
      53
     ]
    ],
-   "answer": "b",
+   "answer": "1",
    "avoidText": true
   },
   {
@@ -2437,7 +2437,7 @@
      53
     ]
    ],
-   "answer": "2",
+   "answer": "d (the common difference)",
    "avoidText": true
   },
   {
@@ -3027,7 +3027,7 @@
     ],
     "col": ""
    },
-   "answer": "1.73"
+   "answer": "0.87"
   },
   {
    "label": "79b",
@@ -3064,7 +3064,7 @@
     ],
     "col": ""
    },
-   "answer": "1.73"
+   "answer": "0.71"
   },
   {
    "label": "79c",
@@ -3138,7 +3138,7 @@
     ],
     "col": ""
    },
-   "answer": "1.73"
+   "answer": "0.00"
   },
   {
    "label": "80a",
@@ -3175,7 +3175,7 @@
     ],
     "col": ""
    },
-   "answer": "1.73"
+   "answer": "6"
   },
   {
    "label": "80b",
@@ -3212,7 +3212,7 @@
     ],
     "col": ""
    },
-   "answer": "1.73"
+   "answer": "18"
   },
   {
    "label": "80c",
@@ -3249,7 +3249,7 @@
     ],
     "col": ""
    },
-   "answer": "1.73"
+   "answer": "2"
   },
   {
    "label": "81a",
@@ -3286,7 +3286,7 @@
     ],
     "col": ""
    },
-   "answer": "1.73"
+   "answer": "log2(8) = 3"
   },
   {
    "label": "81b",
@@ -3323,7 +3323,7 @@
     ],
     "col": ""
    },
-   "answer": "1.73"
+   "answer": "log10(100) = 2"
   },
   {
    "label": "81c",
@@ -3360,7 +3360,7 @@
     ],
     "col": ""
    },
-   "answer": "1.73"
+   "answer": "log5(1) = 0"
   },
   {
    "label": "82a",
@@ -3944,7 +3944,7 @@
      221
     ]
    ],
-   "answer": "x = 2 = 32. Write a well-organized, extended response of about 120-200 words."
+   "answer": "x = 2 = 32."
   },
   {
    "label": "91",
@@ -7059,7 +7059,7 @@
     ],
     "col": ""
    },
-   "answer": "1.73"
+   "answer": "[H+] > [OH-]"
   },
   {
    "label": "79b",
@@ -7096,7 +7096,7 @@
     ],
     "col": ""
    },
-   "answer": "1.73"
+   "answer": "neutral"
   },
   {
    "label": "79c",
@@ -7133,7 +7133,7 @@
     ],
     "col": ""
    },
-   "answer": "1.73"
+   "answer": "[H+] < [OH-]"
   },
   {
    "label": "80a",
@@ -7170,7 +7170,7 @@
     ],
     "col": ""
    },
-   "answer": "1.73"
+   "answer": "2 mol"
   },
   {
    "label": "80b",
@@ -7207,7 +7207,7 @@
     ],
     "col": ""
    },
-   "answer": "1.73"
+   "answer": "36 g"
   },
   {
    "label": "80c",
@@ -7244,7 +7244,7 @@
     ],
     "col": ""
    },
-   "answer": "1.73"
+   "answer": "0.5 mol"
   },
   {
    "label": "81a",
@@ -7281,7 +7281,7 @@
     ],
     "col": ""
    },
-   "answer": "1.73"
+   "answer": "0.5 mol/L"
   },
   {
    "label": "81b",
@@ -7318,7 +7318,7 @@
     ],
     "col": ""
    },
-   "answer": "1.73"
+   "answer": "2 mol"
   },
   {
    "label": "81c",
@@ -7355,7 +7355,7 @@
     ],
     "col": ""
    },
-   "answer": "1.73"
+   "answer": "3 L"
   },
   {
    "label": "82a",
@@ -7859,7 +7859,7 @@
      221
     ]
    ],
-   "answer": "Atomic number = 11 (the number of protons). Mass number = 11 + 12 = 23. Write a well-organized, extended response of about 120-200 words."
+   "answer": "Atomic number = 11 (the number of protons). Mass number = 11 + 12 = 23."
   },
   {
    "label": "91",
@@ -10430,7 +10430,7 @@
      53
     ]
    ],
-   "answer": "x",
+   "answer": "R (resistance)",
    "avoidText": true
   },
   {
@@ -10591,7 +10591,7 @@
      53
     ]
    ],
-   "answer": "generator (dynamo)",
+   "answer": "generator",
    "avoidText": true
   },
   {
@@ -10974,7 +10974,7 @@
     ],
     "col": ""
    },
-   "answer": "1.73"
+   "answer": "6 ohm"
   },
   {
    "label": "79b",
@@ -11011,7 +11011,7 @@
     ],
     "col": ""
    },
-   "answer": "1.73"
+   "answer": "10 V"
   },
   {
    "label": "79c",
@@ -11048,7 +11048,7 @@
     ],
     "col": ""
    },
-   "answer": "1.73"
+   "answer": "3 A"
   },
   {
    "label": "80a",
@@ -11085,7 +11085,7 @@
     ],
     "col": ""
    },
-   "answer": "1.73"
+   "answer": "8 ohm"
   },
   {
    "label": "80b",
@@ -11122,7 +11122,7 @@
     ],
     "col": ""
    },
-   "answer": "1.73"
+   "answer": "2 ohm"
   },
   {
    "label": "80c",
@@ -11159,7 +11159,7 @@
     ],
     "col": ""
    },
-   "answer": "1.73"
+   "answer": "2 ohm"
   },
   {
    "label": "80d",
@@ -11196,7 +11196,7 @@
     ],
     "col": ""
    },
-   "answer": "1.73"
+   "answer": "10 ohm"
   },
   {
    "label": "81a",
@@ -11233,7 +11233,7 @@
     ],
     "col": ""
    },
-   "answer": "1.73"
+   "answer": "9 J"
   },
   {
    "label": "81b",
@@ -11270,7 +11270,7 @@
     ],
     "col": ""
    },
-   "answer": "1.73"
+   "answer": "4 kg"
   },
   {
    "label": "81c",
@@ -11307,7 +11307,7 @@
     ],
     "col": ""
    },
-   "answer": "1.73"
+   "answer": "4 m/s"
   },
   {
    "label": "82a",
@@ -11811,7 +11811,7 @@
      221
     ]
    ],
-   "answer": "c = 500 / (2 x 5) = 50 J/(kg · degree C). Write a well-organized, extended response of about 120-200 words."
+   "answer": "c = 500 / (2 x 5) = 50 J/(kg · degree C)."
   },
   {
    "label": "91",
@@ -14359,7 +14359,7 @@
      53
     ]
    ],
-   "answer": "phenotype; genotype",
+   "answer": "phenotype",
    "avoidText": true
   },
   {
@@ -14382,7 +14382,7 @@
      53
     ]
    ],
-   "answer": "phenotype; genotype",
+   "answer": "genotype",
    "avoidText": true
   },
   {
@@ -14681,7 +14681,7 @@
      53
     ]
    ],
-   "answer": "classification (taxonomy)",
+   "answer": "classification",
    "avoidText": true
   },
   {
@@ -14773,7 +14773,7 @@
      53
     ]
    ],
-   "answer": "i",
+   "answer": "inherited",
    "avoidText": true
   },
   {
@@ -14949,7 +14949,7 @@
     ],
     "col": ""
    },
-   "answer": "1.73"
+   "answer": "Aa"
   },
   {
    "label": "79b",
@@ -14986,7 +14986,7 @@
     ],
     "col": ""
    },
-   "answer": "1.73"
+   "answer": "Aa"
   },
   {
    "label": "80a",
@@ -15023,7 +15023,7 @@
     ],
     "col": ""
    },
-   "answer": "1.73"
+   "answer": "Circulatory"
   },
   {
    "label": "80b",
@@ -15060,7 +15060,7 @@
     ],
     "col": ""
    },
-   "answer": "1.73"
+   "answer": "Gas exchange (breathing)"
   },
   {
    "label": "80c",
@@ -15097,7 +15097,7 @@
     ],
     "col": ""
    },
-   "answer": "1.73"
+   "answer": "Kidney"
   },
   {
    "label": "81a",
@@ -15134,7 +15134,7 @@
     ],
     "col": ""
    },
-   "answer": "1.73"
+   "answer": "No"
   },
   {
    "label": "81b",
@@ -15171,7 +15171,7 @@
     ],
     "col": ""
    },
-   "answer": "1.73"
+   "answer": "High to low water concentration"
   },
   {
    "label": "81c",
@@ -15208,7 +15208,7 @@
     ],
     "col": ""
    },
-   "answer": "1.73"
+   "answer": "Low to high concentration"
   },
   {
    "label": "82a",
@@ -15792,7 +15792,7 @@
      221
     ]
    ],
-   "answer": "Adenine, thymine, cytosine, and guanine. Adenine pairs with thymine (A-T), and cytosine pairs with guanine (C-G). Write a well-organized, extended response of about 120-200 words."
+   "answer": "Adenine, thymine, cytosine, and guanine. Adenine pairs with thymine (A-T), and cytosine pairs with guanine (C-G)."
   },
   {
    "label": "91",
@@ -18907,7 +18907,7 @@
     ],
     "col": ""
    },
-   "answer": "1.73"
+   "answer": "adverb"
   },
   {
    "label": "79b",
@@ -18944,7 +18944,7 @@
     ],
     "col": ""
    },
-   "answer": "1.73"
+   "answer": "adjective"
   },
   {
    "label": "79c",
@@ -18981,7 +18981,7 @@
     ],
     "col": ""
    },
-   "answer": "1.73"
+   "answer": "verb"
   },
   {
    "label": "79d",
@@ -19018,7 +19018,7 @@
     ],
     "col": ""
    },
-   "answer": "1.73"
+   "answer": "noun"
   },
   {
    "label": "80a",
@@ -19055,7 +19055,7 @@
     ],
     "col": ""
    },
-   "answer": "1.73"
+   "answer": "went"
   },
   {
    "label": "80b",
@@ -19092,7 +19092,7 @@
     ],
     "col": ""
    },
-   "answer": "1.73"
+   "answer": "eaten"
   },
   {
    "label": "80c",
@@ -19129,7 +19129,7 @@
     ],
     "col": ""
    },
-   "answer": "1.73"
+   "answer": "began"
   },
   {
    "label": "80d",
@@ -19166,7 +19166,7 @@
     ],
     "col": ""
    },
-   "answer": "1.73"
+   "answer": "written"
   },
   {
    "label": "81a",
@@ -19203,7 +19203,7 @@
     ],
     "col": ""
    },
-   "answer": "1.73"
+   "answer": "their"
   },
   {
    "label": "81b",
@@ -19240,7 +19240,7 @@
     ],
     "col": ""
    },
-   "answer": "1.73"
+   "answer": "they're"
   },
   {
    "label": "81c",
@@ -19277,7 +19277,7 @@
     ],
     "col": ""
    },
-   "answer": "1.73"
+   "answer": "there"
   },
   {
    "label": "82a",
@@ -19912,7 +19912,7 @@
      221
     ]
    ],
-   "answer": "\"Curious\" describes \"cat,\" and \"dark\" describes \"attic.\" Write a well-organized, extended response of about 120-200 words."
+   "answer": "\"Curious\" describes \"cat,\" and \"dark\" describes \"attic.\""
   },
   {
    "label": "91",
