@@ -4,7 +4,7 @@ window.__runDoc = async function (opts) {
   const calls = [];
   const comp = new __C();
   window.__lastComp = comp;
-    { const acct0 = comp.acct.bind(comp); comp.acct = () => ({ ...acct0(), role: 'Admin', perUpload: 999, daily: 1e9 }); comp.remainingToday = () => 1e9; }
+    { const acct0 = comp.acct.bind(comp); comp.acct = () => ({ ...acct0(), role: window.__evalRole || 'Member', perUpload: 999, daily: 1e9 }); comp.remainingToday = () => 1e9; }
   comp.toast = () => {};
   const oracle = gt ? __makeOracle(gt, oracleCfg || {}, comp) : null;
   const PRICE = { 'claude-sonnet-4-5': [3, 15], 'claude-sonnet-4-6': [3, 15], 'claude-sonnet-5': [2, 10], 'claude-haiku-4-5': [1, 5], 'claude-opus-5': [5, 25] };
@@ -44,9 +44,12 @@ window.__runDoc = async function (opts) {
       }
     },
   };
-  // Multi-file fixtures are one worksheet split into files (photos of pages): run them combined, as v3 did.
-  Object.assign(comp.state, { email: 'eval@local', ocr: 'Built-in', gkey: '', fileMode: 'combine', fileIdx: 0 }, settings || {});
   const docs = Array.isArray(doc) ? doc : [doc];
+  // Photo sets run as a Member, so the automatic photo combining is what gets tested. Several PDFs that form
+  // one test (big_combo) need the Admin "Combine into one" choice.
+  const multiPdf = docs.length > 1 && !docs.every(d => /\.(jpe?g|png|webp)$/i.test(d));
+  window.__evalRole = multiPdf ? 'Admin' : 'Member';
+  Object.assign(comp.state, { email: 'eval@local', ocr: 'Built-in', gkey: '', fileIdx: 0 }, multiPdf ? { fileMode: 'combine' } : {}, settings || {});
   comp.state.files = [];
   for (const [i, d] of docs.entries()) {
     const blob = await (await fetch('/' + d)).blob();

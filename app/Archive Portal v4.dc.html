@@ -6861,6 +6861,8 @@ class Component extends DCLogic {
     [/^(\d+) pages per upload$/, 'สูงสุด $1 หน้าต่อครั้ง'],
     [/^Stage (\d+) of (\d+)$/, 'ขั้นที่ $1 จาก $2'],
     [/^File (\d+) of (\d+)$/, 'ไฟล์ $1 จาก $2'],
+    [/^These (\d+) photos are read as the pages of one worksheet, in the order listed\.$/, 'รูปทั้ง $1 รูปจะถูกอ่านเป็นหน้าของใบงานเดียวกัน ตามลำดับที่แสดง'],
+    [/^All (\d+) files are merged into one worksheet, in the order listed, with one result and one PDF\.$/, 'ไฟล์ทั้ง $1 ไฟล์จะถูกรวมเป็นใบงานเดียว ตามลำดับที่แสดง ได้ผลลัพธ์และ PDF เดียว'],
     [/^(\d+) answers? written$/, 'เขียนแล้ว $1 คำตอบ'],
     [/^(\d+) to check$/, 'ต้องตรวจ $1 รายการ'],
     [/^(\d+) worksheets?$/, '$1 ใบงาน'],
@@ -7524,8 +7526,19 @@ class Component extends DCLogic {
     return byId;
   }
 
+  // Photos are almost always the pages of one worksheet (one photo per page), so they are combined
+  // automatically for every role. An Admin's explicit choice wins; PDFs and documents stay separate.
+  static isImageFile(f) {
+    return !!f && (/^image\//i.test(String(f.type || (f.raw && f.raw.type) || '')) || /\.(jpe?g|png|webp|heic|heif|gif|bmp|tiff?)$/i.test(String(f.name || '')));
+  }
+
   combineOn() {
-    return this.acct().role === 'Admin' && this.state.fileMode === 'combine' && (this.state.files || []).filter(x => x.raw).length > 1;
+    const all = (this.state.files || []).filter(x => x.raw);
+    if (all.length < 2) return false;
+    const mode = this.acct().role === 'Admin' ? this.state.fileMode : null;
+    if (mode === 'combine') return true;
+    if (mode === 'separate') return false;
+    return all.every(f => Component.isImageFile(f));
   }
 
   curFile() {
@@ -7773,13 +7786,14 @@ class Component extends DCLogic {
       ...(() => {
         const n = s.files.filter(x => x.raw).length, i = s.fileIdx || 0;
         const isAdm = this.acct().role === 'Admin';
-        const mode = s.fileMode === 'combine' ? 'combine' : 'separate';
+        const mode = this.combineOn() ? 'combine' : 'separate';
+        const photos = n > 1 && s.files.filter(x => x.raw).every(f => Component.isImageFile(f));
         const modeOpt = (k, label) => ({ label, on: mode === k, ink: mode === k ? '#ffffff' : '#c9c2ba', bg: mode === k ? 'rgba(163,18,31,.28)' : 'transparent', border: mode === k ? '#a3121f' : 'rgba(198,168,116,.24)', pick: () => this.setState({ fileMode: k }) });
         const go = k => { this.flushSave(); this._entryId = null; this._traceRaw = null; this.runPipeline(k); };
         return {
           showFileMode: isAdm && n > 1,
           fileModeOpts: [modeOpt('separate', 'Separate files'), modeOpt('combine', 'Combine into one')],
-          fileModeNote: mode === 'combine' ? 'All ' + n + ' files are merged into one worksheet, in the order listed, with one result and one PDF.' : 'Each file is completed on its own. Use Next file on the result page.',
+          fileModeNote: mode === 'combine' && photos && s.fileMode !== 'combine' ? 'These ' + n + ' photos are read as the pages of one worksheet, in the order listed.' : mode === 'combine' ? 'All ' + n + ' files are merged into one worksheet, in the order listed, with one result and one PDF.' : 'Each file is completed on its own. Use Next file on the result page.',
           multiFile: n > 1 && !this.combineOn(),
           fileCounter: 'File ' + (i + 1) + ' of ' + n,
           curFileName: this.curFile().name || 'Worksheet',
