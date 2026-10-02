@@ -19,6 +19,8 @@ window.__runDoc = async function (opts) {
     const pr = PRICE[body.model] || PRICE['claude-sonnet-4-5'];
     return { inTok, outTok, imgTok: img, est: (inTok * pr[0] + outTok * pr[1]) / 1e6 };
   };
+  let inFlight = 0, peak = 0;
+  if (oracleCfg && oracleCfg.latency) comp.wait = ms => new Promise(r => setTimeout(r, ms * oracleCfg.latency));
   window.claude = {
     complete: async body => {
       const stage = __stageOf(body.system);
@@ -35,6 +37,15 @@ window.__runDoc = async function (opts) {
           return r.text;
         }
         if (!oracle) throw new Error('No ground truth for oracle mode');
+        // --latency S: each call takes as long as that step took in a real 52-page run, times S, so wall
+        // time shows the effect of running calls in parallel. --flaky P: a share P of calls get "429 busy".
+        const cfg = oracleCfg || {};
+        if (cfg.latency) {
+          const REAL = { layout_text: 14269, map: 12013, facts: 26877, solve: 7901, check: 4386, fit: 3180, final: 3505, assign: 4500, pin: 3000, layout_vision: 15000 };
+          inFlight++; peak = Math.max(peak, inFlight);
+          try { await new Promise(r => setTimeout(r, (REAL[stage] || 4000) * cfg.latency)); } finally { inFlight--; }
+        }
+        if (cfg.flaky && Math.random() < cfg.flaky) throw new Error('429 rate_limit_error: too many requests');
         return await wrapOut(await oracle.complete(body, stage));
       } catch (e) {
         rec.error = String((e && e.message) || e);
@@ -63,6 +74,7 @@ window.__runDoc = async function (opts) {
   const rect = b => (b ? [r(b.x), r(b.y), r(b.w), r(b.h)] : null);
   const out = {
     ms: Math.round(performance.now() - t0),
+    peakInFlight: peak,
     apiError: st.apiError || '',
     mode: comp._traceRaw ? comp._traceRaw.mode : null,
     times: comp._traceRaw ? comp._traceRaw.times : null,

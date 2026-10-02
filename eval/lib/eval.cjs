@@ -28,7 +28,7 @@ async function main() {
     try {
       run = await page.evaluate(o => window.__runDoc(o), {
         doc: gt.doc, gt, claude: mode, snapshots: !!opt('snap'),
-        oracleCfg: { mapBoxes: !opt('no-map-boxes'), noise: Number(opt('noise', 0)), seed: Number(opt('seed', 1)), verbose: !!opt('verbose'), sloppy: !!opt('sloppy'), breakLayout: opt('break-layout') || null, breakSolve: !!opt('break-solve'), layoutReplay: opt('replay') ? (() => {
+        oracleCfg: { latency: Number(opt('latency', 0)), flaky: Number(opt('flaky', 0)), mapBoxes: !opt('no-map-boxes'), noise: Number(opt('noise', 0)), seed: Number(opt('seed', 1)), verbose: !!opt('verbose'), sloppy: !!opt('sloppy'), breakLayout: opt('break-layout') || null, breakSolve: !!opt('break-solve'), layoutReplay: opt('replay') ? (() => {
           // Every recorded layout chunk, merged: the oracle hands back the questions for the pages each request shows.
           const r = JSON.parse(fs.readFileSync(opt('replay'), 'utf8'));
           const qs = [], seen = new Set();
@@ -47,7 +47,8 @@ async function main() {
     s.tiny = run.answers.filter(a => a.sizeRatio != null && a.sizeRatio < Number(opt('tiny', 0.6))).map(a => a.num + ' x' + a.sizeRatio);
     s.cut = run.answers.filter(a => /…$/.test(a.shown || '')).map(a => a.num);
     s.audit = run.audit || [];
-    s.apiError = run.apiError; s.mode = run.mode; s.ms = Date.now() - t0;
+    s.apiError = run.apiError; s.mode = run.mode; s.ms = Date.now() - t0; s.pipelineMs = run.ms; s.peakInFlight = run.peakInFlight;
+    if (opt('latency')) console.log('   ' + name + ': pipeline ' + (run.ms / 1000).toFixed(1) + 's at latency x' + opt('latency') + ' (≈ ' + (run.ms / Number(opt('latency')) / 60000).toFixed(1) + ' min real), up to ' + run.peakInFlight + ' calls at once');
     s.calls = run.calls.reduce((m, c) => { m[c.stage] = (m[c.stage] || 0) + 1; return m; }, {});
     s.cost = run.calls.reduce((m, c) => m + (c.cost || 0), 0);
     s.est = run.calls.reduce((m, c) => m + (c.est || 0), 0);
